@@ -8,7 +8,7 @@
 
         doSignup: function () {
 
-            this.setState({activeStep: 4});
+            this.setState({activeStep: this.steps.length - 1});
 
             Peerio.Auth.signup(this.data.name.username,
                                this.data.pass.passphrase,
@@ -36,9 +36,9 @@
         },
 
         componentWillMount: function () {
+            Peerio.DataCollection.Signup.startSignup();
             this.data = {};
             this.steps = [
-                Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SignupWizardName,
                 Peerio.UI.SignupWizardPassphrase,
                 Peerio.UI.SignupWizardConfirm,
@@ -97,13 +97,13 @@
                             </ReactCSSTransitionGroup>
                             <div className={classNames(
                                 'flex-row',
-                                this.state.activeStep < 2 ?
+                                this.state.activeStep < 1 ?
                                     ' flex-justify-end' : ' flex-justify-between'
                             )}>
                                 <Peerio.UI.Tappable
                                     element='div'
                                     className={classNames(
-                                        'btn-back', {'hide': this.state.activeStep < 2}
+                                        'btn-back', {'hide': this.state.activeStep < 1}
                                     )}
                                     onTap={this.handlePreviousStep}>
                                     <i className="material-icons">chevron_left</i>
