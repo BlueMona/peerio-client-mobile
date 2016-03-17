@@ -112,10 +112,9 @@
                                     </Peerio.UI.Tappable>
                                 </ul>
                                 <ul>
-                                    <Peerio.UI.Tappable tag="li"
-                                                        onTap={this.toggleAndTransition.bind(this, 'settings_2fa')}>
-                                        <i className="material-icons">help</i> Support
-                                    </Peerio.UI.Tappable>
+                                    <li>
+                                        <a href="mailto:support@peerio.com"><i className="material-icons">help</i> Support</a>
+                                    </li>
                                 </ul>
 
 

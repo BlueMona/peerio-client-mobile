@@ -113,6 +113,12 @@ Click the sidebar in the example to toggle the `.open` state.
 
   }
 
+  a {
+    @extend .flex-row;
+
+    color: currentColor;
+  }
+
   .sign-out {
     margin: 0 $margin-small;
   }
