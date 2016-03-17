@@ -91,6 +91,7 @@
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
+            // Peerio.Helpers.checkFileSystemEncryption();
             this.transitionTo(this.nextRoute);
         },
 
@@ -207,6 +208,8 @@
                 return;
             }
 
+            userValue = userValue.toLowerCase();
+
             Peerio.user = Peerio.User.create(userValue);
             Peerio.NativeAPI.preventSleep();
 
@@ -229,7 +232,7 @@
         // change focus to passphrase input on enter
         handleUsernameChange: function (e) {
             var value = this.refs.username.getDOMNode().value;
-            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState({username: value});
+            (!value || Peerio.Helpers.isValidUsername(value)) && this.setState({username: value.toLowerCase()});
         },
 
         // submit form on enter
@@ -295,6 +298,7 @@
                                             <input value={this.state.username}
                                                    id="username" ref="username"
                                                    type="text" maxLength="16"
+                                                   className="lowercase"
                                                    autoComplete="off"
                                                    autoCorrect="off"
                                                    autoCapitalize="off"
