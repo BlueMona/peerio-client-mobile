@@ -4,7 +4,6 @@ Peerio.UI.Routes = (
     <Route name='root' path='/' handler={Peerio.UI.Root}>
         <DefaultRoute name="index" handler={Peerio.UI.Index}/>
         <NotFoundRoute handler={Peerio.UI.NotFound}/>
-        <Route name="connection_lost" path="/connection_lost" handler={Peerio.UI.ConnectionLost}/>
         <Route name="login" path="/login" handler={Peerio.UI.Login}>
             <Route name="login_2fa" path="/login/2fa" handler={Peerio.UI.TwoFactorAuthPrompt} />
         </Route>

@@ -100,7 +100,7 @@
     <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="https://github.com/PeerioTechnologies/peerio-privacy-screen" />
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
     <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="https://github.com/PeerioTechnologies/peerio-cordova-sqlcipher" />
-    <plugin name="phonegap-plugin-push" spec="~1" />
+    <plugin name="phonegap-plugin-push" spec="1.5.3" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="https://github.com/PeerioTechnologies/peerio-keychain-touchid" />
     <plugin name="com.peerio.cordova.plugin.social" spec="https://github.com/PeerioTechnologies/peerio-cordova-social" />
     <plugin name="com.peerio.cordova.plugin.file" spec="https://github.com/PeerioTechnologies/peerio-cordova-file" />
