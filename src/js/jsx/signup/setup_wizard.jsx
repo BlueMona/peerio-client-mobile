@@ -14,14 +14,12 @@
 
         componentWillMount: function () {
             this.steps = [
-                Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardPin,
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardCoupon,
-            ];
-            this.stepButtons = [
-              'get started', 'skip', 'no thanks','finish'
+                Peerio.UI.SignupWizardOptIn,
+                Peerio.UI.SetupWizardContactImport
             ];
 
             Peerio.UI.TouchId.isFeatureAvailable()
@@ -54,7 +52,7 @@
                     'flex-row',
                     this.state.activeStep === 1  ?
                         ' flex-justify-end' : ' flex-justify-between',
-                    this.state.activeStep === 0 ?
+                    this.state.activeStep < 1 ?
                         ' hide' : ''
                 )}>
                     <Peerio.UI.Tappable
