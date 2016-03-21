@@ -83,7 +83,7 @@
             Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
         },
 
-        fileShared: function(file) {
+        fileShared: function (file) {
             this.forceUpdate();
         },
 
@@ -126,20 +126,21 @@
                         return;
                     }
                     node.value = '';
-                    this.resizeTextAreaAsync();
+                    setTimeout(this.onTextChanged, 0);
                     this.setState({attachments: [], sending: false});
                 });
             this.setState({empty: true});
         },
-        resizeTextAreaAsync: function () {
-            setTimeout(this.resizeTextArea, 0);
-        },
         // grows textarea height with content up to max-height css property value
         // or shrinks down to 1 line
-        resizeTextArea: function () {
+        onTextChanged: function () {
             var node = this.refs.reply.getDOMNode();
-            node.style.height = 'auto';
             node.style.height = node.scrollHeight + 'px';
+            if (node.value.isEmpty()) {
+                if (!this.state.empty) this.setState({empty: true})
+            } else {
+                if (this.state.empty) this.setState({empty: false});
+            }
         },
         scrollToBottom: function () {
             if (!this.refs.content) return;
@@ -186,21 +187,17 @@
             return Peerio.Conversation.getMessagesRange(this.props.params.id, to, from);
         },
 
-        setEmpty: function () {
-            var node = this.refs.reply.getDOMNode();
-            return node.value.isEmpty() ? this.setState({empty: true}) : this.setState({empty: false});
-        },
-
         detachFile: function (id) {
             this.setState({removed: id});
             var index = this.state.attachments.indexOf(id);
 
             setTimeout(() => {
-                if(index != -1) {
+                if (index != -1) {
                     this.state.attachments.splice(index, 1);
                     this.setState({attachments: this.state.attachments});
-                      this.setState({removed: null});
-                }},350);
+                    this.setState({removed: null});
+                }
+            }, 350);
         },
 
         //----- RENDER
@@ -230,31 +227,34 @@
 
                     <div id="reply">
                         <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
-                          {this.state.attachments.map(id => {
-                              var file = Peerio.user.files.dict[id];
+                            {
+                                this.state.attachments.map(id => {
+                                    var file = Peerio.user.files.dict[id];
 
-                              return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
-                                  { this.state.attachments.length ? file.name : null }
-                                  <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
-                                    highlight_off
-                                  </Peerio.UI.Tappable>
-                                </li>); })
-                              }
+                                    return (
+                                        <li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
+                                            { this.state.attachments.length ? file.name : null }
+                                            <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons"
+                                                                onTap={this.detachFile.bind(this, id)}>
+                                                highlight_off
+                                            </Peerio.UI.Tappable>
+                                        </li>);
+                                })
+                            }
 
                         </ul>
 
                         <Peerio.UI.Tappable element="div" className="reply-attach" onTap={this.openFileSelect}>
                             <i className="material-icons">attach_file</i>
                             <div className={'icon-counter' + (this.state.attachments.length ? '' : ' none')}>
-                              {this.state.attachments.length || ''}
+                                {this.state.attachments.length || ''}
                             </div>
                         </Peerio.UI.Tappable>
-
-                      <textarea
-                          className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
-                          rows="1" ref="reply" placeholder={this.state.placeholderText}
-                          onKeyUp={this.resizeTextArea}
-                          disabled={this.state.textEntryDisabled} onChange={this.resizeTextArea, this.setEmpty}/>
+                        <textarea
+                            className={this.state.textEntryDisabled ?  'reply-input placeholder-warning':'reply-input'}
+                            rows="1" ref="reply" placeholder={this.state.placeholderText}
+                            onChange={this.onTextChanged}
+                            disabled={this.state.textEntryDisabled}/>
 
                         { !this.state.empty ?
                             <Peerio.UI.Tappable element="div" className="reply-send" onTap={this.sendReply}>
