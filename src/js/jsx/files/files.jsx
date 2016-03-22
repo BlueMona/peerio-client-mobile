@@ -54,7 +54,7 @@
                           <i className="list-item-thumb file-type material-icons">cloud_upload</i>
                           <div className="list-item-content">
                             <div className="list-item-title">
-                            {u.stateName} {u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i className="fa fa-circle-o-notch fa-spin"></i> 
+                            {u.stateName}&nbsp;{u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i className="fa fa-circle-o-notch fa-spin"></i>
                                 </div>
                                 <div className="list-item-description">{file.name}</div>
                             </div>
