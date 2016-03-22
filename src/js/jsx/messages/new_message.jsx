@@ -29,12 +29,18 @@
                 return Peerio.Action.showAlert({text: 'Please select at least one contact to send your message to.'});
             }
 
+            if(this.state.sending) return;
 
-            Peerio.Conversation().reply(this.state.recipients, this.refs.message.getDOMNode().value,
-                this.state.attachments, this.refs.subject.getDOMNode().value).catch(err => {
-                Peerio.Action.showAlert({text: 'Error sending message ' + err});
-            });
-            this.goBack();
+            this.setState({sending:true});
+
+            Peerio.Conversation()
+                .reply(this.state.recipients, this.refs.message.getDOMNode().value,
+                    this.state.attachments, this.refs.subject.getDOMNode().value)
+                .then(this.goBack)
+                .catch(err => {
+                    Peerio.Action.showAlert({text: 'Error sending message. ' + err});
+                    this.setState({sending:false});
+                });
         },
         openContactSelect: function () {
             Peerio.Action.showContactSelect({preselected: this.state.recipients.slice()});
@@ -54,11 +60,12 @@
             var index = this.state.attachments.indexOf(id);
 
             setTimeout(() => {
-                if(index != -1) {
+                if (index != -1) {
                     this.state.attachments.splice(index, 1);
                     this.setState({attachments: this.state.attachments});
-                      this.setState({removed: null});
-                }},350);
+                    this.setState({removed: null});
+                }
+            }, 350);
         },
 
         //--- RENDER
@@ -87,19 +94,21 @@
                                 <i className="material-icons">attach_file</i>
                 <span
                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
-                </Peerio.UI.Tappable>
+                            </Peerio.UI.Tappable>
                         </div>
                         <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
-                          {this.state.attachments.map(id => {
-                              var file = Peerio.user.files.dict[id];
+                            {this.state.attachments.map(id => {
+                                var file = Peerio.user.files.dict[id];
 
-                              return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
-                                  { this.state.attachments.length ? file.name : null }
-                                  <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons" onTap={this.detachFile.bind(this, id)}>
-                                    highlight_off
-                                  </Peerio.UI.Tappable>
-                                </li>); })
-                              }
+                                return (<li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
+                                    { this.state.attachments.length ? file.name : null }
+                                    <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons"
+                                                        onTap={this.detachFile.bind(this, id)}>
+                                        highlight_off
+                                    </Peerio.UI.Tappable>
+                                </li>);
+                            })
+                            }
 
                         </ul>
                         <textarea ref="message" className="message" placeholder="Type your message"></textarea>

@@ -17,7 +17,7 @@
                     username: this.state.username,
                     passphrase: this.state.passphrase
                 };
-                
+
                 this.transitionTo('root');
             })
             .catch( (error) => {
@@ -129,7 +129,7 @@
 
         generatePassphrase: function () {
             if(!this.trackedGeneration) {
-                this.trackedGeneration = true; 
+                this.trackedGeneration = true;
             } else {
                 Peerio.DataCollection.Signup.generatePassphrase();
             };
@@ -331,8 +331,8 @@
                 </p>
                 <div className="flex-row">
                     <div className="input-group flex-grow-1">
-                        <label>Language</label>
-                        <select ref="lang" onChange={this.generatePassphrase}>
+                        <label htmlFor="lang">Language</label>
+                        <select ref="lang" id="lang" onChange={this.generatePassphrase}>
                             <option value="en">English</option>
                             <option value="fr">Francais</option>
                             <option value="de">Deutsch</option>
@@ -348,8 +348,8 @@
                     </div>
 
                     <div className="input-group">
-                        <label>Length</label>
-                        <select ref="wordCount" onChange={this.generatePassphrase}>
+                        <label htmlFor="wordCount">Length</label>
+                        <select ref="wordCount" id="wordCount" onChange={this.generatePassphrase}>
                             <option value="5">5</option>
                             <option value="6">6</option>
                             <option value="8">7</option>

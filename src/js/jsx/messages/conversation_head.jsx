@@ -23,7 +23,7 @@
                 return (
                     <div key={username}>
                         <Peerio.UI.Avatar username={username}/>
-                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername') || username}
                     </div>
                 );
             });
@@ -31,7 +31,7 @@
                 participants.push(
                     <div key={username} className='former-participant'>
                         <Peerio.UI.Avatar username={username}/>
-                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername')}
+                        {Peerio.user.contacts.getPropValByKey(username, 'fullNameAndUsername') || username}
                     </div>
                 );
             });

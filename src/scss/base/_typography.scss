@@ -194,6 +194,10 @@ Text Style                                                                  | cl
 .caption {
   color: $black-38;
   font-size: 12px;
+
+  &.light {
+    color: $white-30;
+  }
 }
 
 .lowercase {
