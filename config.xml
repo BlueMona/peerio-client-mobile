@@ -109,7 +109,7 @@
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
-    <plugin name="cordova-plugin-insomnia" spec="4.0.1" />
+    <plugin name="com.peerio.cordova.plugin.insomnia" spec="4.2.0" />
     <plugin name="com.peerio.cordova.plugin.wkwebview" spec="0.6.9">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
