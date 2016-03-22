@@ -37,7 +37,9 @@
     "fs": "*",
     "xcode": "*",
     "deep-diff": "*",
-    "plist": "*"
+    "plist": "*",
+    "colors": "*",
+    "xml2js": "*"
   },
   "repository": {
     "type": "git",

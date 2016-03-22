@@ -82,35 +82,35 @@
         <preference name="UIWebViewDecelerationSpeed" value="fast" />
         <preference name="CameraUsesGeolocation" value="false" />
     </platform>
-    <engine name="ios" spec="~3.9.2" />
-    <engine name="android" spec="~5.0.0" />
-    <plugin name="cordova-plugin-keyboard" spec="~1.1.3" />
-    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="~1" />
-    <plugin name="cordova-plugin-appversion" spec="~1" />
-    <plugin name="cordova-plugin-device" spec="~1" />
-    <plugin name="cordova-plugin-splashscreen" spec="*" />
-    <plugin name="cordova-plugin-crosswalk-webview" spec="~1" />
-    <plugin name="cordova-plugin-statusbar" spec="~2" />
-    <plugin name="cordova-plugin-contacts" spec="~2" />
-    <plugin name="com.peerio.cordova.plugin.camera" spec="https://github.com/PeerioTechnologies/peerio-cordova-camera" />
-    <plugin name="cordova-plugin-whitelist" spec="*" />
-    <plugin name="cordova-plugin-email" spec="~1" />
-    <plugin name="br.com.dtmtec.plugins.carrier" spec="https://github.com/dtmtec/cordova-plugin-carrier" />
-    <plugin name="cordova-plugin-globalization" spec="*" />
-    <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="https://github.com/PeerioTechnologies/peerio-privacy-screen" />
-    <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
-    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="https://github.com/PeerioTechnologies/peerio-cordova-sqlcipher" />
+    <engine name="ios" spec="3.9.2" />
+    <engine name="android" spec="5.0.0" />
+    <plugin name="cordova-plugin-keyboard" spec="1.1.3" />
+    <plugin name="cordova-plugin-chrome-apps-system-cpu" spec="1.1.1" />
+    <plugin name="cordova-plugin-appversion" spec="1.0.0" />
+    <plugin name="cordova-plugin-device" spec="1.1.1" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="1.6.1" />
+    <plugin name="cordova-plugin-statusbar" spec="2.1.2" />
+    <plugin name="cordova-plugin-contacts" spec="2.0.1" />
+    <plugin name="com.peerio.cordova.plugin.camera" spec="2.1.2" />
+    <plugin name="cordova-plugin-whitelist" spec="1.2.1" />
+    <plugin name="cordova-plugin-email" spec="1.1.0" />
+    <plugin name="com.peerio.cordova.plugin.carrier" spec="1.0.0" />
+    <plugin name="cordova-plugin-globalization" spec="1.0.3" />
+    <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="1.0.0" />
+    <plugin name="com.peerio.cordova.plugin.clipboard" spec="0.1.0" />
+    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="0.1.4-rc" />
     <plugin name="phonegap-plugin-push" spec="1.5.3" />
-    <plugin name="com.peerio.cordova.plugin.touchid" spec="https://github.com/PeerioTechnologies/peerio-keychain-touchid" />
-    <plugin name="com.peerio.cordova.plugin.social" spec="https://github.com/PeerioTechnologies/peerio-cordova-social" />
-    <plugin name="com.peerio.cordova.plugin.file" spec="https://github.com/PeerioTechnologies/peerio-cordova-file" />
-    <plugin name="com.peerio.cordova.open" spec="https://github.com/PeerioTechnologies/peerio-cordova-open" />
+    <plugin name="com.peerio.cordova.plugin.splashscreen" spec="3.2.2" />
+    <plugin name="com.peerio.cordova.plugin.touchid" spec="1.0.0" />
+    <plugin name="com.peerio.cordova.plugin.social" spec="5.0.12" />
+    <plugin name="com.peerio.cordova.plugin.file" spec="4.1.3" />
+    <plugin name="com.peerio.cordova.plugin.open" spec="1.0.10" />
     <preference name="xwalkVersion" value="15+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
-    <plugin name="cordova-plugin-insomnia" spec="~4.0.1" />
-    <plugin name="com.peerio.cordova.plugin.wkwebview" spec="https://github.com/PeerioTechnologies/peerio-cordova-wkwebview">
+    <plugin name="cordova-plugin-insomnia" spec="4.0.1" />
+    <plugin name="com.peerio.cordova.plugin.wkwebview" spec="0.6.9">
         <variable name="WKWEBVIEW_SERVER_PORT" value="53741" />
     </plugin>
 </widget>
