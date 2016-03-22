@@ -110,26 +110,21 @@
                 files = this.state.attachments;
             }
             this.setState({sending: true});
-            this.state.conversation.reply(
-                this.state.conversation.participants, body, files)
+            this.state.conversation.reply(this.state.conversation.participants, body, files)
                 .then((msg) => {
-                    msg.failed && msg.failed.length
-                    && Peerio.UI.Alert.show({
-                        text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
-                    });
-                    return msg;
+                    if (msg.failed && msg.failed.length) {
+                        Peerio.UI.Alert.show({
+                            text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
+                        });
+                    }
+                    node.value = '';
+                    //setTimeout(this.onTextChanged, 0);
+                    this.setState({attachments: []});
                 })
                 .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
                 .finally(()=> {
-                    if (ack) {
-                        this.setState({sending: false});
-                        return;
-                    }
-                    node.value = '';
-                    setTimeout(this.onTextChanged, 0);
-                    this.setState({attachments: [], sending: false});
+                    this.setState({sending: false});
                 });
-            this.setState({empty: true});
         },
         // grows textarea height with content up to max-height css property value
         // or shrinks down to 1 line
