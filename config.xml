@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="100012" id="com.peerio" ios-CFBundleVersion="0" version="2.2.3">
+<widget android-versionCode="100013" id="com.peerio" ios-CFBundleVersion="0" version="2.2.4">
     <name>Peerio</name>
     <description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
@@ -42,7 +42,7 @@
         <preference name="AndroidPersistentFileLocation" value="Internal" />
         <preference name="AndroidExtraFilesystems" value="files,documents,cache,cache-external,root" />
         <preference name="AndroidLaunchMode" value="singleTop" />
-        <preference name="android-minSdkVersion" value="16" />
+        <preference name="android-minSdkVersion" value="19" />
         <preference name="android-targetSdkVersion" value="23" />
     </platform>
     <platform name="ios">
@@ -99,7 +99,7 @@
     <plugin name="cordova-plugin-globalization" spec="*" />
     <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="https://github.com/PeerioTechnologies/peerio-privacy-screen" />
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
-    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="https://github.com/PeerioTechnologies/peerio-cordova-sqlcipher" />
+    <plugin name="io.litehelpers.cordova.sqlcipher" spec="https://github.com/litehelpers/Cordova-sqlcipher-adapter" />
     <plugin name="phonegap-plugin-push" spec="1.5.3" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="https://github.com/PeerioTechnologies/peerio-keychain-touchid" />
     <plugin name="com.peerio.cordova.plugin.social" spec="https://github.com/PeerioTechnologies/peerio-cordova-social" />
