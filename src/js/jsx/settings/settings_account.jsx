@@ -123,7 +123,7 @@
                                 />
                             </div>
                             <div className="input-group">
-                                <label htmlFor="first-name">Last Name</label>
+                                <label htmlFor="last-name">Last Name</label>
                                 <input id="last-name"
                                        type="text"
                                        required="required"
@@ -133,7 +133,7 @@
                                 />
                             </div>
                             <div className="input-group">
-                                <label>Addresses</label>
+                                <label htmlFor="address">Addresses</label>
                                     {addressHint}
                                     {addressItems}
                                 <Peerio.UI.AddAddress ref="addAddress" />

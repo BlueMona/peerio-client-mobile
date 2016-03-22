@@ -87,7 +87,7 @@
                 pinUI =
                     (<div>
                         <div className="input-group flex-col flex-justify-center">
-                          <label>
+                          <label htmlFor="passcode">
                               Passcode must be 6 digits
                           </label>
                           <input className="text-center"
@@ -97,7 +97,8 @@
                                  pattern="[0-9]*"
                                  value={this.state.newPin}
                                  inputmode="numeric"
-                                 onChange={this.newPinChange}/>
+                                 onChange={this.newPinChange}
+                                 id="passcode"/>
                              <p className="info-small text-center"><b>{message}</b></p>
                         </div>
                         <div className="buttons">

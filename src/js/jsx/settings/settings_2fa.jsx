@@ -79,9 +79,9 @@
         },
 
         startEnable2FA: function() {
-            (!Peerio.user.addresses || Peerio.user.addresses.length == 0) 
+            (!Peerio.user.addresses || Peerio.user.addresses.length == 0)
             && Peerio.UI.Confirm.show({
-                text: 'You don\'t have a registered contact address. If you lose your 2FA, ' + 
+                text: 'You don\'t have a registered contact address. If you lose your 2FA, ' +
                         'Peerio won\'t be able to recover your account.',
                 cancelText: 'I understand',
                 okText: 'Add address'
@@ -149,12 +149,13 @@
                             </div>
                             ) : (
                             <div className="input-group">
-                                <label>
+                                <label htmlFor="generatedCode">
                                     {pasteMessage}
                                 </label>
                                 {this.state.code ? (
                                     <input className="text-center"
                                         ref="generatedCode"
+                                        id="generatedCode"
                                         autoComplete="off" autoCorrect="off"
                                         autoCapitalize="off" spellCheck="false"
                                         value={this.state.code} readOnly="true"/>
@@ -165,12 +166,13 @@
 
                             </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
                             <div className="input-group">
-                                <label>
+                                <label htmlFor="authenticatorCode">
                                     Enter the six digit code that appears in the app:
                                 </label>
                                 <input
                                     className="text-center"
                                     ref="authenticatorCode"
+                                    id="authenticatorCode"
                                     autoComplete="off" autoCorrect="off"
                                     autoCapitalize="off" spellCheck="false"
                                     onChange={this.onChangeAuthy}

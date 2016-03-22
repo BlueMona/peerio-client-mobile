@@ -68,7 +68,7 @@
            return (
                <div>
                    <div className="flex-row flex-align-center">
-                       <input type="text" placeholder="add phone or email"
+                       <input type="text" placeholder="add phone or email" id="address"
                            ref="textEdit"/>
 
                        <Peerio.UI.Tappable className="btn-primary" onTap={ this.addNewAddress }>
