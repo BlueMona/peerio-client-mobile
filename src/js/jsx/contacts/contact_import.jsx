@@ -4,7 +4,11 @@
     Peerio.UI.AddContactImport = React.createClass({
         mixins: [ReactRouter.Navigation],
         getInitialState: function () {
-            return {deviceContacts: [], availableContacts: []};
+            return {
+              deviceContacts: [],
+              availableContacts: [],
+              selectAll: false,
+            };
         },
         //contacts marked as selected are handled outside React state because updating
         //through state would force a loop through all availableContacts on render as well (too expensive).
@@ -111,11 +115,16 @@
                     this.transitionTo('contacts');
                 });
         },
+        // TODO make select all, select all.
+        toggleSelection: function(){
+          this.setState({selectAll: !this.state.selectAll});
+        },
+
         render: function () {
 
             var contactRequestList = [];
             var contactInviteList = [];
-
+            var toggleSelection = this.toggleSelection;
             var inviteAddress = this.handleInviteAddress;
             var requestContact = this.handleRequestContact;
 
@@ -157,6 +166,13 @@
                 </ul>
                 <div className="headline-divider">Invite Your Contacts to Peerio</div>
                 <ul className="flex-list">
+                    <Peerio.UI.Tappable element="li" className="list-item select-all" onTap={toggleSelection}>
+                        <div className={'checkbox-input' + (this.state.selectAll ? ' checked': '')}>
+                            <i className="material-icons"></i>
+                        </div>
+                        <div className="list-item-content"> Select all contacts</div>
+                    </Peerio.UI.Tappable>
+
                     {contactInviteList}
                 </ul>
             </div>);

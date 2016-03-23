@@ -26,7 +26,7 @@ Peerio.UI.AddContact = React.createClass({
   },
 
   importContacts: function() {
-      Peerio.UI.Confirm.show({text: 'Your contact list will be sent to Peerio\'s servers so you can see who is already using Peerio. Do you want to proceed?'})
+      Peerio.UI.Confirm.show({text: 'Your contact list will be shared with Peerio. This information is only used to help you find your contacts on Peerio and will be wiped immediately after importing. Would you like to proceed?'})
       .then( () => {
           this.transitionTo('add_contact_import');
       });
