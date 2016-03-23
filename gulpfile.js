@@ -23,6 +23,8 @@ var series = require('stream-series');
 var replace = require('gulp-replace');
 var xcode = require('./extra/peerio-xcode.js');
 var plist = require('plist');
+var colors = require('colors');
+var xml2js = require('xml2js');
 
 var babelOptions = {
     compact: false,
@@ -108,6 +110,19 @@ gulp.task('index', function () {
   if(options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
 
   return result.pipe(gulp.dest('./www'));
+});
+
+gulp.task('check-plugins', function() {
+    console.log('checking plugins'.yellow);
+    var parser = new xml2js.Parser();
+    fs.readFile('./config.xml', function(err, data) {
+        parser.parseString(data, function (err, result) {
+            result.widget.plugin.forEach( i => {
+                console.log( i.$.name.blue + ' ' + i.$.spec.yellow );
+            });
+            console.log('Done');
+        });
+    });
 });
 
 gulp.task('js', function () {

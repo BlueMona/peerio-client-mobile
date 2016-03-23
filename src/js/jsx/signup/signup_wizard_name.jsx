@@ -78,6 +78,7 @@
                             spellCheck="false"
                             className="lowercase"
                             onChange={this.validateUsername}/>
+                          <span className="caption light">Required</span>
                     </div>
                     <div className="input-group">{
                         (this.state.firstNameValid === null || this.state.firstNameValid === true)
