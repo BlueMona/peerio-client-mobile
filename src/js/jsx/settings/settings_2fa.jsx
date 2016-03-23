@@ -82,6 +82,7 @@
             Peerio.Net.confirm2FA(currentCode)
             .then( (response) => {
                 this.setState({message: ''});
+                this.goBack();
             })
             .catch( (reject) => {
                 this.setState({message: 'Code is incorrect. Please try again.'});
@@ -101,6 +102,7 @@
                 this.setState({message: 'Code is incorrect. Please try again.'});
             })
             .finally( () => {
+                this.goBack();
                 this.setState({ authyCode: '' });
             });
         },
