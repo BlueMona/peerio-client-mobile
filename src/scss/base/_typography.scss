@@ -169,16 +169,23 @@ Text Style                                                                  | cl
   display: flex;
   align-items: center;
   color: color(meta-text-light);
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-.headline-divider:after,
-.headline-divider:before{
-  content: " ";
-  height: 1px;
-  background-color: darken(color(meta-text-light), 5%);
-  flex-grow: 1;
-  margin: 0px 1rem;
+  margin: $margin-base 0;
+
+  &:after,
+  &:before{
+    content: " ";
+    height: 1px;
+    background-color: darken(color(meta-text-light), 5%);
+    flex-grow: 1;
+  }
+
+  &:after {
+    margin: 0 0 0 8px;
+  }
+
+  &:before{
+    margin: 0 8px 0 0;
+  }
 }
 
 .red-bold {
@@ -194,6 +201,10 @@ Text Style                                                                  | cl
 .caption {
   color: $black-38;
   font-size: 12px;
+
+  &.light {
+    color: $white-30;
+  }
 }
 
 .lowercase {

@@ -14,6 +14,7 @@
 
         componentWillMount: function () {
             this.steps = [
+                Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardPin,
                 Peerio.UI.SetupWizardEmail,
@@ -46,7 +47,7 @@
 
         render: function () {
             var currentStep = React.createElement(
-                this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep });
+                this.steps[this.state.activeStep], { key: 'step' + this.state.activeStep, onSuccess: this.handleNextStep, handleNextStep: this.handleNextStep });
             var button = (
 
                 <div className={classNames(

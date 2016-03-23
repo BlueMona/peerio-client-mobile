@@ -37,7 +37,7 @@
   }
 }
 
-#sidemenu-toggle, #app-lock, #search, #global-back {
+#sidemenu-toggle, #app-lock, #global-back {
   height: 48px;
   width: 48px;
   line-height: 48px;
@@ -47,34 +47,6 @@
     margin: 0;
   }
 }
-
-// navbar section: search block
-#search {
-  position: relative;
-  width:auto;
-}
-// input with search keywords
-#search-keyword {
-  height: 100%;
-  width: 100%;
-  padding: 0 33px 0 5px;
-  background-color: lighten(color(p-blue-darker), 10%);
-  border: none;
-  font-weight: 200;
-  font-size: 13px;
-  text-align: left;
-}
-// search button
-#search-button {
-  position: absolute;
-  right: 0;
-  top:0;
-  height: 100%;
-  width: 30px;
-  padding-top: 10px;
-  text-align: center;
-}
-
 
 // spacer to make the right cell go to the right
 .spacer {
