@@ -31,14 +31,17 @@
             if (!Peerio.autoLogin) {
                 Peerio.Auth.getSavedLogin()
                     .then((data) => {
-                        this.setState({savedLogin: data});
-
-                        this.invokeTouchID(data);
-
-                        data && data.username && Peerio.Auth.getPinForUser(data.username)
+                        Peerio.TinyDB.getItem('prevent_saved_login')
+                        .then(prevent => {
+                            if(prevent) return true;
+                            this.setState({savedLogin: data});
+                            this.invokeTouchID(data);
+                            data && data.username && Peerio.Auth.getPinForUser(data.username)
                             .then((pin) => {
                                 this.setState({isPin: !!pin});
                             });
+                        })
+                        .finally(() => Peerio.TinyDB.removeItem('prevent_saved_login'));
                     });
             }
         },

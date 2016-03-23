@@ -248,7 +248,8 @@ Peerio.NativeAPI.init = function () {
         .catch(noop)
         .then(Peerio.SqlDB.closeAll)
         .catch(noop)
-        .then(()=> window.location.reload());
+        .then(() => Peerio.TinyDB.saveItem('prevent_saved_login', true))
+        .finally(()=> window.location.reload());
     },
 
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
