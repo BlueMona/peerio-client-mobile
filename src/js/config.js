@@ -18,7 +18,7 @@ Peerio.Config.init = function () {
 
         var cfg = Peerio.Config = {};
 
-        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://hocuspocus.peerio.com';
+        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
         cfg.piwik = {
             server: 'https://piwik.peerio.com/piwik.php',
