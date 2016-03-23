@@ -6,7 +6,6 @@
 
         getInitialState: function() {
             return {
-                clipboardSuccess: false,
                 code: '',
                 isEnabled2FA: false,
                 // used for the two step disabling 2FA process
@@ -29,26 +28,6 @@
         componentDidUpdate: function(prevProps, prevState) {
             if(!this.state.isEnabled2FA && prevState.isEnabled2FA)  {
                 this.startEnable2FA();
-            }
-            if(!this.state.isEnabled2FA && prevState.code != this.state.code) {
-                // we try to copy code to buffer
-                // if we fail, we focus on the code input
-                // to make it easier for user to copy
-                // if we succeed, we focus on
-                // authenticator input
-                var element = React.findDOMNode(this.refs.generatedCode);
-                Peerio.NativeAPI.copyToClipboard(this.state.code)
-                .then( () => {
-                    this.setState( { clipboardSuccess: true } );
-                    element = React.findDOMNode(this.refs.authenticatorCode);
-                })
-                .catch( () => {
-                    L.info('Clipboard copying is not available on the platform');
-                })
-                .finally( () => {
-                    element.focus();
-                    element.select();
-                });
             }
         },
 
@@ -103,6 +82,7 @@
             Peerio.Net.confirm2FA(currentCode)
             .then( (response) => {
                 this.setState({message: ''});
+                this.goBack();
             })
             .catch( (reject) => {
                 this.setState({message: 'Code is incorrect. Please try again.'});
@@ -122,6 +102,7 @@
                 this.setState({message: 'Code is incorrect. Please try again.'});
             })
             .finally( () => {
+                this.goBack();
                 this.setState({ authyCode: '' });
             });
         },
@@ -132,10 +113,15 @@
                 message: ''
             });
         },
+
+        onCopy: function () {
+            this.setState({clipboardSuccess: true});
+        },
+
         //--- RENDER
         render: function () {
             var pasteMessage = this.state.clipboardSuccess ?
-                'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
+                'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Copy and paste the following secret key into your authenticator app:';
 
                 return (
                     <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
@@ -163,7 +149,9 @@
                                     <div className="text-center">
                                         <i className="fa fa-circle-o-notch fa-spin"></i>
                                     </div>)}
-
+                                    <div className="text-center">
+                                        <Peerio.UI.CopyButton onCopy={this.onCopy} copy={this.state.code}/>
+                                    </div>
                             </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
                             <div className="input-group">
                                 <label htmlFor="authenticatorCode">

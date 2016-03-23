@@ -100,7 +100,7 @@
     <plugin name="com.peerio.cordova.plugin.clipboard" spec="0.1.0" />
     <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="0.1.5" />
     <plugin name="phonegap-plugin-push" spec="1.5.3" />
-    <plugin name="com.peerio.cordova.plugin.splashscreen" spec="3.2.2" />
+    <plugin name="com.peerio.cordova.plugin.splashscreen" spec="3.2.3" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="1.0.0" />
     <plugin name="com.peerio.cordova.plugin.social" spec="5.0.12" />
     <plugin name="com.peerio.cordova.plugin.file" spec="4.1.3" />
