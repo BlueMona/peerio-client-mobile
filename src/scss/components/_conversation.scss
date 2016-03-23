@@ -41,15 +41,6 @@ $avatar-size: 29px;
     padding-left: $avatar-size + $padding-base;
     position: relative;
 
-    .headline-divider {
-      position: absolute;
-      left: 0;
-
-      + .head {
-        margin-top: 2rem;
-      }
-    }
-
     .avatar {
       width: $avatar-size;
       height: $avatar-size;
