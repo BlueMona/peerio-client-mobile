@@ -98,7 +98,7 @@
     <plugin name="cordova-plugin-globalization" spec="1.0.3" />
     <plugin name="com.peerio.cordova.plugin.privacyscreen" spec="1.0.0" />
     <plugin name="com.peerio.cordova.plugin.clipboard" spec="0.1.0" />
-    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="0.1.4-rc" />
+    <plugin name="com.peerio.cordova.plugin.sqlcipher" spec="0.1.5" />
     <plugin name="phonegap-plugin-push" spec="1.5.3" />
     <plugin name="com.peerio.cordova.plugin.splashscreen" spec="3.2.2" />
     <plugin name="com.peerio.cordova.plugin.touchid" spec="1.0.0" />
