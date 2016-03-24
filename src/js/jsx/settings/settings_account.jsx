@@ -82,11 +82,13 @@
                 headline: 'Delete account',
                 text: 'Are you sure you want to delete account?',
                 onAccept: function () {
-                    Peerio.user.closeAccount().then(function () {
+                    Peerio.user.closeAccount()
+                    .then(() => Peerio.User.wipeLocalData(Peerio.user.username))
+                    .then(() => {
                         Peerio.Action.showAlert({
                             text: 'Account deleted. Signing out.',
                             onClose: function () {
-                                window.location.reload();
+                                Peerio.NativeAPI.signOut();
                             }
                         });
                     });
