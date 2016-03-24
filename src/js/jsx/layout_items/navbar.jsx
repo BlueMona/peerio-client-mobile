@@ -17,11 +17,12 @@
         },
 
         componentWillMount: function () {
-            this.tickPeerioDownTimer = window.setInterval(() => this.tickIsPeerioDown(), 5000);
+            this.tickPeerioDownTimer = window.setInterval(() => this.tickIsPeerioDown(), 2000);
             var d = Peerio.Dispatcher;
             var fn = Peerio.Helpers.getStateUpdaterFn;
             this.subscrIDs = [
                 d.onConnected(fn(this, {socketConnected: true})),
+                d.onConnected(() => this.cancelIsPeerioDown()),
                 d.onDisconnected(fn(this, {socketConnected: false})),
                 d.onLoading(fn(this, {loading: true})),
                 d.onLoadingDone(fn(this, {loading: false})),
@@ -52,6 +53,7 @@
                 this.counter = 0;
                 this.animateIsPeerioDownTimer = 
                     window.setInterval(() => this.animateIsPeerioDown(), 2000);
+                window.isPeerioDownTimer = null;
             }, 5000);
         },
 
