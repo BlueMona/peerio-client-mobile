@@ -4,6 +4,12 @@
 Peerio.UI.AddContact = React.createClass({
   mixins: [ReactRouter.Navigation],
 
+  statics: {
+      importContactsWarning: function() {
+          return Peerio.UI.Confirm.show({text: 'Your contact list will be shared with Peerio. This information is only used to help you find your contacts on Peerio and will be wiped immediately after importing. Would you like to proceed?'});
+      }
+  },
+
   componentWillMount: function() {
       Peerio.user.getInviteCode()
       .then( (code) => {
@@ -17,16 +23,16 @@ Peerio.UI.AddContact = React.createClass({
       };
   },
 
-  goToSearch: function(){
+  goToSearch: function() {
     this.transitionTo('add_contact_search', {id:this.state.searchString});
   },
 
-  updateSearchString: function(e){
+  updateSearchString: function(e) {
     this.setState({searchString: e.target.value});
   },
 
   importContacts: function() {
-      Peerio.UI.Confirm.show({text: 'Your contact list will be shared with Peerio. This information is only used to help you find your contacts on Peerio and will be wiped immediately after importing. Would you like to proceed?'})
+      Peerio.UI.AddContact.importContactsWarning()
       .then( () => {
           this.transitionTo('add_contact_import');
       });

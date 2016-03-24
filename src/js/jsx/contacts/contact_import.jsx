@@ -8,6 +8,7 @@
               deviceContacts: [],
               availableContacts: [],
               selectAll: false,
+              inProgress: true
             };
         },
         //contacts marked as selected are handled outside React state because updating
@@ -34,7 +35,10 @@
 
             } else {
                 //dev mode
-                this.deviceImportSuccess();
+                this.deviceImportSuccess([
+                                         { id: 10, emails: [ {value: 'seavan@gmail.com'} ], name: 'Sam Avanesov'},
+                                         { id: 11, emails: [ {value: 'seavan+10@gmail.com'} ], name: 'Aram Avanesov'},
+                ]);
             }
         },
         deviceImportFailure: function () {
@@ -46,36 +50,40 @@
 
         },
         searchForPeerioUsers: function (contacts) {
-
+            this.setState({inProgress: true});
             var addressChunks = _.chunk(Peerio.Util.parseAddressesForLookup(contacts), 500);
-
-            var self = this;
-
             //index contacts by ID to merge with foundUsers.
             contacts = _.keyBy(contacts, 'id');
-
-            addressChunks.forEach(function (addressChunk) {
-
+            var importPromise = Promise.resolve(true);
+            addressChunks.forEach( addressChunk => {
                 var searchAddresses = {addresses: addressChunk};
-
-                Peerio.Net.addressLookup(searchAddresses)
-                    .then(function (returnData) {
-
+                importPromise = importPromise
+                .then( () => Peerio.Net.addressLookup(searchAddresses))
+                .then( (returnData) => {
                         var foundUsers = _.filter(returnData, function (i) {
                             return i.username;
                         });
                         foundUsers = _.keyBy(foundUsers, 'id');
-
-                        if (self.state.availableContacts.length) {
-                            contacts = _.merge(self.state.availableContacts, foundUsers);
+                        if (this.state.availableContacts.length) {
+                            contacts = _.merge(this.state.availableContacts, foundUsers);
                         } else {
                             contacts = _.merge(contacts, foundUsers);
                         }
+                        this.setState({availableContacts: contacts});
+                })
+                .catch( (e) => L.error(e) );
+            });
 
-                        self.setState({availableContacts: contacts});
-                    });
+            importPromise = importPromise
+            .then( () => new Promise( function(resolve, reject) {
+                window.setTimeout(resolve, 3000);
+            }) );
+            
+            importPromise.finally( () => {
+                this.setState({inProgress: false});
             });
         },
+
         handleInviteAddress: function (address) {
             var adrObj = {email: address};
 
@@ -85,6 +93,7 @@
                 _.remove(this.inviteAddresses, adrObj);
             }
         },
+
         handleRequestContact: function (username) {
             var usrObj = {username: username};
 
@@ -128,7 +137,8 @@
             var inviteAddress = this.handleInviteAddress;
             var requestContact = this.handleRequestContact;
 
-            _.forOwn(this.state.availableContacts, function (contact, contactID) {
+            _.forOwn(this.state.availableContacts, (contact, contactID) => {
+                L.info(this.state);
                 if (contact.username) {
                     contactRequestList.push(
                         <Peerio.UI.ContactRequestTemplate
@@ -150,7 +160,7 @@
 
             });
 
-            if (this.state.availableContacts.length === 0) {
+            if (this.state.inProgress) {
                 return (
                     <div className="content without-tab-bar">
                         <div className="headline">Contact Import</div>
@@ -164,6 +174,7 @@
                 <ul>
                     {contactRequestList}
                 </ul>
+                { contactRequestList.length === 0 ? (<p>No matches found</p>) : null }
                 <div className="headline-divider">Invite Your Contacts to Peerio</div>
                 <ul className="flex-list">
                     <Peerio.UI.Tappable element="li" className="list-item select-all" onTap={toggleSelection}>
@@ -174,6 +185,7 @@
                     </Peerio.UI.Tappable>
 
                     {contactInviteList}
+                    {contactInviteList.length === 0 ? (<p>No contacts found</p>) : null}
                 </ul>
             </div>);
         }
