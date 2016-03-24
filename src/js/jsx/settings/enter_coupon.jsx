@@ -24,7 +24,7 @@
                   <div className="input-group">
                       <label htmlFor="coupon">If you have a promotional code, please enter it below.</label>
                       <div className="flex-row flex-align-center">
-                          <input type="text" placeholder="enter coupon code" ref="textEdit" spellCheck="false" id="coupon"/>
+                          <input type="text" placeholder="enter coupon code" ref="textEdit" spellCheck="false" autoComplete="off" id="coupon"/>
                           <Peerio.UI.Tappable className="btn-primary" onTap={ this.redeemCoupon }>
                              redeem
                           </Peerio.UI.Tappable>
