@@ -100,6 +100,13 @@
 
         handleLoginFail: function (error, systemPin) {
             this.setState({waitingForLogin: false});
+
+            // if the account was deleted
+            
+            if (error && error.code === 400) {
+                Peerio.User.wipeLocalData(Peerio.user.username);
+            }
+
             // if we got a 2FA request
             if (error && error.code === 424) {
                 console.log('Handling 2FA');
