@@ -52,7 +52,7 @@
         render: function () {
             var inRequests = Peerio.user.receivedContactRequests.arr.map(item => this.getContactNode(item, true));
             var outRequests = Peerio.user.sentContactRequests.arr.map(item => this.getContactNode(item, false, true));
-            var contacts = Peerio.user.getSortedContacts()
+            var contacts = Peerio.user.contacts.arr
             .filter(c => !c.isDeleted).map(item => this.getContactNode(item));
 
             if (contacts.length === 1 && outRequests === 0 && inRequests === 0) {
