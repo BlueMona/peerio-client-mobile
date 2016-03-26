@@ -103,8 +103,9 @@
 
             // if the account was deleted
             
-            if (error && error.code === 400) {
+            if (error && error.code === 488) {
                 Peerio.User.wipeLocalData(Peerio.user.username);
+                error.message = 'Account was deleted';
             }
 
             // if we got a 2FA request
