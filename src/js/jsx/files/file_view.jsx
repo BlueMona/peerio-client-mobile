@@ -126,7 +126,7 @@
                         <li>
                             <label>Location</label>
                             <div
-                                className="info-content">{file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
+                                className="info-content">{file.cached ? 'On this device (decrypted) and in the cloud (encrypted)' : 'In the cloud (encrypted)'}</div>
                         </li>
                         <li>
                             <label>Owner</label>
