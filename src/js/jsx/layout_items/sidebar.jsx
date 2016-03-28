@@ -112,9 +112,8 @@
                                     </Peerio.UI.Tappable>
                                 </ul>
                                 <ul>
-                                    <li>
-                                        <a href="mailto:support@peerio.com"><i className="material-icons">help</i> Support</a>
-                                    </li>
+                                    <Peerio.UI.Tappable element="li" onTap={Peerio.NativeAPI.openInBrowser.bind(this, 'mailto:support@peerio.com')}>
+                                      <i className="material-icons">help</i> Support</Peerio.UI.Tappable>
                                 </ul>
 
 
