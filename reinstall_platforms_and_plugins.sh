@@ -1,7 +1,7 @@
 #!/bin/sh
 echo '=== REINSTALLING PLATFORMS AND PLUGINS'
 
-if [ -e "extra/cordova-android" ]; then
+if [ -d "extra/cordova-android" ]; then
     cd "extra/cordova-android"
     git pull
     cd "../.."
