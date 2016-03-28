@@ -77,7 +77,11 @@ Peerio.NativeAPI.init = function () {
      */
     api.openInBrowser = function (url) {
         try {
-            window.open(url, '_system');
+            if(Peerio.runtime.platform == 'android')
+                window.cordova.plugins.disusered
+            .open(url, () => L.info('ok'), e => L.info(e));
+            else
+                window.open(url, '_system');
         } catch (ex) {
             L.error('Failed to open url in browser. {0}', ex);
         }

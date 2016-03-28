@@ -37,7 +37,7 @@
         handleRemoveLocal: function () {
             Peerio.Action.showConfirm({
                 headline: 'Remove file from this device?',
-                text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+                text: 'This file will be deleted from your device, but will still be available to users who you have shared it with.',
                 onAccept: ()=>Peerio.user.files.dict[this.props.params.id].deleteFromCache()
             });
         },
@@ -126,7 +126,7 @@
                         <li>
                             <label>Location</label>
                             <div
-                                className="info-content">{file.cached ? 'On this device and in the cloud' : 'In the cloud'}</div>
+                                className="info-content">{file.cached ? 'On this device (decrypted) and in the cloud (encrypted)' : 'In the cloud (encrypted)'}</div>
                         </li>
                         <li>
                             <label>Owner</label>

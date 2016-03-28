@@ -7,6 +7,7 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onHardBackButton(this.handleHardwareBack),
                 Peerio.Dispatcher.onTransitionTo(this.handleTransition),
+                Peerio.Dispatcher.onResume(this.handleResume),
            ];
         },
         componentWillUnmount: function(){
@@ -15,6 +16,9 @@
         handleHardwareBack: function(){
             if(this.isAppRoot()) return;
             this.goBack();
+        },
+        handleResume: function() {
+            Peerio.NativeAPI.clearPushBadge();
         },
         // hack to allow out of router context components to navigate
         handleTransition: function(){
