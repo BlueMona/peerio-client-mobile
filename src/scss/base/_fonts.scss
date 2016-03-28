@@ -1,9 +1,9 @@
 //   Font face rules
 
-@mixin all-font-formats($args){
+@mixin all-font-formats($args) {
   src: url($args + '.eot');
   src: url($args + '.eot?#iefix') format('embedded-opentype'),
-       url($args + '.woff2') format('woff2'),
+        //  url($args + '.woff2') format('woff2'),
        url($args + '.woff') format('woff'),
        url($args + '.ttf') format('truetype');
 }
@@ -18,36 +18,36 @@
 
 // OPEN SANS
 @font-face {
-    font-family: "OpenSans";
-    @include all-font-formats("#{$opensans-font-path}OpenSans-Light");
+    font-family: 'OpenSans';
+    @include all-font-formats('#{$opensans-font-path}OpenSans-Light');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "OpenSans";
-    @include all-font-formats("#{$opensans-font-path}OpenSans-Regular");
+    font-family: 'OpenSans';
+    @include all-font-formats('#{$opensans-font-path}OpenSans-Regular');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "OpenSans";
-    @include all-font-formats("#{$opensans-font-path}OpenSans-SemiBold");
+    font-family: 'OpenSans';
+    @include all-font-formats('#{$opensans-font-path}OpenSans-SemiBold');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "OpenSans";
-    @include all-font-formats("#{$opensans-font-path}OpenSans-Bold");
+    font-family: 'OpenSans';
+    @include all-font-formats('#{$opensans-font-path}OpenSans-Bold');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "OpenSans";
-    @include all-font-formats("#{$opensans-font-path}OpenSans-ExtraBold");
+    font-family: 'OpenSans';
+    @include all-font-formats('#{$opensans-font-path}OpenSans-ExtraBold');
     font-weight: 800;
     font-style: normal;
 }
