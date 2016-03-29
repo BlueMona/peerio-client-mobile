@@ -48,6 +48,13 @@
             this.toggleAndTransition('files');
             Peerio.Action.showFileUpload();
         },
+        handleSupport: function () {
+            window.cordova ? window.cordova.plugins.email.open({
+                to: 'support@peerio.com',
+                subject: 'Peerio support request',
+                isHtml: true
+            }) : window.open('mailto:support@peerio.com', '_blank');
+        },
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
@@ -112,7 +119,7 @@
                                     </Peerio.UI.Tappable>
                                 </ul>
                                 <ul>
-                                    <Peerio.UI.Tappable element="li" onTap={Peerio.NativeAPI.openInBrowser.bind(this, 'mailto:support@peerio.com')}>
+                                    <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
                                       <i className="material-icons">help</i> Support</Peerio.UI.Tappable>
                                 </ul>
 

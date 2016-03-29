@@ -16,7 +16,7 @@
     <access origin="https://peeriodev.blob.core.windows.net" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-intent href="mailto:*" />
+    <allow-intent href="mailto:*" launch-external="yes"/>
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
     <preference name="Orientation" value="portrait" />
