@@ -338,6 +338,17 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
+     * Opens email window
+     */
+    api.openEmailWindow = function (to, subject) {
+        window.cordova ? window.cordova.plugins.email.open({
+            to: to,
+            subject: subject,
+            isHtml: true
+        }) : window.open(to, '_blank');
+    };
+
+    /**
      * Get carrier info 
      */
     api.getCarrierInfo = function () {

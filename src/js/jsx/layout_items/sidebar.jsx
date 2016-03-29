@@ -49,11 +49,8 @@
             Peerio.Action.showFileUpload();
         },
         handleSupport: function () {
-            window.cordova ? window.cordova.plugins.email.open({
-                to: 'support@peerio.com',
-                subject: 'Peerio support request',
-                isHtml: true
-            }) : window.open('mailto:support@peerio.com', '_blank');
+            Peerio.NativeAPI.openEmailWindow('support@peerio.com', 
+                                             'Peerio support request');
         },
         signOut: function () {
             Peerio.NativeAPI.signOut();
