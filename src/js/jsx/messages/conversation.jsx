@@ -88,7 +88,7 @@
         },
 
         acceptFileSelection: function (selection) {
-            this.setState({attachments: selection});
+            this.setState({attachments: selection}, this.onTextChanged);
         },
 
         sendAck: function () {
@@ -117,13 +117,17 @@
                             text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
                         });
                     }
-                    node.value = '';
-                    //setTimeout(this.onTextChanged, 0);
-                    this.setState({attachments: []});
+                    if(!ack) {
+                        node.value = '';
+                        this.setState({attachments: []});
+                    }
                 })
-                .catch(err => Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')}))
+                .catch(err => {
+                    L.error("Failed to send message. {0}", err);
+                    Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')})
+                })
                 .finally(()=> {
-                    this.setState({sending: false});
+                    this.setState({sending: false}, this.onTextChanged);
                 });
         },
         // grows textarea height with content up to max-height css property value
@@ -131,7 +135,7 @@
         onTextChanged: function () {
             var node = this.refs.reply.getDOMNode();
             node.style.height = node.scrollHeight + 'px';
-            if (node.value.isEmpty()) {
+            if (node.value.isEmpty() && this.state.attachments.length===0) {
                 if (!this.state.empty) this.setState({empty: true})
             } else {
                 if (this.state.empty) this.setState({empty: false});
@@ -189,7 +193,7 @@
             setTimeout(() => {
                 if (index != -1) {
                     this.state.attachments.splice(index, 1);
-                    this.setState({attachments: this.state.attachments});
+                    this.setState({attachments: this.state.attachments}, this.onTextChanged);
                     this.setState({removed: null});
                 }
             }, 350);
