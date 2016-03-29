@@ -80,9 +80,9 @@ textarea {
 }
 
 input {
+  -webkit-appearance: none;
 
   &[type="search"] {
-    -webkit-appearance: none;
     box-sizing: border-box;
   }
 
