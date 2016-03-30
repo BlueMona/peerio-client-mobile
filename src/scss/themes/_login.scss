@@ -12,7 +12,7 @@
   }
 }
 
-.content-wrapper-signup{
+.content-wrapper-signup {
   background-color: color(p-blue);
   color: $white-100;
 
@@ -20,12 +20,13 @@
     overflow-y: scroll;
   }
 
-  input, select{
-    color: $white-100;
+  input,
+  select {
     border-color: $white-12;
+    color: $white-100;
 
     &:focus {
-      border-color: white;
+      border-color: $white-100;
     }
   }
 
@@ -53,6 +54,7 @@
       background-color: color(p-blue-light-5);
       min-height: 48px;
       border-radius: $radius-default;
+      color: currentColor;
     }
 
     .input-control {

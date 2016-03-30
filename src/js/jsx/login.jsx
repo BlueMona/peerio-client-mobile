@@ -94,12 +94,20 @@
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
-            // Peerio.Helpers.checkFileSystemEncryption();
+            Peerio.Helpers.checkFileSystemEncryption();
             this.transitionTo(this.nextRoute);
         },
 
         handleLoginFail: function (error, systemPin) {
             this.setState({waitingForLogin: false});
+
+            // if the account was deleted
+            
+            if (error && error.code === 488) {
+                Peerio.User.wipeLocalData(Peerio.user.username);
+                error.message = 'Account was deleted';
+            }
+
             // if we got a 2FA request
             if (error && error.code === 424) {
                 console.log('Handling 2FA');

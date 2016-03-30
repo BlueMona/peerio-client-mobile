@@ -166,7 +166,7 @@
                                     onChange={this.onChangeAuthy}
                                     value={this.state.authyCode}/>
                             </div>) : null }
-                            <p className="caption margin-small padding-small">
+                            <p className="caption text-red">
                                 {this.state.message}
                             </p>
                     </div>

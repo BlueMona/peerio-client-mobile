@@ -19,6 +19,9 @@
 # debug variables file with potentially sensitive info
 /debug.js
 
+# cloned platform
+/extra/cordova-android
+
 # Cordova platform generated files
 /platforms
 /plugins

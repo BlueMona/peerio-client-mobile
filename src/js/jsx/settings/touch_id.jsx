@@ -10,6 +10,10 @@
         return (username || Peerio.user.username) + '_' +keyName;
     }
 
+    Peerio.User.addWipeCallback( (username) => {
+        return window.PeerioTouchIdKeychain ? window.PeerioTouchIdKeychain.deleteValue(keychainName(username)) : Promise.resolve(true);
+    });
+
     Peerio.UI.TouchId = React.createClass({
         statics: {
             hasTouchID: function (username) {
