@@ -345,7 +345,7 @@ Peerio.NativeAPI.init = function () {
             to: to,
             subject: subject,
             isHtml: true
-        }) : window.open(to, '_blank');
+        }) : window.open('mailto:' + to, '_blank');
     };
 
     /**
