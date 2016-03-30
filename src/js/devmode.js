@@ -3,6 +3,7 @@ L.captureConsole();
 L.captureRootErrors();
 L.benchmarkEnabled = true;
 L.level = L.LEVELS.SILLY;
+L.cacheLimit = 3000;
 
 if (window.PeerioDebug && PeerioDebug.logLevel != null) {
     L.level = PeerioDebug.logLevel || 3;
