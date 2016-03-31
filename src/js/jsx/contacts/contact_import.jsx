@@ -14,7 +14,7 @@
         //contacts marked as selected are handled outside React state because updating
         //through state would force a loop through all availableContacts on render as well (too expensive).
         inviteAddresses: [],
-        requestContacts: [],
+        requestContacts: {},
         componentWillMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.addOrInviteContacts)];
         },
@@ -76,7 +76,7 @@
 
             importPromise = importPromise
             .then( () => new Promise( function(resolve, reject) {
-                window.setTimeout(resolve, 3000);
+                window.setTimeout(resolve, 100);
             }) );
             
             importPromise.finally( () => {
@@ -94,15 +94,6 @@
             }
         },
 
-        handleRequestContact: function (username) {
-            var usrObj = {username: username};
-
-            if (!_.some(this.requestContacts, usrObj)) {
-                this.requestContacts.push(usrObj);
-            } else {
-                _.remove(this.requestContacts, usrObj);
-            }
-        },
         addOrInviteContacts: function () {
 
             if (this.inviteAddresses.length === 0 && this.requestContacts.length === 0) {
@@ -136,23 +127,18 @@
             var toggleSelection = this.toggleSelection;
             var inviteAddress = this.handleInviteAddress;
             var requestContact = this.handleRequestContact;
-
+            var requestItems = [];
+            var inviteItems = [];
             _.forOwn(this.state.availableContacts, (contact, contactID) => {
                 L.info(this.state);
+                contact.username = 'test' + contactID;
                 if (contact.username) {
-                    contactRequestList.push(
-                        <Peerio.UI.ContactRequestTemplate
-                            name={contact.name}
-                            username={contact.username}
-                            id={contactID}
-                            onTap={requestContact}
-                            isSelected={contact.selected}/>
-                    );
+                    requestItems.push(contact);
                 } else if (contact.emails.length) {
-
                     _.each(contact.emails, function (email) {
                         email.onTap = inviteAddress;
                     });
+                    inviteItems.push(contact);
                     contactInviteList.push(
                         <Peerio.UI.ContactInviteTemplate name={contact.name} emails={contact.emails} id={contactID}/>
                     );
@@ -171,9 +157,15 @@
             return (<div className="content without-tab-bar">
                 <div className="headline">Contact Import</div>
                 <div className="headline-divider">Your Friends on Peerio</div>
-                <ul>
-                    {contactRequestList}
-                </ul>
+                <Peerio.UI.List 
+                    selectAllText="Select all contacts"
+                    items={requestItems} element={ (contact, index) => (
+                    <Peerio.UI.ContactRequestTemplate
+                        name={contact.name}
+                        username={contact.username}
+                        id={contact}
+                        selected={this.requestContacts}/>
+                )}/>
                 { contactRequestList.length === 0 ? (<p>No matches found</p>) : null }
                 <div className="headline-divider">Invite Your Contacts to Peerio</div>
                 <ul className="flex-list">
@@ -184,9 +176,10 @@
                         <div className="list-item-content"> Select all contacts</div>
                     </Peerio.UI.Tappable>
 
-                    {contactInviteList}
+                                        {contactInviteList}
                     {contactInviteList.length === 0 ? (<p>No contacts found</p>) : null}
                 </ul>
+                
             </div>);
         }
     });

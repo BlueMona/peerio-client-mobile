@@ -6,15 +6,12 @@
   'use strict';
 
 Peerio.UI.ContactRequestTemplate = React.createClass({
-  getInitialState: function(){
-    return {selected: false};
-  },
   toggleSelection: function(){
-    this.props.onTap(this.props.username);
-    this.setState({selected: !this.state.selected});
+    this.props.isSelected = !this.props.isSelected;
+    this.props.selected[this.props.username] = this.props.isSelected;
+    this.forceUpdate();
   },
   render: function(){
-    var self = this;
     var name;
     var publicKey = this.props.publicKey;
     if (this.props.name) {
@@ -29,7 +26,7 @@ Peerio.UI.ContactRequestTemplate = React.createClass({
     }
     return <Peerio.UI.Tappable element="li" className='list-item' onTap={this.toggleSelection}>
 
-      <div className={'checkbox-input' + (this.state.selected ? ' checked': '')}>
+      <div className={'checkbox-input' + (this.props.selected[this.props.username] ? ' checked': '')}>
         <i className="material-icons"></i>
       </div>
 
