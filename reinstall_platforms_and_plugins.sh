@@ -1,6 +1,16 @@
 #!/bin/sh
 echo '=== REINSTALLING PLATFORMS AND PLUGINS'
 
+if [ -d "extra/cordova-android" ]; then
+    cd "extra/cordova-android"
+    git pull
+    cd "../.."
+else
+    cd "extra"
+    git clone https://github.com/PeerioTechnologies/cordova-android.git
+    cd ".."
+fi
+
 echo '=== Removing plugins...'
 rm -rf plugins
 echo '=== Removing platforms...'

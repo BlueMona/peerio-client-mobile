@@ -32,7 +32,8 @@ $avatar-size: 29px;
   color: color(p-blue-darker);
   user-select: initial;
   border-bottom: $border-dark;
-
+  padding-bottom: 50px;
+  
   .item {
     width: 100%;
     padding: 0 $padding-base 0 $edge-distance;
