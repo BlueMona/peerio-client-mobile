@@ -9,7 +9,7 @@ We use specifically node v4 (node v5 breaks the build)
 
 npm install -g bower@1.6.5
 
-npm install -g cordova@5.3.3
+npm install -g cordova@5.4.1
 
 npm install bower-installer gulp -g -d
 
