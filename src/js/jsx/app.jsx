@@ -19,24 +19,27 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         checkTOS: function () {
-            if (this.tosRequested || Peerio.user.settings.acceptedLatestTOS) return;
-            this.tosRequested = true;
+            setTimeout(()=> {
+                if (this.tosRequested || Peerio.user.settings.acceptedLatestTOS) return;
+                this.tosRequested = true;
 
-            Peerio.UI.Confirm.show({
-                    headline: 'TOS Updated',
-                    text: <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}} onTap={this.handleTOSRead}>
-                        Please review and accept updated Peerio TOS
-                    </Peerio.UI.Tappable>,
-                    okText: 'Accept',
-                    cancelText: 'Reject'
-                })
-                .then(()=> {
-                    Peerio.user.acceptTOS();
-                })
-                .catch(()=> {
-                    Peerio.NativeAPI.signOut();
-                })
-                .finally(()=> this.tosRequested = false)
+                Peerio.UI.Confirm.show({
+                        headline: 'TOS Updated',
+                        text: <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
+                                                  onTap={this.handleTOSRead}>
+                            Please review and accept updated Peerio TOS
+                        </Peerio.UI.Tappable>,
+                        okText: 'Accept',
+                        cancelText: 'Reject'
+                    })
+                    .then(()=> {
+                        Peerio.user.acceptTOS();
+                    })
+                    .catch(()=> {
+                        Peerio.NativeAPI.signOut();
+                    })
+                    .finally(()=> this.tosRequested = false);
+            }, 2000);
         },
         handleTOSRead: function () {
             Peerio.NativeAPI.openInBrowser('https://github.com/PeerioTechnologies/peerio-documentation/blob/master/Terms_of_Use.md');
