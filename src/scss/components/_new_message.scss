@@ -27,9 +27,8 @@ $recipients-height: 40px;
       overflow: hidden;
       overflow-y: scroll;
     }
-
-
   }
+
   .add-btn,
   .attach-btn {
     min-width: 48px;
@@ -43,7 +42,6 @@ $recipients-height: 40px;
   .attach-btn {
     border-top: $border-dark;
   }
-
 
   .name-selected {
     font-size: .9em;
@@ -70,11 +68,12 @@ $recipients-height: 40px;
 
 
   .subject {
-    border-top: $border-dark;
-    border-bottom: 0;
     -webkit-appearance: none; // removes weird inner shadow on ios
-    padding: 0 $padding-small;
+    background: transparent;
+    border-bottom: 0;
+    border-top: $border-dark;
     height: 40px;
+    padding: 0 $padding-small;
     text-overflow: ellipsis;
 
     &:focus {
