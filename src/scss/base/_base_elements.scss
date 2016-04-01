@@ -43,17 +43,18 @@ label {
 
 input,
 select {
-  background: transparent;
-  border: 0;
-  border-bottom: $border-dark;
+  background: rgba(0, 0, 0, .06);
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: $radius-default;
   font-size: 16px;
-  height: 32px;
+  height: 36px;
   line-height: 32px;
-  padding: 0;
+  padding: 0 4px;
+  transition: $speed-normal;
   width: 100%;
 
   &:focus {
-    border-bottom: 1px solid color(p-blue);
+    border: 2px solid rgba(0, 0, 0, .08);
   }
 }
 
@@ -70,15 +71,18 @@ input:focus::-webkit-input-placeholder {
 // except inputs, they can be text-selected
 input,
 textarea {
-  border-radius: 0;
   box-sizing: border-box;
   user-select: initial;
 }
 
+textarea {
+  border-radius: 0;
+}
+
 input {
+  -webkit-appearance: none;
 
   &[type="search"] {
-    -webkit-appearance: none;
     box-sizing: border-box;
   }
 

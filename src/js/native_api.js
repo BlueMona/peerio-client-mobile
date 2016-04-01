@@ -77,9 +77,8 @@ Peerio.NativeAPI.init = function () {
      */
     api.openInBrowser = function (url) {
         try {
-            if(Peerio.runtime.platform == 'android')
-                window.cordova.plugins.disusered
-            .open(url, () => L.info('ok'), e => L.info(e));
+            if(cordova && cordova.InAppBrowser)
+                cordova.InAppBrowser.open(url, '_system');
             else
                 window.open(url, '_system');
         } catch (ex) {

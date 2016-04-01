@@ -39,30 +39,27 @@ Peerio.UI.AddContact = React.createClass({
   },
 
   render: function(){
-    var searchButton = (this.state.searchString.length === 0) ?
-        <div className="btn-disabled"><i className="material-icons">search</i> Search</div>
-      :<Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.goToSearch}>
-      <i className="material-icons">search</i> Search
+    var searchButton = <Peerio.UI.Tappable element="div" className="btn-safe flex-shrink-0" onTap={this.goToSearch}>
+      Search
     </Peerio.UI.Tappable>;
     return  (<div className="content without-tab-bar without-footer">
       <div className="flex-col flex-justify-start">
         <div className="headline">Add Contact</div>
         <div  className="input-group">
           <label htmlFor="search">Search</label>
-          <input type="text"
-              className="lowercase"
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              onChange={this.updateSearchString}
-              placeholder="username, email or phone"
-              value={this.state.searchString}
-              id="search"/>
-        </div>
-
-        <div className="buttons">
-            {searchButton}
+            <div className="flex-row flex-align-center">
+                <input type="text"
+                    className="lowercase"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    onChange={this.updateSearchString}
+                    placeholder="username, email or phone"
+                    value={this.state.searchString}
+                    id="search"/>
+                {searchButton}
+            </div>
         </div>
         <p className="line-across">or</p>
           <p className="centered-text">
