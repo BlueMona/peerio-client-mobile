@@ -77,7 +77,7 @@ Peerio.NativeAPI.init = function () {
      */
     api.openInBrowser = function (url) {
         try {
-            if(cordova.InAppBrowser)
+            if(cordova && cordova.InAppBrowser)
                 cordova.InAppBrowser.open(url, '_system');
             else
                 window.open(url, '_system');
