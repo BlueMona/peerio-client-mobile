@@ -33,9 +33,7 @@ Peerio.UI.AddContact = React.createClass({
   },
 
   render: function(){
-    var searchButton = (this.state.searchString.length === 0) ?
-        <div className="btn-disabled flex-shrink-0">Search</div>
-      :<Peerio.UI.Tappable element="div" className="btn-safe flex-shrink-0" onTap={this.goToSearch}>
+    var searchButton = <Peerio.UI.Tappable element="div" className="btn-safe flex-shrink-0" onTap={this.goToSearch}>
       Search
     </Peerio.UI.Tappable>;
     return  (<div className="content without-tab-bar without-footer">
