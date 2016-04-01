@@ -12,9 +12,8 @@
 
         toggle: function () {
             var selected = !this.state.selectAll;
-            this.getItems().forEach( i => i.selected = selected );
+            this.props.select && this.getItems().forEach( i => this.props.select(i, selected) );
             this.setState({selectAll: selected});
-            this.forceUpdate();
         },
 
         render: function () {

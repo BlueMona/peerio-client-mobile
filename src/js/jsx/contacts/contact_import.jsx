@@ -11,13 +11,13 @@
               inProgress: true
             };
         },
-        //contacts marked as selected are handled outside React state because updating
-        //through state would force a loop through all availableContacts on render as well (too expensive).
-        inviteAddresses: [],
-        requestContacts: {},
+
         componentWillMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onBigGreenButton(this.addOrInviteContacts)];
+            this.inviteAddresses = {};
+            this.requestContacts = {};
         },
+
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
@@ -84,64 +84,38 @@
             });
         },
 
-        handleInviteAddress: function (address) {
-            var adrObj = {email: address};
-
-            if (!_.some(this.inviteAddresses, adrObj)) {
-                this.inviteAddresses.push(adrObj);
-            } else {
-                _.remove(this.inviteAddresses, adrObj);
-            }
-        },
-
         addOrInviteContacts: function () {
+            var usersToAddInvite = { add: [], invite: [] };
 
-            if (this.inviteAddresses.length === 0 && this.requestContacts.length === 0) {
-                return;
+            for(var key in this.requestContacts) {
+                usersToAddInvite.add.push({ username: this.requestContacts[key].username });
             }
 
-            var usersToAddInvite = {};
-
-            if (this.requestContacts.length !== 0) {
-                usersToAddInvite.add = this.requestContacts;
+            for(var key in this.inviteAddresses) {
+                usersToAddInvite.invite.push({ email: this.inviteAddresses[key].value });
             }
 
-            if (this.inviteAddresses.length !== 0) {
-                usersToAddInvite.invite = this.inviteAddresses;
-            }
-            Peerio.Net.addOrInviteContacts(usersToAddInvite)
+            if (usersToAddInvite.add.length === 0) delete usersToAddInvite.add;
+            if (usersToAddInvite.invite.length === 0) delete usersToAddInvite.invite;
+            
+            (usersToAddInvite.add || usersToAddInvite.invite) 
+            && Peerio.Net.addOrInviteContacts(usersToAddInvite)
                 .bind(this)
                 .then(function (a) {
                     this.transitionTo('contacts');
                 });
         },
-        // TODO make select all, select all.
-        toggleSelection: function(){
-          this.setState({selectAll: !this.state.selectAll});
-        },
 
         render: function () {
-
-            var contactRequestList = [];
-            var contactInviteList = [];
-            var toggleSelection = this.toggleSelection;
-            var inviteAddress = this.handleInviteAddress;
-            var requestContact = this.handleRequestContact;
             var requestItems = [];
             var inviteItems = [];
             _.forOwn(this.state.availableContacts, (contact, contactID) => {
                 L.info(this.state);
-                contact.username = 'test' + contactID;
+                // contact.username = 'test' + contactID;
                 if (contact.username) {
                     requestItems.push(contact);
                 } else if (contact.emails.length) {
-                    _.each(contact.emails, function (email) {
-                        email.onTap = inviteAddress;
-                    });
                     inviteItems.push(contact);
-                    contactInviteList.push(
-                        <Peerio.UI.ContactInviteTemplate name={contact.name} emails={contact.emails} id={contactID}/>
-                    );
                 }
 
             });
@@ -154,34 +128,61 @@
                     </div>);
             }
 
-            return (<div className="content without-tab-bar">
-                <div className="headline">Contact Import</div>
-                <div className="headline-divider">Your Friends on Peerio</div>
-                <Peerio.UI.List 
-                    selectAllText="Select all contacts"
-                    items={requestItems} element={ (contact, index) => (
-                    <Peerio.UI.ContactRequestTemplate
-                        name={contact.name}
-                        username={contact.username}
-                        id={contact}
-                        selected={this.requestContacts}/>
-                )}/>
-                { contactRequestList.length === 0 ? (<p>No matches found</p>) : null }
-                <div className="headline-divider">Invite Your Contacts to Peerio</div>
-                <ul className="flex-list">
-                    <Peerio.UI.Tappable element="li" className="list-item select-all" onTap={toggleSelection}>
-                        <div className={'checkbox-input' + (this.state.selectAll ? ' checked': '')}>
-                            <i className="material-icons"></i>
-                        </div>
-                        <div className="list-item-content"> Select all contacts</div>
-                    </Peerio.UI.Tappable>
+            var selectContactRequest = (item, select) => {
+                if(select) 
+                    this.requestContacts[item.username] = item;
+                else 
+                    delete this.requestContacts[item.username];
+            }; 
 
-                                        {contactInviteList}
-                    {contactInviteList.length === 0 ? (<p>No contacts found</p>) : null}
-                </ul>
-                
-            </div>);
+            var selectInviteAddress = (item, select) => {
+                if(item.emails)
+                    item.emails.forEach( email => selectInviteAddress(email, select) );
+                else
+                    if(select)
+                        this.inviteAddresses[item.value] = item;
+                    else
+                        delete this.inviteAddresses[item.value];
+            }; 
+
+            return (
+                <div className="content without-tab-bar">
+                    <div className="headline">Contact Import</div>
+                    <div className="headline-divider">Your Friends on Peerio</div>
+                    { requestItems.length === 0 ? (<p>No matches found</p>) : (
+                        <Peerio.UI.List 
+                            selectAllText="Select all contacts"
+                            items={requestItems} 
+                            select={selectContactRequest}
+                            element={ (contact, index) => (
+                                <Peerio.UI.ContactRequestTemplate
+                                    item={contact}
+                                    name={contact.name}
+                                    username={contact.username}
+                                    key={index}
+                                    select={selectContactRequest}
+                                    isSelected={ item => !!this.requestContacts[item.username] }
+                                />
+                                )}/>)
+                    }
+                    <div className="headline-divider">Invite Your Contacts to Peerio</div>
+                    { inviteItems.length === 0 ? (<p>No contacts found</p>) : (
+                        <Peerio.UI.List 
+                            selectAllText="Select all contacts"
+                            items={inviteItems} 
+                            select={selectInviteAddress}
+                            element={ (contact, index) => (
+                                <Peerio.UI.ContactInviteTemplate
+                                    item={contact}
+                                    name={contact.name}
+                                    emails={contact.emails}
+                                    key={index}
+                                    isSelected={ email => !!this.inviteAddresses[email.value] }
+                                    select={selectInviteAddress}
+                                />
+                                )}/>)
+                    }
+                </div>);
         }
     });
-
 }());
