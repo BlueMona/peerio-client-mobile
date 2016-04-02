@@ -79,7 +79,7 @@ var paths = {
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
     bower_installer_dst: 'www/bower',
-    static_src: ['*media/**/*', '*locale/**/*', 'extra/cordova.js'],
+    static_src: ['*media/**/*', '*locales/*.json', 'extra/cordova.js'],
     static_dst: 'www/',
     clean_dst: ['www/js', 'www/css', 'www/index.html', 
                 'www/media', 'www/locale'],
@@ -89,7 +89,14 @@ var paths = {
 
 gulp.task('default', ['help']);
 gulp.task('compile', ['bower-installer'], function (done) {
-    return runSequence('compile-clean', ['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js', 'static-files'], 'index', done);
+    var tasks = ['compile-clean'];
+    if(options.release){
+        tasks.push('localize');
+    }
+    tasks.push(['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js', 'static-files']);
+    tasks.push('index');
+    tasks.push(done);
+    return runSequence.apply(null, tasks);
 });
 
 gulp.task('index', function () {
@@ -135,6 +142,10 @@ gulp.task('js', function () {
 gulp.task('compile-clean', function () {
     return gulp.src(paths.clean_dst, {read: false})
         .pipe(clean());
+});
+
+gulp.task('localize', function(){
+    cp.execSync('tx pull -af', { stdio: 'inherit' });
 });
 
 gulp.task('prepare-plist', function () {
@@ -369,5 +380,6 @@ function bump(version) {
 function bowerInstaller() {
     console.log('bower-installer');
     cp.execSync('rm -rf ' + paths.bower_installer_dst);
+    cp.execSync('mkdir -p www/bower'); // hack for peerio-copy, fails otherwise
     cp.execSync('bower-installer');
 }
