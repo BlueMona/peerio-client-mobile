@@ -48,7 +48,7 @@ var babelOptions = {
 
 // extracting --cli --parameters
 var knownOptions = {
-    boolean: ['api', 'release'],
+    boolean: ['noapi', 'release'],
     default: {}
 };
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
@@ -78,6 +78,7 @@ var paths = {
     jsx_postinit_inject: 'www/js/jsx-postinit/**/*.js',
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
+    peerio_copy: 'bower_components/peerio-copy/clients_en.js',
     bower_installer_dst: 'www/bower',
     static_src: ['*media/**/*', '*locales/*.json', 'extra/cordova.js'],
     static_dst: 'www/',
@@ -193,8 +194,8 @@ gulp.task('help', function () {
     console.log('+-----------------------------------------------------------------------------------------------+');
     console.log('|                                         =====  USAGE  =====                                   |');
     console.log('+-----------------------------------------------------------------------------------------------+');
-    console.log('| gulp serve               - start http server with live reload                                 |');
-    console.log('| gulp serve --api         - start http server with live reload and watch symlinked peerio api  |');
+    console.log('| gulp serve               - start http server with live reload and watch symlinked peerio api  |                              |');
+    console.log('| gulp serve --noapi       - start http server with live reload without watching api changes    |');
     console.log('| gulp compile             - same as "gulp sass jsx"                                            |');
     console.log('| gulp compile --release   - release version                                                    |');
     console.log('| gulp run-android         - compile + "cordova run android"                                    |');
@@ -271,14 +272,13 @@ gulp.task('static-files', function () {
 gulp.task('serve', ['compile'], function () {
 
     // watching symlinked peerio-client-api package
-    if (options.api) {
+    if (!options.noapi) {
         // watch triggers for every file, so we debounce it
         var copyApi = _.debounce(bowerInstaller, 1500);
 
         copyApi();
 
-        gulp.watch(paths.peerio_client_api, copyApi);
-
+        gulp.watch([paths.peerio_client_api, paths.peerio_copy], copyApi);
     }
 
     // starting http server with watcher
