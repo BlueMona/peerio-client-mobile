@@ -242,9 +242,9 @@ Peerio.NativeAPI.init = function () {
             window.plugins.socialsharing.share(text, subject, null, link) :
             Peerio.UI.Alert.show({ 
             text: text + ' ' + link, 
-            title: subject,
+            title: subject
         });
-    },
+    };
 
     api.signOut = function () {
         Peerio.NativeAPI.disablePushNotifications()
@@ -253,7 +253,7 @@ Peerio.NativeAPI.init = function () {
         .catch(noop)
         .then(() => Peerio.TinyDB.saveItem('prevent_saved_login', true))
         .finally(()=> window.location.reload());
-    },
+    };
 
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
     /**
