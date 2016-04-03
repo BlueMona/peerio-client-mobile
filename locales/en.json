@@ -1,0 +1,22 @@
+{
+  "username": "username",
+  "version": "version",
+  "passcode": "passcode",
+  "passphrase": "passphrase",
+
+  "error_accountDeleted": "Account was deleted.",
+  "error_badCredentials": "Bad credentials.",
+  "error_loginFailed": "Login failed.",
+  "error_emptyUsername": "Username cannot be empty.",
+
+  "login_welcomeBack": "Welcome back,",
+  "login_forgetUsername": "Tap here to change and forget username.",
+  "login_passphraseOrPasscode": "{#passphrase} or {#passcode}",
+  "login_loginButton": "login",
+  "login_signUpButton":"sign up",
+
+  "dialog_TOSRequestTitle": "TOS Updated",
+  "dialog_TOSRequestText": "Please review and accept updated Peerio TOS",
+  "dialog_acceptButton": "Accept",
+  "dialog_rejectButton": "Reject"
+}

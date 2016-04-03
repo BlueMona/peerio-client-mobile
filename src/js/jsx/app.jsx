@@ -24,13 +24,13 @@
                 this.tosRequested = true;
 
                 Peerio.UI.Confirm.show({
-                        headline: 'TOS Updated',
+                        headline: t('dialog_TOSRequestTitle'),
                         text: <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
                                                   onTap={this.handleTOSRead}>
-                            Please review and accept updated Peerio TOS
+                            t('dialog_TOSRequestText')
                         </Peerio.UI.Tappable>,
-                        okText: 'Accept',
-                        cancelText: 'Reject'
+                        okText: t('dialog_acceptButton'),
+                        cancelText: t('dialog_rejectButton')
                     })
                     .then(()=> {
                         Peerio.user.acceptTOS();
