@@ -50,6 +50,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
         L.info('Detected platform {0}. Version {1}', Peerio.runtime.platform, Peerio.runtime.version);
         // peerio client api
         Peerio.initAPI().then(function () {
+            window.t = Peerio.Translator.translate;
             // order matters
             Peerio.ActionExtension.init();
             Peerio.AppStateExtension.init();

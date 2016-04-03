@@ -78,7 +78,7 @@ var paths = {
     jsx_postinit_inject: 'www/js/jsx-postinit/**/*.js',
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
-    peerio_copy: 'bower_components/peerio-copy/clients_en.js',
+    peerio_copy: 'bower_components/peerio-copy/clients_en.json',
     bower_installer_dst: 'www/bower',
     static_src: ['*media/**/*', '*locales/*.json', 'extra/cordova.js'],
     static_dst: 'www/',
