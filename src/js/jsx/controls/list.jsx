@@ -23,7 +23,7 @@
             );
 
             return (
-                <ul className="list-view">
+                <ul className="flex-list">
                     <Peerio.UI.Tappable
                         element="li"
                         className="list-item select-all"
