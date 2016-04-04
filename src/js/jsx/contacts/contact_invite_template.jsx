@@ -22,7 +22,7 @@
             var name = this.props.name ? <div className="list-item-title selectable">{this.props.name}</div> : '' ;
 
             return (
-                <li className='list-item' style={{ 'border': '1px solid red'}}>
+                <li className='list-item'>
                     <div className="list-item-content">
                         {name}
                         <div className="list-item-description">

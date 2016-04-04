@@ -18,21 +18,21 @@
 
         render: function () {
             var items = this.getItems();
-            var renderItems = items.map((i, index) => 
+            var renderItems = items.map((i, index) =>
                 this.props.element( i, index )
             );
 
             return (
-                <ul className="">
-                    <Peerio.UI.Tappable 
-                        element="li" 
-                        className="list-item select-all" 
+                <ul className="list-view">
+                    <Peerio.UI.Tappable
+                        element="li"
+                        className="list-item select-all"
                         onTap={this.toggle}>
                         <div className={'checkbox-input' + (this.state.selectAll ? ' checked': '')}>
                             <i className="material-icons"></i>
                         </div>
                         <div className="list-item-content">{this.props.selectAllText || 'Select all contacts'}</div>
-                        </Peerio.UI.Tappable> 
+                        </Peerio.UI.Tappable>
                     {renderItems}
                 </ul>
             );
@@ -41,4 +41,3 @@
 
     });
 }());
- 

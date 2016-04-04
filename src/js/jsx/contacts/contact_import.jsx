@@ -36,7 +36,8 @@
             } else {
                 //dev mode
                 this.deviceImportSuccess([
-                                         { id: 10, emails: [ {value: 'seavan@gmail.com'} ], name: 'Sam Avanesov'},
+                                         { id: 9, emails: [ {value: 'seavan+10@gmail.com'} ], name: 'Aram Avanesov'},
+                                         { id: 10, emails: [ {value: 'seavan@gmail.com'},{value: 'seavan@gmail.com'},{value: 'seavan@gmail.com'} ], name: 'Sam Avanesov'},
                                          { id: 11, emails: [ {value: 'seavan+10@gmail.com'} ], name: 'Aram Avanesov'},
                 ]);
             }
@@ -98,7 +99,7 @@
             if (usersToAddInvite.add.length === 0) delete usersToAddInvite.add;
             if (usersToAddInvite.invite.length === 0) delete usersToAddInvite.invite;
 
-            (usersToAddInvite.add || usersToAddInvite.invite) 
+            (usersToAddInvite.add || usersToAddInvite.invite)
             && Peerio.Net.addOrInviteContacts(usersToAddInvite)
             .bind(this)
             .then(function (a) {
@@ -131,11 +132,11 @@
             }
 
             var selectContactRequest = (item, select) => {
-                if(select) 
+                if(select)
                     this.requestContacts[item.username] = item;
-                else 
+                else
                     delete this.requestContacts[item.username];
-            }; 
+            };
 
             var selectInviteAddress = (item, select) => {
                 if(item.emails)
@@ -145,7 +146,7 @@
                         this.inviteAddresses[item.value] = item;
                 else
                     delete this.inviteAddresses[item.value];
-            }; 
+            };
 
             return (
                 <div className="content without-tab-bar">
@@ -153,9 +154,9 @@
                         <div className="headline">Contact Import</div> }
                         <div className="headline-divider">Your Friends on Peerio</div>
                         { requestItems.length === 0 ? (<p>No matches found</p>) : (
-                            <Peerio.UI.List 
+                            <Peerio.UI.List
                                 selectAllText="Select all contacts"
-                                items={requestItems} 
+                                items={requestItems}
                                 select={selectContactRequest}
                                 element={ (contact, index) => (
                                     <Peerio.UI.ContactRequestTemplate
@@ -170,9 +171,9 @@
                         }
                         <div className="headline-divider">Invite Your Contacts to Peerio</div>
                         { inviteItems.length === 0 ? (<p>No contacts found</p>) : (
-                            <Peerio.UI.List 
+                            <Peerio.UI.List
                                 selectAllText="Select all contacts"
-                                items={inviteItems} 
+                                items={inviteItems}
                                 select={selectInviteAddress}
                                 element={ (contact, index) => (
                                     <Peerio.UI.ContactInviteTemplate
