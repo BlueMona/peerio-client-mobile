@@ -361,6 +361,8 @@ gulp.task('version', function () {
 });
 
 gulp.task('find-unused-locale-strings', function () {
+    console.log('Looking for unused locale strings in *.jsx files. Might take some time, wait please..');
+
     var locales = require('./locales/en.json');
     for (var key in locales) {
         try {
