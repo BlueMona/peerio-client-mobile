@@ -82,8 +82,8 @@ var paths = {
     bower_installer_dst: 'www/bower',
     static_src: ['*media/**/*', '*locales/*.json', 'extra/cordova.js'],
     static_dst: 'www/',
-    clean_dst: ['www/js', 'www/css', 'www/index.html', 
-                'www/media', 'www/locale'],
+    clean_dst: ['www/js', 'www/css', 'www/index.html',
+        'www/media', 'www/locale'],
     project_plist: 'platforms/ios/Peerio/Peerio-Info.plist'
 };
 /*eslint-enable*/
@@ -91,7 +91,7 @@ var paths = {
 gulp.task('default', ['help']);
 gulp.task('compile', ['bower-installer'], function (done) {
     var tasks = ['compile-clean'];
-    if(options.release){
+    if (options.release) {
         tasks.push('localize');
     }
     tasks.push(['jsx', 'jsx-preinit', 'jsx-postinit', 'sass', 'js', 'static-files']);
@@ -101,32 +101,32 @@ gulp.task('compile', ['bower-installer'], function (done) {
 });
 
 gulp.task('index', function () {
-  var target = gulp.src(paths.html_src);
-  var sourcesJs = gulp.src(paths.js_inject, {read: false});
-  var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
-  var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
-  var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
-  console.log('DON\'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio');
-  console.log('OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK');
-  var result = target
-  .pipe(inject(
-      series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit), 
-      {addRootSlash: false, ignorePath: 'www'}
-  ));
-  // a piece of replacement code
-  if(!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
-  if(options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
+    var target = gulp.src(paths.html_src);
+    var sourcesJs = gulp.src(paths.js_inject, {read: false});
+    var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
+    var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
+    var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
+    console.log('DON\'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio');
+    console.log('OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK');
+    var result = target
+        .pipe(inject(
+            series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit),
+            {addRootSlash: false, ignorePath: 'www'}
+        ));
+    // a piece of replacement code
+    if (!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
+    if (options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
 
-  return result.pipe(gulp.dest('./www'));
+    return result.pipe(gulp.dest('./www'));
 });
 
-gulp.task('check-plugins', function() {
+gulp.task('check-plugins', function () {
     console.log('checking plugins'.yellow);
     var parser = new xml2js.Parser();
-    fs.readFile('./config.xml', function(err, data) {
+    fs.readFile('./config.xml', function (err, data) {
         parser.parseString(data, function (err, result) {
-            result.widget.plugin.forEach( i => {
-                console.log( i.$.name.blue + ' ' + i.$.spec.yellow );
+            result.widget.plugin.forEach(i => {
+                console.log(i.$.name.blue + ' ' + i.$.spec.yellow);
             });
             console.log('Done');
         });
@@ -145,8 +145,8 @@ gulp.task('compile-clean', function () {
         .pipe(clean());
 });
 
-gulp.task('localize', function(){
-    cp.execSync('tx pull -af', { stdio: 'inherit' });
+gulp.task('localize', function () {
+    cp.execSync('tx pull -af', {stdio: 'inherit'});
 });
 
 gulp.task('prepare-plist', function () {
@@ -154,15 +154,15 @@ gulp.task('prepare-plist', function () {
     var change = false;
     var itsEncryption = true;
     var complianceCode = '50fca128-07a4-40a7-8a57-e48418e296ec';
-    if(info['ITSAppUsesNonExemptEncryption'] != itsEncryption) {
+    if (info['ITSAppUsesNonExemptEncryption'] != itsEncryption) {
         change = true;
         info['ITSAppUsesNonExemptEncryption'] = itsEncryption;
     }
-    if(info['ITSEncryptionExportComplianceCode'] != complianceCode) {
+    if (info['ITSEncryptionExportComplianceCode'] != complianceCode) {
         change = true;
         info['ITSEncryptionExportComplianceCode'] = complianceCode;
     }
-    if(change) {
+    if (change) {
         console.log('Applying changes to plist file');
         fs.writeFileSync(paths.project_plist, plist.build(info));
     } else {
@@ -171,14 +171,14 @@ gulp.task('prepare-plist', function () {
 });
 
 gulp.task('prepare-pbx', function () {
-    var profile = options.release ? 
+    var profile = options.release ?
         '762f2597-7db7-4626-8eba-117f50135387' : false;
-    xcode.apply({ 
-        path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj', 
-        push: true, 
-        dataProtection: true, 
-        team: '7L45B96YPK', 
-        profile: profile, 
+    xcode.apply({
+        path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj',
+        push: true,
+        dataProtection: true,
+        team: '7L45B96YPK',
+        profile: profile,
         disableBitcode: true,
         deploymentTarget: '8.2',
         targetedDeviceFamily: 1
@@ -186,7 +186,7 @@ gulp.task('prepare-pbx', function () {
 });
 
 gulp.task('prepare', ['prepare-pbx', 'prepare-plist'], function () {
-   return true;
+    return true;
 });
 
 gulp.task('help', function () {
@@ -209,7 +209,7 @@ gulp.task('help', function () {
 });
 
 // install external references
-gulp.task('bower-installer', function(done) {
+gulp.task('bower-installer', function (done) {
     console.log('running bower-installer');
     bowerInstaller();
     done();
@@ -290,7 +290,7 @@ gulp.task('serve', ['compile'], function () {
     });
 
     // watch triggers for every file, so we debounce it
-    gulp.watch(paths.peerio_client_api, _.debounce(function(){
+    gulp.watch(paths.peerio_client_api, _.debounce(function () {
         console.log('peerio-client-api changed, updating...');
         bowerInstaller();
     }, 1500));
@@ -360,6 +360,17 @@ gulp.task('version', function () {
         }));
 });
 
+gulp.task('find-unused-locale-strings', function () {
+    var locales = require('./locales/en.json');
+    for (var key in locales) {
+        try {
+            cp.execSync('grep -e ' + key + ' * -R -F -l -s -m 1 --include *.jsx');
+        }catch(ex){
+            //throws when grep returns 1, which means no entries found
+            console.log(key);
+        }
+    }
+});
 // UTILITY FUNCTIONS
 function bump(version) {
     gulp.src(paths.config_xml)
