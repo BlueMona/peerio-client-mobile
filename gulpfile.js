@@ -270,17 +270,6 @@ gulp.task('static-files', function () {
 // peerio-api-client repository is watched if --api option is provided and copied to www too
 // http server watches www folder and reloads
 gulp.task('serve', ['compile'], function () {
-
-    // watching symlinked peerio-client-api package
-    if (!options.noapi) {
-        // watch triggers for every file, so we debounce it
-        var copyApi = _.debounce(bowerInstaller, 1500);
-
-        copyApi();
-
-        gulp.watch([paths.peerio_client_api, paths.peerio_copy], copyApi);
-    }
-
     // starting http server with watcher
     browserSync.init({
         notify: false,
@@ -298,6 +287,17 @@ gulp.task('serve', ['compile'], function () {
             index: 'www/index.html',
             directory: true
         }
+    });
+
+    // watch triggers for every file, so we debounce it
+    gulp.watch(paths.peerio_client_api, _.debounce(function(){
+        console.log('peerio-client-api changed, updating...');
+        bowerInstaller();
+    }, 1500));
+
+    gulp.watch(paths.peerio_copy, function () {
+        console.log('peerio-copy changed, updating...');
+        bowerInstaller();
     });
 
     // compile watchers
@@ -378,8 +378,9 @@ function bump(version) {
 }
 
 function bowerInstaller() {
-    console.log('bower-installer');
+    console.log('bower-installer start...');
     cp.execSync('rm -rf ' + paths.bower_installer_dst);
     cp.execSync('mkdir -p www/bower'); // hack for peerio-copy, fails otherwise
     cp.execSync('bower-installer');
+    console.log('...bower-installer end');
 }
