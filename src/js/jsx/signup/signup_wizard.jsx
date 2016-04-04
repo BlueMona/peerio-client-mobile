@@ -24,14 +24,14 @@
                 this.transitionTo('root');
             })
             .catch( (error) => {
-                Peerio.Action.showAlert({text: 'Error creating account: ' + error});
+                Peerio.Action.showAlert({text: t('error_creatingAccount')+' ' + error});
                 this.setState( this.getInitialState );
             });
         },
 
         getInitialState: function () {
             return {
-                activeStep: 0,
+                activeStep: 0
             };
         },
 
@@ -43,12 +43,8 @@
                 Peerio.UI.SignupWizardName,
                 Peerio.UI.SignupWizardPassphrase,
                 Peerio.UI.SignupWizardConfirm,
-                Peerio.UI.SignupWizardSpinner,
+                Peerio.UI.SignupWizardSpinner
             ];
-        },
-
-        processReturnedPassphrase : function() {
-            L.info('processing returned passphrase, lol');
         },
 
         handleNextStep: function (data) {
@@ -108,13 +104,13 @@
                                     )}
                                     onTap={this.handlePreviousStep}>
                                     <i className="material-icons">chevron_left</i>
-                                    back
+                                    {t('backButton')}
                                 </Peerio.UI.Tappable>
                                 <Peerio.UI.Tappable
                                     element="div"
                                     className="btn"
                                     onTap={this.transitionTo.bind(this,'login')}>
-                                    Exit
+                                    {t('exitButton')}
                                 </Peerio.UI.Tappable>
                             </div>
                         </div>
@@ -122,7 +118,7 @@
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
                 </div>
             );
-        },
+        }
     });
 
 }());
