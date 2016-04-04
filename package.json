@@ -39,7 +39,9 @@
     "deep-diff": "*",
     "plist": "*",
     "colors": "*",
-    "xml2js": "*"
+    "xml2js": "*",
+    "sync-exec": "*",
+    "Q": "*"
   },
   "repository": {
     "type": "git",
