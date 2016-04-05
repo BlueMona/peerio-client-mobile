@@ -29,7 +29,7 @@
                             element='div'
                             className="btn-safe"
                             onTap={this.handleNextStep}>
-                            {t('agreeButton')}
+                            {t('button_agree')}
                         </Peerio.UI.Tappable>
                     </div>
                 </div>

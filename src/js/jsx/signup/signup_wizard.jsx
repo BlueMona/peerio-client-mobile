@@ -11,22 +11,22 @@
             this.setState({activeStep: this.steps.length - 1});
 
             Peerio.Auth.signup(this.data.name.username,
-                               this.data.pass.passphrase,
-                               this.data.name.firstName,
-                               this.data.name.lastName)
-            .then(() => {
-                //todo: terrible, transfer this through router
-                Peerio.autoLogin = {
-                    username: this.data.name.username,
-                    passphrase: this.data.pass.passphrase
-                };
+                this.data.pass.passphrase,
+                this.data.name.firstName,
+                this.data.name.lastName)
+                .then(() => {
+                    //todo: terrible, transfer this through router
+                    Peerio.autoLogin = {
+                        username: this.data.name.username,
+                        passphrase: this.data.pass.passphrase
+                    };
 
-                this.transitionTo('root');
-            })
-            .catch( (error) => {
-                Peerio.Action.showAlert({text: t('error_creatingAccount')+' ' + error});
-                this.setState( this.getInitialState );
-            });
+                    this.transitionTo('root');
+                })
+                .catch((error) => {
+                    Peerio.Action.showAlert({text: t('error_creatingAccount') + ' ' + error});
+                    this.setState(this.getInitialState);
+                });
         },
 
         getInitialState: function () {
@@ -39,7 +39,7 @@
             Peerio.DataCollection.Signup.startSignup();
             this.data = {};
             this.steps = [
-                Peerio.UI.SignupWizardTOS,  
+                Peerio.UI.SignupWizardTOS,
                 Peerio.UI.SignupWizardName,
                 Peerio.UI.SignupWizardPassphrase,
                 Peerio.UI.SignupWizardConfirm,
@@ -48,12 +48,12 @@
         },
 
         handleNextStep: function (data) {
-            if(data) _.extend(this.data, data);
-            if(this.state.activeStep >= this.steps.length - 1) {
+            if (data) _.extend(this.data, data);
+            if (this.state.activeStep >= this.steps.length - 1) {
                 return;
             }
-            this.setState( { activeStep: this.state.activeStep + 1 } );
-            if(data && data.signup) {
+            this.setState({activeStep: this.state.activeStep + 1});
+            if (data && data.signup) {
                 this.doSignup();
             }
         },
@@ -104,13 +104,13 @@
                                     )}
                                     onTap={this.handlePreviousStep}>
                                     <i className="material-icons">chevron_left</i>
-                                    {t('backButton')}
+                                    {t('button_back')}
                                 </Peerio.UI.Tappable>
                                 <Peerio.UI.Tappable
                                     element="div"
                                     className="btn"
                                     onTap={this.transitionTo.bind(this,'login')}>
-                                    {t('exitButton')}
+                                    {t('button_exit')}
                                 </Peerio.UI.Tappable>
                             </div>
                         </div>

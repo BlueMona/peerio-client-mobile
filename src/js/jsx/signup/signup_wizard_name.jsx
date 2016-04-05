@@ -78,7 +78,7 @@
                             spellCheck="false"
                             className="lowercase"
                             onChange={this.validateUsername}/>
-                          <span className="caption light">{t('requiredField')}</span>
+                          <span className="caption light">{t('input_required')}</span>
                     </div>
                     <div className="input-group">{
                         (this.state.firstNameValid === null || this.state.firstNameValid === true)
@@ -108,7 +108,7 @@
                             element='div'
                             className="btn-safe"
                             onTap={this.handleNextStep}>
-                            {t('continueButton')}</Peerio.UI.Tappable>
+                            {t('button_continue')}</Peerio.UI.Tappable>
                         : null }
                     </div>
                 </fieldset>

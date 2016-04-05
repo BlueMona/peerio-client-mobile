@@ -21,7 +21,7 @@
                     <p>
                         <Peerio.UI.Tappable
                             onTap={Peerio.NativeAPI.openInBrowser.bind(this, 'https://peerio.zendesk.com/hc/en-us/articles/203946145')}>
-                            {t('signup_optInPolicyLink', null, {emphasis: segment => <b><u>{segment}</u></b>})}
+                            {t('signup_optInPolicy', null, {emphasis: segment => <b><u>{segment}</u></b>})}
                         </Peerio.UI.Tappable>
                     </p>
                     <p>{t('signup_optInDescription2')}</p>
@@ -29,11 +29,11 @@
                         <Peerio.UI.Tappable
                             element="div"
                             className="btn-safe"
-                            onTap={this.handleDataOptIn.bind(this, true)}>{t('yesIDoButton')}</Peerio.UI.Tappable>
+                            onTap={this.handleDataOptIn.bind(this, true)}>{t('button_yesIDo')}</Peerio.UI.Tappable>
                         <Peerio.UI.Tappable
                             element="div"
                             className="btn-primary"
-                            onTap={this.handleDataOptIn.bind(this, false)}>{t('notRightNowButton')}</Peerio.UI.Tappable>
+                            onTap={this.handleDataOptIn.bind(this, false)}>{t('button_notRightNow')}</Peerio.UI.Tappable>
                     </div>
                 </div>);
         }

@@ -29,8 +29,8 @@
                                                   onTap={this.handleTOSRead}>
                             t('dialog_TOSRequestText')
                         </Peerio.UI.Tappable>,
-                        okText: t('acceptButton'),
-                        cancelText: t('rejectButton')
+                        okText: t('button_accept'),
+                        cancelText: t('button_reject')
                     })
                     .then(()=> {
                         Peerio.user.acceptTOS();
