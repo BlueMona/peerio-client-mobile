@@ -65,6 +65,10 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
       resize: none;
     }
   }
+
+  .headline-divider {
+    color: $white-70;
+  }
 }
 
 .content.with-reply-box {

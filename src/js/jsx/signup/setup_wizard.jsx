@@ -81,13 +81,14 @@
 
             return (
 
-                    <div className="content-wrapper-signup flex-col">
+                    <div className="content-wrapper-signup flex-col" style={{overflow: "hidden"}}>
                         <div className="progress-bar">
                             {progressBarSteps}
                         </div>
                         <ReactCSSTransitionGroup
                             transitionName="animate"
-                            className="flex-grow-1 flex-shrink-0"
+                            className="flex-grow-1 flex-shrink-1"
+                            style={{overflow: 'auto'}}
                             transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
                             <div  key={'cont'+this.state.activeStep} className="">
                                 {currentStep}

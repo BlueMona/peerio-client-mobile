@@ -47,7 +47,7 @@
                   </div>
 
 
-                  <ul className="compact-list-view">
+                  <ul className="list-view">
                     <li>
                       <label>Participants</label>
                     </li>
@@ -57,7 +57,7 @@
 
 
                     { c.fileIDs.length ? (
-                    <ul className="compact-list-view">
+                    <ul className="list-view">
                       <li><label>Shared Files</label></li>
                       { c.fileIDs.map(f => <FileNode id={f} key={f}/>)}
                     </ul> ) : null }

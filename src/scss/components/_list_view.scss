@@ -108,6 +108,7 @@ ul {
       @extend .flex-col;
       @extend .flex-align-start;
 
+      min-height: 48px;
       height: auto;
       padding: $padding-small $padding-base;
 
@@ -132,8 +133,10 @@ li {
   @extend .flex-row;
   @extend .flex-align-center;
 
+  box-sizing: border-box;
+
   font-size: 16px;
-  height: 48px;
+  min-height: 48px;
   padding: 0 $padding-base;
 
   //with avatar,icon, checkbox,etc text should start at 72px from the left
@@ -211,10 +214,10 @@ li {
       }
 
       .list-item-sup {
-        opacity: 1;
-        text-transform: uppercase;
         font-size: .6rem;
         font-weight: 400;
+        opacity: 1;
+        text-transform: uppercase;
       }
 
       .list-item-description {
@@ -232,19 +235,16 @@ li {
     }
 
     .list-item-thumb {
-      //max-width: 40px;
       min-width: 24px;
-      // padding: 0 5px;
       flex: 0 0 auto;
       text-align: center;
       align-self: center;
-
     }
 
     .list-item-forward {
+      align-self: center;
       flex: 0 0 20px;
       text-align: center;
-      align-self: center;
 
     }
 
@@ -266,7 +266,6 @@ li {
       > i:only-child {
         color: $white-100;
         margin: 0 auto;
-
       }
     }
 
@@ -296,35 +295,6 @@ li {
   font-size: 24px;
   margin-right: $margin-base;
   opacity: .8;
-}
-
-.compact-list-view {
-  @extend .list-view;
-
-  .list-item {
-    max-height: $list-item-height;
-    min-height: 48px;
-
-    .list-item-title {
-      font-weight: normal;
-
-    }
-
-    .list-item-thumb {
-      text-align: left;
-    }
-  }
-}
-
-.flexible-list-view {
-  @extend .list-view;
-  overflow: visible;
-
-  .list-item {
-    max-height: none;
-    min-height: 0;
-    overflow: visible;
-  }
 }
 
 .nested-list {

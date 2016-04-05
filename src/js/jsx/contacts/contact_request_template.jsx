@@ -12,11 +12,11 @@
             var name;
             var publicKey = this.props.publicKey;
             if (this.props.name) {
-                name = <div className="list-item-title">
+                name = <div className="list-item-content">
                     {this.props.name} &bull; <span className="text-mono p-blue-dark-15">{this.props.username}</span>
                 </div>;
             } else {
-                name = <div className="list-item-title">
+                name = <div className="list-item-content">
                     {this.props.username}
                     <div className="text-mono p-blue-dark-15">{publicKey}</div>
                 </div>;
