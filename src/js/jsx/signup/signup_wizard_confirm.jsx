@@ -24,13 +24,9 @@
             });
         },
 
-        passPhraseIsValid: function () {
-            if (this.state.passphrase_valid) {
+        createAccount: function () {
                 Peerio.DataCollection.endTimePoint('signup_enterpassphrase');
                 this.props.handleNextStep({signup: true});
-            } else {
-                Peerio.Action.showAlert({text: 'Passphrases do not match'});
-            }
         },
 
         handlePreviousStep: function () {
@@ -40,14 +36,14 @@
         render: function () {
             var createPassPhrase = this.state.passphrase_valid ?
                 (<Peerio.UI.Tappable element="div" className="btn-safe"
-                    onTap={this.passPhraseIsValid}>
-                    Create my account
+                    onTap={this.createAccount}>
+                    {t('signup_confirmCreateButton')}
                 </Peerio.UI.Tappable>) : null;
-            var passphraseMsg = this.state.passphrase_alert ? 'Passphrase does not match' : null;
+            var passphraseMsg = this.state.passphrase_alert ? t('error_passpraseNotMatching') : null;
 
             return (
                 <div>
-                    <div className="headline">Please enter the passphrase</div>
+                    <div className="headline">{t('signup_enterPassphrase')}</div>
                     <div className="textarea-wrapper">
                         <textarea
                             className="border-none"
@@ -62,7 +58,7 @@
                         {createPassPhrase}
                         <Peerio.UI.Tappable element="div" className="btn-primary"
                             onTap={this.handlePreviousStep}>
-                            Let me see my passphrase again
+                            {t('signup_showPassphrase')}
                         </Peerio.UI.Tappable>
                     </div>
                 </div>

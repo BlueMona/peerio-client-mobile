@@ -37,18 +37,17 @@
         render: function () {
             return (
                 <fieldset key={'signup-step-1'}>
-                    <div className="headline">Your Passphrase</div>
+                    <div className="headline">{t('signup_passphraseTitle')}</div>
                     <Peerio.UI.TrackSubState name="passphrase"/>
 
-                    <p className='info'>This is your secure randomly generated passphrase. If you lose it, you
-                        will <strong>permanently</strong> lose access to your account.</p>
+                    <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>segment</strong>})}</p>
 
                     <p className="txt-lrg">
                         {this.state.passphrase}
                     </p>
                     <div className="flex-row">
                         <div className="input-group flex-grow-1">
-                            <label htmlFor="lang">Language</label>
+                            <label htmlFor="lang">{t('language')}</label>
                             <select ref="lang" id="lang" onChange={this.generatePassphrase}>
                                 <option value="en">English</option>
                                 <option value="fr">Francais</option>
@@ -65,7 +64,7 @@
                         </div>
 
                         <div className="input-group">
-                            <label htmlFor="wordCount">Length</label>
+                            <label htmlFor="wordCount">{t('length')}</label>
                             <select ref="wordCount" id="wordCount" onChange={this.generatePassphrase}>
                                 <option value="5">5</option>
                                 <option value="6">6</option>
@@ -77,12 +76,8 @@
                         </div>
                     </div>
                     <div className="buttons">
-                        <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.handleNextStep}> I'll
-                            remember my
-                            passphrase</Peerio.UI.Tappable>
-                        <Peerio.UI.Tappable element='div' className="btn-primary" onTap={this.generatePassphrase}> I
-                            don't like
-                            this passphrase</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element='div' className="btn-safe" onTap={this.handleNextStep}>{t('signup_acceptPassphrase')}</Peerio.UI.Tappable>
+                        <Peerio.UI.Tappable element='div' className="btn-primary" onTap={this.generatePassphrase}>{t('signup_nextPassphrase')}</Peerio.UI.Tappable>
                     </div>
                 </fieldset>);
         }
