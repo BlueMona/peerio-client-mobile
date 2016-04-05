@@ -49,7 +49,7 @@
             var button = (
 
                 <div className={classNames(
-                    'flex-row',
+                    'flex-row flex-shrink-0',
                     this.state.activeStep === 1  ?
                         ' flex-justify-end' : ' flex-justify-between',
                     this.state.activeStep < 1 ?
