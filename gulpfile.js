@@ -112,15 +112,68 @@ gulp.task('index', function () {
   return result.pipe(gulp.dest('./www'));
 });
 
-gulp.task('check-plugins', function() {
-    console.log('checking plugins'.yellow);
+gulp.task('check-plugins', function(done) {
+    var syncExec = require('sync-exec');
     var parser = new xml2js.Parser();
     fs.readFile('./config.xml', function(err, data) {
         parser.parseString(data, function (err, result) {
             result.widget.plugin.forEach( i => {
-                console.log( i.$.name.blue + ' ' + i.$.spec.yellow );
+                //if(!i.$.name.startsWith('com.peerio.')) return;
+                var pluginPackage = null;
+                try {
+                    pluginPackage = require('./plugins/' + i.$.name + '/package.json');
+                } catch(e) {
+                    console.log('error ' + i.$.name);
+                    console.log(e);
+                    return;
+                }
+                try {
+                    var version = semver.clean(
+                        syncExec('npm view ' + pluginPackage.name + ' version').stdout);
+                    var res = semver.satisfies(pluginPackage.version, version) || semver.gt(i.$.spec, version);
+                    res = !!res ? 'ok'.green : 'updated'.red;
+                    if(i.$.name.startsWith('com.peerio')) {
+                        if(pluginPackage.repository.url.indexOf('PeerioTechnologies') != -1) {
+                        } else {
+                            console.log('bad git repo specified'.red);
+                        }
+                        if(pluginPackage.original) {
+                            res += ' original: yes'.cyan;
+                        } else
+                        if(!pluginPackage.forked) {
+                            console.log('you must specify that package is either original or forked'.red);
+                        } else {
+                            if(pluginPackage.forked.type == 'npm') { 
+                                res += '\n\t' + ' forked from: ' + (pluginPackage.forked.name + '@' + pluginPackage.forked.version.yellow);
+                                var parentVersion = semver.clean(
+                                    syncExec('npm view ' + 
+                                             pluginPackage.forked.name + ' version').stdout);
+                                             res += ' parent: ' + parentVersion.yellow;
+                                             if(semver.satisfies(parentVersion, pluginPackage.forked.version) || semver.gt(pluginPackage.forked.version, parentVersion)) {
+                                                 res += ' ok'.green;
+                                             } else {
+                                                 res += ' updated'.red;
+                                             }
+                            }
+                            if(pluginPackage.forked.type == 'git') { 
+                                res += '\n\t' + ' forked from: ' + pluginPackage.forked.url + '#' + pluginPackage.forked.version.cyan;
+                            }
+                        }
+                    }
+                    console.log( i.$.name + 
+                                ' current: ' + pluginPackage.version.yellow + 
+                                ' npm: ' + version.cyan +
+                                ' ' + res);
+                } catch(e) {
+                    console.log('error ' + i.$.name);
+                    console.log(e);
+                    console.log(command);
+                    console.log( i.$.name + 
+                                ' current: ' + pluginPackage.version.yellow + 
+                                ' error'.red );
+                }
             });
-            console.log('Done');
+            done();
         });
     });
 });
@@ -128,13 +181,13 @@ gulp.task('check-plugins', function() {
 gulp.task('js', function () {
     console.log('compiling js files.');
     gulp.src(paths.js_src)
-        .pipe(babel(babelOptions))
-        .pipe(gulp.dest(paths.js_dst));
+    .pipe(babel(babelOptions))
+    .pipe(gulp.dest(paths.js_dst));
 });
 
 gulp.task('compile-clean', function () {
     return gulp.src(paths.clean_dst, {read: false})
-        .pipe(clean());
+    .pipe(clean());
 });
 
 gulp.task('prepare-plist', function () {

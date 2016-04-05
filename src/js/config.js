@@ -18,6 +18,8 @@ Peerio.Config.init = function () {
 
         var cfg = Peerio.Config = {};
 
+        cfg.defaultLocale = 'en';
+
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
         cfg.piwik = {
