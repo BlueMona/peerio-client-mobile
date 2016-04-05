@@ -332,6 +332,11 @@ li {
 
 .list-item.select-all {
   flex-direction: row;
+
+  ~ .list-item {
+    border-top: $border-dark;
+    padding-top: $padding-small;
+  }
 }
 
 .vscroll .loader-item {
