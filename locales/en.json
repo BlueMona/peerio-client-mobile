@@ -18,6 +18,7 @@
   "button_enable": "enable",
   "button_exit": "exit",
   "button_finish": "finish",
+  "button_delete": "Delete",
   "button_getStarted": "Get started",
   "button_import": "Import",
   "button_maybeLater": "Maybe later",
@@ -80,6 +81,7 @@
   "login_passphraseOrPasscode": "{#passphrase} or {#passcode}",
   "login_signUpButton": "sign up",
   "login_welcomeBack": "Welcome back,",
+  "login_changeUserButton":"Change User",
   "setup_contactInfoDescription": "Help your contacts find you on Peerio, receive notifications, and enable support services by adding your email address or phone number",
   "setup_contactInfoTitle": "Contact Info",
   "setup_emailOrPhone": "Email Address / Phone Number",
@@ -108,5 +110,6 @@
   "signup_showPassphrase": "Let me see my passphrase again",
   "signup_wrongUsername": "Please pick a different username",
   "tosUpdateRequestText": "Please review and accept updated Peerio TOS.",
-  "tosUpdateRequestTitle": "TOS Updated"
+  "tosUpdateRequestTitle": "TOS Updated",
+  "openLinkWarning":"Warning! Please only open links from the contacts you trust.",
 }

@@ -29,11 +29,11 @@ Peerio.NativeAPI.init = function () {
     window.addEventListener('keyboardDidHide', Peerio.Action.keyboardDidHide, true);
 
     //-- PRIVACY SCREEN
-    
+
     try {
         window.PrivacyScreen && window.PrivacyScreen.enable
         && window.PrivacyScreen.enable();
-    } catch(e) {
+    } catch (e) {
         L.error(e);
     }
 
@@ -53,7 +53,8 @@ Peerio.NativeAPI.init = function () {
     }
 
     function isClipboardAvailable() {
-        if (cordova && cordova.plugins && cordova.plugins.clipboard) return true;
+        if (Peerio.runtime && Peerio.runtime.platform === 'browser'
+            || cordova && cordova.plugins && cordova.plugins.clipboard) return true;
         L.info('Native API: Clipboard plugin not available.');
         return false;
     }
@@ -72,12 +73,12 @@ Peerio.NativeAPI.init = function () {
 
     //-- INTERNAL BROWSER ----------------------------------------------------------------------------------------------
     /**
-     * Opens url 
+     * Opens url
      * @param url
      */
     api.openInBrowser = function (url) {
         try {
-            if(cordova && cordova.InAppBrowser)
+            if (cordova && cordova.InAppBrowser)
                 cordova.InAppBrowser.open(url, '_system');
             else
                 window.open(url, '_system');
@@ -195,18 +196,18 @@ Peerio.NativeAPI.init = function () {
         if (!isCameraAvailable()) return Promise.reject();
 
         return new Promise(function (resolve, reject) {
-            camera ? 
-            navigator.camera.getPicture(resolve, reject, {
-                sourceType: Camera.PictureSourceType.CAMERA,
-                destinationType: Camera.DestinationType.FILE_URI,
-                encodingType: Camera.EncodingType.JPEG,
-                mediaType: Camera.MediaType.ALLMEDIA,
-                cameraDirection: Camera.Direction.BACK,
-                allowEdit: false,
-                correctOrientation: true,
-                saveToPhotoAlbum: false,
-                quality: 90
-            }) : navigator.camera.getPicture(resolve, reject, {
+            camera ?
+                navigator.camera.getPicture(resolve, reject, {
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    encodingType: Camera.EncodingType.JPEG,
+                    mediaType: Camera.MediaType.ALLMEDIA,
+                    cameraDirection: Camera.Direction.BACK,
+                    allowEdit: false,
+                    correctOrientation: true,
+                    saveToPhotoAlbum: false,
+                    quality: 90
+                }) : navigator.camera.getPicture(resolve, reject, {
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 destinationType: Camera.DestinationType.FILE_URI,
                 encodingType: Camera.EncodingType.JPEG
@@ -240,19 +241,19 @@ Peerio.NativeAPI.init = function () {
     api.shareNativeDialog = function (text, subject, link) {
         window.plugins && window.plugins.socialsharing ?
             window.plugins.socialsharing.share(text, subject, null, link) :
-            Peerio.UI.Alert.show({ 
-            text: text + ' ' + link, 
-            title: subject
-        });
+            Peerio.UI.Alert.show({
+                text: text + ' ' + link,
+                title: subject
+            });
     };
 
     api.signOut = function () {
         Peerio.NativeAPI.disablePushNotifications()
-        .catch(noop)
-        .then(Peerio.SqlDB.closeAll)
-        .catch(noop)
-        .then(() => Peerio.TinyDB.saveItem('prevent_saved_login', true))
-        .finally(()=> window.location.reload());
+            .catch(noop)
+            .then(Peerio.SqlDB.closeAll)
+            .catch(noop)
+            .then(() => Peerio.TinyDB.saveItem('prevent_saved_login', true))
+            .finally(()=> window.location.reload());
     };
 
     //-- PUSH NOTIFICATIONS --------------------------------------------------------------------------------------------
@@ -337,11 +338,11 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-     * Get carrier info 
+     * Get carrier info
      */
     api.getCarrierInfo = function () {
-        return new Promise( (resolve, reject) => {
-            if(!window.plugins.carrier) return Promise.reject('No carrier plugin available');
+        return new Promise((resolve, reject) => {
+            if (!window.plugins.carrier) return Promise.reject('No carrier plugin available');
             window.plugins.carrier.getCarrierInfo(resolve, reject);
         });
     };
@@ -349,14 +350,14 @@ Peerio.NativeAPI.init = function () {
     // default is Canada. HA-HA-HA (no offense to US users intended)
     api.DEFAULT_COUNTRY = 'ca';
     /**
-    * Get preferred language (fallbacks to locale info in plugin)
-    */
+     * Get preferred language (fallbacks to locale info in plugin)
+     */
     api.getPreferredCountry = function () {
-        return new Promise ( (resolve, reject) => {
-            if(!navigator.globalization) return reject('No globalization plugin available');
-            navigator.globalization.getPreferredLanguage( resolve, reject );
-        }).then( (data) => {
-            if(!data && !data.value) return api.DEFAULT_COUNTRY;
+        return new Promise((resolve, reject) => {
+            if (!navigator.globalization) return reject('No globalization plugin available');
+            navigator.globalization.getPreferredLanguage(resolve, reject);
+        }).then((data) => {
+            if (!data && !data.value) return api.DEFAULT_COUNTRY;
             var arr = data.value.split(/-/);
             return arr[arr.length - 1].toLowerCase();
         });
@@ -366,20 +367,20 @@ Peerio.NativeAPI.init = function () {
      * Get country code (carrer info, then fallback to preferred language,
      * then fallback to locale
      */
-     api.getCountryCode = function() {
-         return api.getCarrierInfo()
-         .then( (data) => data.countryCode.toLowerCase() )
-         .catch( () => api.getPreferredCountry() )
-         .catch( () => Promise.resolve(api.DEFAULT_COUNTRY) );
-     };
+    api.getCountryCode = function () {
+        return api.getCarrierInfo()
+            .then((data) => data.countryCode.toLowerCase())
+            .catch(() => api.getPreferredCountry())
+            .catch(() => Promise.resolve(api.DEFAULT_COUNTRY));
+    };
 
-     /**
-      * Get countries for which police is allowed to force fingerprint identification on device
-      */
-     api.isForcefulFingerprintEnabled = function() {
-         return api.getCountryCode()
-         .then( (data) => data == 'us' );
-     };
+    /**
+     * Get countries for which police is allowed to force fingerprint identification on device
+     */
+    api.isForcefulFingerprintEnabled = function () {
+        return api.getCountryCode()
+            .then((data) => data == 'us');
+    };
 
 
     //------------------------------------------------------------------------------------------------------------------

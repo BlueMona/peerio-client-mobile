@@ -15,7 +15,7 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         handleUnreadStateChange: function () {
-            if(!Peerio.user.unreadState.files) return;
+            if (!Peerio.user.unreadState.files) return;
 
             window.setTimeout(()=> {
                 if (this.isMounted() && Peerio.user.unreadState.files)
@@ -28,33 +28,29 @@
         },
         render: function () {
             var nodes = [];
-            if (Peerio.user.files) {
-                Peerio.user.files.arr.forEach(function (item) {
-                    nodes.push(
-                        <Peerio.UI.FileItem 
-                            className="list-item" 
-                            key={item.shortID}
-                            item={item}
-                            onTap={this.openFileView.bind(this, item.shortID)}>
-                        </Peerio.UI.FileItem>
-                    );
-                }.bind(this));
-            }
-            else {
-                nodes = Peerio.UI.ItemPlaceholder.getPlaceholdersArray();
-            }
+            Peerio.user.files.arr.forEach(function (item) {
+                nodes.push(
+                    <Peerio.UI.FileItem
+                        className="list-item"
+                        key={item.shortID}
+                        item={item}
+                        onTap={this.openFileView.bind(this, item.shortID)}>
+                    </Peerio.UI.FileItem>
+                );
+            }.bind(this));
             var uploadNodes;
             if (Peerio.user.uploads.length > 0) {
                 uploadNodes = [];
                 Peerio.user.uploads.forEach(function (file) {
                     var u = file.uploadState;
-                    if(!u) return;
+                    if (!u) return;
                     uploadNodes.push(
                         <li className="list-item">
-                          <i className="list-item-thumb file-type material-icons">cloud_upload</i>
-                          <div className="list-item-content">
-                            <div className="list-item-title">
-                            {u.stateName}&nbsp;{u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i className="fa fa-circle-o-notch fa-spin"></i>
+                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
+                            <div className="list-item-content">
+                                <div className="list-item-title">
+                                    {u.stateName}&nbsp;{u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i
+                                    className="fa fa-circle-o-notch fa-spin"></i>
                                 </div>
                                 <div className="list-item-description">{file.name}</div>
                             </div>
@@ -136,19 +132,19 @@
 
             return (<Peerio.UI.Tappable element="li" className={classes} key={item.shortID} onTap={this.props.onTap}>
 
-              <i className={item.icon}></i>
+                <i className={item.icon}></i>
 
-              <div className="list-item-content flex-col flex-justify-center">
-                  <div className="list-item-title">
-                    <div className="text-overflow">{this.props.item.name}</div>
-                    {cacheState}
-                  </div>
+                <div className="list-item-content flex-col flex-justify-center">
+                    <div className="list-item-title">
+                        <div className="text-overflow">{this.props.item.name}</div>
+                        {cacheState}
+                    </div>
                     <div className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
-                        {downloadStateNode}
-                    </div>
-                    <div className="list-item-forward">
-                        <i className="material-icons">chevron_right</i>
-                    </div>
+                    {downloadStateNode}
+                </div>
+                <div className="list-item-forward">
+                    <i className="material-icons">chevron_right</i>
+                </div>
             </Peerio.UI.Tappable>);
         }
     });
