@@ -39,7 +39,7 @@
                     onTap={this.createAccount}>
                     {t('signup_confirmCreateButton')}
                 </Peerio.UI.Tappable>) : null;
-            var passphraseMsg = this.state.passphrase_alert ? t('error_passpraseNotMatching') : null;
+            var passphraseMsg = this.state.passphrase_alert ? t('error_passphraseNotMatching') : null;
 
             return (
                 <div>
