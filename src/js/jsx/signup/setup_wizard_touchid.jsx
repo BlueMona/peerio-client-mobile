@@ -3,6 +3,10 @@
 
     Peerio.UI.SetupWizardTouchID = React.createClass({
 
+        getInitialState: function(){
+          return {};
+        },
+
         componentWillMount: function () {
             Peerio.UI.TouchId.setUserSeenOffer();
             Peerio.NativeAPI.isForcefulFingerprintEnabled()

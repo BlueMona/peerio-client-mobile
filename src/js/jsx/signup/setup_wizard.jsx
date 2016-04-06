@@ -16,16 +16,14 @@
             this.steps = [
                 Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SetupWizardStart,
-                Peerio.UI.SetupWizardPin,
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardCoupon
             ];
 
             Peerio.UI.TouchId.isFeatureAvailable()
-                .then(() => {
-                    this.steps[1] = Peerio.UI.SetupWizardTouchID;
-                    this.forceUpdate();
-                });
+                .then(() => this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID))
+                .catch(() => this.steps.splice(2, 0, Peerio.UI.SetupWizardPin))
+                .finally(this.forceUpdate);
         },
 
         handleNextStep: function () {
