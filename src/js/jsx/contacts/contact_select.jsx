@@ -46,10 +46,10 @@
 
         if (Peerio.user.contacts.arr.length === 1) {
           var intro_content = (<div className="content-intro">
-                                <div className="headline">Peerio Contacts</div>
-                                <p>It looks like you have not added any contacts yet. Click below to get started.</p>
+                                <div className="headline">{t('contact_listTitle')}</div>
+                                <p>{t('contact_listEmpty')}</p>
                                 <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.addContact}>
-                                  <i className="material-icons">person_add</i>Add a contact
+                                  <i className="material-icons">person_add</i>{t('button_addContact')}
                                 </Peerio.UI.Tappable>
                                 <img src="media/img/contacts.png"/>
                               </div>);
@@ -60,7 +60,7 @@
       return (
         <div className="modal item-select">
           <div className="subhead">
-          Select your recipients
+              {t('contactSelect_prompt')}
           </div>
           <ul>
           {contacts}
@@ -68,11 +68,11 @@
           <div id="footer">
             <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.props.onClose}>
               <i className="material-icons">cancel</i>
-              <label>Cancel</label></Peerio.UI.Tappable>
+              <label>{t('button_cancel')}</label></Peerio.UI.Tappable>
 
             <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.accept}>
               <i className="material-icons">person_add</i>
-              <label>{this.state.hadItems ? 'Update' : 'Add'} Recipients</label></Peerio.UI.Tappable>
+              <label>{this.state.hadItems ? t('contactSelect_updateRecipientsButton') : t('contactSelect_addRecipientsButton')}</label></Peerio.UI.Tappable>
           </div>
         </div>
       );

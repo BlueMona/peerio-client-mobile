@@ -13,7 +13,7 @@ Peerio.UI.AddContact = React.createClass({
 
   getInitialState: function() {
       return {
-          searchString: '',
+          searchString: ''
       };
   },
 
@@ -26,7 +26,7 @@ Peerio.UI.AddContact = React.createClass({
   },
 
   importContacts: function() {
-      Peerio.UI.Confirm.show({text: 'Your contact list will be sent to Peerio\'s servers so you can see who is already using Peerio. Do you want to proceed?'})
+      Peerio.UI.Confirm.show({text: t('contact_importWarning')})
       .then( () => {
           this.transitionTo('add_contact_import');
       });
@@ -34,13 +34,13 @@ Peerio.UI.AddContact = React.createClass({
 
   render: function(){
     var searchButton = <Peerio.UI.Tappable element="div" className="btn-safe flex-shrink-0" onTap={this.goToSearch}>
-      Search
+        {t('button_search')}
     </Peerio.UI.Tappable>;
     return  (<div className="content without-tab-bar without-footer">
       <div className="flex-col flex-justify-start">
-        <div className="headline">Add Contact</div>
+        <div className="headline">{t('contact_addTitle')}</div>
         <div  className="input-group">
-          <label htmlFor="search">Search</label>
+          <label htmlFor="search">{t('contact_searchTitle')}</label>
             <div className="flex-row flex-align-center">
                 <input type="text"
                     className="lowercase"
@@ -49,19 +49,19 @@ Peerio.UI.AddContact = React.createClass({
                     autoCapitalize="off"
                     spellCheck="false"
                     onChange={this.updateSearchString}
-                    placeholder="username, email or phone"
+                    placeholder={t('contact_searchPlaceholder')}
                     value={this.state.searchString}
                     id="search"/>
                 {searchButton}
             </div>
         </div>
-        <p className="line-across">or</p>
+        <p className="line-across">{t('or')}</p>
           <p className="centered-text">
-            Import contacts from your phone.
+              {t('contact_importTitle')}
           </p>
           <div className="buttons">
             <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.importContacts}>
-              <i className="material-icons">import_contacts</i>  Import
+              <i className="material-icons">import_contacts</i>  {t('button_import')}
             </Peerio.UI.Tappable>
           </div>
           </div>
