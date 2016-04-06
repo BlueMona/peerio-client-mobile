@@ -427,6 +427,30 @@ gulp.task('find-unused-locale-strings', function () {
         }
     }
 });
+
+gulp.task('find-duplicate-locale-strings', function () {
+    console.log('Looking for duplicate locale strings in locales/en.json files. Might take some time, wait please..');
+
+    var locales = require('./locales/en.json');
+    var cache = {};
+    for (var key in locales) {
+        var val = locales[key];
+        if(cache[val]){
+            cache[val].push(key);
+            continue;
+        }
+        cache[val] = [key];
+    }
+    for(var val in cache){
+        if(cache[val].length ===1) continue;
+        console.log('---------------');
+        console.log(val);
+        cache[val].forEach(key=>console.log('\t'+key));
+    }
+    console.log('---------------');
+});
+
+
 // UTILITY FUNCTIONS
 function bump(version) {
     gulp.src(paths.config_xml)
