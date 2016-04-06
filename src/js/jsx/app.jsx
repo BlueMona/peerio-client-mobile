@@ -27,7 +27,7 @@
                         headline: t('tosUpdateRequestTitle'),
                         text: <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
                                                   onTap={this.handleTOSRead}>
-                            t('tosUpdateRequestText')
+                            {t('tosUpdateRequestText')}
                         </Peerio.UI.Tappable>,
                         okText: t('button_accept'),
                         cancelText: t('button_reject')

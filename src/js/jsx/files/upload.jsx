@@ -9,10 +9,10 @@
                 .then(function (fileInfo) {
                     return Peerio.user.uploadFile(fileInfo)
                         .then(function () {
-                            Peerio.Action.showAlert({text: 'Upload complete'});
+                            Peerio.Action.showAlert({text: t('file_uploadComplete')});
                         })
                         .catch(function (err) {
-                            Peerio.Action.showAlert({text: 'Upload failed. ' + err});
+                            Peerio.Action.showAlert({text: t('file_uploadFailed')+' ' + err});
                         });
                 })
                 // this catch handles user cancel on confirm/prompt
@@ -29,7 +29,7 @@
             fileExtension = fileExtension ? fileExtension : 'jpg';
             var fileName = Peerio.Helpers.getFileNameWithoutExtension(fileUrl);
             return Peerio.UI.Prompt.show({
-                    text: 'Enter filename:',
+                    text: t('file_namePrompt'),
                     promptValue: fileName,
                     minLength: 1
                 })
@@ -47,8 +47,8 @@
                     if (file.size / 1024 / 1024 < 100) return fileUrl;
                     return new Promise((resolve, reject) => {
                         Peerio.Action.showConfirm({
-                            headline: 'Beta warning',
-                            text: 'Uploading files over 100MB may cause Peerio to crash. We are working to solve this issue. Would you still like to try uploading this file?',
+                            headline: t('file_sizeWarningTitle'),
+                            text: t('file_sizeWarningTextUpload'),
                             onAccept: ()=>resolve(fileUrl),
                             onReject: reject
                         });
@@ -61,14 +61,14 @@
                 <div className="modal item-select flex-col flex-justify-center">
                     <div className="buttons">
                         <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture} className="btn-primary">
-                            <i className="material-icons">photo_library</i> Pick from photo library
+                            <i className="material-icons">photo_library</i> {t('file_pickFromLibrary')}
                         </Peerio.UI.Tappable>
                         <Peerio.UI.Tappable element="div" onTap={this.handleTakePicture.bind(this,true)}
-                                            className="btn-primary">
-                            <i className="material-icons">photo_camera</i> Take a new picture
+                                            className="btn-primary"> {t('file_takePicture')}
+                            <i className="material-icons">photo_camera</i>
                         </Peerio.UI.Tappable>
                         <Peerio.UI.Tappable element="div" onTap={this.props.onClose} className="btn-dark">
-                            <i className="material-icons">close</i> Cancel
+                            <i className="material-icons">close</i> {t('button_cancel')}
                         </Peerio.UI.Tappable>
                     </div>
                 </div>

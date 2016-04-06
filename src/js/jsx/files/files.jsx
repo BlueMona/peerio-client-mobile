@@ -49,8 +49,8 @@
                             <i className="list-item-thumb file-type material-icons">cloud_upload</i>
                             <div className="list-item-content">
                                 <div className="list-item-title">
-                                    {u.stateName}&nbsp;{u.totalChunks ? u.currentChunk + ' of ' + u.totalChunks : ''} <i
-                                    className="fa fa-circle-o-notch fa-spin"></i>
+                                    {t(u.stateName)}&nbsp;{u.totalChunks ? Math.round(u.currentChunk / u.totalChunks * 100) + '%' : ''}
+                                    <i className="fa fa-circle-o-notch fa-spin"></i>
                                 </div>
                                 <div className="list-item-description">{file.name}</div>
                             </div>
@@ -64,9 +64,9 @@
                         <div className="content-intro">
                             <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-                            <div className="headline">Peerio File Storage!</div>
+                            <div className="headline">{t('file_listEmptyTitle')}</div>
 
-                            <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+                            <p>{t('file_listEmptyText')}</p>
                             <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}}
                                  src="media/img/home-bigfilesok.png"/>
                         </div>
@@ -104,8 +104,8 @@
         showDestroyDialog: function () {
             var destroyFileAfterAnimate = this.destroyFileAfterAnimate;
             Peerio.Action.showConfirm({
-                headline: 'Remove this file?',
-                text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+                headline: t('file_removeConfirmTitle'),
+                text: t('file_removeConfirmText'),
                 onAccept: destroyFileAfterAnimate
             });
         },
@@ -123,7 +123,7 @@
             var downloadStateNode = null;
             if (item.downloadState) {
                 var ds = item.downloadState;
-                downloadStateNode = (<div className="download">{ds.stateName}&nbsp;{ds.percent}</div>);
+                downloadStateNode = (<div className="download">{t(ds.stateName)}&nbsp;{ds.percent}</div>);
             }
 
             var cacheState = item.cached ? <i className="material-icons p-blue-dark-10">save</i> : null;
