@@ -26,20 +26,20 @@
         send: function () {
             //todo validation
             if (!this.state.recipients.length) {
-                return Peerio.Action.showAlert({text: 'Please select at least one contact to send your message to.'});
+                return Peerio.Action.showAlert({text: t('message_selectContacts')});
             }
 
-            if(this.state.sending) return;
+            if (this.state.sending) return;
 
-            this.setState({sending:true});
+            this.setState({sending: true});
 
             Peerio.Conversation()
                 .reply(this.state.recipients, this.refs.message.getDOMNode().value,
                     this.state.attachments, this.refs.subject.getDOMNode().value)
                 .then(this.goBack)
                 .catch(err => {
-                    Peerio.Action.showAlert({text: 'Error sending message. ' + err});
-                    this.setState({sending:false});
+                    Peerio.Action.showAlert({text: t('error_messageSend') + ' ' + err});
+                    this.setState({sending: false});
                 });
         },
         openContactSelect: function () {
@@ -111,7 +111,7 @@
                             }
 
                         </ul>
-                        <textarea ref="message" className="message" placeholder="Type your message"></textarea>
+                        <textarea ref="message" className="message" placeholder={t('message_typePrompt')}></textarea>
                     </div>
                 </div>
             );
