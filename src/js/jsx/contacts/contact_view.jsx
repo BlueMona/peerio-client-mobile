@@ -121,7 +121,7 @@
                                 <div className="flex-col">
                                     <div className="headline">{this.contact.fullName}</div>
                                     <div
-                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</div>
+                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(' + t('You') + ')' : ''}</div>
                                 </div>
                             </div>
                         </li>
