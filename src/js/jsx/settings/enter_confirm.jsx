@@ -22,7 +22,7 @@
             return !this.props.visible ? null : (
                 <div className="content-inline-dialog">
                     <div className="headling-md">
-                        Please enter the code you received on your e-mail or phone
+                        {t('address_confirmCodePrompt2')}
                     </div>
                     <div>
                         <input
@@ -33,11 +33,11 @@
                         </input>
                         <Peerio.UI.Tappable element="div" className="btn-safe"
                             onTap={this.ok}>
-                            Confirm
+                            {t('button_confirm')}
                         </Peerio.UI.Tappable>
                         <Peerio.UI.Tappable element="div" className="btn-danger"
                             onTap={this.cancel}>
-                            Cancel
+                            {t('button_cancel')}
                         </Peerio.UI.Tappable>
                     </div>
                 </div>

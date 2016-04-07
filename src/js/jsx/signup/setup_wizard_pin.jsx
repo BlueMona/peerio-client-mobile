@@ -2,22 +2,15 @@
     'use strict';
 
     Peerio.UI.SetupWizardPin = React.createClass({
-        mixins: [ReactRouter.Navigation],
-
-        getInitialState: function () {
-            return {
-            };
-        },
-
         render: function () {
-           return (
+            return (
                 <div>
-                    <div className="headline">Set a passcode</div>
-                  <p>This allows you to login <strong>from this device</strong> without entering your passphrase.</p>
+                    <div className="headline">{t('setup_passcodeTitle')}</div>
+                    <p>{t('setup_passcodeDescription', null, {emphasis: segment => <strong>{segment}</strong>})}</p>
                     <Peerio.UI.SetPin hideHeader={true} {...this.props} autoFocus={true} focusDelay={1000}/>
                 </div>
             );
-        },
+        }
     });
 
 }());

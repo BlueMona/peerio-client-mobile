@@ -20,7 +20,7 @@
                 .load()
                 .then(c => this.setState({conversation: c}, this.disableIfLastParticipant)) //todo, also call disable on conv update
                 .catch(err => {
-                    Peerio.Action.showAlert({text: 'Failed to load conversation'});
+                    Peerio.Action.showAlert({text: t('error_loadingConversation')});
                     L.error('Failed to load conversation. {0}', err);
                     this.goBack();
                 });
@@ -71,10 +71,7 @@
                 if (data.deleted.length && data.deleted.indexOf(this.props.params.id) != -1)
                     this.goBack();
                 else
-                    Peerio.Conversation(this.props.params.id)
-                        .load().catch(err => {
-                        this.goBack();
-                    });
+                    Peerio.Conversation(this.props.params.id).load().catch(err => this.goBack());
             }
         },
 
@@ -114,17 +111,17 @@
                 .then((msg) => {
                     if (msg.failed && msg.failed.length) {
                         Peerio.UI.Alert.show({
-                            text: 'Failed to deliver message to following recipients: ' + msg.failed.join(', ')
+                            text: t('error_messageDelivery') + ' ' + msg.failed.join(', ')
                         });
                     }
-                    if(!ack) {
+                    if (!ack) {
                         node.value = '';
                         this.setState({attachments: []});
                     }
                 })
                 .catch(err => {
                     L.error("Failed to send message. {0}", err);
-                    Peerio.Action.showAlert({text: 'Failed to send message. ' + (err || '')})
+                    Peerio.Action.showAlert({text: t('error_messageSend') + ' ' + (err || '')})
                 })
                 .finally(()=> {
                     this.setState({sending: false}, this.onTextChanged);
@@ -135,7 +132,7 @@
         onTextChanged: function () {
             var node = this.refs.reply.getDOMNode();
             node.style.height = node.scrollHeight + 'px';
-            if (node.value.isEmpty() && this.state.attachments.length===0) {
+            if (node.value.isEmpty() && this.state.attachments.length === 0) {
                 if (!this.state.empty) this.setState({empty: true})
             } else {
                 if (this.state.empty) this.setState({empty: false});
@@ -157,16 +154,16 @@
                     // then disable reply
                     this.setState({
                         textEntryDisabled: true,
-                        placeholderText: 'There are no participants left in this conversation'
+                        placeholderText: t('conversation_noParticipants')
                     });
                 } else {
                     // otherwise just inform user that this was never shared with anyone
-                    this.setState({placeholderText: 'You are the only person in this conversation.'});
+                    this.setState({placeholderText: t('conversation_withSelf')});
                 }
             }
             else {
                 // normal case
-                this.setState({placeholderText: 'Type your message...'});
+                this.setState({placeholderText: 'message_typePrompt'});
             }
         },
 

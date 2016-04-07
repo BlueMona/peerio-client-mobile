@@ -12,7 +12,7 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onSettingsUpdated(() => {
                     this.setState({addresses: this.getAddresses()});
-                }),
+                })
             ];
         },
 
@@ -48,12 +48,12 @@
 
         updateFirstName: function (event) {
             var name = event.target.value;
-            Peerio.Helpers.isNameValid(name) && this.setState({firstName: name });
+            Peerio.Helpers.isNameValid(name) && this.setState({firstName: name});
         },
 
         updateLastName: function (event) {
             var name = event.target.value;
-            Peerio.Helpers.isNameValid(name) && this.setState({lastName: name });
+            Peerio.Helpers.isNameValid(name) && this.setState({lastName: name});
         },
 
         clearAddressText: function () {
@@ -63,14 +63,14 @@
         removeAddress: function (address, code) {
             this.setState({confirmationDialogVisible: false});
 
-            Peerio.UI.Confirm.show({text: 'Are you sure you want to remove the address?'})
-            .then( () => {
-                this.clearAddressText();
-                Peerio.user.removeAddress(address)
+            Peerio.UI.Confirm.show({text: t('address_removeConfirm')})
                 .then(() => {
-                    this.setState({addresses: this.getAddresses()});
+                    this.clearAddressText();
+                    Peerio.user.removeAddress(address)
+                        .then(() => {
+                            this.setState({addresses: this.getAddresses()});
+                        });
                 });
-            });
         },
 
         setPrimaryAddress: function (address) {
@@ -79,28 +79,28 @@
 
         deleteAccount: function () {
             Peerio.Action.showConfirm({
-                headline: 'Delete account',
-                text: 'Are you sure you want to delete account?',
+                headline: t('account_deleteTitle'),
+                text: t('account_deleteConfirm'),
                 onAccept: function () {
                     Peerio.user.closeAccount()
-                    .then(() => Peerio.User.wipeLocalData(Peerio.user.username))
-                    .then(() => {
-                        Peerio.Action.showAlert({
-                            text: 'Account deleted. Signing out.',
-                            onClose: function () {
-                                Peerio.NativeAPI.signOut();
-                            }
+                        .then(() => Peerio.User.wipeLocalData(Peerio.user.username))
+                        .then(() => {
+                            Peerio.Action.showAlert({
+                                text: t('account_deleted'),
+                                onClose: function () {
+                                    Peerio.NativeAPI.signOut();
+                                }
+                            });
                         });
-                    });
                 }
             });
         },
 
         render: function () {
             var addressHint = this.state.addresses.length > 1 ? (
-                    <div className="caption">
-                      Tap an address to make it your primary.
-                    </div>
+                <div className="caption">
+                    {t('address_makePrimary')}
+                </div>
             ) : null;
             var addressItems = this.state.addresses.map(
                 (address, index) =>
@@ -112,10 +112,10 @@
             return (
                 <div>
                     <div className="content without-tab-bar without-footer">
-                        <div className="headline">Profile</div>
+                        <div className="headline">{t('profile')}</div>
                         <div className="flex-col flex-justify-center">
                             <div className="input-group">
-                                <label htmlFor="first-name">First Name</label>
+                                <label htmlFor="first-name">{t('firstName')}</label>
                                 <input id="first-name"
                                        type="text"
                                        required="required"
@@ -125,7 +125,7 @@
                                 />
                             </div>
                             <div className="input-group">
-                                <label htmlFor="last-name">Last Name</label>
+                                <label htmlFor="last-name">{t('lastName')}</label>
                                 <input id="last-name"
                                        type="text"
                                        required="required"
@@ -135,20 +135,20 @@
                                 />
                             </div>
                             <div className="input-group">
-                                <label htmlFor="address">Addresses</label>
-                                    {addressHint}
-                                    {addressItems}
-                                <Peerio.UI.AddAddress ref="addAddress" />
-                              <div className="caption">Phone requires country code</div>
+                                <label htmlFor="address">{t('addresses')}</label>
+                                {addressHint}
+                                {addressItems}
+                                <Peerio.UI.AddAddress ref="addAddress"/>
+                                <div className="caption">{t('address_phoneInvalid')}</div>
                             </div>
                             <div className="input-group">
-                                <div className="info-label">Your public key:</div>
+                                <div className="info-label">{t('yourPublicKey')}</div>
                                 <span className="text-mono col-8 col-first">{ Peerio.user.publicKey }</span>
                             </div>
                             <div className="buttons">
-                              <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
-                                delete your account
-                              </Peerio.UI.Tappable>
+                                <Peerio.UI.Tappable className="btn-danger" onTap={ this.deleteAccount }>
+                                    {t('button_deleteAccount')}
+                                </Peerio.UI.Tappable>
                             </div>
 
                         </div>

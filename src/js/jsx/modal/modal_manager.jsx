@@ -86,9 +86,9 @@
             // bluring active elemtn and hiding keyboard
             // so our modal looks normal and not like always
             /*            if(document.activeElement) {
-                document.activeElement.blur();
-            }
-            Peerio.NativeAPI.hideKeyboard(); */
+             document.activeElement.blur();
+             }
+             Peerio.NativeAPI.hideKeyboard(); */
 
             var nodes = [];
             for (var i = 0; i < this.state.activeModals.length; i++)

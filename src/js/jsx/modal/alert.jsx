@@ -34,7 +34,7 @@
             var btns = this.props.btns ||
                 (<div>
                     <Peerio.UI.Tappable element="div" className="btn-safe"
-                                        onTap={this.handleAction}>OK</Peerio.UI.Tappable>
+                                        onTap={this.handleAction}>{t('button_ok')}</Peerio.UI.Tappable>
                 </div>);
 
             var text = this.props.text || '';
