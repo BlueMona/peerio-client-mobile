@@ -5,6 +5,7 @@
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.pyc
 
 # build release apk output
 /bin

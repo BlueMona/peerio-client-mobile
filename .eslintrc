@@ -20,6 +20,7 @@
     "no-irregular-whitespace": 0,
     "no-trailing-spaces": 0,
     "no-use-before-define": [1, "nofunc"],
+    "no-unused-vars": 1
   },
   "globals": {
     "Peerio": true,

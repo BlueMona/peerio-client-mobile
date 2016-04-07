@@ -402,6 +402,12 @@ gulp.task('version', function () {
         }));
 });
 
+gulp.task('test', function () {
+    var syncExec = require('sync-exec');
+    syncExec('python tests/login.py');
+    
+});
+
 // UTILITY FUNCTIONS
 function bump(version) {
     gulp.src(paths.config_xml)
