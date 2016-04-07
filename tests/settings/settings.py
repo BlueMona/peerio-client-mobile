@@ -18,6 +18,7 @@ class Settings:
             'app': self.appPath(),
             'launchTimeout': 90000,
             'autoWebView': True,
+            'newCommandTimeout': 1200
         }
 
     def ios(self, config):
