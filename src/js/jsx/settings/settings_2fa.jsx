@@ -60,10 +60,9 @@
         startEnable2FA: function() {
             (!Peerio.user.addresses || Peerio.user.addresses.length == 0)
             && Peerio.UI.Confirm.show({
-                text: 'You don\'t have a registered contact address. If you lose your 2FA, ' +
-                        'Peerio won\'t be able to recover your account.',
-                cancelText: 'I understand',
-                okText: 'Add address'
+                text: t('2fa_addressRequired'),
+                cancelText: t('button_IUnderstand'),
+                okText: t('button_addAddress')
             })
             .then(() => this.transitionTo('account_settings'))
             .catch(() => true);
@@ -85,7 +84,7 @@
                 this.goBack();
             })
             .catch( (reject) => {
-                this.setState({message: 'Code is incorrect. Please try again.'});
+                this.setState({message: t('2fa_invalid')});
             })
             .finally( () => {
                 this.setState({ authyCode: '' });
@@ -99,7 +98,7 @@
                 });
             })
             .catch( (reject) => {
-                this.setState({message: 'Code is incorrect. Please try again.'});
+                this.setState({message: t('2fa_invalid')});
             })
             .finally( () => {
                 this.goBack();
@@ -120,17 +119,16 @@
 
         //--- RENDER
         render: function () {
-            var pasteMessage = this.state.clipboardSuccess ?
-                'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Copy and paste the following secret key into your authenticator app:';
+            var pasteMessage = this.state.clipboardSuccess ? t('2fa_clipboard') : t('2fa_manualCopy');
 
                 return (
                     <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
-                        <div className="headline-md">Two Factor Authentication (2FA)</div>
+                        <div className="headline-md">{t('2fa')}</div>
                         { this.state.isEnabled2FA ? (
                             <div className="buttons">
                               <Peerio.UI.Tappable element="div" className="btn-danger"
                                   onTap={this.startDisable2FA}>
-                                  Disable 2FA
+                                  {t('2fa_disable')}
                               </Peerio.UI.Tappable>
                             </div>
                             ) : (
@@ -155,7 +153,7 @@
                             </div>)} { this.state.disable2FA || !this.state.isEnabled2FA ? (
                             <div className="input-group">
                                 <label htmlFor="authenticatorCode">
-                                    Enter the six digit code that appears in the app:
+                                    {t('2fa_prompt')}
                                 </label>
                                 <input
                                     className="text-center"

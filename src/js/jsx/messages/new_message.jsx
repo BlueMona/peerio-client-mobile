@@ -88,7 +88,7 @@
                             </div>
                         </Peerio.UI.Tappable>
                         <div className="subject-inputs">
-                            <input type="text" ref="subject" className="subject" placeholder="Subject"/>
+                            <input type="text" ref="subject" className="subject" placeholder={t('subject')}/>
 
                             <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
                                 <i className="material-icons">attach_file</i>
