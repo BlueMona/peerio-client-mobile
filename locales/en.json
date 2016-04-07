@@ -29,6 +29,7 @@
   "messages":"Messages",
   "files":"Files",
   "contacts":"Contacts",
+  "finishingIn":"finishing in {time}",
   "button_accept": "accept",
   "button_agree": "I agree",
   "button_cancel": "Cancel",
@@ -57,6 +58,7 @@
   "button_importContacts": "Import & Invite Contacts",
   "button_addSelectedContact": "Add Selected Contact",
   "button_send": "Send",
+  "button_ok":"OK",
   "contact_addTitle": "Add Contact",
   "contact_invitePrompt": "Invite them to join Peerio by clicking the button below:",
   "contact_inviteSendButton": "Send email invite",
@@ -181,6 +183,8 @@
   "appUpdate_available": "Peerio update available",
   "appUpdate_normal": "An update is available, would you like to get the latest version of Peerio?",
   "appUpdate_critical": "Your Peerio client is out-of-date and can’t connect to the server, please update to connect!",
+  "2fa":"Two Factor Authentication (2FA)",
+  "2fa_protectedOperation":"The operation you requested is protected by 2FA. Please enter the six digit code that appears in the authenticator app",
   "2fa_invalid": "Code is incorrect. Please try again.",
   "2fa_prompt": "Please enter 2FA code",
   "2fa_disable":"Disable two factor auth",
@@ -196,6 +200,7 @@
   "message_readByRecipient":"Read",
   "message_readByAll":"Read by all",
   "message_readBy":"Read by {placeholder}",
-  "message_selectContacts":"Please select at least one contact to send your message to."
-
+  "message_selectContacts":"Please select at least one contact to send your message to.",
+  "sync_starting":"starting...",
+  "sync_description":"For optimal experience and performance Peerio stores some of your encrypted data on your device. This may take a moment if you have a lot of messages.",
 }
