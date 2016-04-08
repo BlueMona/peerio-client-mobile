@@ -45,36 +45,39 @@ ___using translator api___
 Translation function is available as `t()` or `window.t()` or `Peerio.Translator.t()` or `Peerio.Translator.translate()`
 
 1. regular string
-```
-t('stringKey')
-```
+  ```
+  t('stringKey')
+  ```
+
 2. string with variable placeholders
-```
-// "progress": "uploading {current} from {max}"
-t('progress', {current:5, max:100})
-```
+  ```
+  // "progress": "uploading {current} from {max}"
+  t('progress', {current:5, max:100})
+  ```
+
 3. strings with segments/wrappers
-```
-// "link": "click \<url>here</>"
-t('link', {url: segment => <a href=''>segment</a>)
-```
+  ```
+  // "link": "click \<url>here</>"
+  t('link', {url: segment => <a href=''>segment</a>)
+  ```
 
 ### translators
 
 1. use `{#hashKey}` to reference another string 
-```
-{
-  "greet": "Hello",
-  "personalGreet": "{#greet}, friend!"
-}
-```
+  ```
+  {
+    "greet": "Hello",
+    "personalGreet": "{#greet}, friend!"
+  }
+  ```
 
 2. don't change anything inside curly braces 
-```
-"bla bla {i'm a variable set by developers}"
-```
+  ```
+  "bla bla {i'm a variable set by developers}"
+  ```
+
 3. if you see a segment, get the idea of what it means from the name, and don't change anything inside angle brackets
-```
-"<url>click here</> to get happy"
-"this is really <emphasis>important</>"
-```
+  ```
+  "<url>click here</> to get happy"
+  "this is really <emphasis>important</>"
+  ```
