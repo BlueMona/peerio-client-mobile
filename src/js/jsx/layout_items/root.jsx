@@ -46,6 +46,8 @@
             else if (Peerio.runtime.updateAvailable) this.notifyOnUpdate();
 
             Peerio.Dispatcher.onUpdateAvailable(this.notifyOnUpdate);
+
+            Peerio.Dispatcher.onLocaleChanged(()=> this.forceUpdate());
             // no need to unsubscribe, this is the root component
         },
         notifyOnUpdate: function (expired) {

@@ -198,8 +198,7 @@
 
         //----- RENDER
         render: function () {
-            // todo: loading state
-            if (!this.state.conversation) return <Peerio.UI.FullViewSpinner/>;
+            if (!this.state.conversation) return null;
             var conversation = this.state.conversation;
 
             // note: reply has fixed positioning and should not be nested in .content,
