@@ -1,0 +1,33 @@
+#!/bin/bash
+
+MYDIR="$(dirname "$(realpath "$0")")"
+
+findAndroidVM() {
+    # kill ios simulator to prevent conflict
+    ps -A | grep -i [s]imulator.app | grep -Eio "^\s*\d+" | xargs kill
+    sleep 1s
+    # if [[ $* == *--kill* ]]; then
+    #    ckillvm
+    # fi
+    VMGUID="$(VBoxManage list vms | grep -i $1 | grep -iEo "{.*}" | grep -iEo -m 1 "[a-z0-9-]+")"
+    if [ ! -z "$VMGUID" -a "$VMGUID" != " " ]; then
+        VMGUIDEXISTING="$(ps -A | grep -i [p]layer.app | grep $VMGUID)"
+        echo "ps -A | grep -i [p]layer.app | grep $VMGUID | grep -Eio "^\s*\d+""
+        if [ ! -z "$VMGUIDEXISTING" -a "$VMGUIDEXISTING" != " " ]; then
+            echo "No existing simulators with different API found, skipping"
+        else
+            ps -A | grep -i [p]layer.app | grep -Eio "^\s*\d+" | xargs kill
+            sleep 1s
+            open -a /Applications/Genymotion.app/Contents/MacOS/player.app --args --vm-name "$VMGUID"
+            sleep 15s
+        fi
+        cordova run android --device
+        open $MYDIR/open-chrome.app
+    else
+        echo "VM $1 not found. Following VMs are available:"
+        VBoxManage list vms
+    fi
+}
+
+
+findAndroidVM $1
