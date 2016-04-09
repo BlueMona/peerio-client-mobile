@@ -50,11 +50,11 @@
         },
         notifyOnUpdate: function (expired) {
             var text = expired
-                ? 'Your Peerio client is out-of-date and can’t connect to the server, please update to connect!'
-                : 'An update is available, would you like to get the latest version of Peerio?';
+                ? t('appUpdate_critical')
+                : t('appUpdate_normal');
 
             Peerio.Action.showConfirm({
-                headline: 'Update',
+                headline: t('appUpdate_available'),
                 text: text,
                 onAccept: ()=>Peerio.NativeAPI.openInBrowser('https://peerio.com')
             });
@@ -64,41 +64,37 @@
             L.info('2fa requested');
             this.blurEssential(true);
             Peerio.UI.Prompt.show({
-                text: retry ? 'Code is incorrect. Please try again:' :'Please enter 2FA code:',
-                inputType: 'numeric',
-                autoSubmitLength: 6,
-                minLength: 6,
-                cancelText: 'Sign out'
-            })
-            .then( (code) => {
-                L.info('2fa resend requested');
-                Peerio.Net.validate2FA(code, Peerio.user.username, Peerio.user.publicKey)
-                    .then(() => {
-                        resolve('successfully entered 2fa code');
-                    })
-                    .catch(() => {
-                        this.handle2FA(resolve, reject, true);
+                    text: retry ? t('2fa_invalid') : t('2fa_prompt'),
+                    inputType: 'numeric',
+                    autoSubmitLength: 6,
+                    minLength: 6,
+                    cancelText: 'Sign out'
+                })
+                .then((code) => {
+                    L.info('2fa resend requested');
+                    Peerio.Net.validate2FA(code, Peerio.user.username, Peerio.user.publicKey)
+                        .then(resolve)
+                        .catch(() => this.handle2FA(resolve, reject, true));
+                })
+                .catch(() => {
+                    L.info('2fa rejected by user');
+                    Peerio.NativeAPI.signOut();
+                    reject({
+                        code: 411, // any special code for user cancel?
+                        message: '2FA authentication cancelled by user'
                     });
-            })
-            .catch( () => {
-                L.info('2fa rejected by user');
-                Peerio.NativeAPI.signOut();
-                reject({
-                    code: 411, // any special code for user cancel?
-                    message: '2FA authentication cancelled by user'
+                })
+                .finally(() => {
+                    this.blurEssential(false);
                 });
-            })
-            .finally( () => {
-                this.blurEssential(false);
-            });
         },
 
         blurEssential: function (blur) {
             [].forEach.call(document.getElementsByClassName('essential'),
-            i => { 
-                blur ? i.classList.add('blur') :
-                    i.classList.remove('blur');
-            }); 
+                i => {
+                    blur ? i.classList.add('blur') :
+                        i.classList.remove('blur');
+                });
         },
 
         render: function () {

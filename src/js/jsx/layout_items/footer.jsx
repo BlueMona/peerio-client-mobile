@@ -14,17 +14,17 @@
             // default action is Peerio.Action.bigGreenButton
             this.mainButtonActions = {
                 messages: {
-                    name: 'Compose message',
+                    name: t('button_composeMessage'),
                     action: this.transitionTo.bind(this, 'new_message'),
                     icon: 'edit'
                 },
-                files: {name: 'Upload file', action: Peerio.Action.showFileUpload, icon: 'cloud_upload'},
-                contacts: {name: 'Add contact', icon: 'person_add'},
-                contact: {name: 'Send Message', icon: 'edit'},
-                add_contact_import: {name: 'Import & Invite Contacts', icon: 'person_add'},
-                add_contact_search: {name: 'Add Selected Contact', icon: 'person_add'},
-                new_message: {name: 'Send', icon: 'send'},
-                conversation: {name: 'Send', icon: 'send'}
+                files: {name: t('button_uploadFile'), action: Peerio.Action.showFileUpload, icon: 'cloud_upload'},
+                contacts: {name: t('button_addContact'), icon: 'person_add'},
+                contact: {name: t('button_sendMessage'), icon: 'edit'},
+                add_contact_import: {name: t('button_importContacts'), icon: 'person_add'},
+                add_contact_search: {name: t('button_addSelectedContact'), icon: 'person_add'},
+                new_message: {name: t('button_send'), icon: 'send'},
+                conversation: {name: t('button_send'), icon: 'send'}
             };
 
             this.subscriptions = [
@@ -32,7 +32,7 @@
                 Peerio.Dispatcher.onShowBigGreenButton(()=>this.setState({greenButtonIsVisible: true}))
             ];
         },
-        componentWillUnmount: function(){
+        componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         //--- RENDER
@@ -47,7 +47,6 @@
 
             return (
                 <div id="footer">
-
                     {greenButton}
                 </div>
             );

@@ -20,17 +20,17 @@
             var tab = routes[routes.length - 1].name;
             return (
                 <div id="tabbar">
-                    <Peerio.UI.TabBarButton text="Messages" active={tab === 'messages'}
+                    <Peerio.UI.TabBarButton text={t('messages')} active={tab === 'messages'}
                                             onActivate={this.transitionTo.bind(this, 'messages')}
                                             icon="forum"
                                             showBadge={Peerio.user.unreadState.conversations}/>
 
-                    <Peerio.UI.TabBarButton text="Files" active={tab === 'files'}
+                    <Peerio.UI.TabBarButton text={t('files')} active={tab === 'files'}
                                             onActivate={this.transitionTo.bind(this, 'files')}
                                             icon="insert_drive_file"
                                             showBadge={Peerio.user.unreadState.files}/>
 
-                    <Peerio.UI.TabBarButton text="Contacts" active={tab === 'contacts'}
+                    <Peerio.UI.TabBarButton text={t('contacts')} active={tab === 'contacts'}
                                             onActivate={this.transitionTo.bind(this, 'contacts')}
                                             icon="people"
                                             showBadge={Peerio.user.unreadState.contacts}/>

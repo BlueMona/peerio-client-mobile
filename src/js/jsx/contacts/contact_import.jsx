@@ -34,7 +34,7 @@
             }
         },
         deviceImportFailure: function () {
-            Peerio.Action.showAlert({text: 'Please enable Peerio to access your device contacts to use the contact import feature.'});
+            Peerio.Action.showAlert({text: t('contact_permissionMissing')});
         },
         deviceImportSuccess: function (contacts) {
             contacts = Peerio.Util.filterDeviceContacts(contacts);
@@ -144,18 +144,18 @@
             if (this.state.availableContacts.length === 0) {
                 return (
                     <div className="content without-tab-bar">
-                        <div className="headline">Contact Import</div>
+                        <div className="headline">{t('contact_import')}</div>
                         <div className="peerio-loader"></div>
                     </div>);
             }
 
             return (<div className="content without-tab-bar">
-                <div className="headline">Contact Import</div>
-                <div className="headline-divider">Your Friends on Peerio</div>
+                <div className="headline">{t('contact_import')}</div>
+                <div className="headline-divider">{t('contact_importFriends')}</div>
                 <ul>
                     {contactRequestList}
                 </ul>
-                <div className="headline-divider">Invite Your Contacts to Peerio</div>
+                <div className="headline-divider">{t('contact_importInvite')}</div>
                 <ul className="flex-list">
                     {contactInviteList}
                 </ul>

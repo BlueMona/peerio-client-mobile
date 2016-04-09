@@ -34,33 +34,34 @@
 
             return (
                 <div className="content without-tab-bar without-footer">
-                  <div className="headline">{c.subject}</div>
-                  <div className="subhead flex-row">
+                    <div className="headline">{c.subject}</div>
+                    <div className="subhead flex-row">
                     <span className="icon-with-label"><i
-                      className="material-icons">event</i> {c.createdMoment.format('L')}</span>
+                        className="material-icons">event</i> {c.createdMoment.format('L')}</span>
                     <span className="icon-with-label"><i
-                      className="material-icons">mode_comment</i> {c.messageCount}</span>
+                        className="material-icons">mode_comment</i> {c.messageCount}</span>
                     <span className="icon-with-label"><i
-                      className="material-icons">insert_drive_file</i> {c.fileIDs.length}</span>
+                        className="material-icons">insert_drive_file</i> {c.fileIDs.length}</span>
                     <span className="icon-with-label"><i
-                      className="material-icons">people</i> {c.participants.length + c.exParticipantsArr.length}</span>
-                  </div>
+                        className="material-icons">people</i> {c.participants.length + c.exParticipantsArr.length}</span>
+                    </div>
 
 
-                  <ul className="compact-list-view">
-                    <li>
-                      <label>Participants</label>
-                    </li>
-                    {c.participants.map(u => <ContactNode username={u} key={u}/>)}
-                    {c.exParticipantsArr.map(u => <ContactNode username={u} leftAt={c.exParticipants[u].moment} key={u}/>) }
-                  </ul>
+                    <ul className="compact-list-view">
+                        <li>
+                            <label>{t('participants')}</label>
+                        </li>
+                        {c.participants.map(u => <ContactNode username={u} key={u}/>)}
+                        {c.exParticipantsArr.map(u => <ContactNode username={u} leftAt={c.exParticipants[u].moment}
+                                                                   key={u}/>) }
+                    </ul>
 
 
                     { c.fileIDs.length ? (
-                    <ul className="compact-list-view">
-                      <li><label>Shared Files</label></li>
-                      { c.fileIDs.map(f => <FileNode id={f} key={f}/>)}
-                    </ul> ) : null }
+                        <ul className="compact-list-view">
+                            <li><label>{t('sharedFiles')}</label></li>
+                            { c.fileIDs.map(f => <FileNode id={f} key={f}/>)}
+                        </ul> ) : null }
                 </div>
             );
         }
@@ -82,13 +83,13 @@
 
             return (
                 <Peerio.UI.Tappable onTap={this.openFileView.bind(this, f.shortID)} element="li" className="list-item">
-                        <i className={'file-type fa fa-' + Peerio.Helpers.getFileIconByName(f.name)}></i>
-                        <div className="list-item-content txt-sm">
-                            <span>{f.name}</span>
-                            <div className="list-item-description">
-                                Shared by <em>{f.sender || f.creator}</em> &bull; {f.moment.format('L')}
-                            </div>
+                    <i className={'file-type fa fa-' + Peerio.Helpers.getFileIconByName(f.name)}></i>
+                    <div className="list-item-content txt-sm">
+                        <span>{f.name}</span>
+                        <div className="list-item-description">
+                            {t('sharedBy')} <em>{f.sender || f.creator}</em> &bull; {f.moment.format('L')}
                         </div>
+                    </div>
                 </Peerio.UI.Tappable>
             );
         }
@@ -103,19 +104,20 @@
         render: function () {
             var eventInfo = false;
             if (this.props.leftAt) {
-                eventInfo = <div className="list-item-description">left : {this.props.leftAt.calendar()}</div>;
+                eventInfo = <div className="list-item-description">{t('conversation_participantLeftAt')} : {this.props.leftAt.calendar()}</div>;
             }
             return (
-                <Peerio.UI.Tappable onTap={this.openContactView.bind(this, this.props.username)} element="li" className="contact list-item">
+                <Peerio.UI.Tappable onTap={this.openContactView.bind(this, this.props.username)} element="li"
+                                    className="contact list-item">
 
-                        <Peerio.UI.Avatar username={this.props.username}/>
+                    <Peerio.UI.Avatar username={this.props.username}/>
 
-                        <div className="list-item-content">
+                    <div className="list-item-content">
                             <span
                                 className={this.props.leftAt ? 'text-crossout':''}>{Peerio.user.contacts.getPropValByKey(this.props.username, 'fullName')}
                                 ({this.props.username})</span>
-                            {eventInfo}
-                        </div>
+                        {eventInfo}
+                    </div>
 
                 </Peerio.UI.Tappable>
 
