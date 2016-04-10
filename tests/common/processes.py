@@ -13,7 +13,7 @@ def startAppium():
     while True:
         line = appiumProcess.stdout.readline()
         if line != '':
-            print line
+            print line.strip()
         if "listener started" in line:
             return True
 

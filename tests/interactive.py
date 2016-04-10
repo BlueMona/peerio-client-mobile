@@ -9,10 +9,10 @@ from common.helper import *
 from common.processes import *
 
 restartAppium()
-sleep(5)
 test_connect()
 switch_to_webview()
-tap_by_css('.saved-login')
+tap_by_css('.btn-safe')
+# tap_by_css('.saved-login')
 # driver = test_connect()
 # context_name = "WEBVIEW_1"
 # driver.switch_to.context(context_name)
