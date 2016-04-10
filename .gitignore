@@ -6,6 +6,7 @@
 *.sublime-project
 *.sublime-workspace
 *.pyc
+tags
 
 # build release apk output
 /bin
