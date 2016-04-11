@@ -87,7 +87,7 @@
                         <li className="subhead">Language</li>
                         <li>
                           <select id="language-select" className="select-input"
-                                  onChange={this.changeLocale} style={{color: 'white',height: '45px'}}>
+                                  onChange={this.changeLocale}>
                               {
                                   Peerio.Config.locales.map(l => <option value={l.code}>{l.name}</option>)
                               }
