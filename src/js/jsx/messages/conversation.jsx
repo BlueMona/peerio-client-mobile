@@ -163,7 +163,7 @@
             }
             else {
                 // normal case
-                this.setState({placeholderText: 'message_typePrompt'});
+                this.setState({placeholderText: t('message_typePrompt')});
             }
         },
 

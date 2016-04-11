@@ -70,7 +70,7 @@
                     inputType: 'numeric',
                     autoSubmitLength: 6,
                     minLength: 6,
-                    cancelText: 'Sign out'
+                    cancelText: t('signOut')
                 })
                 .then((code) => {
                     L.info('2fa resend requested');
