@@ -74,21 +74,20 @@ def test_connect_android():
     global __tapOperator
     __tapOperator = tap_by_element_android
 
+def wait_for(timeout, func):
+    for i in xrange(timeout):
+        try:
+            return func()
+        except:
+            print '.'
+            time.sleep(1)
+    raise Exception('timeout waiting for: %s' % func)
+
 def wait_for_view_origin(driver, xpath):
     global __viewOrigin
     print 'Waiting for webview'
-    viewElement = None
-    for i in xrange(30):
-        try:
-            viewElement = driver().find_element_by_xpath(xpath)
-            break
-        except:
-            print '.'
-        time.sleep(1)
-    if(viewElement != None):
-        __viewOrigin = viewElement.location
-    else:
-        raise Exception("could not find webview")
+    viewElement = wait_for(30, lambda: driver().find_element_by_xpath(xpath))
+    __viewOrigin = viewElement.location
     print '...success'
 
 def device_pixel_ratio():
@@ -118,6 +117,12 @@ def find_by_css(selector):
 
 def find_by_id(id):
     return find_by_css("[id=%s]" % id)
+
+def wait_find_by_id(id):
+    return wait_for(wait_timeout, lambda: find_by_id(id))
+
+def wait_find_by_css(selector):
+    return wait_for(wait_timeout, lambda: find_by_selector(selector))
 
 def tap_by_element_android(el):
     x = el.location['x'] + el.size['width']/2

@@ -28,7 +28,8 @@ def restartAppium():
 def startChromedriver():
     global chromedriverProcess
     atexit.register(killChromedriver)
-    chromedriverProcess = subprocess.Popen(['../tools/chromedriver'], stdout=subprocess.PIPE)
+    chromedriverPath = os.path.join(os.path.dirname(__file__), '../../tools/chromedriver')
+    chromedriverProcess = subprocess.Popen([chromedriverPath], stdout=subprocess.PIPE)
     while True:
         line = chromedriverProcess.stdout.readline()
         if line != '':

@@ -19,9 +19,7 @@ class SimpleLogin(unittest.TestCase):
         text_by_id('username', 'testlogin')
         text_by_id('password', 'winding skater rio arrives juicy')
         tap_by_css('.btn-safe')
-        sleep(15)
-        assert find_by_id('vscroll').is_displayed()
-        pass
+        assert wait_find_by_id('vscroll').is_displayed()
 
 if __name__ == '__main__':
     restartAppium()

@@ -14,6 +14,8 @@ android_appname = 'android-x86-debug.apk'
 android_package = 'com.peerio'
 android_activity = 'MainActivity'
 
+wait_timeout = 30
+
 def ios_path():
     return os.path.abspath(
         os.path.join(os.path.dirname(__file__),
