@@ -29,9 +29,9 @@
 
                     {address.value}
                 </Peerio.UI.Tappable>
-
+                {/* This is an icon, don't translate. */}
                 <Peerio.UI.Tappable element="i" className="material-icons"
-                                    onTap={this.removeAddress.bind(this, address.value)}>{t('button_delete')}</Peerio.UI.Tappable>
+                                    onTap={this.removeAddress.bind(this, address.value)}>delete</Peerio.UI.Tappable>
 
             </div>;
 
