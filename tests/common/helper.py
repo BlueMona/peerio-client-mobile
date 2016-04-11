@@ -1,59 +1,146 @@
-from appium import webdriver
+import appium
+import selenium
+import time
 from settings.settings import *
 
-global __driver
+global __appium_driver
+global __chromium_driver
 global __viewOrigin
+global __devicePixelRatio
+global __findOperator
+global __tapOperator
 
-def set_driver(driver):
-    global __driver
-    __driver = driver
+def set_appium_driver(driver):
+    global __appium_driver
+    __appium_driver = driver
+    return driver
+
+def quit_appium_driver():
+    global __appium_driver
+    __appium_driver.quit()
+
+def appium_driver():
+    global __appium_driver
+    return __appium_driver
+
+def set_chromium_driver(driver):
+    global __chromium_driver
+    __chromium_driver = driver
+    return driver
+
+def quit_chromium_driver():
+    global __chromium_driver
+    __chromium_driver.quit()
+
+def chromium_driver():
+    global __chromium_driver
+    return __chromium_driver
 
 def quit_driver():
-    global __driver
-    __driver.quit()
+    try:
+        quit_appium_driver()
+    except:
+        print
+    try:
+        quit_chromium_driver()
+    except:
+        print
 
-def driver():
-    global __driver
-    return __driver
 
-def create_webdriver(executor, capabilities):
-    set_driver(webdriver.Remote(command_executor=executor,
+def create_appium_driver(executor, capabilities):
+    return set_appium_driver(appium.webdriver.Remote(command_executor=executor,
                             desired_capabilities=capabilities))
-def test_connect():
-    return create_webdriver(executor, ios_92(ios_basic()))
+
+def create_chromium_driver(executor, capabilities):
+    return set_chromium_driver(selenium.webdriver.Remote(command_executor=executor,
+                            desired_capabilities=capabilities))
+
+def test_connect_ios():
+    create_appium_driver(executor, ios_92(ios_basic()))
+    wait_for_view_origin(appium_driver, '//UIAWebView')
+    global __devicePixelRatio
+    __devicePixelRatio = 1
+    print "View origin: %s, device pixel ratio: %d" % (view_origin(), device_pixel_ratio())
+
+def test_connect_android():
+    create_appium_driver(executor, android_600(android_basic()))
+    create_chromium_driver(chromium_executor, chromium_basic())
+    wait_for_view_origin(appium_driver, '//android.webkit.WebView')
+    global __devicePixelRatio
+    __devicePixelRatio = chromium_driver().execute_script('return window.devicePixelRatio')
+    print "View origin: %s, device pixel ratio: %d" % (view_origin(), device_pixel_ratio())
+    global __findOperator
+    __findOperator = find_by_css_android
+    global __tapOperator
+    __tapOperator = tap_by_element_android
+
+def wait_for_view_origin(driver, xpath):
+    global __viewOrigin
+    print 'Waiting for webview'
+    viewElement = None
+    for i in xrange(30):
+        try:
+            viewElement = driver().find_element_by_xpath(xpath)
+            break
+        except:
+            print '.'
+        time.sleep(1)
+    if(viewElement != None):
+        __viewOrigin = viewElement.location
+    else:
+        raise Exception("could not find webview")
+    print '...success'
+
+def device_pixel_ratio():
+    global __devicePixelRatio
+    return __devicePixelRatio
 
 def view_origin():
     global __viewOrigin
-    try:
-        __viewOrigin
-    except:
-        __viewOrigin = driver().find_element_by_xpath("//UIAWebView").location
     return __viewOrigin
 
 def switch_to_webview():
-    context_name = "WEBVIEW_1"
-    driver().switch_to.context(context_name)
+    appium_driver().switch_to.context("WEBVIEW_1")
 
 def switch_to_native():
-    global driver
-    context_name = "NATIVE_APP"
-    driver().switch_to.context(context_name)
+    appium_driver().switch_to.context("NATIVE_APP")
+
+def find_by_css_android(selector):
+    return chromium_driver().find_element_by_css_selector(selector)
+
+def find_by_css_ios(selector):
+    switch_to_webview()
+    return appium_driver().find_element_by_css_selector(selector)
 
 def find_by_css(selector):
-    switch_to_webview()
-    return driver().find_element_by_css_selector(selector)
+    global __findOperator
+    return __findOperator(selector)
 
 def find_by_id(id):
     return find_by_css("[id=%s]" % id)
 
-def tap_by_element(el):
+def tap_by_element_android(el):
+    x = el.location['x'] + el.size['width']/2
+    y = el.location['y'] + el.size['height']/2
+    x *= device_pixel_ratio()
+    y *= device_pixel_ratio()
+    vo = view_origin()
+    x += vo['x']
+    y += vo['y']
+    appium_driver().tap([(x, y)])
+
+def tap_by_element_ios(el):
     x = el.location['x'] + el.size['width']/2
     y = el.location['y'] + el.size['height']/2
     switch_to_native()
     vo = view_origin()
     x += vo['x']
     y += vo['y']
-    driver().tap([(x, y)])
+    appium_driver().tap([(x, y)])
+
+def tap_by_element(el):
+    global __tapOperator
+    __tapOperator(el)
 
 def tap_by_css(selector):
     el = find_by_css(selector)

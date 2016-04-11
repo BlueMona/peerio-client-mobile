@@ -19,14 +19,14 @@ class SimpleLogin(unittest.TestCase):
         text_by_id('username', 'testlogin')
         text_by_id('password', 'winding skater rio arrives juicy')
         tap_by_css('.btn-safe')
-        sleep(5)
+        sleep(15)
         assert find_by_id('vscroll').is_displayed()
         pass
 
 if __name__ == '__main__':
     restartAppium()
-    test_connect()
-    switch_to_webview()
+    restartChromedriver()
+    test_connect_android()
     suite = unittest.TestLoader().loadTestsFromTestCase(SimpleLogin)
     unittest.TextTestRunner(verbosity=2).run(suite)
     quit_driver()
