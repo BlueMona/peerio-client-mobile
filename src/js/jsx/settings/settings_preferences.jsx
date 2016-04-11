@@ -74,10 +74,6 @@
             });
         },
 
-        changeLocale: function (event) {
-            Peerio.Translator.loadLocale(event.target.value);
-        },
-
         render: function () {
             return (
                 <div className="content without-tab-bar without-footer">
@@ -86,12 +82,7 @@
                     <ul>
                         <li className="subhead">Language</li>
                         <li>
-                          <select id="language-select" className="select-input"
-                                  onChange={this.changeLocale}>
-                              {
-                                  Peerio.Config.locales.map(l => <option value={l.code}>{l.name}</option>)
-                              }
-                          </select>
+                          <Peerio.UI.LanguageSelect className="some-class-name"></Peerio.UI.LanguageSelect>
                         </li>
 
                         <li className="subhead">{t('notifications')}</li>
