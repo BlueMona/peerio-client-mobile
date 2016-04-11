@@ -61,6 +61,10 @@ def test_connect_ios():
     global __devicePixelRatio
     __devicePixelRatio = 1
     print "View origin: %s, device pixel ratio: %d" % (view_origin(), device_pixel_ratio())
+    global __findOperator
+    __findOperator = find_by_css_ios
+    global __tapOperator
+    __tapOperator = tap_by_element_ios
 
 def test_connect_android():
     create_appium_driver(executor, android_600(android_basic()))
