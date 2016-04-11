@@ -74,12 +74,26 @@
             });
         },
 
+        changeLocale: function (event) {
+            Peerio.Translator.loadLocale(event.target.value);
+        },
+
         render: function () {
             return (
                 <div className="content without-tab-bar without-footer">
                     <div className="headline">{t('preferences')}</div>
 
                     <ul>
+                        <li className="subhead">Language</li>
+                        <li>
+                          <select id="language-select" className="select-input"
+                                  onChange={this.changeLocale} style={{color: 'white',height: '45px'}}>
+                              {
+                                  Peerio.Config.locales.map(l => <option value={l.code}>{l.name}</option>)
+                              }
+                          </select>
+                        </li>
+
                         <li className="subhead">{t('notifications')}</li>
                         <Peerio.UI.Tappable key='notify-new-message'
                                             element="li"

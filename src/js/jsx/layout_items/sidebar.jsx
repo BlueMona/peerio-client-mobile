@@ -51,9 +51,7 @@
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
-        changeLocale: function (event) {
-            Peerio.Translator.loadLocale(event.target.value);
-        },
+
         //--- RENDER
         render: function () {
             var className = this.state.open ? 'open' : '';
@@ -120,12 +118,6 @@
                                         <i className="fa fa-certificate"></i> {t('redeemCoupon')}
                                     </Peerio.UI.Tappable>
                                 </ul>
-                                <select id="language-select" className="select-input col-8"
-                                        onChange={this.changeLocale} style={{color: 'white',height: '45px'}}>
-                                    {
-                                        Peerio.Config.locales.map(l => <option value={l.code}>{l.name}</option>)
-                                    }
-                                </select>
                                 <div className="flex-grow-1"></div>
                                 { /* signout */}
                                 <ul>
