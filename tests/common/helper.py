@@ -126,7 +126,7 @@ def wait_find_by_id(id):
     return wait_for(wait_timeout, lambda: find_by_id(id))
 
 def wait_find_by_css(selector):
-    return wait_for(wait_timeout, lambda: find_by_selector(selector))
+    return wait_for(wait_timeout, lambda: find_by_css(selector))
 
 def tap_by_element_android(el):
     x = el.location['x'] + el.size['width']/2
