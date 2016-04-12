@@ -6,12 +6,14 @@
 
   .input-select {
     @extend .flex-shrink-0;
+
     margin: $margin-small;
     width: auto;
 
     select {
       color: $white-100;
     }
+
     i {
       color: $white-70;
     }
@@ -57,7 +59,7 @@
   margin-bottom: $margin-base;
 
   // text or passphrase
-  .input-group{
+  .input-group {
     // stying for inputs with controls.
     // TODO: move to input group styling.
     input {
@@ -73,6 +75,7 @@
       input {
         border-radius: $radius-left;
       }
+
       i {
         background-color: color(p-blue-light-5);
         width: 48px;
@@ -85,24 +88,26 @@
       }
     }
   }
+
   input {
-    width: 100%;
-    padding: 0 $padding-small;
     background: transparent;
     border: 0;
     border-radius: 0;
     font-weight: 100;
+    padding: 0 $padding-small;
     transition: all $speed-normal ease;
+    width: 100%;
 
     &:focus {
-      outline: 0;
       border: 0;
+      outline: 0;
     }
   }
+
   label {
+    color: $white-70;
     display: block;
     font-size: 14px;
     font-variant: small-caps;
-    color: $white-70;
   }
 }
