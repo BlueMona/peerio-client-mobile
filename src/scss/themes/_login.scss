@@ -4,11 +4,17 @@
   color: 4white-100;
   overflow: hidden;
 
-  .select-input {
-    border: 0;
-    background-color: color(p-blue-light-10);
-    height: 30px;
-    padding: 5px;
+  .input-select {
+    @extend .flex-shrink-0;
+    margin: $margin-small;
+    width: auto;
+
+    select {
+      color: $white-100;
+    }
+    i {
+      color: $white-70;
+    }
   }
 }
 
