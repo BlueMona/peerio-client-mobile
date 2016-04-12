@@ -354,15 +354,7 @@
                                         {t('login_signUpButton')}
                                     </Peerio.UI.Tappable>)}
 
-                                    <div className="input-group">
-                                        <label className="info-label col-4" htmlFor="language-select">Language:</label>
-                                        <select id="language-select" className="select-input col-8"
-                                                onChange={this.changeLocale} style={{color: 'white',height: '45px'}}>
-                                            {
-                                                Peerio.Config.locales.map(l => <option value={l.code}>{l.name}</option>)
-                                            }
-                                        </select>
-                                    </div>
+                                    <Peerio.UI.LanguageSelect />
 
                                 </div>
                             </form>
