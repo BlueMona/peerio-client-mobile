@@ -42,7 +42,8 @@ label {
 }
 
 input,
-select {
+select,
+.input-select {
   background: rgba(0, 0, 0, .06);
   border: 2px solid rgba(0, 0, 0, 0);
   border-radius: $radius-default;
@@ -52,13 +53,21 @@ select {
   padding: 0 4px;
   transition: $speed-normal;
   width: 100%;
+}
 
+input,
+.input-select {
   &:focus {
     border: 2px solid rgba(0, 0, 0, .08);
   }
 }
 
+.input-select {
+  @extend .flex-row;
+}
+
 select {
+  background: rgba(0, 0, 0, 0);
   -webkit-appearance: none;
   border-radius: 0;
 }

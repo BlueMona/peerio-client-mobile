@@ -9,10 +9,10 @@
         getInitialState: function () {
             return {greenButtonIsVisible: true};
         },
-        componentWillMount: function () {
+        buildActions: function(){
             // route name: { button text, button action }
             // default action is Peerio.Action.bigGreenButton
-            this.mainButtonActions = {
+            this.setState({mainButtonActions : {
                 messages: {
                     name: t('button_composeMessage'),
                     action: this.transitionTo.bind(this, 'new_message'),
@@ -25,11 +25,15 @@
                 add_contact_search: {name: t('button_addSelectedContact'), icon: 'person_add'},
                 new_message: {name: t('button_send'), icon: 'send'},
                 conversation: {name: t('button_send'), icon: 'send'}
-            };
+            }});
+        },
+        componentWillMount: function () {
+            this.buildActions();
 
             this.subscriptions = [
                 Peerio.Dispatcher.onHideBigGreenButton(()=>this.setState({greenButtonIsVisible: false})),
-                Peerio.Dispatcher.onShowBigGreenButton(()=>this.setState({greenButtonIsVisible: true}))
+                Peerio.Dispatcher.onShowBigGreenButton(()=>this.setState({greenButtonIsVisible: true})),
+                Peerio.Dispatcher.onLocaleChanged(this.buildActions)
             ];
         },
         componentWillUnmount: function () {
@@ -37,7 +41,7 @@
         },
         //--- RENDER
         render: function () {
-            var greenButton = this.state.greenButtonIsVisible ? this.mainButtonActions[this.getRouteName()] : null;
+            var greenButton = this.state.greenButtonIsVisible ? this.state.mainButtonActions[this.getRouteName()] : null;
             if (greenButton)
                 greenButton = (
                     <Peerio.UI.Tappable id="greenButton" element="div" className="btn-global-action"

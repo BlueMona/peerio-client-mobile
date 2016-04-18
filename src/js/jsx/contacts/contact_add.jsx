@@ -38,7 +38,7 @@ Peerio.UI.AddContact = React.createClass({
     </Peerio.UI.Tappable>;
     return  (<div className="content without-tab-bar without-footer">
       <div className="flex-col flex-justify-start">
-        <div className="headline">{t('contact_addTitle')}</div>
+        <div className="headline">{t('addContact')}</div>
         <div  className="input-group">
           <label htmlFor="search">{t('contact_searchTitle')}</label>
             <div className="flex-row flex-align-center">

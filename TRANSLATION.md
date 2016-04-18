@@ -4,7 +4,7 @@ Peerio client apps implement translations with Peerio.Translator library
 
 ### Translation workflow
 
-1. New strings are added to 'dev' branch of peerio-copy/clients.json
+1. New strings are added to 'dev' branch of peerio-copy/client.json
 2. When ready, dev branch is getting merged to master
 3. Github hook triggers Peerio service which uploads updated file to transifex
 4. Strings get translated on transifex site
@@ -31,7 +31,7 @@ bower link peerio-copy
 
 ___updating files___
 
-1. `bower-installer` will copy latest `clients_en_.json` from linked peerio-copy package to peerio-client-mobile/locales folder
+1. `bower-installer` will copy latest `client_en_.json` from linked peerio-copy package to peerio-client-mobile/locales folder
 2. `gulp localize` will pull latest translations file from transifex (except english)
 3. `gulp compile` will copy all translations from /locales folder to /www/locales
 

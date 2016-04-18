@@ -254,6 +254,9 @@
             this.setState({savedLogin: null});
             Peerio.Auth.clearSavedLogin();
         },
+        changeLocale: function (event) {
+            Peerio.Translator.loadLocale(event.target.value);
+        },
         //--- RENDER
         render: function () {
             var eyeIcon = this.state.passphraseVisible ? 'visibility_off' : 'visibility';
@@ -350,14 +353,10 @@
                                                                onTap={this.transitionTo.bind(this,'signup')}>
                                         {t('login_signUpButton')}
                                     </Peerio.UI.Tappable>)}
+
+                                    <Peerio.UI.LanguageSelect />
+
                                 </div>
-                                {/*
-                                 <div className="input-group">
-                                 <label className="info-label col-4" htmlFor="language-select">Language:</label>
-                                 <select id="language-select" className="select-input col-8">
-                                 <option value="">english</option>
-                                 </select>
-                                 </div>*/}
                             </form>
                         </div>
                     </div>

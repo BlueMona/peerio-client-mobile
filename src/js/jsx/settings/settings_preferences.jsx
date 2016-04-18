@@ -80,6 +80,11 @@
                     <div className="headline">{t('preferences')}</div>
 
                     <ul>
+                        <li className="subhead">Language</li>
+                        <li>
+                          <Peerio.UI.LanguageSelect className="some-class-name"></Peerio.UI.LanguageSelect>
+                        </li>
+
                         <li className="subhead">{t('notifications')}</li>
                         <Peerio.UI.Tappable key='notify-new-message'
                                             element="li"

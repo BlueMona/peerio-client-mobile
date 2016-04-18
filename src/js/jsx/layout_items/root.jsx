@@ -46,6 +46,8 @@
             else if (Peerio.runtime.updateAvailable) this.notifyOnUpdate();
 
             Peerio.Dispatcher.onUpdateAvailable(this.notifyOnUpdate);
+
+            Peerio.Dispatcher.onLocaleChanged(()=> this.forceUpdate());
             // no need to unsubscribe, this is the root component
         },
         notifyOnUpdate: function (expired) {
@@ -68,7 +70,7 @@
                     inputType: 'numeric',
                     autoSubmitLength: 6,
                     minLength: 6,
-                    cancelText: 'Sign out'
+                    cancelText: t('signOut')
                 })
                 .then((code) => {
                     L.info('2fa resend requested');

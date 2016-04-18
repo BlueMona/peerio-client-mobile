@@ -51,6 +51,7 @@
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
+
         //--- RENDER
         render: function () {
             var className = this.state.open ? 'open' : '';

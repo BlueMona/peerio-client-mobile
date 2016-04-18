@@ -31,8 +31,8 @@
             if (Peerio.user.files) {
                 Peerio.user.files.arr.forEach(function (item) {
                     nodes.push(
-                        <Peerio.UI.FileItem 
-                            className="list-item" 
+                        <Peerio.UI.FileItem
+                            className="list-item"
                             key={item.shortID}
                             item={item}
                             onTap={this.openFileView.bind(this, item.shortID)}>
@@ -68,9 +68,9 @@
                         <div className="content-intro">
                             <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
 
-                            <div className="headline">Peerio File Storage!</div>
+                            <div className="headline">{t('file_listEmptyTitle')}</div>
 
-                            <p>Peerio lets you store files in the cloud securely. Try it out by uploading a file.</p>
+                            <p>{t('file_listEmptyText')}</p>
                             <img style={{maxWidth:'100px', display:'block', margin:'0 auto'}}
                                  src="media/img/home-bigfilesok.png"/>
                         </div>
@@ -108,8 +108,8 @@
         showDestroyDialog: function () {
             var destroyFileAfterAnimate = this.destroyFileAfterAnimate;
             Peerio.Action.showConfirm({
-                headline: 'Remove this file?',
-                text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+                headline: t('file_removeConfirmTitle'),
+                text: t('file_removeConfirmText'),
                 onAccept: destroyFileAfterAnimate
             });
         },
