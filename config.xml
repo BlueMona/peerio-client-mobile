@@ -118,6 +118,7 @@
     <preference name="xwalkMode" value="embedded"/>
     <preference name="xwalkMultipleApk" value="true"/>
     <plugin name="com.peerio.cordova.plugin.insomnia" spec="4.2.1"/>
-    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.4">
+    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.5">
+        <variable name="WKWEBVIEW_SERVER_PORT" value="52341"/>
     </plugin>
 </widget>
