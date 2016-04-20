@@ -364,7 +364,7 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-     * Get country code (carrer info, then fallback to preferred language,
+     * Get country code (carrier info, then fallback to preferred language,
      * then fallback to locale
      */
     api.getCountryCode = function () {
@@ -380,6 +380,13 @@ Peerio.NativeAPI.init = function () {
     api.isForcefulFingerprintEnabled = function () {
         return api.getCountryCode()
             .then((data) => data == 'us');
+    };
+
+    api.getPreferredLanguage= function(){
+        if(navigator.language){
+            return navigator.language.split('-')[0].toLowerCase();
+        }
+
     };
 
 
