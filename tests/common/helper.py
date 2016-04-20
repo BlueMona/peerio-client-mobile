@@ -121,9 +121,6 @@ def find_by_css(selector):
 
 def find_by_id(id):
     return find_by_css("[id=%s]" % id)
-    
-def find_by_reactid(id):
-    return find_by_css("[data-reactid=\"%s\"]" % id)
 
 def wait_find_by_id(id):
     return wait_for(wait_timeout, lambda: find_by_id(id))
@@ -160,10 +157,6 @@ def tap_by_css(selector):
 
 def tap_by_id(id):
     el = find_by_id(id)
-    tap_by_element(el)
-
-def tap_by_reactid(id):
-    el = find_by_reactid(id)
     tap_by_element(el)
     
 def text_by_element(el, text):

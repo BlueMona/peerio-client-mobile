@@ -13,7 +13,7 @@ from common.processes import *
 class SimpleLogin(unittest.TestCase):
     def test_loginPhrase(self):
         try:
-            tap_by_reactid('.0.0.1.0.2.1.0.1.0.6.0.0')
+            tap_by_css('.pin-pad > div:nth-child(7) > div:nth-child(1)')
         except NoSuchElementException:
             print 'skipping saved pin'
         try:
@@ -26,7 +26,7 @@ class SimpleLogin(unittest.TestCase):
         assert wait_find_by_id('vscroll').is_displayed()
     def test_setPin(self):
         tap_by_id('sidemenu-toggle')
-        tap_by_reactid('.0.0.1.0.1.0.0') #taps first button in menu
+        tap_by_css('.sidebar-menu > :nth-child(1) > li:nth-child(1)') #taps first button in menu
         try:
             tap_by_css('.btn-danger')
             tap_by_css('.btn-safe')
