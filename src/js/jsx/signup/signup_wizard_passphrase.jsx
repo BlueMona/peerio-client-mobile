@@ -37,7 +37,7 @@
         render: function () {
             return (
                 <fieldset key={'signup-step-1'}>
-                    <div className="headline">{t('signup_passphraseTitle')}</div>
+                    <div className="headline">{t('yourPassphrase')}</div>
                     <Peerio.UI.TrackSubState name="passphrase"/>
 
                     <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>segment</strong>})}</p>

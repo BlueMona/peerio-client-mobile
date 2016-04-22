@@ -41,7 +41,7 @@
     "colors": "*",
     "xml2js": "*",
     "sync-exec": "*",
-    "Q": "*"
+    "q": "*"
   },
   "repository": {
     "type": "git",

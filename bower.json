@@ -32,11 +32,11 @@
       "/font-awesome\\.css/": "{name}/css",
       "/fontawesome-webfont.*/": "{name}/fonts",
       "/peerio-client-api/dist/dict.*txt/": "{name}",
-      "/peerio-copy/clients_en.json/": "../../locales"
+      "/peerio-copy/client_en.json/": "../../locales"
     },
     "sources": {
       "peerio-client-api": "bower_components/peerio-client-api/dist/**",
-      "peerio-copy": { "mapping": {"bower_components/peerio-copy/clients_en.json": "../en.json"}},
+      "peerio-copy": { "mapping": {"bower_components/peerio-copy/client_en.json": "../en.json"}},
       "react-router": "bower_components/react-router/build/umd/ReactRouter.js",
       "font-awesome": [
         "bower_components/font-awesome/css/font-awesome.css",

@@ -30,7 +30,7 @@
         render: function () {
             var c = this.state.conversation;
 
-            if (!c) return <Peerio.UI.FullViewSpinner/>;
+            if (!c) return null;
 
             return (
                 <div className="content without-tab-bar without-footer">

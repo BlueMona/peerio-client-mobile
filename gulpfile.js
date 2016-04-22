@@ -78,7 +78,7 @@ var paths = {
     jsx_postinit_inject: 'www/js/jsx-postinit/**/*.js',
     config_xml: 'config.xml',
     peerio_client_api: 'bower_components/peerio-client-api/dist/*.js',
-    peerio_copy: 'bower_components/peerio-copy/clients_en.json',
+    peerio_copy: 'bower_components/peerio-copy/client_en.json',
     bower_installer_dst: 'www/bower',
     static_src: ['*media/**/*', '*locales/*.json', 'extra/cordova.js'],
     static_dst: 'www/',
@@ -106,8 +106,6 @@ gulp.task('index', function () {
     var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
     var sourcesJsxPreInit = gulp.src(paths.jsx_preinit_inject, {read: false});
     var sourcesJsxPostInit = gulp.src(paths.jsx_postinit_inject, {read: false});
-    console.log('DON\'T FORGET TO SET PROVISIONING PROFILE TO ios team provisioning profile: com.peerio');
-    console.log('OTHERWISE PUSH NOTIFICATIONS WOULD NOT WORK');
     var result = target
         .pipe(inject(
             series(sourcesJs, sourcesJsxPreInit, sourcesJsx, sourcesJsxPostInit),
