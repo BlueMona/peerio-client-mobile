@@ -1,0 +1,43 @@
+{
+	"indent": {
+		"value": "    ",
+        "MultipleVariableDeclaration": 1
+	},
+	"plugins": [
+		"esformatter-jsx-seavan",
+		"esformatter-collapse-objects",
+		"esformatter-var-each"
+	],
+	"jsx": {
+		"formatJSXExpressions": true,
+		"JSXExpressionsSingleLine": true,
+		"formatJSX": true,
+		"attrsOnSameLineAsTag": false,
+		"maxAttrsOnTag": 1,
+		"firstAttributeOnSameLine": true,
+        "maxFirstAttributeSameLineLength": 30,
+		"spaceInJSXExpressionContainers": "",
+		"alignWithFirstAttribute": true,
+        "removeSpaceBeforeClosingJSX": true,
+		"htmlOptions": { 
+			"brace_style": "collapse",
+			"indent_char": " ",
+			"indent_size": 4,
+			"max_preserve_newlines": 10,
+			"preserve_newlines": true
+		}
+	},
+	"whiteSpace" : {
+		"before" : {
+			"FunctionName" : 1,
+			"FunctionExpressionOpeningBrace" : 1,
+			"FunctionExpressionClosingBrace" : 1
+		},
+		"after" : {
+			"FunctionReservedWord": 1,
+			"FunctionName" : 1,
+			"FunctionExpressionOpeningBrace" : 1,
+			"FunctionExpressionClosingBrace" : 1
+		}
+	}
+}

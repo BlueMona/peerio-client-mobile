@@ -41,7 +41,13 @@
     "colors": "*",
     "xml2js": "*",
     "sync-exec": "*",
-    "q": "*"
+    "q": "*",
+    "python-js": "*",
+    "websocket": "*",
+    "esformatter": "*",
+    "esformatter-jsx-seavan": "*",
+    "esformatter-collapse-objects": "*",
+    "esformatter-var-each": "*"
   },
   "repository": {
     "type": "git",

@@ -8,9 +8,9 @@ from settings.settings import *
 from common.helper import *
 from common.processes import *
 
-# restartAppium()
+restartAppium()
+restartChromedriver()
 test_connect_android()
-# switch_to_webview()
 # tap_by_css('.btn-safe')
 # tap_by_css('.saved-login')
 # driver = test_connect()

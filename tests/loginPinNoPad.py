@@ -21,7 +21,7 @@ class SimpleLogin(unittest.TestCase):
 if __name__ == '__main__':
     restartAppium()
     restartChromedriver()
-    test_connect_ios()
+    test_connect_android()
     suite = unittest.TestLoader().loadTestsFromTestCase(SimpleLogin)
     unittest.TextTestRunner(verbosity=2).run(suite)
     quit_driver()
