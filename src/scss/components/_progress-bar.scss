@@ -1,18 +1,5 @@
 @mixin progress-bar($height, $bgcolor, $activecolor, $bordercolor, $childClass) {
 
-  @mixin right-arrow($bordercolor) {
-    right: -$height;
-    top: 0;
-    border: solid transparent;
-    border-width: $height/2;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    z-index: 1;
-    border-left-color: $bordercolor;
-  }
-
   min-height: $height;
   width: 100%;
   display: flex;
@@ -29,7 +16,16 @@
 
     &.active:after,
     &.active:before{
-      @include right-arrow($bordercolor);
+      right: -$height;
+      top: 0;
+      border: solid transparent;
+      border-width: $height/2;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      z-index: 1;
+      border-left-color: $bordercolor;
     }
 
     &.active:after{
