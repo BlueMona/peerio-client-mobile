@@ -21,7 +21,6 @@ class SimpleLogin(unittest.TestCase):
         tap_by_css('.btn-safe')
         assert wait_find_by_id('vscroll').is_displayed()
 
-
 if __name__ == '__main__':
     restartAppium()
     restartChromedriver()

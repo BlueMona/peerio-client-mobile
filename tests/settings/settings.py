@@ -41,10 +41,17 @@ def ios_92(config):
         'platformName': 'iOS',
         'platform': 'iOS',
         'platformVersion': '9.2',
-        'deviceName': 'iPhone 6',
+        'deviceName': 'iPhone 6 Plus',
         'autoAcceptAlerts': True, # so that system dialogs are accepted
         'autoLaunch': False,
         'noReset': True
+    })
+    return config
+
+def ios_93(config):
+    config = ios_92(config.copy());
+    config.update({
+        'platformVersion': '9.3'
     })
     return config
 

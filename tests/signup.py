@@ -29,6 +29,8 @@ class Signup(unittest.TestCase):
         text_by_id('user_name', 't' + strftime("%Y%m%d%H%M%S"), True)
         text_by_id('user_first_name', 'tester')
         text_by_id('user_last_name', 'lastname')
+        tap_by_css('[for="user_last_name"]')
+        sleep(5)
         wait_find_by_css('.btn-safe')
         tap_by_css('.btn-safe')
 
@@ -44,7 +46,7 @@ class Signup(unittest.TestCase):
         print "done"
 
 if __name__ == '__main__':
-    # restartAppium()
-    # restartChromedriver()
+    restartAppium()
+    restartChromedriver()
     suite = unittest.TestLoader().loadTestsFromTestCase(Signup)
     unittest.TextTestRunner(verbosity=2).run(suite)
