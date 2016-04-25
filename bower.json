@@ -22,7 +22,8 @@
     "classnames": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
     "react-router": "~0.13.3",
-    "peerio-copy": "git@github.com:PeerioTechnologies/peerio-copy.git#dev"
+    "peerio-copy": "git@github.com:PeerioTechnologies/peerio-copy.git#dev",
+    "reconnectingWebsocket": "git@github.com:joewalnes/reconnecting-websocket.git"
   },
   "install": {
     "base": "www/bower",
@@ -52,7 +53,8 @@
         "bower_components/gsap/src/minified/plugins/scrolltoplugin.min.js"
       ],
       "jssha": "bower_components/jssha/src/sha256.js",
-      "classnames": "bower_components/classnames/index.js"
+      "classnames": "bower_components/classnames/index.js",
+      "reconnectingWebsocket": "bower_components/reconnectingWebsocket/reconnecting-websocket.js"
     }
   }
 }

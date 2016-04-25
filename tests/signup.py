@@ -33,7 +33,8 @@ class Signup(unittest.TestCase):
         tap_by_css('.btn-safe')
 
         # get the passphrase
-        phrase = wait_find_by_css('.txt-lrg').text
+        sleep(2)
+        phrase = get_text_by_css('.txt-lrg')
         tap_by_css('.btn-safe')
         wait_find_by_css('textarea')
         text_by_css('textarea', phrase)
@@ -43,7 +44,7 @@ class Signup(unittest.TestCase):
         print "done"
 
 if __name__ == '__main__':
-    restartAppium()
-    restartChromedriver()
+    # restartAppium()
+    # restartChromedriver()
     suite = unittest.TestLoader().loadTestsFromTestCase(Signup)
     unittest.TextTestRunner(verbosity=2).run(suite)
