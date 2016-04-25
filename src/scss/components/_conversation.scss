@@ -33,7 +33,7 @@ $avatar-size: 29px;
   user-select: initial;
   border-bottom: $border-dark;
   padding-bottom: 50px;
-  
+
   .item {
     width: 100%;
     padding: 0 $padding-base 0 $edge-distance;
@@ -198,11 +198,13 @@ $avatar-size: 29px;
     padding: 0 $padding-base;
 
   }
+
   .subject {
     @extend .text-overflow;
 
     margin-right: $margin-base;
   }
+
   .counter {
     @extend .flex-row;
 
@@ -216,8 +218,8 @@ $avatar-size: 29px;
 
   .info {
     height: 36px;
-    width: 36px;
     text-align: right;
+    width: 36px;
   }
 
   .participants {
