@@ -9,6 +9,8 @@ from time import strftime
 from settings.settings import *
 from common.helper import *
 import common.testcase
+import logging
+logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
 class Signup(common.testcase.TestCase):
     def test_01_signup(self):
@@ -22,7 +24,8 @@ class Signup(common.testcase.TestCase):
         # TODO: handle existing usernames
         # TODO: different usernames (random, etc)
         # TODO: username should work correctly in both slow and fast mode. Now only slow works
-        text_by_id('user_name', 't' + strftime("%Y%m%d%H%M%S"), True)
+        username = 't' + strftime("%Y%m%d%H%M%S")
+        text_by_id('user_name', username, True)
         text_by_id('user_first_name', 'tester')
         text_by_id('user_last_name', 'lastname')
         wait_find_by_css('.btn-safe')
@@ -36,6 +39,9 @@ class Signup(common.testcase.TestCase):
         wait_find_by_css('textarea')
         text_by_css('textarea', phrase)
         tap_by_css('.btn-safe')
+
+        logging.info(username)
+        logging.info(phrase)
 
     def test_02_terms(self):
         print "done"

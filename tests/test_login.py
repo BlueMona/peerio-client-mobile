@@ -60,8 +60,8 @@ class Login(common.testcase.TestCase):
             tap_by_css('.saved-login')
         except NoSuchElementException:
             print 'skipping saved login'
-        text_by_id('username', 'seavan15')
-        text_by_id('password', 'blares envelope sneezes martha afar')
+        text_by_id('username', 't20160426200617')
+        text_by_id('password', 'require opinions ants heather missile')
         tap_by_css('.btn-safe')
         assert wait_find_by_id('vscroll') != None
 

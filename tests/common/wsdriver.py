@@ -7,9 +7,11 @@ from abstractdriver import AbstractDriver
 import selenium
 
 class BrowserDriver(AbstractDriver):
-    def __init__(self):
+    def __init__(self, reload=False):
         print "opening connection to automation server"
         self.wait_for(5, self.connect, "automation server")
+        if reload:
+            self.reload()
 
     def sendsocket(self, message):
         if not self.ws.connected:

@@ -10,6 +10,7 @@ from iosdriver import IosDriver
 from iosdriver import IosDriverFast
 
 global driver
+global __platform
 
 __defaultTimeout = 30
 __defaultAnimationTimeout = 5
@@ -19,20 +20,33 @@ def driver():
     return driver
 
 def connect():
-    connect_browser()
-
-def connect_ios():
     global driver
-    driver = IosDriverFast(executor, ios_93(ios_basic()))
+    if not __platform:
+        set_platform(platform_browser())
+    driver = __platform['driver']()
 
-def connect_android():
-    global driver
-    driver = AndroidDriver(executor, android_600(android_basic()), chromium_executor, chromium_basic())
+def set_platform(platform):
+    global __platform
+    __platform = platform
 
-def connect_browser():
-    global driver
-    driver = BrowserDriver()
-    driver.reload()
+def platform_browser():
+    return {
+        'driver': lambda: BrowserDriver(True)
+    }
+
+def platform_ios():
+    return {
+        'appium': True,
+        'chromedriver': False,
+        'driver': lambda: IosDriverFast(executor, ios_93(ios_basic()))
+    }
+
+def platform_android():
+    return {
+        'appium': True,
+        'chromedriver': True,
+        'driver': lambda: AndroidDriver(executor, android_600(android_basic()), chromium_executor, chromium_basic())
+    }
 
 def check_animation():
     active = False

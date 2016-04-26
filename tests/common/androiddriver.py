@@ -8,17 +8,32 @@ import appium
 
 class AndroidDriver(AbstractDriver):
     def __init__(self, executor, capabilities, chromium_executor, chromium_capabilities):
-        self.appium = appium.webdriver.Remote(command_executor=executor,
-                            desired_capabilities=capabilities)
-        self.chromium = selenium.webdriver.Remote(command_executor=chromium_executor,
-                            desired_capabilities=chromium_capabilities)
+        self.executor = executor
+        self.capabilities = capabilities
+        self.chromium_executor = chromium_executor
+        self.chromium_capabilities = chromium_capabilities
+        self.appium = None
+        self.chromium = None
+        self.connect()
+
+    def __exit__(self):
+        self.disconnect()
+
+    def disconnect(self):
+        if self.appium:
+            self.appium.quit()
+        if self.chromium:
+            self.chromium.quit()
+
+    def connect(self):
+        self.disconnect()
+        self.appium = appium.webdriver.Remote(command_executor=self.executor,
+                            desired_capabilities=self.capabilities)
+        self.chromium = selenium.webdriver.Remote(command_executor=self.chromium_executor,
+                            desired_capabilities=self.chromium_capabilities)
         self.wait_for_view_origin(self.appium, '//android.webkit.WebView')
         self.devicePixelRatio = self.chromium.execute_script('return window.devicePixelRatio')
         print "View origin: %s, device pixel ratio: %d" % (self.viewOrigin, self.devicePixelRatio)
-
-    def __exit__(self):
-        self.appium.quit()
-        self.chromium.quit()
 
     def text(self, selector):
         return selector.text

@@ -8,15 +8,27 @@ import appium
 
 class IosDriver(AbstractDriver):
     def __init__(self, executor, capabilities):
-        self.appium = appium.webdriver.Remote(command_executor=executor,
-                            desired_capabilities=capabilities)
+        self.appium = None
+        self.executor = executor
+        self.capabilities = capabilities
+        self.connect()
+
+    def __exit__(self):
+        self.disconnect()
+
+    def disconnect(self):
+        if self.appium:
+            self.appium.quit()
+
+    def connect(self):
+        self.disconnect()
+        self.appium = appium.webdriver.Remote(command_executor=self.executor,
+                            desired_capabilities=self.capabilities)
         self.wait_for_view_origin(self.appium, '//UIAWebView')
         self.switch_to_webview()
         self.devicePixelRatio = self.appium.execute_script('return window.devicePixelRatio')
         print "View origin: %s, device pixel ratio: %d" % (self.viewOrigin, self.devicePixelRatio)
 
-    def __exit__(self):
-        self.appium.quit()
 
     def text(self, selector):
         return selector.text
@@ -40,9 +52,6 @@ class IosDriver(AbstractDriver):
         y += vo['y']
         self.appium.tap([(x, y)])
         return selector
-
-    def reload(self):
-        return None
 
     def switch_to_webview(self):
         self.appium.switch_to.context("WEBVIEW_1")
@@ -74,3 +83,8 @@ class IosDriverFast(IosDriver):
         script += 'return el;'
         el = self.js(script % (selector, text))
         return el
+
+    # slowly entering things makes no sense in browser, so we override it
+    def text_by_css(self, selector, text, slow=False):
+        self.clear(selector)
+        self.send_keys(selector, text)
