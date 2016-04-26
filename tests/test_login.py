@@ -38,13 +38,13 @@ class Login(common.testcase.TestCase):
     def test_03_loginPin(self):
         self.restart()
         enterPin(self.pin)
-        assert wait_find_by_id('vscroll') != None
+        assert wait_find_by_id('tabbar') != None
 
     def test_04_loginPinNoPad(self):
         self.restart()
         self.changeuser()
         self.login()
-        assert wait_find_by_id('vscroll') != None
+        assert wait_find_by_id('tabbar') != None
 
     def test_05_removepin(self):
         navigateToStart()
@@ -63,7 +63,7 @@ class Login(common.testcase.TestCase):
         text_by_id('username', 't20160426200617')
         text_by_id('password', 'require opinions ants heather missile')
         tap_by_css('.btn-safe')
-        assert wait_find_by_id('vscroll') != None
+        assert wait_find_by_id('tabbar') != None
 
     def changeuser(self):
         sleep(1)

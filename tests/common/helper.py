@@ -31,13 +31,13 @@ def set_platform(platform):
 
 def platform_browser():
     return {
+        'browserautomation': True,
         'driver': lambda: BrowserDriver(True)
     }
 
 def platform_ios():
     return {
         'appium': True,
-        'chromedriver': False,
         'driver': lambda: IosDriverFast(executor, ios_93(ios_basic()))
     }
 
