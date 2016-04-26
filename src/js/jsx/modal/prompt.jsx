@@ -50,7 +50,7 @@
                     <Peerio.UI.Tappable
                         element="div"
                         className={(this.isValueValid() ? 'btn-safe' : 'btn-disabled')}
-                        onTap={this.isValueValid() ? this.handleAction : null}>{t('button_ok')}</Peerio.UI.Tappable>
+                        onTap={this.handleAction}>{t('button_ok')}</Peerio.UI.Tappable>
                 </div>;
 
             var text = this.props.text || '';
@@ -84,6 +84,7 @@
         },
 
         handleAction: function (ev) {
+            if(!this.isValueValid()) return;
             this.props.onClose();
             this.props.onAccept && this.props.onAccept(this.state.promptValue);
         }
