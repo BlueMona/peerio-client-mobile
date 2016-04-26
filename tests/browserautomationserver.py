@@ -22,7 +22,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         # if data.origin == 'browser':
         #     print 'message from browser: %s' % message
         # self.write_message(message)
-        print 'message received %s' % message
+        print '>> %s' % message
         if automationSocket is not None:
             automationSocket.write_message(message)
 
@@ -41,7 +41,7 @@ class WSAutomationHandler(tornado.websocket.WebSocketHandler):
         automationSocket = self
 
     def on_message(self, message):
-        print 'message received %s' % message
+        print '<< %s' % message
         if browserSocket is not None:
             browserSocket.write_message(message)
 

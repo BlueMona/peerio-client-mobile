@@ -4,6 +4,7 @@ import jsonpickle
 from settings.settings import *
 from websocket import create_connection
 import selenium
+import random
 
 class AbstractDriver:
     def __init__(self):
@@ -32,6 +33,13 @@ class AbstractDriver:
         self.viewOrigin = viewElement.location
         print '...success'
 
-
-
+    def text_by_css(selector, text, slow=False):
+        el = self.find(selector)
+        self.clear(selector)
+        if(slow):
+            for c in text:
+                self.send_keys(selector, c)
+                time.sleep(random.randrange(1, 10) / 20.0)
+            else:
+                self.send_keys(selector, text)
 

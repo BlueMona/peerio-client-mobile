@@ -4,17 +4,13 @@ import sys
 import pdb
 from selenium.common.exceptions import NoSuchElementException
 from random import randint
-from appium import webdriver
 from time import sleep
 from time import strftime
 from settings.settings import *
 from common.helper import *
-from common.processes import *
+import common.testcase
 
-class Signup(unittest.TestCase):
-    def test_00_init(self):
-        connect()
-
+class Signup(common.testcase.TestCase):
     def test_01_signup(self):
         # signup
         tap_by_css('.btn-primary')
@@ -43,10 +39,3 @@ class Signup(unittest.TestCase):
 
     def test_02_terms(self):
         print "done"
-
-# if __name__ == '__main__':
-    # restartBrowserAutomation()
-    # restartAppium()
-    # restartChromedriver()
-    # suite = unittest.TestLoader().loadTestsFromTestCase(Signup)
-    # unittest.TextTestRunner(verbosity=2).run(suite)

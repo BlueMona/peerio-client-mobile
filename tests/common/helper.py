@@ -18,6 +18,9 @@ __animationClasses = ['.animate-enter', '.animate-leave']
 def driver():
     return driver
 
+def connect():
+    connect_browser()
+
 def connect_ios():
     global driver
     driver = IosDriverFast(executor, ios_93(ios_basic()))
@@ -30,11 +33,6 @@ def connect_browser():
     global driver
     driver = BrowserDriver()
     driver.reload()
-
-def connect():
-    # connect_ios()
-    # connect_android()
-    connect_browser()
 
 def check_animation():
     active = False
@@ -84,19 +82,16 @@ def tap_by_css(selector):
     el = find_by_css(selector)
     driver.tap(selector)
 
+def wait_tap_by_css(selector):
+    el = wait_find_by_css(selector)
+    driver.tap(selector)
+
 def tap_by_id(id):
     el = find_by_id(id)
     tap_by_css("[id=%s]" % id)
 
 def text_by_css(selector, text, slow=False):
-    el = find_by_css(selector)
-    driver.clear(selector)
-    if(slow):
-        for c in text:
-            driver.send_keys(selector, c)
-            time.sleep(random.randrange(1, 10) / 20.0)
-    else:
-        driver.send_keys(selector, text)
+    driver.text_by_css(selector, text, slow)
 
 def text_by_id(id, text, slow=False):
     el = find_by_id(id)
