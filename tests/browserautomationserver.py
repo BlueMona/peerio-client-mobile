@@ -2,6 +2,9 @@ import tornado.ioloop
 import tornado.web
 import tornado.websocket
 import jsonpickle
+import time
+import sys
+import threading
 
 browserSocket = None
 automationSocket = None
@@ -53,7 +56,26 @@ def make_app():
         (r"/automation", WSAutomationHandler),
     ])
 
-if __name__ == "__main__":
+def waitForBrowser():
+    print "waiting for at least one browser to connect"
+    while(True):
+        if browserSocket != None:
+            sys.stdout.write('.success')
+            return True
+        sys.stdout.write('.')
+        time.sleep(1)
+
+def run():
+    print "starting tornado server on 8888"
     app = make_app()
     app.listen(8888)
     tornado.ioloop.IOLoop.current().start()
+
+def runInThread():
+    print "using background thread"
+    t = threading.Thread(target=run)
+    t.daemon = True
+    t.start()
+
+if __name__ == "__main__":
+    run()

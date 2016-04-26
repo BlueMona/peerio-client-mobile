@@ -12,7 +12,7 @@ from common.helper import *
 from common.processes import *
 
 class Signup(unittest.TestCase):
-    def setUp(self):
+    def test_00_init(self):
         connect()
 
     def test_01_signup(self):
@@ -44,8 +44,9 @@ class Signup(unittest.TestCase):
     def test_02_terms(self):
         print "done"
 
-if __name__ == '__main__':
-    restartAppium()
-    restartChromedriver()
-    suite = unittest.TestLoader().loadTestsFromTestCase(Signup)
-    unittest.TextTestRunner(verbosity=2).run(suite)
+# if __name__ == '__main__':
+    # restartBrowserAutomation()
+    # restartAppium()
+    # restartChromedriver()
+    # suite = unittest.TestLoader().loadTestsFromTestCase(Signup)
+    # unittest.TextTestRunner(verbosity=2).run(suite)

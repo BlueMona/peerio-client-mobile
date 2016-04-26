@@ -55,6 +55,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.ActionExtension.init();
             Peerio.AppStateExtension.init();
             Peerio.Helpers.init();
+            Peerio.AutomationSocket.init();
 
             Peerio.NativeAPI.init();
 

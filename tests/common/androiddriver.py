@@ -26,7 +26,8 @@ class AndroidDriver(AbstractDriver):
     def find(self, selector):
         return self.chromium.find_element_by_css_selector(selector)
 
-    def tap(self, el):
+    def tap(self, selector):
+        el = self.find(selector)
         x = el.location['x'] + el.size['width']/2
         y = el.location['y'] + el.size['height']/2
         x *= self.devicePixelRatio
@@ -39,5 +40,6 @@ class AndroidDriver(AbstractDriver):
 
     def reload(self):
         return None
+
 
 

@@ -7,6 +7,7 @@ from websocket import create_connection
 from wsdriver import BrowserDriver
 from androiddriver import AndroidDriver
 from iosdriver import IosDriver
+from iosdriver import IosDriverFast
 
 global driver
 
@@ -17,23 +18,23 @@ __animationClasses = ['.animate-enter', '.animate-leave']
 def driver():
     return driver
 
-def test_connect_ios():
+def connect_ios():
     global driver
-    driver = IosDriver(executor, ios_93(ios_basic()))
+    driver = IosDriverFast(executor, ios_93(ios_basic()))
 
-def test_connect_android():
+def connect_android():
     global driver
     driver = AndroidDriver(executor, android_600(android_basic()), chromium_executor, chromium_basic())
 
-def test_connect_browser():
+def connect_browser():
     global driver
     driver = BrowserDriver()
     driver.reload()
 
-def test_connect():
-    test_connect_ios()
-    # test_connect_android()
-    # test_connect_browser()
+def connect():
+    # connect_ios()
+    # connect_android()
+    connect_browser()
 
 def check_animation():
     active = False
@@ -79,33 +80,27 @@ def wait_find_by_id(id):
 def wait_find_by_css(selector):
     return wait_for(wait_timeout, lambda: find_by_css(selector), "find by selector %s" % selector)
 
-def tap_by_element(el):
-    driver.tap(el)
-
 def tap_by_css(selector):
     el = find_by_css(selector)
-    tap_by_element(el)
+    driver.tap(selector)
 
 def tap_by_id(id):
     el = find_by_id(id)
-    tap_by_element(el)
-
-def text_by_element(el, text, slow=False):
-    driver.clear(el)
-    if(slow):
-        for c in text:
-            driver.send_keys(el, c)
-            time.sleep(random.randrange(1, 10) / 20.0)
-    else:
-        driver.send_keys(el, text)
+    tap_by_css("[id=%s]" % id)
 
 def text_by_css(selector, text, slow=False):
     el = find_by_css(selector)
-    text_by_element(el, text, slow)
+    driver.clear(selector)
+    if(slow):
+        for c in text:
+            driver.send_keys(selector, c)
+            time.sleep(random.randrange(1, 10) / 20.0)
+    else:
+        driver.send_keys(selector, text)
 
 def text_by_id(id, text, slow=False):
     el = find_by_id(id)
-    text_by_element(el, text, slow)
+    text_by_css("[id=%s]" % id, text, slow)
 
 def get_text_by_css(selector):
     return driver.text(find_by_css(selector))

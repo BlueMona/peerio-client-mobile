@@ -309,4 +309,14 @@ Peerio.Helpers.init = function () {
             L.error(e);
         }
     };
+
+    api.simulateTouch = function (element) {
+        var evt = new CustomEvent('simulatetap');
+        element.dispatchEvent(evt);
+    };
+
+    api.simulateChange = function (element) {
+        var ev = new Event('input', { bubbles: true });
+        element.dispatchEvent(ev);
+    };
 };

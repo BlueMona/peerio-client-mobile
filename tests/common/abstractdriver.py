@@ -10,11 +10,11 @@ class AbstractDriver:
         return
 
     def send_keys(self, selector, text):
-        selector.send_keys(text)
+        self.find(selector).send_keys(text)
         return selector
 
     def clear(self, selector):
-        selector.clear()
+        self.find(selector).clear()
         return selector
 
     def wait_for(self, timeout, func, msg = None):

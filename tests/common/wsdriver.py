@@ -3,12 +3,16 @@ import random
 import jsonpickle
 from settings.settings import *
 from websocket import create_connection
+from abstractdriver import AbstractDriver
 import selenium
 
-class BrowserDriver:
+class BrowserDriver(AbstractDriver):
     def __init__(self):
-        self.ws = create_connection("ws://localhost:8888/automation")
+        print "opening connection to automation server"
+        self.wait_for(5, self.connect, "automation server")
 
+    def connect(self):
+        self.ws = create_connection("ws://localhost:8888/automation")
     def text(self, selector):
         self.ws.send(jsonpickle.encode({"action": "text", "selector": selector}))
         return self.ws.recv()
