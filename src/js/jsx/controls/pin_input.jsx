@@ -118,7 +118,7 @@
                     element="div"
                     className="btn flex-justify-center flex-col"
                     onTap={this.state.inProgress ? null : this.deletePIN}>
-                    {t('button_Delete')}
+                    {t('button_delete')}
                 </Peerio.UI.Tappable>
             );
         },
