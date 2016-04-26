@@ -2,6 +2,7 @@
  * Various helper functions that didn't fit anywhere else
  * ------------------------------------------------------
  */
+
 var Peerio = this.Peerio || {};
 Peerio.AutomationSocket = {};
 
@@ -100,7 +101,8 @@ Peerio.AutomationSocket.init = function () {
         api.automationSocket.open();
     };
 
-    if(Peerio.AutomationEnabled === true)
-        api.start('ws://localhost:8888/ws');
+    api.start('ws://localhost:8888/ws');
 };
+
+PeerioDebug && PeerioDebug.AutomationEnabled && Peerio.AutomationSocket.init();
 
