@@ -415,7 +415,7 @@ gulp.task('version', function () {
 gulp.task('test', function (done) {
     console.log('To prepare the environment, please run the following command:');
     console.log('pip install -r tests/requirements.txt'.yellow);
-    console.log('To use tests in the browser, make sure ' + 'Peerio.AutomationEnabled === true'.cyan);
+    console.log('To use tests in the browser, make sure ' + 'PeerioDebug.AutomationEnabled === true'.cyan);
     console.log('To run tests, please execute one of the following commands:');
     console.log('py.test tests -s --platform=browser'.yellow);
     console.log('py.test tests -s --platform=android'.yellow);
