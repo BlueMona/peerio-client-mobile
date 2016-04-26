@@ -45,7 +45,7 @@
                 .then(() => {
                     if (this.props.onSuccess) this.props.onSuccess();
                 })
-                .catch(err=> L.error("Failed to set passcode. {0}", err))
+                .catch(err=> L.error('Failed to set passcode. {0}', err))
                 .finally(function () {
                     self.setState({inProgress: false});
                 });
@@ -61,7 +61,7 @@
             if (!this.state.newPin)
                 message = t('passcode_notDistinct');
             else if (this.state.newPin.length && this.state.newPin.length != PIN_LENGTH)
-                message = t(passcode_tooShort, {number:PIN_LENGTH - this.state.newPin.length});
+                message = t('passcode_tooShort', {number:PIN_LENGTH - this.state.newPin.length});
             else if (pinIsSane)  message = t('passcode_ok');
 
             var setPinButton = !this.state.inProgress && pinIsSane ? (
