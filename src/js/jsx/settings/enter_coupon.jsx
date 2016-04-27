@@ -8,12 +8,12 @@
             var coupon = this.refs.textEdit.getDOMNode().value;
             Peerio.user.redeemCouponCode(coupon)
             .then( () => {
-                return Peerio.UI.Alert.show({text: ''});
+                return Peerio.UI.Alert.show({text: t('coupon_activated')});
             })
             .then( () => { this.props.onSuccess && this.props.onSuccess(coupon); } )
             .catch( (error) => {
                 L.error(error);
-                Peerio.UI.Alert.show({text: t('coupon-invalid')});
+                Peerio.UI.Alert.show({text: t('coupon_invalid')});
             });
         },
 
