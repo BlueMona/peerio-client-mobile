@@ -49,23 +49,21 @@ def platform_android():
     }
 
 def check_animation():
-    active = False
     for css in __animationClasses:
         try:
             driver.find(css)
-            active = True
+            time.sleep(3)
             break
         except selenium.common.exceptions.NoSuchElementException:
             continue
         except:
             print "unexpected error"
             raise
-    if active:
-        raise Exception('animation still performing')
 
 def wait_for(timeout, func, msg = None):
     for i in xrange(timeout):
         try:
+            time.sleep(0.1)
             return func()
         except:
             print '.'
