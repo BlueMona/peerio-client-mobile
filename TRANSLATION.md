@@ -61,6 +61,9 @@ Translation function is available as `t()` or `window.t()` or `Peerio.Translator
   t('link', {url: segment => <a href=''>segment</a>)
   ```
 
+Do not cache localized strings, remember that locale can change on the fly.
+If you absolutely have to do it - listen to locale change event to rebuild the cache.
+
 ### translators
 
 1. use `{#hashKey}` to reference another string 
