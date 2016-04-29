@@ -108,7 +108,7 @@
                         <Peerio.UI.Tappable element="div" className="btn-icon-stacked"
                                             onTap={this.props.onClose}>
                             <i className="material-icons">cancel</i>
-                            <label>{t('button_Cancel')}</label></Peerio.UI.Tappable>
+                            <label>{t('button_cancel')}</label></Peerio.UI.Tappable>
 
                         <Peerio.UI.Tappable element="div" className="btn-icon-stacked" onTap={this.upload}>
                             <i className="material-icons">cloud_upload</i>
