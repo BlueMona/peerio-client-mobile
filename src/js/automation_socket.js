@@ -104,5 +104,5 @@ Peerio.AutomationSocket.init = function () {
     api.start('ws://localhost:8888/ws');
 };
 
-PeerioDebug && PeerioDebug.AutomationEnabled && Peerio.AutomationSocket.init();
+window.PeerioDebug && PeerioDebug.AutomationEnabled && Peerio.AutomationSocket.init();
 
