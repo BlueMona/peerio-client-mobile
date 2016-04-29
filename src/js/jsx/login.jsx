@@ -95,6 +95,7 @@
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
             Peerio.Helpers.checkFileSystemEncryption();
+
             this.transitionTo(this.nextRoute);
         },
 

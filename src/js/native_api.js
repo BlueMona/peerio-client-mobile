@@ -383,10 +383,18 @@ Peerio.NativeAPI.init = function () {
     };
 
     api.getPreferredLanguage= function(){
-        if(navigator.language){
-            return navigator.language.split('-')[0].toLowerCase();
-        }
-
+        var defaultLocale = 'en';
+        var result = Promise.resolve(defaultLocale);
+        if(navigator.language)
+            result = Promise.resolve(navigator.language);
+        else if(navigator.globalization && navigator.globalization.getPreferredLanguage)
+            result = new Promise( resolve => {
+                navigator.globalization.getPreferredLanguage(locale => {
+                    resolve(locale && locale.value ? locale.value : defaultLocale);
+                });
+            });
+        return result
+        .then(locale => locale.split('-')[0].toLowerCase());
     };
 
 

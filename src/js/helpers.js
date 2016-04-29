@@ -319,4 +319,18 @@ Peerio.Helpers.init = function () {
         var ev = new Event('input', { bubbles: true });
         element.dispatchEvent(ev);
     };
+
+    /**
+    * Will try to load locale from system settings, otherwise will get the preferred locale
+    */
+    api.getPreferredLocale = function () {
+        return Peerio.TinyDB.getItem('locale')
+        .then(locale => {
+            return locale ? locale : Peerio.NativeAPI.getPreferredLanguage();
+        });
+    };
+
+    api.savePreferredLocale = function(locale) {
+        Peerio.TinyDB.saveItem('locale', locale);
+    };
 };

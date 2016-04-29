@@ -73,6 +73,9 @@ Peerio.ACK_MSG = ':::peerioAck:::';
                 React.render(React.createElement(Root, null), document.getElementById('approot'));
             });
 
+            Peerio.Helpers.getPreferredLocale()
+            .then(Peerio.Translator.loadLocale);
+
             return Promise.resolve();
         });
     }
