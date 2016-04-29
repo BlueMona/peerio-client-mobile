@@ -58,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile"
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
+  "scripts": {
+      "localize": "tx pull -af"
+  }
 }
