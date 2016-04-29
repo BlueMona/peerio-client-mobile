@@ -20,7 +20,6 @@
             });
 
             var name = this.props.name ? <div className="list-item-title selectable">{this.props.name}</div> : '' ;
-
             return (
                 <li className='list-item'>
                     <div className="list-item-content">

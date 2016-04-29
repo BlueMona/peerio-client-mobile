@@ -39,10 +39,6 @@ $recipients-height: 40px;
     justify-content: center;
   }
 
-  .attach-btn {
-    border-top: $border-dark;
-  }
-
   .name-selected {
     font-size: .9em;
     background-color: color(p-blue-light-10);
@@ -55,29 +51,28 @@ $recipients-height: 40px;
   }
 
   .subject-inputs {
+    border-bottom: $border-dark;
+    border-top: $border-dark;
     display: flex;
     min-height: $recipients-height;
-    border-bottom: $border-dark;
   }
-
 
   .to {
     min-width: 30px;
     text-align: center;
   }
 
-
   .subject {
     -webkit-appearance: none; // removes weird inner shadow on ios
     background: transparent;
-    border-bottom: 0;
-    border-top: $border-dark;
+    border: 0;
     height: 40px;
     padding: 0 $padding-small;
     text-overflow: ellipsis;
 
     &:focus {
       background-color: lighten(color(list-item-bg), 5%);
+      border: 0;
     }
   }
 
@@ -88,9 +83,7 @@ $recipients-height: 40px;
     padding: $padding-small;
     border: 0;
     flex-grow: 1;
-
   }
-
 }
 
 .icon-counter {

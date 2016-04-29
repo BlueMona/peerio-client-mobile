@@ -48,8 +48,8 @@
                     .then((value) => {
                         if (value) return Promise.resolve(false);
                         Peerio.UI.Confirm.show({
-                                text: 'Would you like to enable Touch ID?',
-                                caption: 'Touch ID requires using your Apple Keychain'
+                                text: t('setup_touchTitle'),
+                                caption: t('setup_touchDescription')
                             })
                             .then(() => {
                                 return Peerio.UI.TouchId.clearKeyPair()
@@ -69,7 +69,7 @@
                     .then((hasSeen) => {
                         return hasSeen ? Promise.resolve(true) :
                             Peerio.UI.Confirm.show({
-                                text: 'Enabling TouchID requires using your keychain, would you like to proceed?'
+                                text: t('touch_keychain')
                             });
                     })
                     .then(() => this.setUserSeenBubble());
@@ -141,8 +141,7 @@
 
         showFingerPrintWarning: function () {
             Peerio.Action.showAlert({
-                headline: 'NOTE ON LAW ENFORCEMENT',
-                text: 'In Oct. 2014, a USA court ruled that a police officer can demand you to unlock your device with a fingerprint but not an alphanumeric passcode. Similar laws may exist in other national or regional jurisdictions and should be considered if law enforcement is part of your threat model.'
+                text: t('setup_touchWarning')
             });
         },
 
@@ -150,7 +149,7 @@
 
             return this.state.visible ? (
                 <ul>
-                    <li className="subhead">Touch ID</li>
+                    <li className="subhead">{t('touchId')}</li>
                     <li>
                         <Peerio.UI.Tappable element="div" onTap={this.enableTouchId}
                                             className="flex-row">
@@ -158,7 +157,7 @@
                               ? ' checked': '')}>
                                 <i className="material-icons"/>
                             </div>
-                            <div>Enable fingerprint key</div>
+                            <div>{t('button_enableTouchId')}</div>
                         </Peerio.UI.Tappable>
                         { this.state.fingerPrintWarning ? (
                             <Peerio.UI.Tappable element="i" onTap={this.showFingerPrintWarning}
@@ -171,8 +170,8 @@
                 </ul>
             ) : (
                 <ul>
-                    <li className="subhead">Touch ID</li>
-                    <li>Fingerprint identification unavailable</li>
+                    <li className="subhead">{t('touchId')}</li>
+                    <li>{t('touch_notAvailable')}</li>
                 </ul>
             );
         }

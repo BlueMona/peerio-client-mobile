@@ -56,13 +56,13 @@
         },
         inviteByEmail: function () {
             Peerio.Net.inviteByEmail(this.state.searchString)
-            .then( () => Peerio.Action.showAlert({
-                text: 'We\'ve sent an invite email to ' + this.state.searchString
-            }))
-            .catch( (error) => {
-                L.error(error);
-                Peerio.Action.showAlert({ text: 'Error adding address. Please contact support.' });
-            });
+                .then(() => Peerio.Action.showAlert({
+                    text: t('contact_emailSent', {email: this.state.searchString})
+                }))
+                .catch((error) => {
+                    L.error('Invite error. {0}', error);
+                    Peerio.Action.showAlert({text: t('error_invite')});
+                });
         },
         handleAddContact: function () {
             if (this.selectedUsers.length === 0) {
@@ -76,8 +76,6 @@
             this.transitionTo('contacts');
         },
         render: function () {
-
-            var self = this;
 
             var resultNode = <div className="spinner"></div>;
             var searchResults = this.state.searchResults;
@@ -99,46 +97,46 @@
                     key={this.state.searchResults.id}/>;
             } else if (searchString && searchString.type === 'email') {
                 resultNode = <div>
-                    <p>Sorry, it looks like <strong>{this.state.searchString}</strong> is not signed up for Peerio.</p>
+                    <p>{t('contact_addressNotFound', {address: this.state.searchString},
+                        {emphasis: segment =><strong>{segment}</strong>})}
+                    </p>
 
-                    <p>Invite them to join Peerio by clicking the button below: </p>
+                    <p>{t('contact_invitePrompt')}</p>
                     <Peerio.UI.Tappable element="div" className="btn-md btn-safe" onTap={this.inviteByEmail}>
-                        Send email invite
+                        {t('contact_inviteSendButton')}
                     </Peerio.UI.Tappable>
                 </div>;
             } else {
-                resultNode =
-                    <p>Sorry, there were no results matching your search. Try searching for contacts again by their
-                        email, username or phone number.</p>;
+                resultNode = <p>{t('contact_nothingFound')}</p>;
             }
 
             return (
                 <div className="content without-tab-bar">
-                  <div className="flex-col flex-justify-start">
-                    <div className="headline">Contact Search</div>
-                    <div className="input-group">
-                    {
-                    // NOTE: maybe clear the search on a null return - paul
-                    }
-                    <input 
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="off"
-                        spellCheck="false"
-                        type="search" 
-                        placeholder="email/username/phone" 
-                        ref="searchInput"/>
-                </div>
-                    <div className="buttons">
-                      <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
-                        <i className="material-icons">search</i> Search again
-                      </Peerio.UI.Tappable>
+                    <div className="flex-col flex-justify-start">
+                        <div className="headline">{t('contact_search')}</div>
+                        <div className="input-group">
+                            {
+                                // NOTE: maybe clear the search on a null return - paul
+                            }
+                            <input
+                                autoComplete="off"
+                                autoCorrect="off"
+                                autoCapitalize="off"
+                                spellCheck="false"
+                                type="search"
+                                placeholder={t('contact_searchInputPlaceholder')}
+                                ref="searchInput"/>
+                        </div>
+                        <div className="buttons">
+                            <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
+                                <i className="material-icons">search</i> {t('button_searchAgain')})
+                            </Peerio.UI.Tappable>
+                        </div>
+                        <div className="list-view">
+                            {resultNode}
+                        </div>
                     </div>
-                    <div className="list-view">
-                        {resultNode}
-                    </div>
-                </div>
-              </div>);
+                </div>);
         }
     });
 

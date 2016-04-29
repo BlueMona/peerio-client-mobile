@@ -9,17 +9,17 @@
             return nextProps.text !== this.props.text;
         },
         open: function (href) {
-            Peerio.UI.Confirm.show({text:'Warning! Please only open links from the contacts you trust'})
-            .then(() => this.props.onOpen(href))
-            .catch(() => true);
+            Peerio.UI.Confirm.show({text: t('openLinkWarning')})
+                .then(() => this.props.onOpen(href))
+                .catch(() => true);
         },
         render: function () {
             this.text = this.props.text;
-            var nodes = linkify.tokenize(this.text).map( (token, i) => {
+            var nodes = linkify.tokenize(this.text).map((token, i) => {
                 if (token.isLink)
-                    return <Peerio.UI.Tappable 
+                    return <Peerio.UI.Tappable
                         key={i}
-                        element="span" 
+                        element="span"
                         className="message-link"
                         onTap={this.open.bind(this, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
                 else

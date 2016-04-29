@@ -45,7 +45,7 @@
             }
         },
         deviceImportFailure: function () {
-            Peerio.Action.showAlert({text: 'Please enable Peerio to access your device contacts to use the contact import feature.'});
+            Peerio.Action.showAlert({text: t('contact_permissionMissing')});
         },
         deviceImportSuccess: function (contacts) {
             contacts = Peerio.Util.filterDeviceContacts(contacts);
@@ -128,7 +128,7 @@
                 return (
                     <div className="content without-tab-bar">
                         { this.props.hideTitle ? null :
-                            <div className="headline">Contact Import</div> }
+                            <div className="headline">{t('contact_import')}</div> }
                             <div className="peerio-loader"></div>
                         </div>);
             }
@@ -154,10 +154,10 @@
                 <div className="content without-tab-bar">
                     { this.props.hideTitle ? null :
                         <div className="headline">Contact Import</div> }
-                        <div className="headline-divider">Your Friends on Peerio</div>
+                        <div className="headline-divider">{t('contact_importFriends')}</div>
                         { requestItems.length === 0 ? (<p>No matches found</p>) : (
                             <Peerio.UI.List
-                                selectAllText="Select all contacts"
+                                selectAllText={t('contact_importSelectAll')}
                                 items={requestItems}
                                 select={selectContactRequest}
                                 element={ (contact, index) => (
@@ -171,8 +171,8 @@
                                     />
                                     )}/>)
                         }
-                        <div className="headline-divider">Invite Your Contacts to Peerio</div>
-                        { inviteItems.length === 0 ? (<p>No contacts found</p>) : (
+                        <div className="headline-divider">{t('contact_importInvite')}</div>
+                        { inviteItems.length === 0 ? (<p>{t('contact_noContantsFound')}</p>) : (
                             <Peerio.UI.List
                                 selectAllText="Select all contacts"
                                 items={inviteItems}

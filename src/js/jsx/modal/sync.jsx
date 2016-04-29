@@ -11,7 +11,7 @@
                 progressValue: 0,
                 current: 0,
                 max: 0,
-                message: 'starting...',
+                message: t('sync_starting'),
                 doRender: false,
                 estimate: null,
                 lastStart: null
@@ -23,12 +23,12 @@
                 Peerio.Dispatcher.onSyncEnded(this.props.onClose)
             ];
         },
-        componentDidMount: function(){
+        componentDidMount: function () {
             window.setTimeout(()=> {
                 if (!this.isMounted()) return;
                 // blurring active element and hiding keyboard
                 // we don't need keyboard when modal is active
-                if(document.activeElement) {
+                if (document.activeElement) {
                     document.activeElement.blur();
                 }
                 Peerio.NativeAPI.hideKeyboard();
@@ -71,13 +71,12 @@
                 <ReactCSSTransitionGroup transitionName="fade" transitionAppear={true} transitionAppearTimeout={250}>
                     <div className="modal sync no-scroll-hack" key="sync">
                         <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
-                             onTouchEnd={devmode.summon} />
+                             onTouchEnd={devmode.summon}/>
 
                         <div className="sync-info">
                             <div className="material-icons sync-info-icon">info_outline</div>
                             <div className="sync-info-text">
-                                For optimal experience and performance Peerio stores some of your encrypted data on your
-                                device. This may take a moment if you have a lot of messages.
+                                {t('sync_description')}
                             </div>
                         </div>
 
@@ -90,7 +89,8 @@
                                  style={{transition: this.state.progressValue===0?'none':'width 500ms ease', width: this.state.progressValue+'%' }}>
                             </div>
                         </div>
-                        <div className="sync-progress-caption">finishing in {this.state.estimate || 0}</div>
+                        <div
+                            className="sync-progress-caption">{t('finishingIn', {time: this.state.estimate || 0})}</div>
                     </div>
                 </ReactCSSTransitionGroup>
             );

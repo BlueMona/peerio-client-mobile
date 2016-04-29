@@ -309,4 +309,28 @@ Peerio.Helpers.init = function () {
             L.error(e);
         }
     };
+
+    api.simulateTouch = function (element) {
+        var evt = new CustomEvent('simulatetap');
+        element.dispatchEvent(evt);
+    };
+
+    api.simulateChange = function (element) {
+        var ev = new Event('input', { bubbles: true });
+        element.dispatchEvent(ev);
+    };
+
+    /**
+    * Will try to load locale from system settings, otherwise will get the preferred locale
+    */
+    api.getPreferredLocale = function () {
+        return Peerio.TinyDB.getItem('locale')
+        .then(locale => {
+            return locale ? locale : Peerio.NativeAPI.getPreferredLanguage();
+        });
+    };
+
+    api.savePreferredLocale = function(locale) {
+        Peerio.TinyDB.saveItem('locale', locale);
+    };
 };

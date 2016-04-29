@@ -20,6 +20,12 @@ Peerio.Config.init = function () {
 
         cfg.defaultLocale = 'en';
 
+        cfg.locales = [
+            {code:'en', name:'English'}, 
+            {code:'fr', name:'Français'},
+            {code:'zh_CN', name:'中文'},
+            {code:'hr', name:'Hrvatski'}];
+
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
         cfg.piwik = {

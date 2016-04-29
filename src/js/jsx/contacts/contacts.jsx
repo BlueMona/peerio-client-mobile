@@ -20,7 +20,7 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
         handleUnreadStateChange: function () {
-            if(!Peerio.user.unreadState.contacts) return;
+            if (!Peerio.user.unreadState.contacts) return;
 
             window.setTimeout(()=> {
                 if (this.isMounted() && Peerio.user.unreadState.contacts)
@@ -35,6 +35,12 @@
             this.transitionTo('contact', {id: id});
         },
         getContactNode: function (item, receivedRequest, sentRequest) {
+            var tag = item.isMe && t('contact_youTag')
+                || sentRequest && t('contact_invitedTag')
+                || receivedRequest && t('contact_requestsTag')
+                || null;
+            if (tag) tag = '(' + tag + ')';
+
             return (
                 <Peerio.UI.Tappable element="li" className="list-item"
                                     onTap={this.openContactView.bind(this, item.username)} key={item.username}>
@@ -43,8 +49,8 @@
                     <div className="list-item-content">
                         <div className="list-item-title">{item.fullName}</div>
                         <div
-                            className="list-item-description">{item.username} { item.isMe ? '(You)' : ''} { sentRequest ? '(invited)' : null } { receivedRequest ? '(requests authorization)' : null }</div>
-                          { receivedRequest ? <i className="material-icons status">person_add</i> : null }
+                            className="list-item-description">{item.username} {tag}</div>
+                        { receivedRequest ? <i className="material-icons status">person_add</i> : null }
                     </div>
                     <i className="material-icons">chevron_right</i>
                 </Peerio.UI.Tappable>);
@@ -53,15 +59,14 @@
             var inRequests = Peerio.user.receivedContactRequests.arr.map(item => this.getContactNode(item, true));
             var outRequests = Peerio.user.sentContactRequests.arr.map(item => this.getContactNode(item, false, true));
             var contacts = Peerio.user.contacts.arr
-            .filter(c => !c.isDeleted).map(item => this.getContactNode(item));
+                .filter(c => !c.isDeleted).map(item => this.getContactNode(item));
 
-            if (contacts.length === 1 && outRequests === 0 && inRequests === 0) {
+            if ((contacts.length + outRequests + inRequests) === 1) {
                 var intro_content = <div className="content-intro" key="intro">
-                    <div className="headline">Peerio Contacts</div>
-
-                    <p>Add a contact to send your first message.Click the button below to get started.</p>
+                    <div className="headline">{t('contact_listTitle')}</div>
+                    <p>{t('contact_listEmpty')}</p>
                     <Peerio.UI.Tappable element="div" className="btn-md" onTap={this.handleAddContact}>
-                        <i className="material-icons">person_add</i> Add a contact
+                        <i className="material-icons">person_add</i> {t('button_addContact')}
                     </Peerio.UI.Tappable>
                     <img src="media/img/contacts.png"/>
                 </div>;

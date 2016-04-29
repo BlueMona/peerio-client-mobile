@@ -25,7 +25,7 @@
             return {
                 // number of items loaded per page
                 pageCount: 20
-           };
+            };
         },
 
         // is current loading in progress flag
@@ -39,7 +39,7 @@
             this.updateScroll = window.setInterval(() => {
                 if (!this.isMounted()) return;
                 this.onscroll();
-            }, 1000);  
+            }, 1000);
         },
 
         componentWillUnmount: function () {
@@ -63,11 +63,11 @@
                 if (item) {
                     item = item.getDOMNode();
                     item = this.scrollIntoItem.alignToTop ? item.previousSibling : item.nextSibling;
-                    if(!item) return;
-                    item = item.className != 'bottomScrollHook' && !this.scrollIntoItem.alignToTop && 
-                        item.nextSibling && item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
+                    if (!item) return;
+                    item = item.className != 'bottomScrollHook' && !this.scrollIntoItem.alignToTop &&
+                    item.nextSibling && item.nextSibling.className == 'bottomScrollHook' ? item.nextSibling : item;
                     if (item) {
-                        item.scrollIntoView(this.scrollIntoItem.alignToTop,{behavior: 'smooth'});
+                        item.scrollIntoView(this.scrollIntoItem.alignToTop, {behavior: 'smooth'});
                         var greenButton = document.getElementById('greenButton');
                         greenButton && greenButton.scrollIntoView(false, {behaviour: 'smooth'});
                     }
@@ -83,11 +83,11 @@
             }
         },
 
-        scrollToBottom: function() {
+        scrollToBottom: function () {
             this.refs.bottomScrollHook.getDOMNode().scrollIntoView(false, {behaviour: 'smooth'});
         },
-        
-        reset: function() {
+
+        reset: function () {
 //            this.setState( this.getInitialState(), () => this.componentWillMount() );
         },
         // parent component calls this
@@ -120,7 +120,7 @@
                         upperItem: items.length && items[0] || null
                     }, () => {
                         this.loading = false;
-                        if(callback)callback();
+                        if (callback)callback();
                     });
                 });
         },
@@ -133,7 +133,7 @@
                 var key = items[i][this.props.itemKeyName];
                 var existing = this.itemsHash[key];
                 if (!existing) continue;
-                if(deleteItems.indexOf(key) != -1) {
+                if (deleteItems.indexOf(key) != -1) {
                     items.splice(items.indexOf(existing), 1);
                     delete this.itemsHash[key];
                 }
@@ -250,15 +250,15 @@
         },
 
         loadNextPage: function (force) {
-            var call = function() {
+            var call = function () {
                 return this.loadPage(true,
-                              () => this.props.onGetPage(
-                    this.getLastItem(), this.props.pageCount));
+                    () => this.props.onGetPage(
+                        this.getLastItem(), this.props.pageCount));
             }.bind(this);
 
-            if(force) {
+            if (force) {
                 this.scrollIntoItem = null;
-                this.setState({ noMoreBottomItems: false }, () => call());
+                this.setState({noMoreBottomItems: false}, () => call());
             } else {
                 call();
             }
@@ -288,7 +288,8 @@
             var bottomScrollHook = (<div className="bottomScrollHook" ref="bottomScrollHook"></div>);
 
             return (
-                <div className={classNames('vscroll', 'essential', 'filter-animate', this.props.className)} id="vscroll" ref="vscroll">
+                <div className={classNames('vscroll', 'essential', 'filter-animate', this.props.className)} id="vscroll"
+                     ref="vscroll">
                     {loaderTop}
                     {nodes}
                     {bottomScrollHook}
