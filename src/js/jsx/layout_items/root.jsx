@@ -51,8 +51,10 @@
             // no need to unsubscribe, this is the root component
 
             Peerio.Dispatcher.onSettingsUpdated(settings => {
-                if(Peerio.Translator.forceLocaleOnLogin)
+                if(Peerio.Translator.forceLocaleOnLogin) {
+                    Peerio.Translator.forceLocaleOnLogin = null;
                     Peerio.user.setLocale(Peerio.Translator.locale);
+                }
                 else if(Peerio.Translator.locale !== Peerio.user.settings.localeCode) {
                     var locale = Peerio.user.settings.localeCode;
                     Peerio.Translator.loadLocale(locale);

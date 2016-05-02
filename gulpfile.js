@@ -356,6 +356,7 @@ gulp.task('serve', ['compile'], function () {
     gulp.watch(paths.html_src, ['index']);
     gulp.watch(paths.sass_all, ['sass']);
     gulp.watch(paths.jsx_src, ['jsx']);
+    gulp.watch(paths.jsx_src, ['jsx-postinit']);
     gulp.watch(paths.js_src, ['js']);
 });
 
