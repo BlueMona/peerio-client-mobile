@@ -50,7 +50,7 @@
         },
         handleSupport: function () {
             Peerio.NativeAPI.openEmailWindow('support@peerio.com',
-                                             'Peerio support request');
+                                             'Peerio support/feedback request');
         },
         signOut: function () {
             Peerio.NativeAPI.signOut();
@@ -118,7 +118,8 @@
                                 </ul>
                                 <ul>
                                     <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
-                                      <i className="material-icons">help</i> Support</Peerio.UI.Tappable>
+                                        <i className="material-icons">help</i> {t('supportFeedback')}
+                                    </Peerio.UI.Tappable>
                                 </ul>
 
 

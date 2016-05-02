@@ -346,11 +346,11 @@ Peerio.NativeAPI.init = function () {
             to: to,
             subject: subject,
             isHtml: true
-        }) : window.open('mailto:' + to, '_blank');
+        }) : window.open('mailto:' + to + '?subject=' + subject, '_blank');
     };
 
     /**
-     * Get carrier info 
+     * Get carrier info
 =======
      * Get carrier info
 >>>>>>> master
