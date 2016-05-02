@@ -123,7 +123,7 @@
 
                 return (
 
-                    <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
+                    <div>
                         <div className="headline-md">{t('2fa')}</div>
 
                         { this.state.isEnabled2FA ? (
