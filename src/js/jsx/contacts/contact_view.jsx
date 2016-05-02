@@ -23,7 +23,7 @@
         handleAccept: function () {
             this.contact.accept().catch(function (ex) {
                 L.error('Failed to accept contact request. {0}', ex);
-                Peerio.Action.showAlert({text: 'Failed to accept contact request.'});
+                Peerio.Action.showAlert({text: t('contact_acceptFail')});
             });
 
         },
@@ -31,7 +31,7 @@
         handleReject: function () {
             this.contact.reject().catch(function (ex) {
                 L.error('Failed to reject contact request. {0}', ex);
-                Peerio.Action.showAlert({text: 'Failed to reject contact request.'});
+                Peerio.Action.showAlert({text: t('contact_rejectFail')});
             });
         },
 
@@ -40,7 +40,7 @@
                 .then(()=> this.goBack())
                 .catch(function (ex) {
                     L.error('Failed to remove contact. {0}', ex);
-                    Peerio.Action.showAlert({text: 'Failed to remove contact.'});
+                    Peerio.Action.showAlert({text: t('contact_removeFail')});
                 });
         },
 
@@ -48,9 +48,8 @@
             // asking confirmation for established contacts only
             if (!this.contact.isRequest) {
                 Peerio.Action.showConfirm({
-                    headline: 'Remove Contact?',
-                    text: 'Are you sure you want to remove ' + this.contact.username +
-                    ' from contacts? You will not be able to message and share files with this contact after removal.',
+                    headline: t('contact_removeConfirmTitle'),
+                    text: t('contact_removeConfirmText', {username: this.contact.username}),
                     onAccept: this.removeContactAndGoBack
                 });
             } else this.removeContactAndGoBack();
@@ -65,7 +64,7 @@
                 this.goBack();
                 return null;
             }
-            if(this.contact.isRequest)
+            if (this.contact.isRequest)
                 Peerio.Action.hideBigGreenButton();
             else
                 Peerio.Action.showBigGreenButton();
@@ -75,39 +74,39 @@
             if (!this.contact.isMe) {
                 if (this.contact.isReceivedRequest) {
                     buttons.push(
-                        <Peerio.UI.Tappable 
+                        <Peerio.UI.Tappable
                             key="acceptButton"
-                            element="div" 
+                            element="div"
                             className="btn-safe"
                             onTap={this.handleAccept}>
-                            Accept contact request
+                            {t('contact_acceptRequestButton')}
                         </Peerio.UI.Tappable>,
-                        <Peerio.UI.Tappable 
+                        <Peerio.UI.Tappable
                             key="rejectButton"
-                            element="div" 
+                            element="div"
                             className="btn-danger"
                             onTap={this.handleReject}>
-                            Reject contact request
+                            {t('contact_rejectRequestButton')}
                         </Peerio.UI.Tappable>);
 
                 } else buttons.push(
-                    <Peerio.UI.Tappable 
+                    <Peerio.UI.Tappable
                         key="removeButton"
-                        element="div" 
-                        className="btn-danger" 
+                        element="div"
+                        className="btn-danger"
                         onTap={this.handleRemove}>
-                        Remove contact
+                        {t('contact_removeButton')}
                     </Peerio.UI.Tappable>);
             }
 
-            var status = 'Established contact.';
+            var status = t('contact_statusEstablished');
 
             if (this.contact.isMe) {
-                status = 'This is you';
+                status = t('contact_statusIsSelf');
             } else if (this.contact.isReceivedRequest) {
-                status = 'Pending: you received request';
+                status = t('contact_statusRequestReceived');
             } else if (this.contact.isRequest) {
-                status = 'Pending: you sent request';
+                status = t('contact_statusRequestSent');
             }
 
 
@@ -122,30 +121,30 @@
                                 <div className="flex-col">
                                     <div className="headline">{this.contact.fullName}</div>
                                     <div
-                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(You)' : ''}</div>
+                                        className="subhead-inline">{this.contact.username} { this.contact.isMe ? '(' + t('You') + ')' : ''}</div>
                                 </div>
                             </div>
                         </li>
 
                         <li>
-                            <label>Public Key</label>
+                            <label>{t('publicKey')}</label>
                             <div className="text-mono width-full">{this.contact.publicKey}</div>
                         </li>
 
                         <li>
-                            <label>State:</label>
+                            <label>{t('contactStatus')}</label>
                             <div>{status}</div>
                         </li>
 
                         <li>
-                            <label>Primary address:</label>
-                            <div>{this.contact.address || 'N/A'}</div>
+                            <label>{t('contact_primaryAddress')}</label>
+                            <div>{this.contact.address || t('n/a')}</div>
                         </li>
 
                     </ul>
 
                     <div className="buttons">
-                      {buttons}
+                        {buttons}
                     </div>
 
                 </div>

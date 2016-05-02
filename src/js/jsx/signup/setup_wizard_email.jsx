@@ -2,25 +2,18 @@
     'use strict';
 
     Peerio.UI.SetupWizardEmail = React.createClass({
-        mixins: [ReactRouter.Navigation],
-
-        getInitialState: function () {
-            return {
-            };
-        },
-
         render: function () {
-           return (
+            return (
                 <div>
-                    <div className="headline">Contact Info</div>
-                  <p>Help your contacts find you on Peerio, receive notifications, and enable support services by adding your email address or phone number. </p>
+                    <div className="headline">{t('setup_contactInfoTitle')}</div>
+                    <p>{t('setup_contactInfoDescription')}</p>
                     <div className="input-group">
-                        <label htmlFor="address">Email Address / Phone Number</label>
+                        <label htmlFor="address">{t('setup_emailOrPhone')}</label>
                         <Peerio.UI.AddAddress {...this.props} autoFocus={true} focusDelay={1000}/>
                     </div>
-               </div>
+                </div>
             );
-        },
+        }
     });
 
 }());

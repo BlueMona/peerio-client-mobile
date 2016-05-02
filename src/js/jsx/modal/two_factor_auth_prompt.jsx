@@ -52,7 +52,7 @@
                     .catch(() => {
                         this.setState({
                             authyCode: '',
-                            message: 'Code is incorrect. Please try again'
+                            message: t('2fa_invalid')
                         });
                     });
             }
@@ -65,37 +65,32 @@
 
         //--- RENDER
         render: function () {
-            var pasteMessage = this.state.clipboardSuccess ?
-                'The following key has been copied to your clipboard. Please paste it in your authenticator app:' : 'Paste the following secret key into your authenticator app:';
-
             return (
                 <div className="content-inline-dialog no-scroll-hack">
-                    <div className="headline-md">Two Factor Authentication (2FA)</div>
+                    <div className="headline-md">{t('2fa_protectedOperation')}</div>
                     <div>
                         <div>
                             <p>
-                                The operation you requested is
-                                protected by 2FA. Please enter the six digit
-                                code that appears in the authenticator app:
+
                             </p>
                             <div className="input-group">
-                              <input
-                                  className="txt-lrg text-center"
-                                  ref="authenticatorCode"
-                                  autoComplete="off" autoCorrect="off"
-                                  autoCapitalize="off" spellCheck="false"
-                                  onChange={this.onChangeAuthy}
-                                  value={this.state.authyCode}/>
+                                <input
+                                    className="txt-lrg text-center"
+                                    ref="authenticatorCode"
+                                    autoComplete="off" autoCorrect="off"
+                                    autoCapitalize="off" spellCheck="false"
+                                    onChange={this.onChangeAuthy}
+                                    value={this.state.authyCode}/>
                             </div>
                         </div>
                         <p className="caption">
                             {this.state.message}
                         </p>
                         <div className="buttons">
-                          <Peerio.UI.Tappable element="div" className="btn-danger"
-                                              onTap={this.removeDialog}>
-                              Cancel
-                          </Peerio.UI.Tappable>
+                            <Peerio.UI.Tappable element="div" className="btn-danger"
+                                                onTap={this.removeDialog}>
+                                {t('button_cancel')}
+                            </Peerio.UI.Tappable>
                         </div>
                     </div>
                 </div>

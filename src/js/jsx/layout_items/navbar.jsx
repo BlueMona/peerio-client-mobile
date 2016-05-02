@@ -70,7 +70,7 @@
         },
 
         animateIsPeerioDown: function () {
-            var texts = ['is peerio down?', 'tap here to check'];
+            var texts = [t('server_isDown'), t('server_isDown1')];
             this.setState({connectingText: texts[this.counter++ % 2]});
         },
 
@@ -119,9 +119,9 @@
 
                     <div id="connection-status"
                          className={'flex-row flex-justify-center flex-align-center ' + connectionClass}>
-                        <div>{this.state.outOfSync ? 'out of sync' : ''}</div>
+                        <div>{this.state.outOfSync ? t('outOfSync') : ''}</div>
                         <div className="margin-small">{this.state.outOfSync && !this.state.socketConnected ? '•' : ''}</div>
-                        <div><Peerio.UI.Tappable onTap={this.checkIsPeerioDown}>{this.state.socketConnected ? '' : this.state.connectingText || 'connecting...'}</Peerio.UI.Tappable></div>
+                        <div><Peerio.UI.Tappable onTap={this.checkIsPeerioDown}>{this.state.socketConnected ? '' : this.state.connectingText || t('connecting')}</Peerio.UI.Tappable></div>
                     </div>
                 </div>
             );

@@ -16,8 +16,8 @@
 
     Peerio.UI.Prompt = React.createClass({
         statics: {
-            show: function(params) {
-                return new Promise( (resolve, reject) => {
+            show: function (params) {
+                return new Promise((resolve, reject) => {
                     params.onAccept = resolve;
                     params.onCancel = reject;
                     Peerio.Action.showPrompt(params);
@@ -29,12 +29,12 @@
         },
         updatePromptValue: function (event) {
             this.setState({promptValue: event.target.value}, () => {
-                if(this.props.autoSubmitLength && this.state.promptValue 
-                          && this.state.promptValue.length == this.props.autoSubmitLength)
-                      this.handleAction();
+                if (this.props.autoSubmitLength && this.state.promptValue
+                    && this.state.promptValue.length == this.props.autoSubmitLength)
+                    this.handleAction();
             });
         },
-        isValueValid: function() {
+        isValueValid: function () {
             return (this.props.minLength > 0) ==
                 (this.state.promptValue && this.state.promptValue.length >= this.props.minLength);
         },
@@ -44,15 +44,16 @@
         },
         render: function () {
             var btns = this.props.btns ||
-                  <div>
-                        <Peerio.UI.Tappable element="div" className="btn-danger" onTap={this.handleCancel}>{this.props.cancelText || 'Cancel'}</Peerio.UI.Tappable>
-                        <Peerio.UI.Tappable
-                            element="div"
-                            className={(this.isValueValid() ? 'btn-safe' : 'btn-disabled')}
-                            onTap={this.isValueValid() ? this.handleAction : null}>OK</Peerio.UI.Tappable>
-                  </div>;
+                <div>
+                    <Peerio.UI.Tappable element="div" className="btn-danger"
+                                        onTap={this.handleCancel}>{this.props.cancelText || t('button_cancel')}</Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable
+                        element="div"
+                        className={(this.isValueValid() ? 'btn-safe' : 'btn-disabled')}
+                        onTap={this.handleAction}>{t('button_ok')}</Peerio.UI.Tappable>
+                </div>;
 
-            var text = this.props.text || 'confirm text';
+            var text = this.props.text || '';
             var inputType = this.props.inputType || 'text';
             var pattern = (inputType == 'numeric') ? '[0-9]*' : '.*';
             return (
@@ -64,9 +65,9 @@
                             </div>
                             <p>{text}</p>
                             <input type={inputType} ref="promptInput"
-                                pattern={pattern}
-                                autoCorrect="off" autoCapitalize="off" spellCheck="false"
-                                value={this.state.promptValue} onChange={this.updatePromptValue}/>
+                                   pattern={pattern}
+                                   autoCorrect="off" autoCapitalize="off" spellCheck="false"
+                                   value={this.state.promptValue} onChange={this.updatePromptValue}/>
                         </div>
                         <div className="alert-btns">
                             {btns}
@@ -77,12 +78,13 @@
             );
         },
 
-        handleCancel: function(ev) {
+        handleCancel: function (ev) {
             this.props.onClose();
-            this.props.onCancel && this.props.onCancel('user pressed cancel');
+            this.props.onCancel && this.props.onCancel();
         },
 
         handleAction: function (ev) {
+            if(!this.isValueValid()) return;
             this.props.onClose();
             this.props.onAccept && this.props.onAccept(this.state.promptValue);
         }

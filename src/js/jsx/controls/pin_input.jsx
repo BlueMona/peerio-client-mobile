@@ -5,12 +5,12 @@
 
     Peerio.UI.PinInput = React.createClass({
         statics: {
-            getPinLength: function() {
+            getPinLength: function () {
                 return PIN_LENGTH;
             }
         },
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 pin: '',
                 touchid: false,
@@ -18,39 +18,39 @@
             };
         },
 
-        getDefaultProps: function() {
+        getDefaultProps: function () {
             return {
                 pinLength: PIN_LENGTH
             };
         },
 
-        handleNumTap: function(num) {
-            if(this.state.pin.length >= this.props.pinLength) {
+        handleNumTap: function (num) {
+            if (this.state.pin.length >= this.props.pinLength) {
                 return;
             }
-            this.setState( { pin: this.state.pin + num }, () => {
-                if(this.state.pin.length === this.props.pinLength) {
+            this.setState({pin: this.state.pin + num}, () => {
+                if (this.state.pin.length === this.props.pinLength) {
                     this.props.onEnterPin(this.state.pin);
-                    this.setState( { pin: '', inProgress: true } );
+                    this.setState({pin: '', inProgress: true});
                 }
             });
         },
 
-        handleLoginFail: function() {
-            if(this.state.failNumber > 1) {
-                this.setState( { failNumber: 0 }, () => {
+        handleLoginFail: function () {
+            if (this.state.failNumber > 1) {
+                this.setState({failNumber: 0}, () => {
                     window.setTimeout(() => this.handleLoginFail(), 10000);
-                } );
+                });
                 return;
             }
             this.refs.pinPad.getDOMNode().classList.add('shake');
-            this.setState({ failNumber: this.state.failNumber + 1, inProgress: false });
-            window.setTimeout( () => {
+            this.setState({failNumber: this.state.failNumber + 1, inProgress: false});
+            window.setTimeout(() => {
                 this.refs.pinPad.getDOMNode().classList.remove('shake');
             }, 1000);
         },
 
-        renderTextButton: function(item) {
+        renderTextButton: function (item) {
             return (
                 <Peerio.UI.Tappable
                     tag="div"
@@ -61,7 +61,7 @@
             );
         },
 
-        renderNumButton: function(num) {
+        renderNumButton: function (num) {
             return (
                 <Peerio.UI.Tappable
                     tag="div"
@@ -72,30 +72,30 @@
             );
         },
 
-        renderRow: function(nums) {
+        renderRow: function (nums) {
             return (
                 <div className="flex-row flex-justify-center">
-                    { nums.map( (num) =>
-                               num.text ? this.renderTextButton(num) : this.renderNumButton(num) ) }
+                    { nums.map((num) =>
+                        num.text ? this.renderTextButton(num) : this.renderNumButton(num)) }
                 </div>
             );
         },
 
-        renderIndicators: function(activeLength, maxLength) {
+        renderIndicators: function (activeLength, maxLength) {
             return (
                 <div className="pin-code">
-                    { Array.apply(null, new Array(activeLength)).map( () =>
+                    { Array.apply(null, new Array(activeLength)).map(() =>
                         <div className="pin-indicator active"></div>
                     )}
 
-                    { Array.apply(null, new Array(maxLength - activeLength)).map( () =>
+                    { Array.apply(null, new Array(maxLength - activeLength)).map(() =>
                         <div className="pin-indicator"></div>
                     )}
-                 </div>
+                </div>
             );
         },
 
-        renderTouchID: function() {
+        renderTouchID: function () {
             return (
                 <Peerio.UI.Tappable
                     element="div"
@@ -106,62 +106,63 @@
             );
         },
 
-        deletePIN: function() {
-          this.setState( {
-              pin: this.state.pin.slice(0, -1)
-            } );
+        deletePIN: function () {
+            this.setState({
+                pin: this.state.pin.slice(0, -1)
+            });
         },
 
-        renderPINDelete: function() {
-          return (
+        renderPINDelete: function () {
+            return (
                 <Peerio.UI.Tappable
                     element="div"
                     className="btn flex-justify-center flex-col"
                     onTap={this.state.inProgress ? null : this.deletePIN}>
-                      Delete
+                    {t('button_delete')}
                 </Peerio.UI.Tappable>
-          );
+            );
         },
 
-        renderProgress: function() {
+        renderProgress: function () {
             return (
                 <Peerio.UI.TalkativeProgress enabled={true} showSpin={true} hideText={true}/>
             );
         },
 
-        componentWillMount: function() {
+        componentWillMount: function () {
             Peerio.UI.TouchId.hasTouchID(this.props.username)
-            .then( (value) => this.setState({touchid: !!value}) );
+                .then((value) => this.setState({touchid: !!value}));
         },
 
         render: function () {
-           return (
-               <div className="modal pin-pad" ref="pinPad">
-                 <div className="headline-md text-center margin-small padding-small text-overflow">
-                   Welcome back, <strong>{this.props.firstname}</strong>
-                 </div>
-                 { this.state.inProgress ?
-                 this.renderProgress() :
-                 this.renderIndicators(this.state.pin.length, this.props.pinLength) }
-                 {this.renderRow( [1, 2, 3] ) }
-                 {this.renderRow( [4, 5, 6] ) }
-                 {this.renderRow( [7, 8, 9] ) }
-                 {this.renderRow( [0] ) }
+            return (
+                <div className="modal pin-pad" ref="pinPad">
+                    <div className="headline-md text-center margin-small padding-small text-overflow">
+                        {t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
+                    </div>
+                    { this.state.inProgress ?
+                        this.renderProgress() :
+                        this.renderIndicators(this.state.pin.length, this.props.pinLength) }
+                    {this.renderRow([1, 2, 3]) }
+                    {this.renderRow([4, 5, 6]) }
+                    {this.renderRow([7, 8, 9]) }
+                    {this.renderRow([0]) }
 
-                 <div id="footer">
-                     {this.renderTextButton({
-                         text: 'Change User',
-                         handler: this.props.onChangeUser })
-                     }
-                     { this.state.touchid && !this.state.pin.length ?
-                         this.renderTouchID() :
+                    <div id="footer">
+                        {this.renderTextButton({
+                            text: t('login_changeUserButton'),
+                            handler: this.props.onChangeUser
+                        })
+                        }
+                        { this.state.touchid && !this.state.pin.length ?
+                            this.renderTouchID() :
 
-                         this.state.pin.length ?
-                         this.renderPINDelete() : null
-                     }
-                  </div>
+                            this.state.pin.length ?
+                                this.renderPINDelete() : null
+                        }
+                    </div>
                 </div>);
-          }
+        }
     });
 
 }());

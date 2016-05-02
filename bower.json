@@ -21,7 +21,9 @@
     "gsap": "*",
     "classnames": "*",
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
-    "react-router": "~0.13.3"
+    "react-router": "~0.13.3",
+    "peerio-copy": "git@github.com:PeerioTechnologies/peerio-copy.git#dev",
+    "reconnectingWebsocket": "git@github.com:joewalnes/reconnecting-websocket.git"
   },
   "install": {
     "base": "www/bower",
@@ -30,10 +32,12 @@
       "js": "",
       "/font-awesome\\.css/": "{name}/css",
       "/fontawesome-webfont.*/": "{name}/fonts",
-      "/peerio-client-api/dist/dict.*txt/": "{name}"
+      "/peerio-client-api/dist/dict.*txt/": "{name}",
+      "/peerio-copy/client_en.json/": "../../locales"
     },
     "sources": {
       "peerio-client-api": "bower_components/peerio-client-api/dist/**",
+      "peerio-copy": { "mapping": {"bower_components/peerio-copy/client_en.json": "../en.json"}},
       "react-router": "bower_components/react-router/build/umd/ReactRouter.js",
       "font-awesome": [
         "bower_components/font-awesome/css/font-awesome.css",
@@ -49,7 +53,8 @@
         "bower_components/gsap/src/minified/plugins/scrolltoplugin.min.js"
       ],
       "jssha": "bower_components/jssha/src/sha256.js",
-      "classnames": "bower_components/classnames/index.js"
+      "classnames": "bower_components/classnames/index.js",
+      "reconnectingWebsocket": "bower_components/reconnectingWebsocket/reconnecting-websocket.js"
     }
   }
 }

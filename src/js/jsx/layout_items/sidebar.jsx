@@ -55,6 +55,7 @@
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
+
         //--- RENDER
         render: function () {
             var className = this.state.open ? 'open' : '';
@@ -66,9 +67,9 @@
             var quota = Peerio.Helpers.formatBytes(user.quota.total);
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
-            pinNode = Peerio.user.PINIsSet ? 'Remove passcode' : 'Set passcode';
+            pinNode = Peerio.user.PINIsSet ? t('passcode_remove') : t('passcode_set');
 
-            twoFactor = user.settings.twoFactorAuth ? 'Disable two factor auth' : 'Enable two factor auth';
+            twoFactor = user.settings.twoFactorAuth ? t('2fa_disable') : t('2fa_enable');
 
             if (Peerio)
                 return (
@@ -83,7 +84,7 @@
                                     </div>
                                 </li>
                                 <li className="storage-info">
-                                    <label>Storage</label>
+                                    <label>{t('storage')}</label>
                                     <div>{quotaUsed} / {quota} ({quotaPercent}%)</div>
                                 </li>
                             </ul>
@@ -92,7 +93,7 @@
                                 <ul>
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
-                                        <i className="material-icons">person</i> Profile
+                                        <i className="material-icons">person</i> {t('profile')}
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
@@ -102,17 +103,17 @@
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                        <i className="material-icons">share</i> Get Free Storage
+                                        <i className="material-icons">share</i> {t('getFreeStorage')}
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
-                                        <i className="material-icons">settings</i> Preferences
+                                        <i className="material-icons">settings</i> {t('preferences')}
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
-                                        <i className="fa fa-certificate"></i> Redeem Coupon
+                                        <i className="fa fa-certificate"></i> {t('redeemCoupon')}
                                     </Peerio.UI.Tappable>
                                 </ul>
                                 <ul>
@@ -124,14 +125,19 @@
                                 <div className="flex-grow-1"></div>
                                 <ul>
                                     <Peerio.UI.Tappable element="li"
+<<<<<<< HEAD
                                                         onTap={this.signOut}>
                                         <i className="material-icons">power_settings_new</i> Sign Out
+=======
+                                                        onTap={this.signOut}><i
+                                        className="material-icons">power_settings_new</i> {t('signOut')}
+>>>>>>> master
                                     </Peerio.UI.Tappable>
                                 </ul>
                             </div>
 
                             <div className="app-version">
-                                Peerio version: {Peerio.runtime.version}
+                                {t('version')}: {Peerio.runtime.version}
                             </div>
                         </Peerio.UI.Swiper>
 

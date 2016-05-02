@@ -14,7 +14,7 @@
         handleOpen: function () {
             Peerio.FileSystem.openFileWithOS(Peerio.user.files.dict[this.props.params.id])
                 .catch(function (err) {
-                    alert('Failed to open file. ' + err);
+                    L.error('Failed to open file', err);
                 });
         },
         handleDownload: function () {
@@ -22,8 +22,8 @@
             if (file.size / 1024 / 1024 > 100) {
 
                 Peerio.Action.showConfirm({
-                    headline: 'Beta warning',
-                    text: 'Downloading files over 100MB may cause Peerio to crash. We are working to solve this issue. Would you still like to try downloading this file?',
+                    headline: t('file_sizeWarningTitle'),
+                    text: t('file_sizeWarningTextDownload'),
                     onAccept: ()=>this.doDownload(file)
                 });
             } else this.doDownload(file);
@@ -31,27 +31,27 @@
         doDownload: function (file) {
             file.download()
                 .catch((error) => {
-                    Peerio.Action.showAlert({text: 'Unable to download a file: ' + error});
+                    Peerio.Action.showAlert({text: t('error_fileDownload')+' ' + error});
                 });
         },
         handleRemoveLocal: function () {
             Peerio.Action.showConfirm({
-                headline: 'Remove file from this device?',
-                text: 'This file will be deleted from your device, but will still be available to users who you have shared it with.',
+                headline: t('file_removeLocalConfirmTitle'),
+                text: t('file_removeLocalConfirmText'),
                 onAccept: ()=>Peerio.user.files.dict[this.props.params.id].deleteFromCache()
             });
         },
         handleRemove: function () {
             Peerio.Action.showConfirm({
-                headline: 'Remove this file?',
-                text: 'This file will be deleted from your device and cloud, but will still be available to users who you have shared it with.',
+                headline: t('file_removeConfirmTitle'),
+                text: t('file_removeConfirmText'),
                 onAccept: ()=>Peerio.user.files.dict[this.props.params.id].remove()
             });
         },
         handleNuke: function () {
             Peerio.Action.showConfirm({
-                headline: 'Destroy file completely?',
-                text: 'This file will be deleted from your device, cloud and from the clouds of other users who you have shared it with.',
+                headline: t('file_nukeConfirmTitle'),
+                text: t('file_nukeConfirmText'),
                 onAccept: ()=>Peerio.user.files.dict[this.props.params.id].nuke()
             });
         },
@@ -68,32 +68,31 @@
 
             var sender = file.sender ? (
               <li>
-                <label>Shared by</label>
+                <label>{t('file_sharedBy')}</label>
                 <div className="info-content">{file.sender}</div>
               </li>) : null;
             var downloadStateNode = null, buttonsNode = null;
             if (file.downloadState) {
                 var ds = file.downloadState;
-                downloadStateNode = (<div className="info-banner">{ds.stateName} {ds.percent}</div>);
+                downloadStateNode = (<div className="info-banner">{t('ds.stateName')} {ds.percent}</div>);
             } else {
                 buttonsNode = (
                     <div className="buttons">
-                      {file.cached ? <Peerio.UI.Tappable className="btn-safe" element="div" onTap={this.handleOpen}>Open</Peerio.UI.Tappable>
+                      {file.cached ? <Peerio.UI.Tappable className="btn-safe" element="div" onTap={this.handleOpen}>{t('button_open')}</Peerio.UI.Tappable>
                     : <Peerio.UI.Tappable className="btn-safe" element="div" onTap={this.handleDownload}>
-                    <i className="material-icons">cloud_download</i>Download</Peerio.UI.Tappable>}
+                    <i className="material-icons">cloud_download</i>{t('button_download')}</Peerio.UI.Tappable>}
 
                         {file.cached ?
                             <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemoveLocal}><i
-                                className="material-icons">delete</i>Remove from your device</Peerio.UI.Tappable> : null }
+                                className="material-icons">delete</i>{t('file_removeLocalButton')}</Peerio.UI.Tappable> : null }
 
                         {file.cached ?
-                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>Remove from your device &amp; cloud</Peerio.UI.Tappable>
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>{t('file_removeLocalAndCloudButton')}</Peerio.UI.Tappable>
                             :
-                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>Remove from your cloud</Peerio.UI.Tappable>}
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>{t('file_removeCloudButton')}</Peerio.UI.Tappable>}
 
                         {file.creator === Peerio.user.username ?
-                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleNuke}>Unshare &amp; remove from all
-                                clouds</Peerio.UI.Tappable> : null }
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleNuke}>{t('file_nukeButton')}s</Peerio.UI.Tappable> : null }
                     </div>);
             }
 
@@ -110,32 +109,32 @@
                     </ul>
                     <ul className="flex-list">
                         <li>
-                            <label>File Name</label>
+                            <label>{t('fileName')}</label>
                             <div className="info-content">{file.name}</div>
                         </li>
                         <li>
-                            <label>File Size</label>
+                            <label>{t('fileSize')}</label>
                             <div className="info-content">{file.humanSize}</div>
                         </li>
 
                         <li>
-                            <label>File Type</label>
+                            <label>{t('fileType')}</label>
                             <div className="info-content">{Peerio.Helpers.getFileTypeByName(file.name)}</div>
                         </li>
 
                         <li>
-                            <label>Location</label>
+                            <label>{t('location')}</label>
                             <div
-                                className="info-content">{file.cached ? 'On this device (decrypted) and in the cloud (encrypted)' : 'In the cloud (encrypted)'}</div>
+                                className="info-content">{file.cached ? t('file_locationLocal') : t('file_locationCloud')}</div>
                         </li>
                         <li>
-                            <label>Owner</label>
+                            <label>{t('owner')}</label>
                             <div className="info-content">
-                                {file.creator === Peerio.user.username ? 'You' : file.creator}
+                                {file.creator === Peerio.user.username ? t('you') : file.creator}
                             </div>
                         </li>
                         <li>
-                            <label>Uploaded at</label>
+                            <label>{t('file_uploadedAt')}</label>
                             <div className="info-content">{new Date(file.timestamp).toLocaleString()}</div>
                           </li>
 

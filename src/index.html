@@ -14,7 +14,6 @@
     <!--
 		* gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     	* https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    	* todo: unsafe inline can be removed from scripts in production. browsersync needs it in development.
 	-->
     <!-- release -->
     <meta http-equiv="Content-Security-Policy" content="default-src
@@ -42,7 +41,6 @@
                                                             'self'
                                                             data:
                                                             gap:
-                                                            'sha256-8U0IjmKhdF6muyTAHYlt46GTDHbWDTClf0ZpO3SBmxs='
                                                             https://piwik.peerio.com
                                                             https://ssl.gstatic.com
                                                             https://app.peerio.com
@@ -55,6 +53,8 @@
                                                             wss://hocuspocus.peerio.com
                                                             ws://localhost:3000
                                                             ws://localhost:3001
+                                                            ws://localhost:8888
+                                                            'unsafe-inline'
                                                             ;
                                                         style-src
                                                             'self'
@@ -72,11 +72,14 @@
     <link rel="stylesheet" href="css/app.css" type="text/css"/>
 
     <!-- debug -->
+    <!-- websocket for automation -->
+    <script type="application/javascript" src="bower/reconnectingWebsocket/reconnecting-websocket.js"></script>
     <!-- debug.js may contain sensitive info that is used to help with development.
          The file is ignored in git and located in repository root,
          so it can't be accidentally exposed by cordova tools.
          If you are cloning a new repository, you can create your own debug.js from debug_template.js. -->
     <script type="application/javascript" src="../debug.js"></script>
+    
     <!-- /debug -->
     <script type="application/javascript" src="js/js/urlfix.js"></script>
     <!-- tracing does not actually start before we enable it -->
@@ -110,7 +113,7 @@
     <!-- Don't put anything in here - it will be replaced by React -->
 </div>
 
-<!---------------- <DEVMODE CONTROL START> ---------------->
+<!--               <DEVMODE CONTROL START>               -->
 <!-- This is as independent/vanilla as possible developer mode controls-->
 <div id="devmode" class="devmode-hidden">
     <div id="devmode-title">woah.. secret ninja mode
@@ -136,6 +139,6 @@
         <div id="devmode-log"></div>
     </div>
 </div>
-<!---------------- </DEVMODE CONTROL END> ---------------->
+<!--               </DEVMODE CONTROL END>               -->
 </body>
 </html>

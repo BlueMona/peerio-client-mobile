@@ -32,16 +32,16 @@
                 Peerio.Auth.getSavedLogin()
                     .then((data) => {
                         Peerio.TinyDB.getItem('prevent_saved_login')
-                        .then(prevent => {
-                            if(prevent) return true;
-                            this.setState({savedLogin: data});
-                            this.invokeTouchID(data);
-                            data && data.username && Peerio.Auth.getPinForUser(data.username)
-                            .then((pin) => {
-                                this.setState({isPin: !!pin});
-                            });
-                        })
-                        .finally(() => Peerio.TinyDB.removeItem('prevent_saved_login'));
+                            .then(prevent => {
+                                if (prevent) return true;
+                                this.setState({savedLogin: data});
+                                this.invokeTouchID(data);
+                                data && data.username && Peerio.Auth.getPinForUser(data.username)
+                                    .then((pin) => {
+                                        this.setState({isPin: !!pin});
+                                    });
+                            })
+                            .finally(() => Peerio.TinyDB.removeItem('prevent_saved_login'));
                     });
             }
         },
@@ -95,6 +95,7 @@
             !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
             Peerio.Helpers.checkFileSystemEncryption();
+
             this.transitionTo(this.nextRoute);
         },
 
@@ -102,10 +103,10 @@
             this.setState({waitingForLogin: false});
 
             // if the account was deleted
-            
+
             if (error && error.code === 488) {
                 Peerio.User.wipeLocalData(Peerio.user.username);
-                error.message = 'Account was deleted';
+                error.message = t('error_accountDeleted');
             }
 
             // if we got a 2FA request
@@ -127,7 +128,7 @@
             if (error && error.code === 404) {
                 // should override it as "bad credentials"
                 // maybe this should be done at server side
-                error.message = 'Bad credentials';
+                error.message = t('error_badCredentials');
 
             }
 
@@ -140,10 +141,10 @@
             // this.setState( { isPin: false } );
             var msg = '';
             if (error) {
-                if (is.string(error)) msg = ' Error message: ' + error;
-                else if (error.message) msg = ' Error message: ' + error.message;
+                if (is.string(error)) msg = error;
+                else if (error.message) msg = error.message;
             }
-            Peerio.Action.showAlert({text: 'Login failed.' + msg});
+            Peerio.Action.showAlert({text: t('error_loginFailed') + ' ' + msg});
         },
         // show/hide passphrase
         handlePassphraseShowTap: function () {
@@ -215,7 +216,7 @@
 
             // if username is empty, show user an alert
             if (!userValue || !userValue.length) {
-                Peerio.UI.Alert.show({text: 'Username cannot be empty'});
+                Peerio.UI.Alert.show({text: t('error_emptyUsername')});
                 return;
             }
 
@@ -254,6 +255,9 @@
             this.setState({savedLogin: null});
             Peerio.Auth.clearSavedLogin();
         },
+        changeLocale: function (event) {
+            Peerio.Translator.loadLocale(event.target.value);
+        },
         //--- RENDER
         render: function () {
             var eyeIcon = this.state.passphraseVisible ? 'visibility_off' : 'visibility';
@@ -287,7 +291,7 @@
                     <div className="page-wrapper-login">
 
                         <div className="content-wrapper-login">
-                            <div className="app-version">Peerio version: {Peerio.runtime.version}</div>
+                            <div className="app-version">{t('version')}: {Peerio.runtime.version}</div>
                             <img className="logo" src="media/img/peerio-logo-white.png" alt="Peerio"
                                  onTouchEnd={devmode.summon}/>
 
@@ -296,16 +300,16 @@
                                     ?
                                     (<Peerio.UI.Tappable ref="savedLogin" element="div" className="saved-login"
                                                          onTap={this.clearLogin}>
-                                        <div className="headline-md text-overflow">Welcome back,
+                                        <div className="headline-md text-overflow">{t('login_welcomeBack')}
                                             <strong> {this.state.savedLogin.firstName || this.state.savedLogin.username}</strong>
                                         </div>
 
-                                        <div className="caption">Tap here to change and forget username.</div>
+                                        <div className="caption">{t('login_forgetUsername')}</div>
                                     </Peerio.UI.Tappable>)
                                     :
                                     (<div className="login-input">
                                         <div className="input-group">
-                                            <label htmlFor="username">username</label>
+                                            <label htmlFor="username">{t('username')}</label>
                                             <input value={this.state.username}
                                                    id="username" ref="username"
                                                    type="text" maxLength="16"
@@ -323,7 +327,7 @@
                                 <div className="login-input">
                                     <div className="input-group">
                                         <label htmlFor="password">
-                                            {this.state.isPin ? 'passcode' : 'passphrase or passcode'}
+                                            {this.state.isPin ? t('passcode') : t('login_passphraseOrPasscode')}
                                         </label>
                                         <div className="input-control">
                                             {passInput}
@@ -341,23 +345,19 @@
                                     <Peerio.UI.Tappable element="div" ref="loginBtn" className="btn-safe"
                                                         onTap={this.handleSubmit}>
                                         {this.state.waitingForLogin ?
-                                            <i className="fa fa-circle-o-notch fa-spin"></i> : 'login'}
+                                            <i className="fa fa-circle-o-notch fa-spin"></i> : t('login_loginButton')}
                                     </Peerio.UI.Tappable>
 
                                     {this.state.waitingForLogin
                                         ? null
                                         : (<Peerio.UI.Tappable element="div" className="btn-primary"
                                                                onTap={this.transitionTo.bind(this,'signup')}>
-                                        sign up
+                                        {t('login_signUpButton')}
                                     </Peerio.UI.Tappable>)}
+
+                                    <Peerio.UI.LanguageSelect />
+
                                 </div>
-                                {/*
-                                 <div className="input-group">
-                                 <label className="info-label col-4" htmlFor="language-select">Language:</label>
-                                 <select id="language-select" className="select-input col-8">
-                                 <option value="">english</option>
-                                 </select>
-                                 </div>*/}
                             </form>
                         </div>
                     </div>

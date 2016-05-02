@@ -39,7 +39,15 @@
     "deep-diff": "*",
     "plist": "*",
     "colors": "*",
-    "xml2js": "*"
+    "xml2js": "*",
+    "sync-exec": "*",
+    "q": "*",
+    "python-js": "*",
+    "websocket": "*",
+    "esformatter": "*",
+    "esformatter-jsx-seavan": "*",
+    "esformatter-collapse-objects": "*",
+    "esformatter-var-each": "*"
   },
   "repository": {
     "type": "git",
@@ -50,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/PeerioTechnologies/peerio-client-mobile/issues"
   },
-  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile"
+  "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
+  "scripts": {
+      "localize": "tx pull -af"
+  }
 }

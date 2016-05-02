@@ -8,6 +8,9 @@
         maxDistanceX: 10, // pixels
         maxDistanceY: 13, // pixels
         maxDelay: 500,   // milliseconds
+        componentDidMount: function () {
+            this.getDOMNode().addEventListener('simulatetap', () => this.props.onTap());
+        },
         handleTouchStart: function (e) {
             e.stopPropagation();
             this.touchStartStamp = Date.now();

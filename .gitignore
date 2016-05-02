@@ -5,6 +5,8 @@
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.pyc
+tags
 
 # build release apk output
 /bin
@@ -26,3 +28,6 @@
 /platforms
 /plugins
 GENERATED_CHANGELOG.md
+
+# tests cache
+tests/.cache
