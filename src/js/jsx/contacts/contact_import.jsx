@@ -157,7 +157,7 @@
                         <div className="headline-divider">{t('contact_importFriends')}</div>
                         { requestItems.length === 0 ? (<p>No matches found</p>) : (
                             <Peerio.UI.List
-                                selectAllText={t('contact_importSelectAll')}
+                                selectAllText={t('importContactsSelectAll')}
                                 items={requestItems}
                                 select={selectContactRequest}
                                 element={ (contact, index) => (
@@ -174,7 +174,7 @@
                         <div className="headline-divider">{t('contact_importInvite')}</div>
                         { inviteItems.length === 0 ? (<p>{t('contact_noContantsFound')}</p>) : (
                             <Peerio.UI.List
-                                selectAllText="Select all contacts"
+                                selectAllText={t('importContactsSelectAll')}
                                 items={inviteItems}
                                 select={selectInviteAddress}
                                 element={ (contact, index) => (

@@ -86,8 +86,9 @@
                         {progressBarSteps}
                     </div>
                     <ReactCSSTransitionGroup
+                        className="flex-grow-1 flex-shrink-1" 
+                        style={{overflow:'auto'}}
                         transitionName="animate"
-                        className="flex-grow-1 flex-shrink-0"
                         transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
                         <div key={'cont'+this.state.activeStep}>
                             {currentStep}
