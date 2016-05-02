@@ -49,7 +49,7 @@
             Peerio.Action.showFileUpload();
         },
         handleSupport: function () {
-            Peerio.NativeAPI.openEmailWindow('support@peerio.com', 
+            Peerio.NativeAPI.openEmailWindow('support@peerio.com',
                                              'Peerio support request');
         },
         signOut: function () {
@@ -125,13 +125,9 @@
                                 <div className="flex-grow-1"></div>
                                 <ul>
                                     <Peerio.UI.Tappable element="li"
-<<<<<<< HEAD
-                                                        onTap={this.signOut}>
-                                        <i className="material-icons">power_settings_new</i> Sign Out
-=======
                                                         onTap={this.signOut}><i
                                         className="material-icons">power_settings_new</i> {t('signOut')}
->>>>>>> master
+
                                     </Peerio.UI.Tappable>
                                 </ul>
                             </div>

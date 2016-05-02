@@ -122,13 +122,10 @@
             var pasteMessage = this.state.clipboardSuccess ? t('2fa_clipboard') : t('2fa_manualCopy');
 
                 return (
-<<<<<<< HEAD
-                    <div>
-                        <div className="headline-md">Two Factor Authentication (2FA)</div>
-=======
+
                     <div className="content no-scroll-hack without-tab-bar flex-col without-footer">
                         <div className="headline-md">{t('2fa')}</div>
->>>>>>> master
+
                         { this.state.isEnabled2FA ? (
                             <div className="buttons">
                               <Peerio.UI.Tappable element="div" className="btn-danger"
