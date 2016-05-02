@@ -14,10 +14,11 @@
 
         componentWillMount: function () {
             this.steps = [
-                Peerio.UI.SignupWizardOptIn,
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardEmail,
-                Peerio.UI.SetupWizardCoupon
+                Peerio.UI.SetupWizardCoupon,
+                Peerio.UI.SetupWizardContactImport,
+                Peerio.UI.SignupWizardOptIn
             ];
 
             Peerio.UI.TouchId.isFeatureAvailable()
@@ -48,10 +49,10 @@
             var button = (
 
                 <div className={classNames(
-                    'flex-row',
+                    'flex-row flex-shrink-0',
                     this.state.activeStep === 1  ?
                         ' flex-justify-end' : ' flex-justify-between',
-                    this.state.activeStep === 0 ?
+                    this.state.activeStep < 1 ?
                         ' hide' : ''
                 )}>
                     <Peerio.UI.Tappable
@@ -85,8 +86,9 @@
                         {progressBarSteps}
                     </div>
                     <ReactCSSTransitionGroup
+                        className="flex-grow-1 flex-shrink-1" 
+                        style={{overflow:'auto'}}
                         transitionName="animate"
-                        className="flex-grow-1 flex-shrink-0"
                         transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
                         <div key={'cont'+this.state.activeStep}>
                             {currentStep}

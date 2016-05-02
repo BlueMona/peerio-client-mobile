@@ -9,8 +9,9 @@
                 .then(() => {
                     this.props.handleNextStep();
                 });
+
             Peerio.user && Peerio.user.enableDataCollection &&
-            Peerio.user.enableDataCollection(enable);
+                Peerio.user.enableDataCollection(enable);
         },
 
         render: function () {
