@@ -31,3 +31,5 @@ GENERATED_CHANGELOG.md
 
 # tests cache
 tests/.cache
+
+/locales

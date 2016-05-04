@@ -120,4 +120,7 @@
     <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.7">
         <variable name="WKWEBVIEW_SERVER_PORT" value="52341"/>
     </plugin>
+    <plugin name="cc.fovea.cordova.purchase" spec="https://github.com/j3k0/cordova-plugin-purchase">
+        <variable name="BILLING_KEY" value="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5LDihZWo1q5+QLs3KE8Kh4PpFfIg7vAacEvaqiwxpb2EzZbi0CEGc2Mx6IiF+6AOvWPfbJPOoDGpYXEdGbqG4xZoibe2608DmhFsAcfwsLiLiw2cdxQl6fXe29BZiJzyr15/COp6uHB2mAjrFi2DVAU4ZFK3kmcRPwyCWrMMlgDxwGUv0ZCo/f21juGqmrW/PAh28CuDtwOywXkT2vpZdt1thoj7FYB1Re1UYYnUf89LlYsDiQfycdOB6izGdYc6SrBwI0d4JTEyOnJPPZIVjHfscEd1mB6UCOJmYIkntAT/UddM/8Wxa5hKBeEdW+5kEoyWyhfYsVYsyY0fpxl84QIDAQAB" />
+    </plugin>
 </widget>
