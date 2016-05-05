@@ -1,0 +1,2 @@
+var arr = document.querySelectorAll('.C0USHC-dc-a .gwt-TextBox');
+Array.prototype.forEach.call(arr, function(i) { title = i.nextSibling.innerText; if(title == 'CAD') return; n = parseFloat(i.value.replace(/,/g, '')); order = Math.floor(Math.log10(n)); div = Math.pow(10, order); norm = order > 0 ? (Math.floor(n*10/div) * div/10) : (Math.floor(n * div) / div); sub = Math.pow(10, order - 3); norm2 = norm - sub; console.log(title + ': ' + n + ' -> ' + norm2); i.value = norm2; i.dispatchEvent(new Event('change', { bubbles: true })); });
