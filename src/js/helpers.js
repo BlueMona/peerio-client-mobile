@@ -315,9 +315,30 @@ Peerio.Helpers.init = function () {
         element.dispatchEvent(evt);
     };
 
+    api.simulateTouchSelector = function (selector) {
+        var evt = new CustomEvent('simulatetap');
+        document.querySelector(selector).dispatchEvent(evt);
+        return Promise.resolve(true);
+    };
+
+    api.sleep = function (time) {
+        return new Promise((resolve, reject) => {
+            window.setTimeout(resolve, time);
+        });
+    };
+
     api.simulateChange = function (element) {
         var ev = new Event('input', { bubbles: true });
         element.dispatchEvent(ev);
+    };
+
+    api.waitUntil = function(timeout, checkLambda) {
+        var checker = (resolve, reject) => {
+            if(checkLambda()) return resolve(true);
+            if(timeout-- > 0) return window.setTimeout( () => checker(resolve, reject), 1000);
+            reject('operation timed out'); 
+        };
+        return new Promise(checker);
     };
 
     /**

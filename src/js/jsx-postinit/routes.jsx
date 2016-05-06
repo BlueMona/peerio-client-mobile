@@ -44,6 +44,7 @@ Peerio.UI.Routes = (
 
             <Route name="set_pin" path="/app/set_pin" handler={Peerio.UI.SetPin} />
             <Route name="security" path="/app/security" handler={Peerio.UI.Security} />
+            <Route name="payments" path="/app/payments" handler={Peerio.UI.Payments} />
         </Route>
     </Route>
 );

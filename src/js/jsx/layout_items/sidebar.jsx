@@ -52,6 +52,9 @@
             Peerio.NativeAPI.openEmailWindow('support@peerio.com',
                                              'Peerio support/feedback request');
         },
+        handlePayments: function () {
+            this.toggleAndTransition('payments');
+        },
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
@@ -122,6 +125,11 @@
                                     </Peerio.UI.Tappable>
                                 </ul>
 
+                                <ul>
+                                    <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
+                                        <i className="material-icons">help</i> {t('payments_menu')}
+                                    </Peerio.UI.Tappable>
+                                </ul>
 
                                 <div className="flex-grow-1"></div>
                                 <ul>

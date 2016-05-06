@@ -3,13 +3,13 @@
 set -e
 
 echo ==================== COMPILING ASSETS ====================
-gulp compile --release
-# gulp compile
+# gulp compile --release
+gulp compile
 
 
 echo =============== BUILDING ANDROID PROJECT =================
 python tools/add-manifest-debuggable.py
-cordova build --release android
+cordova build android --release
 
 function signapk(){
   echo ==========================================================
