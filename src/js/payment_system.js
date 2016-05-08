@@ -37,7 +37,7 @@ Peerio.PaymentSystem.init = function () {
 
     api.loadProductsFromServer = function () {
         if(store.products.length == 0) {
-            var resp = '[{"id":"pro_annual","android_id": "com.peerio.storage.50.yearly", "ios_id": "com.peerio.storage.yearly", "browser_id": "mock.yearly", "name":"Peerio Pro (annual)","description":"50Gb of additional files storage","interval":"year","amount":9999,"currency":"usd","interval_count":1,"bonus":"50G"},{"id":"pro_monthly", "android_id": "com.peerio.storage.50.monthly", "ios_id": "com.peerio.storage.monthly", "browser_id": "mock.monthly", "name":"Peerio Pro (monthly)","description":"50Gb of additional files storage","interval":"month","amount":999,"currency":"usd","interval_count":1,"bonus":"50G"}]';
+            var resp = '[{"id":"pro_annual","android_id": "com.peerio.storage.50.yearly", "com.peerio.storage.50.yearly": "storage.yearly", "browser_id": "mock.yearly", "name":"Peerio Pro (annual)","description":"50Gb of additional files storage","interval":"year","amount":9999,"currency":"usd","interval_count":1,"bonus":"50G"},{"id":"pro_monthly", "android_id": "com.peerio.storage.50.monthly", "ios_id": "com.peerio.storage.50.monthly", "browser_id": "mock.monthly", "name":"Peerio Pro (monthly)","description":"50Gb of additional files storage","interval":"month","amount":999,"currency":"usd","interval_count":1,"bonus":"50G"}]';
 
             var server_data = JSON.parse(resp);
             server_data.forEach(i => store.register(api.parsers[Peerio.runtime.platform](i)));
