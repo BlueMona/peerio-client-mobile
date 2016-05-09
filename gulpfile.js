@@ -48,7 +48,7 @@ var babelOptions = {
 
 // extracting --cli --parameters
 var knownOptions = {
-    boolean: ['noapi', 'release'],
+    boolean: ['noapi', 'release', 'injectd', 'injectr'],
     default: {}
 };
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
@@ -115,6 +115,14 @@ gulp.task('index', function () {
     if (!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
     if (options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
 
+    console.log(options.injectd);
+    var injectFile = options.injectd ? 'debug.js' : (options.injectr ? 'debug.prod.js' : null);
+    if(injectFile) result = result.pipe(inject(gulp.src(injectFile), {
+        starttag: '<!-- inject:debug -->',
+        transform: function (filePath, file) {
+            return '<script type="text/javascript">\n' + file.contents.toString('utf8') + '\n</script>';
+        }
+    }));
     return result.pipe(gulp.dest('./www'));
 });
 
