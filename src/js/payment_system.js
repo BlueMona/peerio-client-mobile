@@ -37,6 +37,7 @@ Peerio.PaymentSystem.init = function () {
 
     api.loadProductsFromServer = function () {
         if(store.products.length == 0) {
+            // TODO: load from https://hocuspocus.peerio.com/paid_plan/list
             var resp = '[{"id":"pro_annual","android_id": "com.peerio.storage.50.yearly", "com.peerio.storage.50.yearly": "storage.yearly", "browser_id": "mock.yearly", "name":"Peerio Pro (annual)","description":"50Gb of additional files storage","interval":"year","amount":9999,"currency":"usd","interval_count":1,"bonus":"50G"},{"id":"pro_monthly", "android_id": "com.peerio.storage.50.monthly", "ios_id": "com.peerio.storage.50.monthly", "browser_id": "mock.monthly", "name":"Peerio Pro (monthly)","description":"50Gb of additional files storage","interval":"month","amount":999,"currency":"usd","interval_count":1,"bonus":"50G"}]';
 
             var server_data = JSON.parse(resp);
@@ -44,6 +45,14 @@ Peerio.PaymentSystem.init = function () {
         }
         return Promise.resolve(true)
         .then( () => store && store.refresh() );
+    };
+
+    api.tryLoad = function () {
+        try {
+            api.loadProductsFromServer();
+        } catch (e) {
+            return Promise.reject(e);
+        }
     };
 
     if(Peerio.runtime.platform === 'browser') {
@@ -64,11 +73,15 @@ Peerio.PaymentSystem.init = function () {
                         p.loaded = true;
                         p.canPurchase = true;
                         p.title = p.id;
+                        p.finish = function () {
+                            L.info('loaded product: ' + p.id);
+                        };
+                        store.approved_cb && store.approved_cb(p);
                     }, 1000);
                 });
             },
             order: function (id) {
-                Peerio.UI.Alert.show({text:id})
+                Peerio.UI.Confirm.show({text:id})
                 .then( () => {
                     var p = store.products.filter( p => p.id == id )[0];
                     p.finish = function() {

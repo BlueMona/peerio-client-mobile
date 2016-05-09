@@ -7,19 +7,23 @@
             return {subscriptions: []};
         },
         componentDidMount: function () {
-            this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.forceUpdate.bind(this))];
+            this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.handleUpdate.bind(this))];
+            Peerio.PaymentSystem.getAllSubscriptions()
+                 .then(s => this.setState({ 'subscriptions': s }))
+                 .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
         },
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
- 
-        componentWillMount: function () {
-            Peerio.PaymentSystem.getAllSubscriptions()
-                .then(s => this.setState({ 'subscriptions': s }))
-                .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
+
+        handleUpdate: function (p) {
+            this.forceUpdate();
+            L.info(p);
         },
+ 
         handleOrder: function (p) {
-            if(!p.canPurchase || this.hasSubscriptions()) return;
+            var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
+            if(!forceSubscriptions && (!p.canPurchase || this.hasSubscriptions())) return;
             store.order(p.id);
         },
         hasSubscriptions: function () {

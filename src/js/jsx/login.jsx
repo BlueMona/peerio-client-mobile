@@ -88,6 +88,8 @@
             Peerio.NativeAPI.getCountryCode().then((code) => {
                 Peerio.DataCollection.trackCountry(code);
             });
+
+            Peerio.PaymentSystem.tryLoad();
         },
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;

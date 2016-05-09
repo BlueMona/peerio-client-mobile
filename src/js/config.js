@@ -10,28 +10,6 @@
 
 var Peerio = this.Peerio || {};
 
-PeerioDebug = {};
-// this will be typed into login form as default value
-PeerioDebug.user = 't20160506204943';
-PeerioDebug.pass = 'dan jackpot welfare gen rang';
-
-PeerioDebug.server = 'wss://hocuspocus.peerio.com';
-
-// PeerioDebug.logLevel = 3;
-
-// test find and tap capabilities
-
-PeerioDebug.AutomationEnabled = true;
-
-PeerioDebug.afterStart = function() {
-    Peerio.Helpers.sleep(2000)
-    .then(() => Peerio.Helpers.simulateTouchSelector('.btn-safe'))
-    .then(() => Peerio.Helpers.sleep(1000))
-    .then(() => document.querySelector('.tab') ? true : Promise.reject('not loaded'))
-    .then(() => window.location = '#/app/payments');
-};
-
-
 Peerio.Config = {};
 
 Peerio.Config.init = function () {

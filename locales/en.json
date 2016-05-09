@@ -577,5 +577,7 @@
   "touch_notAvailable": "Fingerprint identification unavailable",
   "supportFeedback": "Support/Feedback",
   "payments_title": "Buy additional storage",
-  "payments_menu": "Upgrade"
+  "payments_menu": "Upgrade",
+  "payments_hasSubscription": "You already have a subscription",
+  "payments_buy": "Buy"
 }

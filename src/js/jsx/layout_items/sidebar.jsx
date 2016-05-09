@@ -19,6 +19,7 @@
             Peerio.Dispatcher.onSidebarToggle(this.toggle);
             Peerio.Dispatcher.onHardMenuButton(this.toggle);
             Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null));
+            Peerio.Dispatcher.onPaymentProductUpdated(this.forceUpdate.bind(this, null));
             //sidebar is never unmounted so we don't unsubscribe
         },
         //--- CUSTOM FN
@@ -66,8 +67,13 @@
             var twoFactor;
             var user = Peerio.user;
             if (!user || !user.settings) return null;
+            // TODO: remove when quota is calculated by server
+            var total = user.quota.total;
+            if (user.subscription && user.subscription.active) {
+                total += user.subscription.amount;
+            }
             var quotaUsed = Peerio.Helpers.formatBytes(user.quota.user);
-            var quota = Peerio.Helpers.formatBytes(user.quota.total);
+            var quota = Peerio.Helpers.formatBytes(total);
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
             pinNode = Peerio.user.PINIsSet ? t('passcode_remove') : t('passcode_set');
