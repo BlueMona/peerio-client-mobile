@@ -15,6 +15,17 @@ android_appname = 'android-x86-debug.apk'
 android_package = 'com.peerio'
 android_activity = 'MainActivity'
 
+test_logins = {
+    'wss://app.peerio.com': {
+        'user': 't20160511003719',
+        'secret': 'fished richter retarded buyer council'
+    },
+    'wss://hocuspocus.peerio.com': {
+        'user': 't20160426200617',
+        'secret': 'require opinions ants heather missile'
+    }
+}
+
 wait_timeout = 30
 
 def ios_path():

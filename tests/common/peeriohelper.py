@@ -1,4 +1,5 @@
 from common.helper import *
+from settings.settings import test_logins
 
 def removePin():
     tap_by_css('.btn-danger')
@@ -34,14 +35,16 @@ def enterPin(pinText):
         tapPin(i)
         sleep(0.1)
 
+def getWebSocketServer():
+    return driver().execute_script('return Peerio.Config.webSocketServer')
+
 class LoginBase:
     def login(self):
         if not tap_by_css('.saved-login'):
             print 'skipping saved login'
-        # text_by_id('username', 't20160426200617')
-        # text_by_id('password', 'require opinions ants heather missile')
-        text_by_id('username', 't20160511003719')
-        text_by_id('password', 'fished richter retarded buyer council')
+        pair = test_logins[getWebSocketServer()]
+        text_by_id('username', pair['user'])
+        text_by_id('password', pair['secret'])
 
         tap_by_css('.btn-safe')
         assert wait_find_by_id('tabbar') != None
