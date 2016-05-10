@@ -41,6 +41,12 @@ def platform_ios():
         'driver': lambda: IosDriverFast(executor, ios_93(ios_basic()))
     }
 
+def platform_iosdevice():
+    return {
+        'appium': True,
+        'driver': lambda: IosDriverFast(executor, ios_device())
+    }
+
 def platform_android():
     return {
         'appium': True,

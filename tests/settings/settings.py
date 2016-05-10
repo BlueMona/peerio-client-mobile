@@ -30,15 +30,15 @@ def android_path():
 
 def ios_basic():
     return {
+        'platformName': 'iOS',
         'app': ios_path(),
         'launchTimeout': 90000,
         'newCommandTimeout': 12000
     }
 
 def ios_92(config):
-    config = config.copy();
+    config = config.copy()
     config.update({
-        'platformName': 'iOS',
         'platform': 'iOS',
         'platformVersion': '9.2',
         'deviceName': 'iPhone 6 Plus',
@@ -49,9 +49,18 @@ def ios_92(config):
     return config
 
 def ios_93(config):
-    config = ios_92(config.copy());
+    config = ios_92(config.copy())
     config.update({
         'platformVersion': '9.3'
+    })
+    return config
+
+def ios_device():
+    config = ios_basic()
+    config.update({
+        'deviceName': 'iPhone',
+        'nativeInstrumentsLib': True,
+        'udid': '9c52cb2f1c824d0d467d1454fe75f7a8e0e6fcf2'
     })
     return config
 

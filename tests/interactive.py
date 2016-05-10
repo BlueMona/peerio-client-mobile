@@ -7,15 +7,23 @@ from time import sleep
 from settings.settings import *
 from common.helper import *
 from common.processes import *
+import common.helper
 
-# restartAppium()
-# restartChromedriver()
-# test_connect_android()
-# tap_by_css('.btn-safe')
-# tap_by_css('.saved-login')
-# driver = test_connect()
-# context_name = "WEBVIEW_1"
-# driver.switch_to.context(context_name)
-# savedLogin = driver.find_element_by_css_selector('.saved-login')
+platform = 'iosdevice'
+method = getattr(common.helper, 'platform_' + platform)
+if not method:
+    exit()
 
+platform_options = method()
+set_platform(platform_options)
 
+if 'appium' in platform_options and platform_options['appium']:
+    restartAppium()
+
+if 'browserautomation' in platform_options and platform_options['browserautomation']:
+    restartBrowserAutomation()
+
+if 'chromedriver' in platform_options and platform_options['chromedriver']:
+    restartChromedriver()
+
+connect()

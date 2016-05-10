@@ -54,7 +54,7 @@ class IosDriver(AbstractDriver):
         return selector
 
     def switch_to_webview(self):
-        self.appium.switch_to.context("WEBVIEW_1")
+        self.appium.switch_to.context(next(x for x in self.appium.contexts if x.startswith("WEBVIEW_")))
 
     def switch_to_native(self):
         self.appium.switch_to.context("NATIVE_APP")

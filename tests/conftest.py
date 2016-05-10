@@ -32,7 +32,7 @@ def execute_before_any_test():
     if 'browserautomation' in platform_options and platform_options['browserautomation']:
         restartBrowserAutomation()
 
-    if 'chromeriver' in platform_options and platform_options['chromedriver']:
+    if 'chromedriver' in platform_options and platform_options['chromedriver']:
         restartChromedriver()
 
 @pytest.yield_fixture(autouse=True)
