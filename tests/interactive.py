@@ -6,11 +6,14 @@ from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
 from settings.settings import *
 from common.helper import *
+from common.peeriohelper import *
 import common.platforms
 
-platform = 'iosdevice'
+platform = 'android'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
 
 connect()
+t = LoginBase()
+t.login()

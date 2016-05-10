@@ -60,5 +60,7 @@ class AndroidDriver(AbstractDriver):
     def reload(self):
         return None
 
+    def execute_script(self, script):
+        return self.chromium.execute_script(script)
 
 

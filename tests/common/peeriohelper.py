@@ -38,8 +38,11 @@ class LoginBase:
     def login(self):
         if not tap_by_css('.saved-login'):
             print 'skipping saved login'
-        text_by_id('username', 't20160426200617')
-        text_by_id('password', 'require opinions ants heather missile')
+        # text_by_id('username', 't20160426200617')
+        # text_by_id('password', 'require opinions ants heather missile')
+        text_by_id('username', 't20160511003719')
+        text_by_id('password', 'fished richter retarded buyer council')
+
         tap_by_css('.btn-safe')
         assert wait_find_by_id('tabbar') != None
 

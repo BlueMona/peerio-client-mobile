@@ -15,7 +15,10 @@ class AbstractDriver:
         return selector
 
     def clear(self, selector):
-        self.find(selector).clear()
+        el = self.find(selector)
+        if not el:
+            raise Exception('no such element: %s' % selector)
+        el.clear()
         return selector
 
     def wait_for(self, timeout, func, msg = None):
@@ -41,6 +44,8 @@ class AbstractDriver:
 
     def text_by_css(self, selector, text, slow=False):
         el = self.find(selector)
+        if not el:
+            raise Exception('no such element: %s' % selector)
         self.clear(selector)
         if(slow):
             for c in text:
@@ -48,7 +53,4 @@ class AbstractDriver:
                 time.sleep(random.randrange(1, 10) / 20.0)
         else:
             self.send_keys(selector, text)
-
-    def execute_script(self, script):
-        return self.appium.execute_script(script)
 

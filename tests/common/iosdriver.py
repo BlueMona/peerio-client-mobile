@@ -67,6 +67,9 @@ class IosDriver(AbstractDriver):
         self.switch_to_webview()
         return self.appium.execute_script(script)
 
+    def execute_script(self, script):
+        return self.appium.execute_script(script)
+
 class IosDriverFast(IosDriver):
     def tap(self, selector):
         self.switch_to_webview()
