@@ -19,7 +19,7 @@ tags
 /www
 
 # debug variables file with potentially sensitive info
-/debug.js
+/debug*.js
 
 # cloned platform
 /extra/cordova-android
