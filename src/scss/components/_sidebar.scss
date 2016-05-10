@@ -43,6 +43,27 @@ Click the sidebar in the example to toggle the `.open` state.
   display: flex;
   flex-direction: column;
 
+  // What is this about? max-height? Why max-height? - paul
+  // TODO find out who did this and figure out why. - paul
+  // moved outside of sidebar-header so I didn't have to make more than one of these abominations. - paul
+  @media screen and (max-height: 480px){
+    .sidebar-header {
+      margin: 0 auto;
+      text-align: left;
+
+      .avatar {
+        float: left;
+        margin-right: 10px;
+      }
+    }
+
+    li {
+      min-height: 32px;
+      font-size: 12px;
+    }
+  }
+
+
   .sidebar-header {
     @extend .flex-justify-center;
 
@@ -61,17 +82,6 @@ Click the sidebar in the example to toggle the `.open` state.
       @extend .text-overflow;
     }
 
-    @media screen and (max-height: 480px){
-      margin: 0 auto;
-      text-align: left;
-      width: 150px;
-
-      .avatar {
-        float: left;
-        margin-right: 10px;
-      }
-    }
-
     .storage-info {
       @extend .flex-col;
       @extend .flex-align-start;
@@ -83,9 +93,9 @@ Click the sidebar in the example to toggle the `.open` state.
   }
 
   .app-version {
-    position: static;
     margin-bottom: $margin-small;
     padding: 0 $padding-base;
+    position: static;
   }
 
   .avatar.big {
@@ -110,7 +120,6 @@ Click the sidebar in the example to toggle the `.open` state.
     &:not(:last-of-type) {
       border-bottom: $border-light;
     }
-
   }
 
   a {
