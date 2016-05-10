@@ -523,6 +523,7 @@
   "file_locationCloud": "In the cloud (encrypted)",
   "file_uploadComplete": "Upload complete.",
   "file_uploadFailed": "Upload failed.",
+  "file_uploadStorageExceeded": "Storage quota exceeded.",
   "file_namePrompt": "Enter filename:",
   "fileSelect_title": "Select your files",
   "server_isDown": "Is Peerio down?",

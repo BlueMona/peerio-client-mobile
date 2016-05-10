@@ -11,8 +11,11 @@
                         .then(function () {
                             Peerio.Action.showAlert({text: t('file_uploadComplete')});
                         })
-                        .catch(function (err) {
-                            Peerio.Action.showAlert({text: t('file_uploadFailed')+' ' + err});
+                        .catch(function (e) {
+                            var message = e;
+                            if(e && e.code === 413)
+                                message = t('file_uploadStorageExceeded');
+                            Peerio.Action.showAlert({text: t('file_uploadFailed') + ' ' + message });
                         });
                 })
                 // this catch handles user cancel on confirm/prompt
