@@ -116,8 +116,8 @@ gulp.task('index', function () {
     if (options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
 
     console.log(options.injectd);
-    var injectFile = options.injectd ? 'debug.js' : (options.injectr ? 'debug.prod.js' : null);
-    if(injectFile) result = result.pipe(inject(gulp.src(injectFile), {
+    var injectFile = options.injectd ? 'debug.staging.js' : (options.injectr ? 'debug.prod.js' : null);
+    if(injectFile) result = result.pipe(inject(gulp.src(injectFile).pipe(babel(babelOptions)), {
         starttag: '<!-- inject:debug -->',
         transform: function (filePath, file) {
             return '<script type="text/javascript">\n' + file.contents.toString('utf8') + '\n</script>';

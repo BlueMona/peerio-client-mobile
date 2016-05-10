@@ -311,14 +311,15 @@ Peerio.Helpers.init = function () {
     };
 
     api.simulateTouch = function (element) {
-        var evt = new CustomEvent('simulatetap');
-        element.dispatchEvent(evt);
+        if(element) {
+            var evt = new CustomEvent('simulatetap');
+            element.dispatchEvent(evt);
+        }
+        return Promise.resolve(true);
     };
 
     api.simulateTouchSelector = function (selector) {
-        var evt = new CustomEvent('simulatetap');
-        document.querySelector(selector).dispatchEvent(evt);
-        return Promise.resolve(true);
+        return api.simulateTouch(document.querySelector(selector));
     };
 
     api.sleep = function (time) {
