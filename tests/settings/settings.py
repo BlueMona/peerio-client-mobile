@@ -1,3 +1,4 @@
+import sys
 import unittest
 import os
 from random import randint
@@ -55,12 +56,11 @@ def ios_93(config):
     })
     return config
 
-def ios_device():
+def ios_device(udid):
     config = ios_basic()
     config.update({
         'deviceName': 'iPhone',
-        'nativeInstrumentsLib': True,
-        'udid': '9c52cb2f1c824d0d467d1454fe75f7a8e0e6fcf2'
+        'udid': udid
     })
     return config
 

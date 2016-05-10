@@ -2,15 +2,12 @@ import appium
 import selenium
 import time
 import random
+import common.platforms
 from settings.settings import *
 from websocket import create_connection
 from wsdriver import BrowserDriver
-from androiddriver import AndroidDriver
-from iosdriver import IosDriver
-from iosdriver import IosDriverFast
 
 global driver
-global __platform
 
 __defaultTimeout = 30
 __defaultAnimationTimeout = 5
@@ -21,38 +18,7 @@ def driver():
 
 def connect():
     global driver
-    if not __platform:
-        set_platform(platform_browser())
-    driver = __platform['driver']()
-
-def set_platform(platform):
-    global __platform
-    __platform = platform
-
-def platform_browser():
-    return {
-        'browserautomation': True,
-        'driver': lambda: BrowserDriver(True)
-    }
-
-def platform_ios():
-    return {
-        'appium': True,
-        'driver': lambda: IosDriverFast(executor, ios_93(ios_basic()))
-    }
-
-def platform_iosdevice():
-    return {
-        'appium': True,
-        'driver': lambda: IosDriverFast(executor, ios_device())
-    }
-
-def platform_android():
-    return {
-        'appium': True,
-        'chromedriver': True,
-        'driver': lambda: AndroidDriver(executor, android_600(android_basic()), chromium_executor, chromium_basic())
-    }
+    driver = common.platforms.get_platform()['driver']()
 
 def check_animation():
     for css in __animationClasses:

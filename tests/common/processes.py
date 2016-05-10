@@ -4,6 +4,7 @@ import time
 import os
 import subprocess
 import browserautomationserver
+import commands
 
 global appiumProcess
 global chromedriverProcess
@@ -61,5 +62,33 @@ def killBrowserAutomation():
 def restartBrowserAutomation():
     killBrowserAutomation()
     startBrowserAutomation()
+
+global iosDebugProxyProcess
+def startIosDebugProxy():
+    atexit.register(killIosDebugProxy)
+    print "waiting for ios debug proxy to start"
+    udid = getIPhoneDeviceID()
+    if not udid:
+        raise Exception("No iOS devices connected")
+    os.system("ios_webkit_debug_proxy -c %s:27753 &" % udid)
+    return True
+
+def killIosDebugProxy():
+    os.system("ps -A | grep [i]os_webkit_debug_proxy | awk '{print $1}' | xargs kill -9")
+
+def restartIosDebugProxy():
+    killIosDebugProxy()
+    startIosDebugProxy()
+
+def getIPhoneDeviceID():
+    res = commands.getstatusoutput("ideviceinfo | grep UniqueDeviceID")
+    if len(res) < 2:
+        return False
+    res = res[1]
+    res = res.split(': ')
+    if len(res) < 2:
+        return False
+    return res[1]
+
 
 
