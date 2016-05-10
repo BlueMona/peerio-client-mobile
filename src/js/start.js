@@ -76,6 +76,8 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.Helpers.getPreferredLocale()
             .then(Peerio.Translator.loadLocale);
 
+            window.PeerioDebug && PeerioDebug.afterStart && PeerioDebug.afterStart();
+
             return Promise.resolve();
         });
     }
