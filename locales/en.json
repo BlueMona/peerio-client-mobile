@@ -356,6 +356,7 @@
   "optIns": "Opt-ins",
   "optIns_dataCollection": "Data collection",
   "redeemCoupon": "Redeem Coupon",
+  "enterCouponCode": "Enter Coupon Code",
   "participants": "Participants",
   "sharedFiles": "Shared Files",
   "finishingIn": "finishing in {time}",
@@ -434,8 +435,8 @@
   "contact_status": "Contact status:",
   "contact_primaryAddress": "Primary Address",
   "contact_statusEstablished": "Established contact.",
-  "contact_statusRequestSent": "Pending: you sent request",
-  "contact_statusRequestReceived": "Pending: you received request",
+  "contact_statusRequestSent": "Pending: you sent a request",
+  "contact_statusRequestReceived": "Pending: you received a request",
   "contact_statusIsSelf": "This is you",
   "contact_youTag": "{#you}",
   "contact_invitedTag": "invited",
@@ -523,7 +524,6 @@
   "file_locationCloud": "In the cloud (encrypted)",
   "file_uploadComplete": "Upload complete.",
   "file_uploadFailed": "Upload failed.",
-  "file_uploadStorageExceeded": "Storage quota exceeded.",
   "file_namePrompt": "Enter filename:",
   "fileSelect_title": "Select your files",
   "server_isDown": "Is Peerio down?",
@@ -574,6 +574,9 @@
   "shareText": "Securely share messages and files with me on Peerio! Use code {code} to add me and get 250MB of bonus storage.",
   "inviteNote": "When one of your contacts signs up for Peerio and enters your promo code, a contact request will automatically be sent to them from your account and both of you will receive 250MB of bonus storage. You can earn up to 10GB of free storage this way!",
   "shareThisCode": "Share this code",
-  "touch_keychain": "Enabling TouchID requires using your keychain, would you like to proceed?",
-  "touch_notAvailable": "Fingerprint identification unavailable"
+  "touch_keychain": "Enabling Touch ID requires using your keychain, would you like to proceed?",
+  "touch_notAvailable": "Fingerprint identification unavailable",
+  "supportFeedback": "Support/Feedback",
+  "payments_title": "Buy additional storage",
+  "payments_menu": "Upgrade"
 }
