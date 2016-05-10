@@ -49,3 +49,6 @@ class AbstractDriver:
         else:
             self.send_keys(selector, text)
 
+    def execute_script(self, script):
+        return self.appium.execute_script(script)
+

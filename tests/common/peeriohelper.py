@@ -34,4 +34,17 @@ def enterPin(pinText):
         tapPin(i)
         sleep(0.1)
 
+class LoginBase:
+    def login(self):
+        if not tap_by_css('.saved-login'):
+            print 'skipping saved login'
+        text_by_id('username', 't20160426200617')
+        text_by_id('password', 'require opinions ants heather missile')
+        tap_by_css('.btn-safe')
+        assert wait_find_by_id('tabbar') != None
+
+    def changeuser(self):
+        sleep(1)
+        return tap_by_css('#footer .btn')
+        sleep(1)
 

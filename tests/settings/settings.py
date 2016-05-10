@@ -34,6 +34,9 @@ def ios_basic():
         'platformName': 'iOS',
         'app': ios_path(),
         'launchTimeout': 90000,
+        'autoAcceptAlerts': True, # so that system dialogs are accepted
+        'autoLaunch': False,
+        'noReset': True,
         'newCommandTimeout': 12000
     }
 
@@ -43,9 +46,6 @@ def ios_92(config):
         'platform': 'iOS',
         'platformVersion': '9.2',
         'deviceName': 'iPhone 6 Plus',
-        'autoAcceptAlerts': True, # so that system dialogs are accepted
-        'autoLaunch': False,
-        'noReset': True
     })
     return config
 

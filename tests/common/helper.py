@@ -64,7 +64,10 @@ def wait_find_by_css(selector):
 
 def tap_by_css(selector):
     el = find_by_css(selector)
+    if not el:
+        return False
     driver.tap(selector)
+    return True
 
 def wait_tap_by_css(selector):
     el = wait_find_by_css(selector)
@@ -83,3 +86,7 @@ def text_by_id(id, text, slow=False):
 
 def get_text_by_css(selector):
     return driver.text(find_by_css(selector))
+
+def execute_script(script):
+    return driver.execute_script(script)
+

@@ -285,6 +285,7 @@ Peerio.NativeAPI.init = function () {
 
             push.on('notification', function (data) {
                 L.silly('push notification received: {0}', data);
+                api.notifications = [data];
             });
 
             push.on('error', function (e) {
