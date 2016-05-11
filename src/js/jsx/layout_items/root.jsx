@@ -61,6 +61,11 @@
                     Peerio.Helpers.savePreferredLocale(locale);
                 }
             });
+
+            Peerio.Dispatcher.onServerWarning(warning => {
+                Peerio.UI.Alert.show({ text: warning.msg })
+                    .then(() => Peerio.user.clearWarning(warning));
+            });
         },
         notifyOnUpdate: function (expired) {
             var text = expired
