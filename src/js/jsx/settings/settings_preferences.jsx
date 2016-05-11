@@ -80,7 +80,7 @@
                     <div className="headline">{t('preferences')}</div>
 
                     <ul>
-                        <li className="subhead">Language</li>
+                        <li className="subhead">{t('language')}</li>
                         <li>
                           <Peerio.UI.LanguageSelect className="some-class-name"></Peerio.UI.LanguageSelect>
                         </li>
