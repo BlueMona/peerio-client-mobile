@@ -51,6 +51,10 @@
             if(window.isPeerioDownTimer) return;
             window.isPeerioDownTimer = window.setTimeout(() => {
                 this.counter = 0;
+                if(this.animateIsPeerioDownTimer) {
+                    window.clearInterval(this.animateIsPeerioDownTimer);
+                    this.animateIsPeerioDownTimer = null;
+                }
                 this.animateIsPeerioDownTimer = 
                     window.setInterval(() => this.animateIsPeerioDown(), 2000);
                 window.isPeerioDownTimer = null;
