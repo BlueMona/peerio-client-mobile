@@ -40,7 +40,7 @@
                     <div className="headline">{t('yourPassphrase')}</div>
                     <Peerio.UI.TrackSubState name="passphrase"/>
 
-                    <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>segment</strong>})}</p>
+                    <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>{segment}</strong>})}</p>
 
                     <p className="txt-lrg">
                         {this.state.passphrase}
