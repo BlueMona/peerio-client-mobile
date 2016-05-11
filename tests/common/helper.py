@@ -62,6 +62,13 @@ def wait_find_by_id(id):
 def wait_find_by_css(selector):
     return wait_for(wait_timeout, lambda: find_by_css(selector), "find by selector %s" % selector)
 
+def wait_not_find_by_css(selector):
+    try:
+        wait_find_by_css(selector)
+    except:
+        return True
+    return False
+
 def tap_by_css(selector):
     el = find_by_css(selector)
     if not el:

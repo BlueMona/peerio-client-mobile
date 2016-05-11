@@ -40,7 +40,7 @@
             var text = this.props.text || '';
 
             return (
-                <div className="modal alert-wrapper">
+                <div className={classNames('modal', 'alert-wrapper', this.props.serviceClass)}>
                     <div className="alert">
                         <div className="alert-content">
                             <div className={'headline' + (!this.props.headline ? ' hide' : '')}>

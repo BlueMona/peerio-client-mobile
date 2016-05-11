@@ -9,11 +9,11 @@ from common.helper import *
 from common.peeriohelper import *
 import common.platforms
 
-platform = 'android'
+platform = 'ios'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
 
 connect()
-t = LoginBase()
-t.login()
+# t = LoginBase()
+# t.login()

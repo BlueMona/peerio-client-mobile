@@ -26,7 +26,7 @@ test_logins = {
     }
 }
 
-wait_timeout = 30
+wait_timeout = 15
 
 def ios_path():
     return os.path.abspath(
