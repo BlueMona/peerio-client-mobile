@@ -87,7 +87,7 @@
                     <div className="list-item-content txt-sm">
                         <span>{f.name}</span>
                         <div className="list-item-description">
-                            {t('sharedBy')} <em>{f.sender || f.creator}</em> &bull; {f.moment.format('L')}
+                            {t('file_sharedBy')} <em>{f.sender || f.creator}</em> &bull; {f.moment.format('L')}
                         </div>
                     </div>
                 </Peerio.UI.Tappable>
