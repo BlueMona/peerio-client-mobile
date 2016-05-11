@@ -111,10 +111,11 @@
                                         <i className="material-icons">settings</i> {t('preferences')}
                                     </Peerio.UI.Tappable>
 
+                                    {Peerio.runtime.platform != 'ios' ?
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
                                         <i className="fa fa-certificate"></i> {t('redeemCoupon')}
-                                    </Peerio.UI.Tappable>
+                                    </Peerio.UI.Tappable> : null}
                                 </ul>
                                 <ul>
                                     <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
