@@ -38,11 +38,18 @@
                                                              <div className="flex-col flex-grow-1">
                                                                 {/*<p>{i.description}</p>*/}
                                                                 <div className="flex-grow-1">
-                                                                  <div className="text-center headline-lrg"><strong>$99.99/year</strong></div>
-                                                                  <div className="text-center">or 9.99/month</div>
-                                                                  <p>Full features of basic plan</p>
-                                                                  <p>Priority email support</p>
-                                                                  <p>50GB file storage</p>
+                                                                  <div className="section-highlight">
+                                                                    <div className="headline text-center">50GB - <strong>$99.99/year</strong></div>
+                                                                    <div className="text-center">or 9.99/month</div>
+                                                                </div>
+                                                                  <p className="flex-row flex-align-center">
+                                                                    <i className="material-icons">add</i>
+                                                                    Full features of basic plan
+                                                                  </p>
+                                                                  <p className="flex-row flex-align-center">
+                                                                    <i className="material-icons">add</i>
+                                                                    Priority email support
+                                                                  </p>
                                                                 </div>
                                                                 <div className="buttons">
                                                                   {this.state.subscriptions.map( i =>

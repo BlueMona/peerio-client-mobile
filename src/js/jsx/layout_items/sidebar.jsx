@@ -120,7 +120,7 @@
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
-                                        <i className="material-icons">help</i> {t('payments_menu')}
+                                        <i className="material-icons">cloud_upload</i> {t('payments_menu')}
                                     </Peerio.UI.Tappable>
                                 </ul>
 
