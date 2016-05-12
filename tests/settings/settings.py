@@ -1,3 +1,4 @@
+import sys
 import unittest
 import os
 from random import randint
@@ -14,7 +15,18 @@ android_appname = 'android-x86-debug.apk'
 android_package = 'com.peerio'
 android_activity = 'MainActivity'
 
-wait_timeout = 30
+test_logins = {
+    'wss://app.peerio.com': {
+        'user': 't20160511003719',
+        'secret': 'fished richter retarded buyer council'
+    },
+    'wss://hocuspocus.peerio.com': {
+        'user': 't20160426200617',
+        'secret': 'require opinions ants heather missile'
+    }
+}
+
+wait_timeout = 15
 
 def ios_path():
     return os.path.abspath(
@@ -30,28 +42,36 @@ def android_path():
 
 def ios_basic():
     return {
+        'platformName': 'iOS',
         'app': ios_path(),
         'launchTimeout': 90000,
+        'autoAcceptAlerts': True, # so that system dialogs are accepted
+        'autoLaunch': False,
+        'noReset': True,
         'newCommandTimeout': 12000
     }
 
 def ios_92(config):
-    config = config.copy();
+    config = config.copy()
     config.update({
-        'platformName': 'iOS',
         'platform': 'iOS',
         'platformVersion': '9.2',
         'deviceName': 'iPhone 6 Plus',
-        'autoAcceptAlerts': True, # so that system dialogs are accepted
-        'autoLaunch': False,
-        'noReset': True
     })
     return config
 
 def ios_93(config):
-    config = ios_92(config.copy());
+    config = ios_92(config.copy())
     config.update({
         'platformVersion': '9.3'
+    })
+    return config
+
+def ios_device(udid):
+    config = ios_basic()
+    config.update({
+        'deviceName': 'iPhone',
+        'udid': udid
     })
     return config
 

@@ -68,6 +68,11 @@
                     Peerio.user.subscription = { active: true, amount: 50 * 1024 * 1024 * 1024 };
                 }
             });
+
+            Peerio.Dispatcher.onServerWarning(warning => {
+                Peerio.UI.Alert.show({ text: warning.msg, serviceClass: '_serverWarning' })
+                    .then(() => Peerio.user.clearWarning(warning));
+            });
         },
         notifyOnUpdate: function (expired) {
             var text = expired

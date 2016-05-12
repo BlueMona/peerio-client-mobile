@@ -19,64 +19,57 @@ Peerio.AutomationSocket.init = function () {
         };
         api.automationSocket = 
             new ReconnectingWebSocket(host, null, options);
+
+        api.automationActions = {
+            send_keys: function (el, data) {
+                el.value += data.value;
+                Peerio.Helpers.simulateChange(el);
+            },
+            tap: function (el, data) {
+                Peerio.Helpers.simulateTouch(el);
+            },
+            find: function (el) {
+                if(!el) throw 'not_found';
+            },
+            text: function (el, data) {
+                data.result = el.textContent;
+            },
+            clear: function (el) {
+                el.value = '';
+            },
+            option: function (el, data) {
+                el.value = data.value;
+                Peerio.Helpers.simulateChange(el);
+            },
+            value: function (el, data) {
+                data.result = el.value;
+            },
+            reload: function (el, data) {
+                window.location.reload();
+                data.suppressResult = true;
+            }
+        };
+
+        api.executeElement = function (data) {
+            if(!_.has(api.automationActions, data.action))
+                throw 'action_not_found';
+            var el = data.selector ? document.querySelector(data.selector) : null;
+            if(data.selector && !el)
+                throw 'not_found';
+            api.automationActions[data.action](el, data);
+        };
+
         api.automationSocket.onmessage = function(data) {
             data = JSON.parse(data.data);
             console.log(data);
-            var result = 'action_not_found';
-            var el = null;
-            switch(data.action) {
-                case 'send_keys':
-                    el = document.querySelector(data.selector);
-                if(el) {
-                    el.value += data.value;
-                    Peerio.Helpers.simulateChange(el);
-                    result = 'success'; 
-                } else {
-                    result = 'not_found';
-                }
-                break;
-                case 'tap':
-                    el = document.querySelector(data.selector);
-                    if(el) {
-                    Peerio.Helpers.simulateTouch(el);
-                    result = 'success'; 
-                    } else {
-                        result = 'not_found';
-                    }
-                break;
-                case 'find':
-                    el = document.querySelector(data.selector);
-                    if(el) {
-                     result = 'success'; 
-                    } else {
-                        result = 'not_found';
-                     }
-                break;
-                case 'text':
-                    el = document.querySelector(data.selector);
-                    if(el) {
-                        result = el.textContent; 
-                    } else {
-                        result = 'not_found';
-                    }
-                break;
-
-                case 'clear':
-                    el = document.querySelector(data.selector);
-                    if(el) {
-                        el.value = '';
-                        result = 'success'; 
-                    } else {
-                        result = 'not_found';
-                    }
-                    break;
-
-                case 'reload':
-                     window.location.reload();
-                    return;
+            var result = 'success';
+            try {
+                api.executeElement(data);
+                result = data.result || result;
+            } catch(e) {
+                result = e;
             }
-
-            api.automationSocket.send(result);
+            !data.suppressResult && api.automationSocket.send(result);
         };
 
         api.automationSocket.checkSend = function () {

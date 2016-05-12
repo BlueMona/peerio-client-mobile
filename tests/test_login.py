@@ -2,7 +2,6 @@ import unittest
 import os
 import sys
 import pdb
-from selenium.common.exceptions import NoSuchElementException
 from random import randint
 from appium import webdriver
 from time import sleep
@@ -12,11 +11,9 @@ from common.peeriohelper import *
 from common.processes import *
 import common.testcase
 
-class Login(common.testcase.TestCase):
+class Login(common.testcase.TestCase, LoginBase):
     def test_01_login(self):
-        try:
-            self.changeuser()
-        except NoSuchElementException:
+        if not self.changeuser():
             print 'skipping pin'
         self.login()
 
@@ -54,19 +51,4 @@ class Login(common.testcase.TestCase):
 
     def test_99_logout(self):
         navigateToLogout()
-
-    def login(self):
-        try:
-            tap_by_css('.saved-login')
-        except NoSuchElementException:
-            print 'skipping saved login'
-        text_by_id('username', 't20160426200617')
-        text_by_id('password', 'require opinions ants heather missile')
-        tap_by_css('.btn-safe')
-        assert wait_find_by_id('tabbar') != None
-
-    def changeuser(self):
-        sleep(1)
-        tap_by_css('#footer .btn')
-        sleep(1)
 

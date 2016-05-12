@@ -34,13 +34,28 @@
             this.props.handleNextStep({pass: this.state});
         },
 
+        dictLocales: {
+            'en': 'English',
+            'fr': 'Francais',
+            'de': 'Deutsch',
+            'es': 'Español',
+            'it': 'Italiano',
+            'ru': 'Русский',
+            'zh-CN': '汉语',
+            'nb-NO': 'Norsk (Bokmål)',
+            'tr': 'Türkçe',
+            'hu': 'Magyar'
+        },
+
         render: function () {
+            var localeNodes = Object.keys(this.dictLocales).map(l => <option value={l}>{this.dictLocales[l]}</option>);
+            var locale = this.dictLocales[Peerio.Translator.locale] ? Peerio.Translator.locale : 'en';
             return (
                 <fieldset key={'signup-step-1'}>
                     <div className="headline">{t('yourPassphrase')}</div>
                     <Peerio.UI.TrackSubState name="passphrase"/>
 
-                    <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>segment</strong>})}</p>
+                    <p className='info'>{t('signup_passphraseDescription', null, {emphasis: segment => <strong>{segment}</strong>})}</p>
 
                     <p className="txt-lrg">
                         {this.state.passphrase}
@@ -48,17 +63,8 @@
                     <div className="flex-row">
                         <div className="input-group flex-grow-1">
                             <label htmlFor="lang">{t('language')}</label>
-                            <select ref="lang" id="lang" onChange={this.generatePassphrase}>
-                                <option value="en">English</option>
-                                <option value="fr">Francais</option>
-                                <option value="de">Deutsch</option>
-                                <option value="es">Español</option>
-                                <option value="it">Italiano</option>
-                                <option value="ru">Русский</option>
-                                <option value="zh-CN">汉语</option>
-                                <option value="nb-NO">Norsk (Bokmål)</option>
-                                <option value="tr">Türkçe</option>
-                                <option value="hu">Magyar</option>
+                            <select ref="lang" id="lang" onChange={this.generatePassphrase} value={locale}>
+                                {localeNodes}
                             </select>
 
                         </div>

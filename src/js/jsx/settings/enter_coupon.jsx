@@ -24,7 +24,7 @@
                   <div className="input-group">
                       <label htmlFor="coupon">{t('coupon_prompt')}</label>
                       <div className="flex-row flex-align-center">
-                          <input type="text" placeholder="enter coupon code" ref="textEdit" spellCheck="false" autoComplete="off" id="coupon"/>
+                          <input type="text" placeholder={t('enterCouponCode')} ref="textEdit" spellCheck="false" autoComplete="off" id="coupon"/>
                           <Peerio.UI.Tappable className="btn-primary" onTap={ this.redeemCoupon }>
                               {t('button_redeem')}
                           </Peerio.UI.Tappable>

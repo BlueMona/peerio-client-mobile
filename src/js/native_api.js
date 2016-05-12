@@ -269,7 +269,7 @@ Peerio.NativeAPI.init = function () {
         return new Promise(function (resolve, reject) {
             var push = PushNotification.init({
                 ios: {alert: true, badge: true, sound: true, clearBadge: true},
-                android: {senderID: Peerio.Config.push.android.senderID, clearNotifications: true}
+                android: {senderID: Peerio.Config.push.android.senderID, clearNotifications: true, forceShow: false}
             });
 
             api.push = push;
@@ -285,6 +285,7 @@ Peerio.NativeAPI.init = function () {
 
             push.on('notification', function (data) {
                 L.silly('push notification received: {0}', data);
+                api.notifications = [data];
             });
 
             push.on('error', function (e) {

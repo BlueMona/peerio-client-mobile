@@ -331,6 +331,8 @@ Peerio.Helpers.init = function () {
     api.simulateChange = function (element) {
         var ev = new Event('input', { bubbles: true });
         element.dispatchEvent(ev);
+        var ev = new Event('change', { bubbles: true });
+        element.dispatchEvent(ev);
     };
 
     api.waitUntil = function(timeout, checkLambda) {

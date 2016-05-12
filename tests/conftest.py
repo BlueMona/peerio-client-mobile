@@ -18,22 +18,11 @@ def execute_before_any_test():
         pytest.exit('\n'.join(message))
         return
 
-    method = getattr(common.helper, 'platform_' + platform)
-    if not method:
+    if not common.platforms.launchPlatform(platform):
         pytest.exit('platform not found: ' + platform)
         return
 
-    platform_options = method()
-    set_platform(platform_options)
-
-    if 'appium' in platform_options and platform_options['appium']:
-        restartAppium()
-
-    if 'browserautomation' in platform_options and platform_options['browserautomation']:
-        restartBrowserAutomation()
-
-    if 'chromeriver' in platform_options and platform_options['chromedriver']:
-        restartChromedriver()
+    connect()
 
 @pytest.yield_fixture(autouse=True)
 def run_around_tests():

@@ -51,10 +51,10 @@
                     if(!u) return;
                     uploadNodes.push(
                         <li className="list-item">
-                          <i className="list-item-thumb file-type material-icons">cloud_upload</i>
-                          <div className="list-item-content">
-                            <div className="list-item-title">
-                                {u.stateName}&nbsp;{u.totalChunks ? Math.round(u.currentChunk * 100/u.totalChunks) + '%' : ''} <i className="fa fa-circle-o-notch fa-spin"></i>
+                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
+                            <div className="list-item-content">
+                                <div className="list-item-title">
+                                    {t(u.stateName)}&nbsp;{u.totalChunks ? Math.round(u.currentChunk * 100/u.totalChunks) + '%' : ''} <i className="fa fa-circle-o-notch fa-spin"></i>
                                 </div>
                                 <div className="list-item-description">{file.name}</div>
                             </div>
@@ -127,29 +127,30 @@
             var downloadStateNode = null;
             if (item.downloadState) {
                 var ds = item.downloadState;
-                downloadStateNode = (<div className="download">{ds.stateName}&nbsp;{ds.percent}</div>);
+                downloadStateNode = (<div className="download">{t(ds.stateName)}&nbsp;{ds.percent}</div>);
             }
 
             var cacheState = item.cached ? <i className="material-icons p-blue-dark-10">save</i> : null;
 
             var timestamp = moment(item.timestamp).calendar();
 
-            return (<Peerio.UI.Tappable element="li" className={classes} key={item.shortID} onTap={this.props.onTap}>
+            return (
+                <Peerio.UI.Tappable element="li" className={classes} key={item.shortID} onTap={this.props.onTap}>
+                    <i className={item.icon}></i>
 
-              <i className={item.icon}></i>
-
-              <div className="list-item-content flex-col flex-justify-center">
-                  <div className="list-item-title">
-                    <div className="text-overflow">{this.props.item.name}</div>
-                    {cacheState}
-                  </div>
-                    <div className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
+                    <div className="list-item-content flex-col flex-justify-center">
+                        <div className="list-item-title">
+                            <div className="text-overflow">{this.props.item.name}</div>
+                            {cacheState}
+                        </div>
+                        <div className="list-item-description">{this.props.item.humanSize} &bull; {timestamp}</div>
                         {downloadStateNode}
                     </div>
                     <div className="list-item-forward">
                         <i className="material-icons">chevron_right</i>
                     </div>
-            </Peerio.UI.Tappable>);
+                </Peerio.UI.Tappable>
+            );
         }
     });
 

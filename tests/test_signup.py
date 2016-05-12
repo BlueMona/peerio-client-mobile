@@ -14,36 +14,11 @@ import logging
 import pycurl
 logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
-class Signup(common.testcase.TestCase):
+class Signup(common.testcase.TestCase, SignupBase):
     def test_01_signup(self):
-        # signup
-        tap_by_css('.btn-primary')
-
-        # terms of use
-        tap_by_css('.btn-safe')
-
-        # basic information
-        # TODO: handle existing usernames
-        # TODO: different usernames (random, etc)
-        # TODO: username should work correctly in both slow and fast mode. Now only slow works
-        username = 't' + strftime("%Y%m%d%H%M%S")
-        text_by_id('user_name', username, True)
-        text_by_id('user_first_name', 'tester')
-        text_by_id('user_last_name', 'lastname')
-        wait_find_by_css('.btn-safe')
-        tap_by_css('.btn-safe')
-
-        # get the passphrase
-        # waiting for passphrase to be generated
-        sleep(1)
-        phrase = get_text_by_css('.txt-lrg')
-        tap_by_css('.btn-safe')
-        wait_find_by_css('textarea')
-        text_by_css('textarea', phrase)
-        tap_by_css('.btn-safe')
-
-        logging.info(username)
-        logging.info(phrase)
+        self.signup()
+        logging.info(self.username)
+        logging.info(self.phrase)
 
     def test_02_usability_research(self):
         wait_find_by_css('.headline')

@@ -15,7 +15,10 @@ class AbstractDriver:
         return selector
 
     def clear(self, selector):
-        self.find(selector).clear()
+        el = self.find(selector)
+        if not el:
+            raise Exception('no such element: %s' % selector)
+        el.clear()
         return selector
 
     def wait_for(self, timeout, func, msg = None):
@@ -41,6 +44,8 @@ class AbstractDriver:
 
     def text_by_css(self, selector, text, slow=False):
         el = self.find(selector)
+        if not el:
+            raise Exception('no such element: %s' % selector)
         self.clear(selector)
         if(slow):
             for c in text:

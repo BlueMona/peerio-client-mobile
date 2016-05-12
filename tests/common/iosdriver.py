@@ -5,6 +5,7 @@ from websocket import create_connection
 from abstractdriver import AbstractDriver
 import selenium
 import appium
+from selenium.common.exceptions import NoSuchElementException
 
 class IosDriver(AbstractDriver):
     def __init__(self, executor, capabilities):
@@ -35,7 +36,10 @@ class IosDriver(AbstractDriver):
 
     def find(self, selector):
         self.switch_to_webview()
-        return self.appium.find_element_by_css_selector(selector)
+        try:
+            return self.appium.find_element_by_css_selector(selector)
+        except NoSuchElementException:
+            return None
 
     def tap(self, selector):
         self.switch_to_webview()
@@ -54,13 +58,16 @@ class IosDriver(AbstractDriver):
         return selector
 
     def switch_to_webview(self):
-        self.appium.switch_to.context("WEBVIEW_1")
+        self.appium.switch_to.context(next(x for x in self.appium.contexts if x.startswith("WEBVIEW_")))
 
     def switch_to_native(self):
         self.appium.switch_to.context("NATIVE_APP")
 
     def js(self, script):
         self.switch_to_webview()
+        return self.appium.execute_script(script)
+
+    def execute_script(self, script):
         return self.appium.execute_script(script)
 
 class IosDriverFast(IosDriver):

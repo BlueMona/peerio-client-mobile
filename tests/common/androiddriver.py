@@ -5,6 +5,7 @@ from websocket import create_connection
 from abstractdriver import AbstractDriver
 import selenium
 import appium
+from selenium.common.exceptions import NoSuchElementException
 
 class AndroidDriver(AbstractDriver):
     def __init__(self, executor, capabilities, chromium_executor, chromium_capabilities):
@@ -39,7 +40,10 @@ class AndroidDriver(AbstractDriver):
         return selector.text
 
     def find(self, selector):
-        return self.chromium.find_element_by_css_selector(selector)
+        try:
+            return self.chromium.find_element_by_css_selector(selector)
+        except NoSuchElementException:
+            return None
 
     def tap(self, selector):
         el = self.find(selector)
@@ -56,5 +60,7 @@ class AndroidDriver(AbstractDriver):
     def reload(self):
         return None
 
+    def execute_script(self, script):
+        return self.chromium.execute_script(script)
 
 

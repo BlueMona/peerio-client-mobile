@@ -50,11 +50,19 @@
             }
             if(window.isPeerioDownTimer) return;
             window.isPeerioDownTimer = window.setTimeout(() => {
-                this.counter = 0;
+                this.cancelAnimation();
                 this.animateIsPeerioDownTimer = 
                     window.setInterval(() => this.animateIsPeerioDown(), 2000);
                 window.isPeerioDownTimer = null;
             }, 5000);
+        },
+
+        cancelAnimation: function () {
+            this.counter = 0;
+            if(this.animateIsPeerioDownTimer) {
+                window.clearInterval(this.animateIsPeerioDownTimer);
+                this.animateIsPeerioDownTimer = null;
+            }
         },
 
         cancelIsPeerioDown: function () {
@@ -62,10 +70,7 @@
                 window.clearTimeout(this.isPeerioDownTimer);
                 this.isPeerioDownTimer = null;
             }
-            if(this.animateIsPeerioDownTimer) {
-                window.clearInterval(this.animateIsPeerioDownTimer);
-                this.animateIsPeerioDownTimer = null;
-            }
+            this.cancelAnimation();
             this.setState({connectingText: null});
         },
 
