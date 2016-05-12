@@ -1,8 +1,6 @@
 (function () {
     'use strict';
 
-    var MAX_USERNAME_LEN = 16;
-
     Peerio.UI.SignupWizardName = React.createClass({
         mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
 
@@ -29,8 +27,7 @@
 
         validateUsername: function () {
             var username = this.refs.username.getDOMNode().value;
-
-            if(username.length > MAX_USERNAME_LEN) return;
+            if(!Peerio.Helpers.isValidUsername(username)) return;
             username = username.toLowerCase();
             this.setState({username: username});
             Peerio.Net.validateUsername(username)
