@@ -8,10 +8,12 @@ from selenium.common.exceptions import NoSuchElementException
 class LocaleTest(common.testcase.TestCase, LoginBase, SignupBase):
     locales = {
         "en": {
-            "login": "Login"
+            "login": "Login",
+            "signup": ""
         },
         "fr": {
-            "login": "Connexion"
+            "login": "Connexion",
+            "signup": "Commencer"
         }
     }
 
@@ -23,4 +25,12 @@ class LocaleTest(common.testcase.TestCase, LoginBase, SignupBase):
     def test_01_locale_start(self):
         for l in self.locales:
             self.locale_test(l)
+        self.locale_test("en")
+
+    def test_02_locale_after_signup(self):
+        self.restart()
+        self.locale_test("fr")
+        self.signup()
+        wait_find_by_css('._setupWizard')
+        assert get_text_by_css('.btn-safe') == self.locales["fr"]["signup"]
 

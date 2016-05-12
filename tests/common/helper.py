@@ -99,3 +99,6 @@ def execute_script(script):
 
 def option_by_css(selector, value):
     return driver.option_by_css(selector, value)
+
+def value_by_css(selector):
+    return driver.value_by_css(selector)

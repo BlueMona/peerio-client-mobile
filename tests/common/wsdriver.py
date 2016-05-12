@@ -72,3 +72,6 @@ class BrowserDriver(AbstractDriver):
             raise selenium.common.exceptions.NoSuchElementException
         return selector
 
+    def get_value_by_css(self, selector):
+        self.sendsocket(jsonpickle.encode({"action": "value", "selector": selector}))
+        return self.ws.recv()

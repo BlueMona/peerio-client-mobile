@@ -41,6 +41,9 @@ Peerio.AutomationSocket.init = function () {
                 el.value = data.value;
                 Peerio.Helpers.simulateChange(el);
             },
+            value: function (el, data) {
+                data.result = el.value;
+            },
             reload: function (el, data) {
                 window.location.reload();
                 data.suppressResult = true;
