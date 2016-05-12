@@ -39,7 +39,8 @@
                                                                 {/*<p>{i.description}</p>*/}
                                                                 <div className="flex-grow-1">
                                                                   <div className="section-highlight">
-                                                                    <div className="headline text-center">50GB - <strong>$99.99/year</strong></div>
+                                                                    <div className="headline-sm">Peerio <strong>Pro</strong></div>
+                                                                    <div className="headline text-center"><strong>50GB</strong> - $99.99/year</div>
                                                                     <div className="text-center">or 9.99/month</div>
                                                                 </div>
                                                                   <p className="flex-row flex-align-center">
