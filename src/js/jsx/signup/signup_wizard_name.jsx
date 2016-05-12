@@ -30,13 +30,16 @@
             if(!Peerio.Helpers.isValidUsername(username)) return;
             username = username.toLowerCase();
             this.setState({username: username});
-            Peerio.Net.validateUsername(username)
-            .then( (valid) => {
-                this.setState({usernameValid: valid});
-            })
-            .catch( () => {
-                this.setState({usernameValid: false});
-            });
+            this.serverValidateUsername = this.serverValidateUsername || _.debounce(() => {
+                Peerio.Net.validateUsername(this.state.username)
+                    .then( (valid) => {
+                        this.setState({usernameValid: valid});
+                    })
+                    .catch( () => {
+                        this.setState({usernameValid: false});
+                    });
+            }, 500);
+            this.serverValidateUsername();
         },
 
         validateFirstName: function () {
