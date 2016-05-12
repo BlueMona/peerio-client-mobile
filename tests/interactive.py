@@ -9,11 +9,15 @@ from common.helper import *
 from common.peeriohelper import *
 import common.platforms
 
-platform = 'ios'
+platform = 'browser'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
 
 connect()
+t = LocaleTest()
+t.test_01_locale_start()
+# t = SignupBase()
+# t.signup()
 # t = LoginBase()
 # t.login()

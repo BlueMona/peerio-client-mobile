@@ -66,4 +66,9 @@ class BrowserDriver(AbstractDriver):
         self.clear(selector)
         self.send_keys(selector, text)
 
+    def option_by_css(self, selector, value):
+        self.sendsocket(jsonpickle.encode({"action": "option", "value": value, "selector": selector}))
+        if self.ws.recv() != "success":
+            raise selenium.common.exceptions.NoSuchElementException
+        return selector
 
