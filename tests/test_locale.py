@@ -27,7 +27,15 @@ class LocaleTest(common.testcase.TestCase, LoginBase, SignupBase):
             self.locale_test(l)
         self.locale_test("en")
 
-    def test_02_locale_after_signup(self):
+    def checkPassphraseLocale(self):
+        assert value_by_css("#lang") == "fr"
+
+    def test_02_locale_passphrase(self):
+        self.restart()
+        self.locale_test("fr")
+        self.signup(self.checkPassphraseLocale)
+
+    def test_03_locale_after_signup(self):
         self.restart()
         self.locale_test("fr")
         self.signup()

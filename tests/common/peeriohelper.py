@@ -58,7 +58,7 @@ class LoginBase:
 class SignupBase:
     username = None
     phrase = None
-    def signup(self):
+    def signup(self, passCb = None):
         # signup
         tap_by_css('.btn-primary')
 
@@ -80,6 +80,8 @@ class SignupBase:
         # waiting for passphrase to be generated
         sleep(1)
         self.phrase = get_text_by_css('.txt-lrg')
+        if passCb:
+            return passCb()
         tap_by_css('.btn-safe')
         wait_find_by_css('textarea')
         text_by_css('textarea', self.phrase)
