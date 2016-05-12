@@ -138,6 +138,7 @@
   "destroyFilesOwnerErrorText": "Destroying files removes them from every account they have been shared with. Only a file's owner can do that. Please try deleting the file instead.",
   "fileUploadError": "File upload failed",
   "fileUploadErrorText": "Please check your connection and try again.",
+  "file_uploadStorageExceeded": "Storage quota exceeded.",
   "dragAndDropUploadTitle": "Drop to upload to Peerio.",
   "dragAndDropUploadText": "Your files will be encrypted and uploaded to your personal cloud.",
   "allFiles": "All Files",
@@ -356,6 +357,7 @@
   "optIns": "Opt-ins",
   "optIns_dataCollection": "Data collection",
   "redeemCoupon": "Redeem Coupon",
+  "enterCouponCode": "Enter Coupon Code",
   "participants": "Participants",
   "sharedFiles": "Shared Files",
   "finishingIn": "finishing in {time}",
@@ -523,7 +525,6 @@
   "file_locationCloud": "In the cloud (encrypted)",
   "file_uploadComplete": "Upload complete.",
   "file_uploadFailed": "Upload failed.",
-  "file_uploadStorageExceeded": "Storage quota exceeded.",
   "file_namePrompt": "Enter filename:",
   "fileSelect_title": "Select your files",
   "server_isDown": "Is Peerio down?",
@@ -577,8 +578,8 @@
   "touch_keychain": "Enabling Touch ID requires using your keychain, would you like to proceed?",
   "touch_notAvailable": "Fingerprint identification unavailable",
   "supportFeedback": "Support/Feedback",
-  "payments_title": "Buy additional storage",
-  "payments_menu": "Upgrade",
+  "payments_title": "Upgrade your storage",
+  "payments_menu": "Upgrade your storage",
   "payments_hasSubscription": "You already have a subscription",
-  "payments_buy": "Buy"
+  "payments_buy": "Upgrade to "
 }

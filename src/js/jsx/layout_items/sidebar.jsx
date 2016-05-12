@@ -111,27 +111,14 @@
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
-                                                        onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                        <i className="material-icons">share</i> {t('getFreeStorage')}
-                                    </Peerio.UI.Tappable>
-
-                                    <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="material-icons">settings</i> {t('preferences')}
                                     </Peerio.UI.Tappable>
 
-                                    <Peerio.UI.Tappable tag="li"
-                                                        onTap={this.toggleAndTransition.bind(this, 'enter_coupon')}>
-                                        <i className="fa fa-certificate"></i> {t('redeemCoupon')}
-                                    </Peerio.UI.Tappable>
-                                </ul>
-                                <ul>
                                     <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
                                         <i className="material-icons">help</i> {t('supportFeedback')}
                                     </Peerio.UI.Tappable>
-                                </ul>
 
-                                <ul>
                                     <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
                                         <i className="material-icons">help</i> {t('payments_menu')}
                                     </Peerio.UI.Tappable>

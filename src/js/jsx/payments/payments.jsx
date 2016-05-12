@@ -20,7 +20,7 @@
             this.forceUpdate();
             L.info(p);
         },
- 
+
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
             if(!forceSubscriptions && (!p.canPurchase || this.hasSubscriptions())) return;
@@ -33,29 +33,39 @@
         render: function () {
             // if the user has at least one subscription, we shouldn't allow him to subscribe more
             // TODO: check if user has subscriptions from other sources (on server)
-            var alreadySubscribed = this.hasSubscriptions(); 
-            var subscriptions = this.state.subscriptions.map( i => 
-                                                             <div>
-                                                                <p>{i.description}</p>
-                                                                <Peerio.UI.Tappable 
-                                                                    element="div" 
-                                                                    className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'} 
-                                                                    onTap={this.handleOrder.bind(this, i)}>
-                                                                    {t('payments_buy') + ' ' + (i.alias ||  i.id)}
-                                                                </Peerio.UI.Tappable>
-                                                             </div>);
+            var alreadySubscribed = this.hasSubscriptions();
+            var subscriptions =
+                                                             <div className="flex-col flex-grow-1">
+                                                                {/*<p>{i.description}</p>*/}
+                                                                <div className="flex-grow-1">
+                                                                  <div className="text-center headline-lrg"><strong>$99.99/year</strong></div>
+                                                                  <div className="text-center">or 9.99/month</div>
+                                                                  <p>Full features of basic plan</p>
+                                                                  <p>Priority email support</p>
+                                                                  <p>50GB file storage</p>
+                                                                </div>
+                                                                <div className="buttons">
+                                                                  {this.state.subscriptions.map( i =>
+                                                                      <Peerio.UI.Tappable
+                                                                          element="div"
+                                                                          className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
+                                                                          onTap={this.handleOrder.bind(this, i)}>
+                                                                          {t('payments_buy') + ' ' + (i.alias ||  i.id)}
+                                                                      </Peerio.UI.Tappable>)}
+                                                                </div>
+                                                             </div>;
             var loader = this.state.error ?
                 <div>{this.state.error}</div> : <div>loader</div>;
             return (
                 <div className="content without-tab-bar without-footer flex-col">
                     <div className="headline">{t('payments_title')}</div>
-                    {alreadySubscribed ? 
-                        <p>{t('payments_hasSubscription')}</p> : null} 
-                    <div>
-                    { this.state.subscriptions && this.state.subscriptions.length ? 
+                    {alreadySubscribed ?
+                        <p>{t('payments_hasSubscription')}</p> : null}
+
+                    { this.state.subscriptions && this.state.subscriptions.length ?
                         subscriptions : loader
                     }
-                    </div>
+
                 </div>
             );
         }
