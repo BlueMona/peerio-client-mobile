@@ -20,7 +20,7 @@ Peerio.PaymentSystem.init = function () {
     };
 
     api.loaded = function() {
-        return store.products.filter(s => s.loaded !== true).length === 0;
+        return store.products.filter(s => s.id != 'application data' && s.loaded !== true).length === 0;
     },
 
     api.getAllSubscriptions = function () {
@@ -62,6 +62,7 @@ Peerio.PaymentSystem.init = function () {
         store = { 
             products: [], 
             PAID_SUBSCRIPTION: 'paid subscription',
+            APPROVED: 'approved',
             when: function () {
                 return {
                     approved: function (cb) { store.approved_cb = cb; }
@@ -105,7 +106,8 @@ Peerio.PaymentSystem.init = function () {
         // only consummable products are approved on the store side
         store.when('product').approved( function (p) { 
             // p.finish(); 
-            Peerio.Action.paymentProductUpdated(p); 
+            if(p.state == store.APPROVED)
+                Peerio.Action.paymentProductUpdated(p); 
         });
         // api.loadProductsFromServer();
     }

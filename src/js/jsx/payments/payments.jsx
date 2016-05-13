@@ -57,7 +57,7 @@
                                               element="div"
                                               className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
                                               onTap={this.handleOrder.bind(this, i)}>
-                                              {t('payments_buy') + ' ' + (i.alias ||  i.id)}
+                                              {t('payments_' + i.id)}
                                           </Peerio.UI.Tappable>)}
                                     </div>
                                  </div>;
