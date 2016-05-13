@@ -51,7 +51,7 @@
                                         Priority email support
                                       </p>
                                     </div>
-                                    <div className="buttons">
+                                    <div className="buttons row">
                                       {this.state.subscriptions.map( i =>
                                           <Peerio.UI.Tappable
                                               element="div"
