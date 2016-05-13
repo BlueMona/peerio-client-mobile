@@ -34,34 +34,33 @@
             // if the user has at least one subscription, we shouldn't allow him to subscribe more
             // TODO: check if user has subscriptions from other sources (on server)
             var alreadySubscribed = this.hasSubscriptions();
-            var subscriptions =
-                                                             <div className="flex-col flex-grow-1">
-                                                                {/*<p>{i.description}</p>*/}
-                                                                <div className="flex-grow-1">
-                                                                  <div className="section-highlight">
-                                                                    <div className="headline-sm">Peerio <strong>Pro</strong></div>
-                                                                    <div className="headline text-center"><strong>50GB</strong> - $99.99/year</div>
-                                                                    <div className="text-center">or 9.99/month</div>
-                                                                </div>
-                                                                  <p className="flex-row flex-align-center">
-                                                                    <i className="material-icons">add</i>
-                                                                    Full features of basic plan
-                                                                  </p>
-                                                                  <p className="flex-row flex-align-center">
-                                                                    <i className="material-icons">add</i>
-                                                                    Priority email support
-                                                                  </p>
-                                                                </div>
-                                                                <div className="buttons">
-                                                                  {this.state.subscriptions.map( i =>
-                                                                      <Peerio.UI.Tappable
-                                                                          element="div"
-                                                                          className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
-                                                                          onTap={this.handleOrder.bind(this, i)}>
-                                                                          {t('payments_buy') + ' ' + (i.alias ||  i.id)}
-                                                                      </Peerio.UI.Tappable>)}
-                                                                </div>
-                                                             </div>;
+            var subscriptions =  <div className="flex-col flex-grow-1">
+                                    {/*<p>{i.description}</p>*/}
+                                    <div className="flex-grow-1">
+                                      <div className="section-highlight">
+                                        <div>Peerio <strong>Pro</strong></div>
+                                        <div style={{fontSize: '20px', lineHeight: '1.5', marginTop: '8px'}}><strong>50GB</strong> - $99.99/year</div>
+                                        <div className="">or 9.99/month</div>
+                                      </div>
+                                      <p className="flex-row flex-align-center">
+                                        <i className="material-icons">add</i>
+                                        Full features of basic plan
+                                      </p>
+                                      <p className="flex-row flex-align-center">
+                                        <i className="material-icons">add</i>
+                                        Priority email support
+                                      </p>
+                                    </div>
+                                    <div className="buttons">
+                                      {this.state.subscriptions.map( i =>
+                                          <Peerio.UI.Tappable
+                                              element="div"
+                                              className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
+                                              onTap={this.handleOrder.bind(this, i)}>
+                                              {t('payments_buy') + ' ' + (i.alias ||  i.id)}
+                                          </Peerio.UI.Tappable>)}
+                                    </div>
+                                 </div>;
             var loader = this.state.error ?
                 <div>{this.state.error}</div> : <div>loader</div>;
             return (
