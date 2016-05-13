@@ -329,6 +329,10 @@ Peerio.Helpers.init = function () {
         return Peerio.TinyDB.getItem('locale')
         .then(locale => {
             return locale ? locale : Peerio.NativeAPI.getPreferredLanguage();
+        })
+        .then(locale => {
+            // checking that the locale is actually available (approved) in the UI
+            return Peerio.Config.locales.filter(l => l.code == locale).length ? locale : Peerio.Config.locales[0].code;
         });
     };
 
