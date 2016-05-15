@@ -7,16 +7,17 @@ from time import sleep
 from settings.settings import *
 from common.helper import *
 from common.peeriohelper import *
+from common.processes import *
 import common.platforms
 
-platform = 'browser'
+platform = 'android'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
 
 connect()
-t = LocaleTest()
-t.test_01_locale_start()
+# t = LocaleTest()
+# t.test_01_locale_start()
 # t = SignupBase()
 # t.signup()
 # t = LoginBase()

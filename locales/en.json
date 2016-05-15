@@ -583,6 +583,6 @@
   "payments_menu": "Upgrade your storage",
   "payments_hasSubscription": "You already have a subscription",
   "payments_buy": "Buy",
-  "payments_com.peerio.storage.50.annually": "Pay annually",
+  "payments_com.peerio.storage.50.yearly": "Pay annually",
   "payments_com.peerio.storage.50.monthly": "Pay monthly"
 }

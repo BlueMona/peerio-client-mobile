@@ -8,10 +8,13 @@
         },
         componentDidMount: function () {
             this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.handleUpdate.bind(this))];
-            Peerio.PaymentSystem.getAllSubscriptions()
-                 .then(s => this.setState({ 'subscriptions': s }))
-                 .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
+            var api = Peerio.PaymentSystem;
+            api.tryLoad()
+                .then(api.getAllSubscriptions)
+                .then(s => this.setState({ 'subscriptions': s }))
+                .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
         },
+
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
@@ -58,12 +61,13 @@
                                               element="div"
                                               className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
                                               onTap={this.handleOrder.bind(this, i)}>
-                                              {t('payments_buy') + ' ' + (i.alias ||  i.id)}
+                                              {t('payments_' + i.id)}
                                           </Peerio.UI.Tappable>)}
                                     </div>
                                  </div>;
             var loader = this.state.error ?
-                <div>{this.state.error}</div> : <div>loader</div>;
+                <div>{this.state.error}</div> : 
+                <div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
             return (
                 <div className="content without-tab-bar without-footer flex-col">
                     <div className="headline">{t('payments_title')}</div>

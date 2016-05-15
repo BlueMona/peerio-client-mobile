@@ -20,8 +20,12 @@ Peerio.PaymentSystem.init = function () {
     };
 
     api.loaded = function() {
-        return store.products.filter(s => s.loaded !== true).length === 0;
-    },
+        return store.products.filter(s => s.id != 'application data' && s.loaded !== true).length === 0;
+    };
+
+    api.getOwnedSubscriptions = function () {
+        return api.getAllSubscriptions().filter(p => p.owned);
+    };
 
     api.getAllSubscriptions = function () {
         return api.loadProductsFromServer()
@@ -47,9 +51,19 @@ Peerio.PaymentSystem.init = function () {
         .then( () => store && store.refresh() );
     };
 
+    api.tryLoadSubscriptionStatus = function () {
+        try {
+            // TODO: implement loading the subscription status from the server (or it should be supplied via settings)
+            return Peerio.TinyDB.getItem('subscription', Peerio.user.username)
+                    .then(s => Peerio.user.subscription = {active: s, amount: 50 * 1024 * 1024 * 1024 });
+        } catch (e) {
+            return Promise.reject(e);
+        }
+    };
+
     api.tryLoad = function () {
         try {
-            api.loadProductsFromServer();
+            return api.loadProductsFromServer();
         } catch (e) {
             return Promise.reject(e);
         }
@@ -62,6 +76,7 @@ Peerio.PaymentSystem.init = function () {
         store = { 
             products: [], 
             PAID_SUBSCRIPTION: 'paid subscription',
+            APPROVED: 'approved',
             when: function () {
                 return {
                     approved: function (cb) { store.approved_cb = cb; }
@@ -84,10 +99,11 @@ Peerio.PaymentSystem.init = function () {
                 Peerio.UI.Confirm.show({text:id})
                 .then( () => {
                     var p = store.products.filter( p => p.id == id )[0];
-                    p.finish = function() {
-                        p.canPurchase = false;
-                        p.owned = true;
-                    };
+                    p.state = store.APPROVED;
+                    // p.finish = function() {
+                    //     p.canPurchase = false;
+                    //     p.owned = true;
+                    // };
                     store.approved_cb && store.approved_cb(p);
                 });
             }
@@ -105,7 +121,13 @@ Peerio.PaymentSystem.init = function () {
         // only consummable products are approved on the store side
         store.when('product').approved( function (p) { 
             // p.finish(); 
-            Peerio.Action.paymentProductUpdated(p); 
+            if(p.state == store.APPROVED) {
+                if(Peerio.user) 
+                    Peerio.TinyDB.saveItem('subscription', true, Peerio.user.username);
+                p.owned = true;
+                p.canPurchase = false;
+                Peerio.Action.paymentProductUpdated(p); 
+            }
         });
         // api.loadProductsFromServer();
     }

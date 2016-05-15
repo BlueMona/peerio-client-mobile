@@ -89,7 +89,7 @@
                 Peerio.DataCollection.trackCountry(code);
             });
 
-            Peerio.PaymentSystem.tryLoad();
+            Peerio.PaymentSystem.tryLoadSubscriptionStatus();
         },
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;

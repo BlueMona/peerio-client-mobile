@@ -8,6 +8,7 @@ from time import sleep
 executor = 'http://127.0.0.1:4723/wd/hub'
 ios_dir = '../../platforms/ios/build/emulator'
 ios_appname = 'Peerio.app'
+ios_bundle = 'com.peerio'
 
 chromium_executor = 'http://127.0.0.1:9515'
 android_dir = '../../platforms/android/build/outputs/apk'
@@ -71,18 +72,27 @@ def ios_device(udid):
     config = ios_basic()
     config.update({
         'deviceName': 'iPhone',
-        'udid': udid
+        'udid': udid,
+        'app': ios_bundle
     })
     return config
 
-def android_basic():
+def android_device(deviceName):
+    config = android_basic(deviceName)
+    config.update({
+        'app': android_package
+    })
+    return config
+
+def android_basic(deviceName):
     return {
         'app': android_path(),
         'appPackage': android_package,
         'appActivity': '.' + android_activity,
         'platformName': 'Android',
         'device': 'Android',
-        'deviceName': '192.168.56.101:5555',
+        'deviceName': deviceName,
+        'udid': deviceName,
         'newCommandTimeout': 12000,
         'noReset': True,
         'androidDeviceSocket': android_package + '_devtools_remote',
