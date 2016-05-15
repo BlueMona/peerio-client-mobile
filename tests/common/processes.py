@@ -5,6 +5,7 @@ import os
 import subprocess
 import browserautomationserver
 import commands
+import re
 
 global appiumProcess
 global chromedriverProcess
@@ -90,5 +91,32 @@ def getIPhoneDeviceID():
         return False
     return res[1]
 
+def getAndroidDevices():
+    res = commands.getstatusoutput("adb devices | grep device")
+    if len(res) < 2:
+        raise Exception("adb devices does not work")
+    res = res[1].split('\n')
+    if len(res) < 2:
+        raise Exception("adb devices not found")
+    del res[0]
+    ret = []
+    regex = re.compile(r'\d+\.\d+\.\d+\.\d+:\d+')
+    for i in res:
+        name = i.split()[0]
+        atype = "physical"
+        if regex.match(name):
+            atype = "genymotion"
+        ret.append( { "name": name, "type": atype } )
+    return ret
 
+def getFirstPhysicalAndroidDeviceID():
+    try:
+        return next(x for x in getAndroidDevices() if x["type"] == "physical")
+    except StopIteration:
+        raise Exception("No physical Android devices connected")
 
+def getFirstGenyMotionAndroidDeviceID():
+    try:
+        return next(x for x in getAndroidDevices() if x["type"] == "genymotion")
+    except StopIteration:
+        raise Exception("No GenyMotion Android devices connected")
