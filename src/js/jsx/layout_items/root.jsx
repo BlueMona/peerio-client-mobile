@@ -64,7 +64,7 @@
 
             // TODO: remove mock when server responds well
             Peerio.Dispatcher.onPaymentProductUpdated( p => {
-                if(!Peerio.user.subscription && p.owned) {
+                if(p.owned) {
                     Peerio.user.subscription = { active: true, amount: 50 * 1024 * 1024 * 1024 };
                 }
             });
