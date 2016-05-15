@@ -33,6 +33,7 @@
         render: function () {
             // if the user has at least one subscription, we shouldn't allow him to subscribe more
             // TODO: check if user has subscriptions from other sources (on server)
+            // TODO: added content to peerio-copy
             var alreadySubscribed = this.hasSubscriptions();
             var subscriptions =  <div className="flex-col flex-grow-1">
                                     {/*<p>{i.description}</p>*/}
