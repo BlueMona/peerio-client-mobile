@@ -97,3 +97,8 @@ def get_text_by_css(selector):
 def execute_script(script):
     return driver.execute_script(script)
 
+def option_by_css(selector, value):
+    return driver.option_by_css(selector, value)
+
+def value_by_css(selector):
+    return driver.value_by_css(selector)

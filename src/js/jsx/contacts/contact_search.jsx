@@ -129,7 +129,7 @@
                         </div>
                         <div className="buttons">
                             <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
-                                <i className="material-icons">search</i> {t('button_searchAgain')})
+                                <i className="material-icons">search</i> {t('button_searchAgain')}
                             </Peerio.UI.Tappable>
                         </div>
                         <div className="list-view">

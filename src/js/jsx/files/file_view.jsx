@@ -74,7 +74,7 @@
             var downloadStateNode = null, buttonsNode = null;
             if (file.downloadState) {
                 var ds = file.downloadState;
-                downloadStateNode = (<div className="info-banner">{t('ds.stateName')} {ds.percent}</div>);
+                downloadStateNode = (<div className="info-banner">{t(ds.stateName)} {ds.percent}</div>);
             } else {
                 buttonsNode = (
                     <div className="buttons">

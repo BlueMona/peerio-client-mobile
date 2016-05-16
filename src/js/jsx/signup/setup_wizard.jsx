@@ -23,7 +23,8 @@
             Peerio.UI.TouchId.isFeatureAvailable()
                 .then(() => this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID))
                 .catch(() => this.steps.splice(2, 0, Peerio.UI.SetupWizardPin))
-                .finally(this.forceUpdate);
+            // component is not yet available for force update so we update it via state
+                .finally(this.setState());
         },
 
         handleNextStep: function () {
@@ -85,7 +86,7 @@
                         {progressBarSteps}
                     </div>
                     <ReactCSSTransitionGroup
-                        className="flex-grow-1 flex-shrink-1"
+                        className="flex-grow-1 flex-shrink-1 _setupWizard"
                         style={{overflow:'auto'}}
                         transitionName="animate"
                         transitionEnterTimeout={1000} transitionLeaveTimeout={200}>

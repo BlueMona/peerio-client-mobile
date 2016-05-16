@@ -59,11 +59,20 @@ def platform_iosdevice():
         'driver': lambda: IosDriverFast(executor, ios_device(udid))
     }
 
-def platform_android():
+def platform_androiddevice():
+    device = getFirstPhysicalAndroidDeviceID()
     return {
         'appium': True,
         'chromedriver': True,
-        'driver': lambda: AndroidDriver(executor, android_600(android_basic()), chromium_executor, chromium_basic())
+        'driver': lambda: AndroidDriver(executor, android_device(device["name"]), chromium_executor, chromium_basic())
     }
 
+def platform_android():
+    device = getFirstGenyMotionAndroidDeviceID()
+    return {
+        'platformName': 'GenyMotion',
+        'appium': True,
+        'chromedriver': True,
+        'driver': lambda: AndroidDriver(executor, android_600(android_basic(device["name"])), chromium_executor, chromium_basic())
+    }
 
