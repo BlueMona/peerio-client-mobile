@@ -98,7 +98,7 @@
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'security')}>
-                                        <i className="material-icons">security</i> Security
+                                        <i className="material-icons">security</i>{t('security')}
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
