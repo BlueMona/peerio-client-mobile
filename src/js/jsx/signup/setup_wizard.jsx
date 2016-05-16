@@ -16,7 +16,6 @@
             this.steps = [
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardEmail,
-                Peerio.UI.SetupWizardCoupon,
                 Peerio.UI.SetupWizardContactImport,
                 Peerio.UI.SignupWizardOptIn
             ];
@@ -86,7 +85,7 @@
                         {progressBarSteps}
                     </div>
                     <ReactCSSTransitionGroup
-                        className="flex-grow-1 flex-shrink-1" 
+                        className="flex-grow-1 flex-shrink-1"
                         style={{overflow:'auto'}}
                         transitionName="animate"
                         transitionEnterTimeout={1000} transitionLeaveTimeout={200}>
