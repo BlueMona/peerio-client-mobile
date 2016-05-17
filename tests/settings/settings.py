@@ -86,7 +86,6 @@ def android_device(deviceName):
 
 def android_basic(deviceName):
     return {
-        'app': android_path(),
         'appPackage': android_package,
         'appActivity': '.' + android_activity,
         'platformName': 'Android',
