@@ -117,7 +117,7 @@
     <preference name="xwalkMode" value="embedded"/>
     <preference name="xwalkMultipleApk" value="true"/>
     <plugin name="com.peerio.cordova.plugin.insomnia" spec="4.2.1"/>
-    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.8">
+    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.9">
         <variable name="WKWEBVIEW_SERVER_PORT" value="52341"/>
     </plugin>
     <plugin name="cc.fovea.cordova.purchase" spec="https://github.com/j3k0/cordova-plugin-purchase">
