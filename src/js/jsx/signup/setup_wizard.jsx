@@ -16,7 +16,6 @@
             this.steps = [
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardEmail,
-                Peerio.UI.SetupWizardCoupon,
                 Peerio.UI.SetupWizardContactImport,
                 Peerio.UI.SignupWizardOptIn
             ];
