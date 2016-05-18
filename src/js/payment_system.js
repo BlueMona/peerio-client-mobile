@@ -46,9 +46,9 @@ Peerio.PaymentSystem.init = function () {
 
             var server_data = JSON.parse(resp);
             server_data.forEach(i => store.register(api.parsers[Peerio.runtime.platform](i)));
+            store && store.refresh();
         }
-        return Promise.resolve(true)
-        .then( () => store && store.refresh() );
+        return Promise.resolve(true);
     };
 
     api.tryLoadSubscriptionStatus = function () {
