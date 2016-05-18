@@ -155,7 +155,7 @@
                     { this.props.hideTitle ? null :
                         <div className="headline">Contact Import</div> }
                         <div className="headline-divider">{t('contact_importFriends')}</div>
-                        { requestItems.length === 0 ? (<p>No matches found</p>) : (
+                        { requestItems.length === 0 ? (<p>{t('noMatchesFound')}</p>) : (
                             <Peerio.UI.List
                                 selectAllText={t('importContactsSelectAll')}
                                 items={requestItems}
