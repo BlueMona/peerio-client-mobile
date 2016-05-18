@@ -102,11 +102,6 @@
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
-                                                        onTap={this.toggleAndTransition.bind(this, 'share_code')}>
-                                        <i className="material-icons">share</i> {t('getFreeStorage')}
-                                    </Peerio.UI.Tappable>
-
-                                    <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="material-icons">settings</i> {t('preferences')}
                                     </Peerio.UI.Tappable>

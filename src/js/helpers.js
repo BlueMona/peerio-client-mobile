@@ -287,11 +287,11 @@ Peerio.Helpers.init = function () {
                     window.FileEncryption.getEncryptionStatus()
                     .then(status => {
                         if(status == 2) return;
-                        var text = 'Your device supports full disk encryption, but it is not currently enabled. Peerio highly recommends the use of disk encryption. Would you like to learn more?';
+                        var text = t('androidEncryptionStatusOff');
                         if(status == 1)
-                            text = 'Your device has encryption turned on but your passcode is still set to the default. We recommend setting a unique passcode. Would you like to learn more?';
+                            text = t('androidEncryptionStatusPartial');
                         if(status == -1)
-                            text = 'Your device does not support encryption. We recommend upgrading to a version of Android which does. Would you like to learn more?';
+                            text =  t('androidEncryptionStatusUnsupported');
 
                         Peerio.UI.Confirm.show({
                             text: text,
