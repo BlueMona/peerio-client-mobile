@@ -63,7 +63,7 @@
             }
             /* if there are no files show a placeholder instead */
             var content =
-                (Peerio.user.files && Peerio.user.files.arr.length === 0) ?
+                (Peerio.user.files && Peerio.user.files.arr.length === 0 && Peerio.user.uploads.length === 0) ?
                     <div className="content list-view">
                         <div className="content-intro">
                             <img className="peerio-logo" src="media/img/peerio-logo-light.png"/>
