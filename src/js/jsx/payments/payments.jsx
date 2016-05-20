@@ -80,8 +80,8 @@
                 </div>
             );
             var loader = this.state.error ?
-                <div>{this.state.error}</div> : 
-                <div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
+                <div>{this.state.error}</div> :
+                <div className="list-item loader-item flex-row flex-align-center flex-justify-center"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
             return (
                 <div className="content without-tab-bar without-footer flex-col">
                     <div className="headline">{t('payments_title')}</div>
