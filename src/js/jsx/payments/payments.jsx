@@ -4,14 +4,17 @@
     Peerio.UI.Payments = React.createClass({
         mixins: [ReactRouter.Navigation],
         getInitialState: function () {
-            return {subscriptions: []};
+            return {
+                activeSubscriptions: Peerio.user.subscriptions,
+                availableSubscriptions: []
+            };
         },
         componentDidMount: function () {
-            this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.handleUpdate.bind(this))];
+            this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.handleUpdate.bind(this, null))];
             var api = Peerio.PaymentSystem;
             api.tryLoad()
                 .then(api.getAllSubscriptions)
-                .then(s => this.setState({ 'subscriptions': s }))
+                .then(s => this.setState({ availableSubscriptions: s }))
                 .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
         },
 
@@ -29,8 +32,13 @@
             if(!forceSubscriptions && (!p.canPurchase || this.hasSubscriptions())) return;
             store.order(p.id);
         },
+
+        handleViewSubscriptions: function () {
+            this.transitionTo('payments_view_subscriptions');
+        },
+
         hasSubscriptions: function () {
-            return this.state.subscriptions.filter( s => s.owned ).length > 0;
+            return this.state.activeSubscriptions.length;
         },
         //--- RENDER
         render: function () {
@@ -38,33 +46,36 @@
             // TODO: check if user has subscriptions from other sources (on server)
             // TODO: added content to peerio-copy
             var alreadySubscribed = this.hasSubscriptions();
-            var subscriptions =  <div className="flex-col flex-grow-1">
-                                    {/*<p>{i.description}</p>*/}
-                                    <div className="flex-grow-1">
-                                      <div className="section-highlight">
-                                        <div>Peerio <strong>Pro</strong></div>
-                                        <div style={{fontSize: '20px', lineHeight: '1.5', marginTop: '8px'}}><strong>50GB</strong> - $99.99/year</div>
-                                        <div className="">or 9.99/month</div>
-                                      </div>
-                                      <p className="flex-row flex-align-center">
-                                        <i className="material-icons">add</i>
-                                        Full features of basic plan
-                                      </p>
-                                      <p className="flex-row flex-align-center">
-                                        <i className="material-icons">add</i>
-                                        Priority email support
-                                      </p>
-                                    </div>
-                                    <div className="buttons row">
-                                      {this.state.subscriptions.map( i =>
-                                          <Peerio.UI.Tappable
-                                              element="div"
-                                              className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
-                                              onTap={this.handleOrder.bind(this, i)}>
-                                              {t('payments_' + i.id)}
-                                          </Peerio.UI.Tappable>)}
-                                    </div>
-                                 </div>;
+            var availableSubscriptions =  (
+                <div className="flex-col flex-grow-1">
+                    {/*<p>{i.description}</p>*/}
+                    <div className="flex-grow-1">
+                        <div className="section-highlight">
+                            <div>Peerio <strong>Pro</strong></div>
+                            <div style={{fontSize: '20px', lineHeight: '1.5', marginTop: '8px'}}><strong>50GB</strong> - $99.99/year</div>
+                            <div className="">or 9.99/month</div>
+                        </div>
+                        <p className="flex-row flex-align-center">
+                            <i className="material-icons">add</i>
+                            Full features of basic plan
+                        </p>
+                        <p className="flex-row flex-align-center">
+                            <i className="material-icons">add</i>
+                            Priority email support
+                        </p>
+                    </div>
+                    <div className="buttons row">
+                        {this.state.availableSubscriptions.map( i => (
+                            <Peerio.UI.Tappable
+                                key={i.id}
+                                element="div"
+                                className={alreadySubscribed || !i.canPurchase ? 'btn-disabled' : 'btn-safe'}
+                                onTap={this.handleOrder.bind(this, i)}>
+                                {t('payments_' + i.id)}
+                            </Peerio.UI.Tappable>))}
+                    </div>
+                </div>
+            );
             var loader = this.state.error ?
                 <div>{this.state.error}</div> : 
                 <div className="list-item loader-item"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
@@ -72,15 +83,21 @@
                 <div className="content without-tab-bar without-footer flex-col">
                     <div className="headline">{t('payments_title')}</div>
                     {alreadySubscribed ?
-                        <p>{t('payments_hasSubscription')}</p> : null}
+                            <p>
+                                {t('payments_hasSubscription')}
+                                <Peerio.UI.Tappable
+                                    element="div"
+                                    className='btn-safe'
+                                    onTap={this.handleViewSubscriptions}>
+                                    {t('payments_viewSubscriptions')}
+                                </Peerio.UI.Tappable>
+                            </p> : null}
 
-                    { this.state.subscriptions && this.state.subscriptions.length ?
-                        subscriptions : loader
+                    { this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
+                        availableSubscriptions : loader
                     }
-
                 </div>
             );
         }
     });
-
 }());

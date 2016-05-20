@@ -56,6 +56,9 @@
         handlePayments: function () {
             this.toggleAndTransition('payments');
         },
+        handlePaymentsView: function () {
+            this.toggleAndTransition('payments_view_subscriptions');
+        },
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
@@ -120,9 +123,13 @@
                                         <i className="material-icons">help</i> {t('supportFeedback')}
                                     </Peerio.UI.Tappable>
 
-                                    <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
-                                        <i className="material-icons">cloud_upload</i> {t('payments_menu')}
-                                    </Peerio.UI.Tappable>
+                                    {Peerio.user.getActiveSubscriptions().length ?
+                                        <Peerio.UI.Tappable element="li" onTap={this.handlePaymentsView}>
+                                            <i className="material-icons">cloud_upload</i> {t('payments_menu_view')}
+                                        </Peerio.UI.Tappable> :
+                                        <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
+                                            <i className="material-icons">cloud_upload</i> {t('payments_menu')}
+                                        </Peerio.UI.Tappable>}
                                 </ul>
 
                                 <div className="flex-grow-1"></div>
