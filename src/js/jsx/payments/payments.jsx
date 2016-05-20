@@ -5,7 +5,6 @@
         mixins: [ReactRouter.Navigation],
         getInitialState: function () {
             return {
-                activeSubscriptions: Peerio.user.subscriptions,
                 availableSubscriptions: []
             };
         },
@@ -29,7 +28,7 @@
 
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
-            if(!forceSubscriptions && (!p.canPurchase || this.hasSubscriptions())) return;
+            if(!forceSubscriptions && (!p.canPurchase || this.hasActiveSubscriptions())) return;
             store.order(p.id);
         },
 
@@ -37,15 +36,19 @@
             this.transitionTo('payments_view_subscriptions');
         },
 
-        hasSubscriptions: function () {
-            return this.state.activeSubscriptions.length;
+        hasActiveSubscriptions: function () {
+            return Peerio.user.getActiveSubscriptions().length;
+        },
+
+        hasCanceledSubscriptions: function () {
+            return Peerio.user.getCanceledSubscriptions().length;
         },
         //--- RENDER
         render: function () {
             // if the user has at least one subscription, we shouldn't allow him to subscribe more
             // TODO: check if user has subscriptions from other sources (on server)
             // TODO: added content to peerio-copy
-            var alreadySubscribed = this.hasSubscriptions();
+            var alreadySubscribed = this.hasActiveSubscriptions();
             var availableSubscriptions =  (
                 <div className="flex-col flex-grow-1">
                     {/*<p>{i.description}</p>*/}
@@ -82,9 +85,9 @@
             return (
                 <div className="content without-tab-bar without-footer flex-col">
                     <div className="headline">{t('payments_title')}</div>
-                    {alreadySubscribed ?
+                    {this.hasActiveSubscriptions() || this.hasCanceledSubscriptions() ?
                             <p>
-                                {t('payments_hasSubscription')}
+                                {this.hasActiveSubscriptions() ? t('payments_hasSubscription') : t('payments_hasCanceledSubscription')}
                                 <Peerio.UI.Tappable
                                     element="div"
                                     className='btn-safe'
@@ -92,6 +95,7 @@
                                     {t('payments_viewSubscriptions')}
                                 </Peerio.UI.Tappable>
                             </p> : null}
+
 
                     { this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
                         availableSubscriptions : loader
