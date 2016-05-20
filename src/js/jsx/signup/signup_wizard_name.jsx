@@ -27,13 +27,14 @@
 
         validateUsername: function () {
             var username = this.refs.username.getDOMNode().value;
+            if(!username.trim().length) return this.setState({username: '', usernameValid: null});
             if(!Peerio.Helpers.isValidUsername(username)) return;
             username = username.toLowerCase();
             this.setState({username: username});
             this.serverValidateUsername = this.serverValidateUsername || _.debounce(() => {
                 Peerio.Net.validateUsername(this.state.username)
                     .then( (valid) => {
-                        this.setState({usernameValid: valid});
+                        this.setState({usernameValid: this.state.username.length ? valid : null});
                     })
                     .catch( () => {
                         this.setState({usernameValid: false});
