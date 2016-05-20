@@ -125,7 +125,7 @@
 
                                     {Peerio.user.getActiveSubscriptions().length ?
                                         <Peerio.UI.Tappable element="li" onTap={this.handlePaymentsView}>
-                                            <i className="material-icons">cloud_upload</i> {t('payments_menu_view')}
+                                            <i className="material-icons">cloud</i> {t('payments_menu_view')}
                                         </Peerio.UI.Tappable> :
                                         <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
                                             <i className="material-icons">cloud_upload</i> {t('payments_menu')}

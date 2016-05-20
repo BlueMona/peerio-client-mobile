@@ -582,7 +582,7 @@
   "supportFeedback": "Support/Feedback",
   "payments_title": "Upgrade your storage",
   "payments_menu": "Upgrade your storage",
-  "payments_menu_view": "Subscriptions",
+  "payments_menu_view": "Manage Subscriptions",
   "payments_hasSubscription": "You already have a subscription",
   "payments_hasCanceledSubscription": "You have canceled subscriptions",
   "payments_buy": "Buy",
