@@ -590,5 +590,6 @@
   "androidEncryptionStatusOff":"Your device supports full disk encryption, but it is not currently enabled. Peerio highly recommends the use of disk encryption. Would you like to learn more?",
   "androidEncryptionStatusPartial":"Your device has encryption turned on but your passcode is still set to the default. We recommend setting a unique passcode. Would you like to learn more?",
   "androidEncryptionStatusUnsupported":"Your device does not support encryption. We recommend upgrading to a version of Android which does. Would you like to learn more?",
-  "security": "Security"
+  "security": "Security",
+  "noMatchesFound": "No matches found"
 }
