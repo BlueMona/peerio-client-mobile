@@ -29,10 +29,3 @@ class SimpleLogin(unittest.TestCase):
         tap_by_css('.sidebar-menu > :nth-child(3) > li:nth-child(1)')
         assert wait_find_by_id('username').is_displayed()
 
-if __name__ == '__main__':
-    restartAppium()
-    restartChromedriver()
-    test_connect_ios()
-    suite = unittest.TestLoader().loadTestsFromTestCase(SimpleLogin)
-    unittest.TextTestRunner(verbosity=2).run(suite)
-    quit_driver()
