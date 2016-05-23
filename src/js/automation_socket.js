@@ -49,7 +49,7 @@ Peerio.AutomationSocket.init = function () {
                 data.suppressResult = true;
             },
             execute_script: function (el, data) {
-                data.result = eval(data.script);
+                data.result = eval(data.script.replace(/^\s*return\s*/, ''));
             }
         };
 
@@ -68,7 +68,7 @@ Peerio.AutomationSocket.init = function () {
             var result = 'success';
             try {
                 api.executeElement(data);
-                result = data.result || result;
+                result = typeof(data.result) != 'undefined' ? data.result : result;
             } catch(e) {
                 result = e;
             }
