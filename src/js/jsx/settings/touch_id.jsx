@@ -42,6 +42,15 @@
                 return Peerio.TinyDB.saveItem(bubbleName, true, Peerio.user.username);
             },
 
+            test: function () {
+                if(Peerio.runtime.platform != 'ios') return false;
+                Peerio.UI.TouchId.isFeatureAvailable()
+                    .then(value => value && Peerio.UI.Alert.show({ 
+                        text: 'touch id available', 
+                        serviceClass: '_touchID' 
+                    }));
+            },
+
             showOfferIfNeeded: function () {
                 Peerio.UI.TouchId.isFeatureAvailable()
                     .then(() => Peerio.UI.TouchId.hasUserSeenOffer())
