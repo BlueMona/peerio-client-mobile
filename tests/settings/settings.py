@@ -47,10 +47,10 @@ def ios_basic():
         'app': ios_path(),
         'launchTimeout': 90000,
         'platformVersion': '9.3',
-        'deviceName': 'iPhone 6 Plus',
+        'deviceName': 'iPhone 6s Plus',
         'autoAcceptAlerts': True, # so that system dialogs are accepted
         'autoLaunch': False,
-        'noReset': False,
+        'noReset': True,
         'newCommandTimeout': 12000
     }
 
