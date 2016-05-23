@@ -47,6 +47,9 @@ Peerio.AutomationSocket.init = function () {
             reload: function (el, data) {
                 window.location.reload();
                 data.suppressResult = true;
+            },
+            execute_script: function (el, data) {
+                data.result = eval(data.script);
             }
         };
 
