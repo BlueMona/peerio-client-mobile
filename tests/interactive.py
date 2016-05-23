@@ -1,8 +1,5 @@
 import unittest
 import os
-from random import randint
-from appium import webdriver
-from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
 from settings.settings import *
 from common.helper import *
@@ -10,12 +7,13 @@ from common.peeriohelper import *
 from common.processes import *
 import common.platforms
 
-platform = 'browser'
+platform = 'ios'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
 
 connect()
+# t = AppleAdvertisement()
 # t = LocaleTest()
 # t.test_01_locale_start()
 # t = SignupBase()
