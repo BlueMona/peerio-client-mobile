@@ -43,34 +43,37 @@
             },
 
             test: function () {
-                if(Peerio.runtime.platform != 'ios') return false;
+                if(Peerio.runtime.platform != 'ios') return 'unsupported';
                 Peerio.UI.TouchId.isFeatureAvailable()
-                    .then(value => value && Peerio.UI.Alert.show({ 
-                        text: 'touch id available', 
+                    .then(value => Peerio.UI.Alert.show({ 
+                        text: 'plugin loaded, touch id status: ' + value, 
                         serviceClass: '_touchID' 
                     }));
             },
 
             showOfferIfNeeded: function () {
                 Peerio.UI.TouchId.isFeatureAvailable()
-                    .then(() => Peerio.UI.TouchId.hasUserSeenOffer())
-                    .then((value) => {
-                        if (value) return Promise.resolve(false);
-                        Peerio.UI.Confirm.show({
-                                text: t('setup_touchTitle'),
-                                caption: t('setup_touchDescription')
-                            })
-                            .then(() => {
-                                return Peerio.UI.TouchId.clearKeyPair()
+                    .then(value => {
+                        if(!value) return;
+                        Peerio.UI.TouchId.hasUserSeenOffer()
+                            .then((value) => {
+                                if (value) return Promise.resolve(false);
+                                Peerio.UI.Confirm.show({
+                                    text: t('setup_touchTitle'),
+                                    caption: t('setup_touchDescription')
+                                })
+                                .then(() => {
+                                    return Peerio.UI.TouchId.clearKeyPair()
+                                        .catch(() => true)
+                                        .then(() => Peerio.UI.TouchId.saveKeyPair());
+                                })
                                 .catch(() => true)
-                                .then(() => Peerio.UI.TouchId.saveKeyPair());
-                            })
-                            .catch(() => true)
-                            .then(() => Peerio.UI.TouchId.setUserSeenOffer());
+                                .then(() => Peerio.UI.TouchId.setUserSeenOffer());
 
-                        return Promise.resolve(true);
-                    })
-                    .catch(err => L.silly(err));
+                                return Promise.resolve(true);
+                            })
+                            .catch(err => L.silly(err));
+                    });
             },
 
             showExclamationBubble: function () {
@@ -123,7 +126,8 @@
 
         componentWillMount: function () {
             Peerio.UI.TouchId.isFeatureAvailable()
-                .then(() => {
+                .then(value => {
+                    if(!value) return;
                     this.setState({visible: true});
 
                     Peerio.UI.TouchId.hasTouchID(Peerio.user.username)
@@ -133,7 +137,7 @@
                         .then((value) => this.setState({fingerPrintWarning: value}));
                 })
                 .catch(() => {
-                    L.info('Touch ID unavailable');
+                    L.error('Touch ID plugin error');
                 });
         },
 
