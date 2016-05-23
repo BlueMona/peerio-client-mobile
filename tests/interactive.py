@@ -7,7 +7,7 @@ from common.peeriohelper import *
 from common.processes import *
 import common.platforms
 
-platform = 'ios'
+platform = 'browser'
 if not common.platforms.launchPlatform(platform):
     print "cannot find the platform %s" % platform
     exit()
