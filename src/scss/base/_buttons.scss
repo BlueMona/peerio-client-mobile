@@ -78,7 +78,7 @@ Footer Buttons                                       | Button Class/ID
   &.row {
     @extend .flex-row;
 
-    .btn-safe {
+    .btn-safe, .btn-disabled {
       width: 100%;
     }
   }
