@@ -8,9 +8,10 @@ import appium
 from selenium.common.exceptions import NoSuchElementException
 
 class AndroidDriver(AbstractDriver):
-    def __init__(self, executor, capabilities, chromium_executor, chromium_capabilities):
+    def __init__(self, executor, capabilities, chromium_executor, chromium_capabilities, extra):
         self.executor = executor
         self.capabilities = capabilities
+        self.capabilities.update(extra)
         self.chromium_executor = chromium_executor
         self.chromium_capabilities = chromium_capabilities
         self.appium = None

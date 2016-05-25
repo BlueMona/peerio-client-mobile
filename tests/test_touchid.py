@@ -7,6 +7,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 class TouchID(common.testcase.TestCase, LoginBase):
     def test_01_push(self):
+        if driver().wipe:
+            driver().wipe()
         hasFeature = execute_script("return Peerio.UI.TouchId.test()")
         if hasFeature == 'unsupported':
             return
