@@ -5,7 +5,7 @@ import random
 from settings.settings import *
 from common.processes import *
 from websocket import create_connection
-from wsdriver import BrowserDriver
+from browserdriver import BrowserDriver
 from androiddriver import AndroidDriver
 from iosdriver import IosDriver
 from iosdriver import IosDriverFast

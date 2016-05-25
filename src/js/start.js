@@ -5,7 +5,7 @@ var RouteHandler = ReactRouter.RouteHandler;
 var NotFoundRoute = ReactRouter.NotFoundRoute;
 
 var Peerio = this.Peerio || {};
-
+Peerio.UI = this.Peerio.UI || {};
 // todo: put this in a right place
 Peerio.ACK_MSG = ':::peerioAck:::';
 

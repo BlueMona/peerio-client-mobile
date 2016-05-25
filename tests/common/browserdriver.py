@@ -75,3 +75,7 @@ class BrowserDriver(AbstractDriver):
     def value_by_css(self, selector):
         self.sendsocket(jsonpickle.encode({"action": "value", "selector": selector}))
         return self.ws.recv()
+
+    def execute_script(self, script):
+        self.sendsocket(jsonpickle.encode({"action": "execute_script", "script": script}))
+        return self.ws.recv()
