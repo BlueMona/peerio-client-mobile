@@ -16,9 +16,9 @@ __animationClasses = ['.animate-enter', '.animate-leave']
 def driver():
     return driver
 
-def connect():
+def connect(extra = {}):
     global driver
-    driver = common.platforms.get_platform()['driver']()
+    driver = common.platforms.get_platform()['driver'](extra)
 
 def check_animation():
     for css in __animationClasses:

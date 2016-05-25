@@ -54,3 +54,7 @@ class AbstractDriver:
         else:
             self.send_keys(selector, text)
 
+    def wipe(self):
+        if self.restartPlatform:
+            self.restartPlatform({ "noReset": False })
+

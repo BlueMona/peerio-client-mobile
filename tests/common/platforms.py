@@ -40,13 +40,13 @@ def set_platform(platform):
 def platform_browser():
     return {
         'browserautomation': True,
-        'driver': lambda: BrowserDriver(True)
+        'driver': lambda extra: BrowserDriver(True)
     }
 
 def platform_ios():
     return {
         'appium': True,
-        'driver': lambda: IosDriverFast(executor, ios_93(ios_basic()))
+        'driver': lambda extra: IosDriverFast(executor, ios_93(ios_basic()), extra)
     }
 
 def platform_iosdevice():
@@ -56,7 +56,7 @@ def platform_iosdevice():
     return {
         'appium': True,
         'ios_webkit_debug_proxy': True,
-        'driver': lambda: IosDriverFast(executor, ios_device(udid))
+        'driver': lambda extra: IosDriverFast(executor, ios_device(udid), extra)
     }
 
 def platform_androiddevice():
@@ -64,7 +64,7 @@ def platform_androiddevice():
     return {
         'appium': True,
         'chromedriver': True,
-        'driver': lambda: AndroidDriver(executor, android_device(device["name"]), chromium_executor, chromium_basic())
+        'driver': lambda extra: AndroidDriver(executor, android_device(device["name"]), chromium_executor, chromium_basic(), extra)
     }
 
 def platform_android():
@@ -73,6 +73,6 @@ def platform_android():
         'platformName': 'GenyMotion',
         'appium': True,
         'chromedriver': True,
-        'driver': lambda: AndroidDriver(executor, android_600(android_basic(device["name"])), chromium_executor, chromium_basic())
+        'driver': lambda extra: AndroidDriver(executor, android_600(android_basic(device["name"])), chromium_executor, chromium_basic(), extra)
     }
 
