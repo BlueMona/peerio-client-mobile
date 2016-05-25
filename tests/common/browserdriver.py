@@ -5,6 +5,8 @@ from settings.settings import *
 from websocket import create_connection
 from abstractdriver import AbstractDriver
 import selenium
+import os
+import sys
 
 class BrowserDriver(AbstractDriver):
     def __init__(self, reload=False):
@@ -79,3 +81,8 @@ class BrowserDriver(AbstractDriver):
     def execute_script(self, script):
         self.sendsocket(jsonpickle.encode({"action": "execute_script", "script": script}))
         return self.ws.recv()
+
+    def wipe(self):
+        clearChromeDBPath = os.path.join(os.path.dirname(__file__), '../../tools/clean_chrome_db.sh')
+        os.system("sh " + clearChromeDBPath + "&")
+        self.reload()
