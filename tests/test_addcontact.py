@@ -39,19 +39,19 @@ class Signup(common.testcase.TestCase):
         wait_find_by_css('textarea')
         text_by_css('textarea', phrase)
         tap_by_css('.btn-safe')
-
+        tap_by_css('.btn-primary')
         logging.info(username)
         logging.info(phrase)
 
     def test_02_terms(self):
-        print "done"
+        print "account created"
         
     def test_03_sendrequest(self):
         tap_by_css('.tab:nth-of-type(3)')
         tap_by_css('.btn-global-action')
         text_by_id('search', 'testadd2')
         tap_by_css('.btn-safe')
-        tap_by_css('checkbox-input')
-        tap_by_css('btn-global-action')
+        tap_by_css('.checkbox-input')
+        tap_by_css('.btn-global-action')
         
         
