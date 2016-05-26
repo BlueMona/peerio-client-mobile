@@ -80,8 +80,7 @@ def ios_device(udid):
     config.update({
         'deviceName': 'iPhone',
         'udid': udid,
-        'app': ios_bundle,
-        'fullReset': True
+        'app': ios_bundle
     })
     return config
 

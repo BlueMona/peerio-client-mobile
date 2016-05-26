@@ -15,8 +15,6 @@ def start_platform(platform, extra):
 
 starter = lambda extra: start_platform('iosdevice', extra)
 starter({})
-driver().restartPlatform = starter
-driver().wipe()
 # t = AppleAdvertisement()
 # t = LocaleTest()
 # t.test_01_locale_start()
