@@ -33,3 +33,5 @@ GENERATED_CHANGELOG.md
 tests/.cache
 
 /locales
+/backup
+/*.debug.xml
