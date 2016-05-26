@@ -27,6 +27,11 @@ test_logins = {
     }
 }
 
+ios_sandbox_testers = {
+    'peeriotest5@etcetera.ws': 'Lamar_10',
+    'peeriotest4@etcetera.ws': 'Lamar_10'
+}
+
 wait_timeout = 15
 
 def ios_path():
@@ -51,7 +56,8 @@ def ios_basic():
         'autoAcceptAlerts': True, # so that system dialogs are accepted
         'autoLaunch': False,
         'noReset': True,
-        'newCommandTimeout': 12000
+        'newCommandTimeout': 12000,
+        'nativeInstrumentsLib': True
     }
 
 def ios_92(config):
@@ -74,7 +80,8 @@ def ios_device(udid):
     config.update({
         'deviceName': 'iPhone',
         'udid': udid,
-        'app': ios_bundle
+        'app': ios_bundle,
+        'fullReset': True
     })
     return config
 
@@ -96,7 +103,7 @@ def android_basic(deviceName):
         'newCommandTimeout': 12000,
         'noReset': True,
         'androidDeviceSocket': android_package + '_devtools_remote',
-        'autoLaunch': False,
+        'autoLaunch': False
     }
 
 def android_600(config):

@@ -7,12 +7,16 @@ from common.peeriohelper import *
 from common.processes import *
 import common.platforms
 
-platform = 'ios'
-if not common.platforms.launchPlatform(platform):
-    print "cannot find the platform %s" % platform
-    exit()
+def start_platform(platform, extra):
+    if not common.platforms.launchPlatform(platform):
+        print "cannot find the platform %s" % platform
+        exit()
+    connect(extra)
 
-connect()
+starter = lambda extra: start_platform('iosdevice', extra)
+starter({})
+driver().restartPlatform = starter
+driver().wipe()
 # t = AppleAdvertisement()
 # t = LocaleTest()
 # t.test_01_locale_start()

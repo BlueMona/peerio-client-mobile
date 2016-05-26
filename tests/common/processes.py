@@ -71,7 +71,7 @@ def startIosDebugProxy():
     udid = getIPhoneDeviceID()
     if not udid:
         raise Exception("No iOS devices connected")
-    os.system("ios_webkit_debug_proxy -c %s:27753 &" % udid)
+    os.system("tools/ios_webkit_debug_proxy -c %s:27753 &" % udid)
     return True
 
 def killIosDebugProxy():

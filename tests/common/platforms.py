@@ -8,7 +8,7 @@ from websocket import create_connection
 from browserdriver import BrowserDriver
 from androiddriver import AndroidDriver
 from iosdriver import IosDriver
-from iosdriver import IosDriverFast
+from iosdriverfast import IosDriverFast
 
 def launchPlatform(platform):
     method = getattr(sys.modules[__name__], 'platform_' + platform)
@@ -18,12 +18,12 @@ def launchPlatform(platform):
     set_platform(platform_options)
     if 'appium' in platform_options and platform_options['appium']:
         restartAppium()
+    if 'ios_webkit_debug_proxy' in platform_options and platform_options['ios_webkit_debug_proxy']:
+        restartIosDebugProxy()
     if 'browserautomation' in platform_options and platform_options['browserautomation']:
         restartBrowserAutomation()
     if 'chromedriver' in platform_options and platform_options['chromedriver']:
         restartChromedriver()
-    if 'ios_webkit_debug_proxy' in platform_options and platform_options['ios_webkit_debug_proxy']:
-        restartIosDebugProxy()
     return True
 
 global __platform
