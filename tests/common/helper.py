@@ -19,6 +19,11 @@ def driver():
 def connect(extra = {}):
     global driver
     driver = common.platforms.get_platform()['driver'](extra)
+    driver.connect()
+
+def create_driver(extra = {}):
+    global driver
+    driver = common.platforms.get_platform()['driver'](extra)
 
 def check_animation():
     for css in __animationClasses:

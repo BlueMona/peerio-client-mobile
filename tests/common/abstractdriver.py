@@ -7,6 +7,7 @@ import selenium
 import random
 
 class AbstractDriver:
+    restartPlatform = None
     def __init__(self):
         return
 
@@ -36,7 +37,7 @@ class AbstractDriver:
         self.viewOrigin = viewElement.location
         print '...success'
 
-    def connect(self):
+    def connect(self, extra = {}):
         print "stub"
 
     def reload(self):
@@ -58,3 +59,7 @@ class AbstractDriver:
         if self.restartPlatform:
             self.restartPlatform({ "noReset": False })
 
+    def dump(self):
+        xml = open("page_source.debug.xml", "w")
+        xml.write(self.appium.page_source)
+        xml.close()
