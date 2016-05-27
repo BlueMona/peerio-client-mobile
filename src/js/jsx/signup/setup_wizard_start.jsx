@@ -14,7 +14,7 @@
 
         render: function () {
             return (
-                <div>
+                <div className="_setupWelcome">
                     <div>
                         <div className="headline">{t('setup_startTitle')}</div>
                         <p>

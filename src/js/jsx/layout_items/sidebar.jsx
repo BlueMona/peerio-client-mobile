@@ -108,7 +108,7 @@
                                         <i className="material-icons">person</i> {t('profile')}
                                     </Peerio.UI.Tappable>
 
-                                    <Peerio.UI.Tappable tag="li"
+                                    <Peerio.UI.Tappable className='__passcode' tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'security')}>
                                         <i className="material-icons">security</i> {t('security')}
                                     </Peerio.UI.Tappable>
@@ -134,7 +134,7 @@
 
                                 <div className="flex-grow-1"></div>
                                 <ul>
-                                    <Peerio.UI.Tappable element="li"
+                                    <Peerio.UI.Tappable className="__logout" element="li"
                                                         onTap={this.signOut}><i
                                         className="material-icons">power_settings_new</i> {t('signOut')}
 

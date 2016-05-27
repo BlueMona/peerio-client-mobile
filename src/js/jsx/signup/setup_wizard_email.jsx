@@ -4,7 +4,7 @@
     Peerio.UI.SetupWizardEmail = React.createClass({
         render: function () {
             return (
-                <div>
+                <div className="_setupEmail">
                     <div className="headline">{t('setup_contactInfoTitle')}</div>
                     <p>{t('setup_contactInfoDescription')}</p>
                     <div className="input-group">
