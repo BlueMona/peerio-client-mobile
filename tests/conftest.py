@@ -3,6 +3,8 @@ import common
 from common.helper import *
 from common.processes import *
 
+test_units_passed = -1
+
 @pytest.fixture(scope="session", autouse=True)
 def execute_before_any_test(extra = {}):
     print "Initializing tests"
