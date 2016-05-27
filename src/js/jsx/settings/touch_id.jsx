@@ -116,7 +116,7 @@
 
             isFeatureAvailable: function () {
                 return window.PeerioTouchIdKeychain ?
-                    window.PeerioTouchIdKeychain.isFeatureAvailable() : Promise.reject(false);
+                    window.PeerioTouchIdKeychain.isFeatureAvailable() : Promise.resolve(false);
             }
         },
 
