@@ -426,13 +426,13 @@ gulp.task('test', function (done) {
     console.log('pip install -r tests/requirements.txt'.yellow);
     console.log('To use tests in the browser, make sure ' + 'PeerioDebug.AutomationEnabled === true'.cyan);
     console.log('To run tests, please execute one of the following commands:');
-    console.log('py.test tests -s --platform=browser'.yellow);
-    console.log('py.test tests -s --platform=android'.yellow);
-    console.log('py.test tests -s --platform=ios'.yellow);
+    console.log('py.test tests -x -s --platform=browser'.yellow);
+    console.log('py.test tests -x -s --platform=android'.yellow);
+    console.log('py.test tests -x -s --platform=ios'.yellow);
     console.log('To test individually, specify a file:');
-    console.log('py.test tests/test_login.py -s --platform=browser'.yellow);
-    console.log('py.test tests/test_login.py -s --platform=ios'.yellow);
-    console.log('py.test tests/test_login.py -s --platform=android'.yellow);
+    console.log('py.test tests/test_login.py -x -s --platform=browser'.yellow);
+    console.log('py.test tests/test_login.py -x -s --platform=ios'.yellow);
+    console.log('py.test tests/test_login.py -x -s --platform=android'.yellow);
 });
 
 gulp.task('find-unused-locale-strings', function () {
