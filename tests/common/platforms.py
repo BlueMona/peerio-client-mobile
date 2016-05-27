@@ -26,7 +26,7 @@ def launchPlatform(platform):
         restartChromedriver()
     return True
 
-global __platform
+__platform = None
 
 def get_platform():
     if not __platform:
