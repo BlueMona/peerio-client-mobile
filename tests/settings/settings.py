@@ -22,8 +22,8 @@ test_logins = {
         'secret': 'fished richter retarded buyer council'
     },
     'wss://hocuspocus.peerio.com': {
-        'user': 't20160426200617',
-        'secret': 'require opinions ants heather missile'
+        'user': 't20160527172900',
+        'secret': 'casket perish telegram obviously contempt'
     }
 }
 
@@ -53,11 +53,12 @@ def ios_basic():
         'launchTimeout': 90000,
         'platformVersion': '9.3',
         'deviceName': 'iPhone 6s Plus',
-        'autoAcceptAlerts': True, # so that system dialogs are accepted
+        # 'autoAcceptAlerts': False, # so that system dialogs are accepted
+        # 'autoDismissAlerts': True, # so that system dialogs are accepted
         'autoLaunch': False,
         'noReset': True,
         'newCommandTimeout': 12000,
-        'nativeInstrumentsLib': True
+        'nativeInstrumentsLib': False
     }
 
 def ios_92(config):
