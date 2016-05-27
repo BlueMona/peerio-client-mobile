@@ -27,21 +27,21 @@ def create_driver(extra = {}):
 
 def check_animation():
     for css in __animationClasses:
-        try:
-            driver.find(css)
-            time.sleep(3)
-            break
-        except selenium.common.exceptions.NoSuchElementException:
-            continue
-        except:
-            print "unexpected error"
-            raise
+        if driver.find(css):
+            return False
+    return True
 
 def wait_for(timeout, func, msg = None):
     for i in xrange(timeout):
         try:
             time.sleep(0.1)
-            return func()
+            r = func()
+            if r:
+                print 'returning %s' % r
+                return r
+            else:
+                print '.'
+                time.sleep(1)
         except:
             print '.'
             time.sleep(1)
@@ -84,6 +84,7 @@ def tap_by_css(selector):
 def wait_tap_by_css(selector):
     el = wait_find_by_css(selector)
     driver.tap(selector)
+    return el
 
 def tap_by_id(id):
     el = find_by_id(id)

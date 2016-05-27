@@ -34,7 +34,8 @@ class BrowserDriver(AbstractDriver):
     def find(self, selector):
         self.sendsocket(jsonpickle.encode({"action": "find", "selector": selector}))
         if self.ws.recv() != "success":
-            raise selenium.common.exceptions.NoSuchElementException
+            return None
+            # raise selenium.common.exceptions.NoSuchElementException
         return selector
 
     def tap(self, selector):
