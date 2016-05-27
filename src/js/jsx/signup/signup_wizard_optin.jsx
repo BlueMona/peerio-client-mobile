@@ -16,7 +16,7 @@
 
         render: function () {
             return (
-                <div className="animate-enter">
+                <div className="_setupOptIn">
                     <div className="headline">{t('signup_optInHeadline')}</div>
                     <p>{t('signup_optInDescription')}</p>
                     <p>
