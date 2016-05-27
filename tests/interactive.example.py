@@ -5,16 +5,17 @@ from settings.settings import *
 from common.helper import *
 from common.peeriohelper import *
 from common.processes import *
-import common.platforms
+from common.platforms import *
 
 def start_platform(platform, extra):
-    if not common.platforms.launchPlatform(platform):
+    if not launchPlatform(platform):
         print "cannot find the platform %s" % platform
         exit()
     connect(extra)
 
-starter = lambda extra: start_platform('iosdevice', extra)
-starter({})
+starter = lambda extra: start_platform('browser', extra)
+connect()
+# starter({})
 # t = AppleAdvertisement()
 # t = LocaleTest()
 # t.test_01_locale_start()
