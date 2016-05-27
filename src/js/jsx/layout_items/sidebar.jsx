@@ -108,7 +108,7 @@
                                         <i className="material-icons">person</i> {t('profile')}
                                     </Peerio.UI.Tappable>
 
-                                    <Peerio.UI.Tappable className='__passcode' tag="li"
+                                    <Peerio.UI.Tappable className='_passcode' tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'security')}>
                                         <i className="material-icons">security</i> {t('security')}
                                     </Peerio.UI.Tappable>
@@ -124,17 +124,17 @@
                                     </Peerio.UI.Tappable>
 
                                     {Peerio.user.getActiveSubscriptions().length ?
-                                        <Peerio.UI.Tappable element="li" onTap={this.handlePaymentsView}>
+                                        <Peerio.UI.Tappable className="_subscriptions" element="li" onTap={this.handlePaymentsView}>
                                             <i className="material-icons">cloud</i> {t('payments_menu_view')}
                                         </Peerio.UI.Tappable> :
-                                        <Peerio.UI.Tappable element="li" onTap={this.handlePayments}>
+                                        <Peerio.UI.Tappable className="_purchase" element="li" onTap={this.handlePayments}>
                                             <i className="material-icons">cloud_upload</i> {t('payments_menu')}
                                         </Peerio.UI.Tappable>}
                                 </ul>
 
                                 <div className="flex-grow-1"></div>
                                 <ul>
-                                    <Peerio.UI.Tappable className="__logout" element="li"
+                                    <Peerio.UI.Tappable className="_logout" element="li"
                                                         onTap={this.signOut}><i
                                         className="material-icons">power_settings_new</i> {t('signOut')}
 
