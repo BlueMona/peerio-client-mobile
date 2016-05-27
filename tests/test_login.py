@@ -10,8 +10,9 @@ from common.helper import *
 from common.peeriohelper import *
 from common.processes import *
 import common.testcase
+import peerio
 
-class Login(common.testcase.TestCase, LoginBase):
+class Login(common.testcase.TestCase, peerio.LoginBase):
     def test_01_login(self):
         if not self.changeuser():
             print 'skipping pin'
