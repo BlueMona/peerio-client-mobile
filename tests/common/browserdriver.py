@@ -3,6 +3,7 @@ import random
 import jsonpickle
 from settings.settings import *
 from websocket import create_connection
+import websocket
 from abstractdriver import AbstractDriver
 import selenium
 import os
@@ -21,46 +22,57 @@ class BrowserDriver(AbstractDriver):
         self.ws.send(message)
 
     def connect_socket(self):
-        self.ws = create_connection("ws://localhost:8888/automation")
-        time.sleep(2)
+        self.ws = create_connection("ws://localhost:8888/automation", timeout=1)
 
     def connect(self):
         self.connect_socket()
+
+    def communicate(self, data):
+        while True:
+            try:
+                self.sendsocket(data)
+                return self.ws.recv()
+            except websocket._exceptions.WebSocketTimeoutException:
+                self.connect_socket()
+            except:
+                print "error reconnecting"
+                return None
 
     def text(self, selector):
         self.sendsocket(jsonpickle.encode({"action": "text", "selector": selector}))
         return self.ws.recv()
 
     def find(self, selector):
-        self.sendsocket(jsonpickle.encode({"action": "find", "selector": selector}))
-        if self.ws.recv() != "success":
+        r = self.communicate(jsonpickle.encode({"action": "find", "selector": selector}))
+        if r != "success":
             return None
             # raise selenium.common.exceptions.NoSuchElementException
         return selector
 
     def tap(self, selector):
-        self.sendsocket(jsonpickle.encode({"action": "tap", "selector": selector}))
-        if self.ws.recv() != "success":
+        r = self.communicate(jsonpickle.encode({"action": "tap", "selector": selector}))
+        if r != "success":
             raise selenium.common.exceptions.NoSuchElementException
         return selector
 
     def send_keys(self, selector, text):
-        self.sendsocket(jsonpickle.encode({"action": "send_keys", "selector": selector, "value": text}))
-        if self.ws.recv() != "success":
+        r = self.communicate(jsonpickle.encode({"action": "send_keys", "selector": selector, "value": text}))
+        if r != "success":
             raise selenium.common.exceptions.NoSuchElementException
         return selector
 
     def reload(self):
+        self.ws.settimeout(60)
         self.sendsocket(jsonpickle.encode({"action": "reload"}))
         val = self.ws.recv()
         print "received %s" % val
         if val != "loaded":
             raise selenium.common.exceptions.NoSuchElementException
-        time.sleep(2)
+        self.ws.settimeout(1)
 
     def clear(self, selector):
-        self.sendsocket(jsonpickle.encode({"action": "clear", "selector": selector}))
-        if self.ws.recv() != "success":
+        r = self.communicate(jsonpickle.encode({"action": "clear", "selector": selector}))
+        if r != "success":
             raise selenium.common.exceptions.NoSuchElementException
         return selector
 
@@ -70,18 +82,16 @@ class BrowserDriver(AbstractDriver):
         self.send_keys(selector, text)
 
     def option_by_css(self, selector, value):
-        self.sendsocket(jsonpickle.encode({"action": "option", "value": value, "selector": selector}))
-        if self.ws.recv() != "success":
+        r = self.communicate(jsonpickle.encode({"action": "option", "value": value, "selector": selector}))
+        if r != "success":
             raise selenium.common.exceptions.NoSuchElementException
         return selector
 
     def value_by_css(self, selector):
-        self.sendsocket(jsonpickle.encode({"action": "value", "selector": selector}))
-        return self.ws.recv()
+        return self.communicate(jsonpickle.encode({"action": "value", "selector": selector}))
 
     def execute_script(self, script):
-        self.sendsocket(jsonpickle.encode({"action": "execute_script", "script": script}))
-        return self.ws.recv()
+        return self.communicate(jsonpickle.encode({"action": "execute_script", "script": script}))
 
     def wipe(self):
         clearChromeDBPath = os.path.join(os.path.dirname(__file__), '../../tools/clean_chrome_db.sh')

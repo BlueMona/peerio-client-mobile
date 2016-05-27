@@ -1,10 +1,10 @@
 from common.helper import *
-from settings.settings import test_logins
-from time import strftime
 
 def removePin():
-    tap_by_css('.btn-danger')
-    wait_tap_by_css('.modal .btn-safe')
+    removePin = find_by_css('.setPin .btn-danger')
+    if removePin != None:
+        tap_by_css('.setPin .btn-danger')
+        wait_tap_by_css('.modal .btn-safe')
 
 def tapPin(number):
     if number == 0:

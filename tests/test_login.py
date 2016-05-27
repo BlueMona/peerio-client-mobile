@@ -7,7 +7,6 @@ from appium import webdriver
 from time import sleep
 from settings.settings import *
 from common.helper import *
-from common.peeriohelper import *
 from common.processes import *
 import common.testcase
 import peerio
@@ -22,11 +21,8 @@ class Login(common.testcase.TestCase, peerio.LoginBase):
     pin = '123123'
 
     def test_02_setpin(self):
-        navigateToSetPin()
-        try:
-            removePin()
-        except NoSuchElementException:
-            print 'skipping removing pin'
+        peerio.navigateToSetPin()
+        peerio.removePin()
         assert wait_find_by_id('passcode') != None
         text_by_id('passcode', self.pin)
         wait_find_by_css('.btn-safe')
@@ -35,7 +31,7 @@ class Login(common.testcase.TestCase, peerio.LoginBase):
 
     def test_03_loginPin(self):
         self.restart()
-        enterPin(self.pin)
+        peerio.enterPin(self.pin)
         assert wait_find_by_id('tabbar') != None
 
     def test_04_loginPinNoPad(self):
@@ -45,11 +41,11 @@ class Login(common.testcase.TestCase, peerio.LoginBase):
         assert wait_find_by_id('tabbar') != None
 
     def test_05_removepin(self):
-        navigateToStart()
-        navigateToSetPin()
-        removePin()
+        peerio.navigateToStart()
+        peerio.navigateToSetPin()
+        peerio.removePin()
         assert find_by_id('passcode') != None
 
     def test_99_logout(self):
-        navigateToLogout()
+        peerio.navigateToLogout()
 
