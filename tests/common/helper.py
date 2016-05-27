@@ -11,7 +11,7 @@ global driver
 
 __defaultTimeout = 30
 __defaultAnimationTimeout = 5
-__animationClasses = ['.animate-enter', '.animate-leave']
+__animationClasses = ['.animate-enter']
 
 def driver():
     return driver
@@ -27,8 +27,11 @@ def create_driver(extra = {}):
 
 def check_animation():
     for css in __animationClasses:
-        if driver.find(css):
+        if driver.find(css) != None:
             return False
+        time.sleep(0.1)
+        print css
+    print '---'
     return True
 
 def wait_for(timeout, func, msg = None):
@@ -42,7 +45,8 @@ def wait_for(timeout, func, msg = None):
             else:
                 print '.'
                 time.sleep(1)
-        except:
+        except Exception as e:
+            print e
             print '.'
             time.sleep(1)
     raise Exception('timeout waiting for: %s, %s' % (func, msg))
@@ -84,11 +88,11 @@ def tap_by_css(selector):
 def wait_tap_by_css(selector):
     el = wait_find_by_css(selector)
     driver.tap(selector)
-    return el
+    return el != None
 
 def tap_by_id(id):
     el = find_by_id(id)
-    tap_by_css("[id=%s]" % id)
+    return tap_by_css("[id=%s]" % id)
 
 def text_by_css(selector, text, slow=False):
     driver.text_by_css(selector, text, slow)
