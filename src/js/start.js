@@ -66,6 +66,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.DataCollection.insertPiwikCode();
 
             Peerio.FileSystemPlugin.init();
+            Peerio.GoogleConversion.init();
 
             React.initializeTouchEvents(true);
 
