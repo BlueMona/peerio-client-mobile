@@ -8,10 +8,11 @@ import appium
 from selenium.common.exceptions import NoSuchElementException
 
 class IosDriver(AbstractDriver):
-    def __init__(self, executor, capabilities):
+    def __init__(self, executor, capabilities, extra = {}):
         self.appium = None
         self.executor = executor
         self.capabilities = capabilities
+        self.capabilities.update(extra)
         self.connect()
 
     def __exit__(self):
@@ -29,7 +30,6 @@ class IosDriver(AbstractDriver):
         self.switch_to_webview()
         self.devicePixelRatio = self.appium.execute_script('return window.devicePixelRatio')
         print "View origin: %s, device pixel ratio: %d" % (self.viewOrigin, self.devicePixelRatio)
-
 
     def text(self, selector):
         return selector.text
