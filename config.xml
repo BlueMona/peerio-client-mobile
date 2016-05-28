@@ -108,7 +108,7 @@
         <variable name="SENDER_ID" value="605156423279"/>
     </plugin>
     <plugin name="com.peerio.cordova.plugin.splashscreen" spec="3.2.6"/>
-    <plugin name="com.peerio.cordova.plugin.touchid" spec="1.0.1"/>
+    <plugin name="com.peerio.cordova.plugin.touchid" spec="1.1.0"/>
     <plugin name="com.peerio.cordova.plugin.social" spec="5.0.13"/>
     <plugin name="com.peerio.cordova.plugin.file" spec="4.1.5"/>
     <plugin name="com.peerio.cordova.plugin.open" spec="1.0.12"/>
