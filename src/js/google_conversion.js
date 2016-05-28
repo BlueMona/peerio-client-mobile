@@ -29,11 +29,16 @@ Peerio.GoogleConversion.init = function () {
     api.trackInstall = function () {
         api.getIDFA()
         .then(i => { 
-            L.info('Mocking track install ' + i);
+            L.info('Track install ' + i);
             api.idfa = i;
+            return Peerio.Net.trackAppleInstall(i);
+        })
+        .then(() => {
+            api.idfa_sent = true;
+            L.info('idfa sent successfully');
         });
     };
 
-    Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun && api.trackInstall();
+    Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun && Peerio.Dispatcher.onConnected(api.trackInstall);
 
 };
