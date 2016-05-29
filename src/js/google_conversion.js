@@ -27,6 +27,10 @@ Peerio.GoogleConversion.init = function () {
     };
 
     api.trackInstall = function () {
+        if (api.subscription) {
+            Peerio.Dispatcher.unsubscribe(api.subscription);
+            delete api.subscription;
+        }
         api.getIDFA()
         .then(i => { 
             L.info('Track install ' + i);
@@ -39,6 +43,7 @@ Peerio.GoogleConversion.init = function () {
         });
     };
 
-    Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun && Peerio.Dispatcher.onConnected(api.trackInstall);
+    // if (Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun)
+    //     api.subscription = Peerio.Dispatcher.onConnected(api.trackInstall);
 
 };
