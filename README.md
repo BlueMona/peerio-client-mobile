@@ -37,6 +37,10 @@ bower link # in peerio-client-api directory creates a link to the component name
 
 bower link peerio-client-api # in peerio-client-mobile directory creates a symbolic link to the upper dir
 
+then run `gulp watch` in the peerio-client-api repo.
+=======
+In order to use the ios emulator you may have to `npm install ios-sim`
+
 notes
 ============
 xwalk will not work without these permissions
