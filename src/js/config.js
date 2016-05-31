@@ -23,8 +23,9 @@ Peerio.Config.init = function () {
         cfg.locales = [
             {code:'en', name:'English'},
             {code:'fr', name:'Français'},
-            {code:'zh_CN', name:'中文'},
-            {code:'hr', name:'Hrvatski'}];
+            {code:'es', name:'Español'},
+            {code:'hr', name:'Hrvatski'},
+            {code:'zh_CN', name:'中文'}];
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
