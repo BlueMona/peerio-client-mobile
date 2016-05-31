@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget android-versionCode="100017" id="com.peerio" ios-CFBundleVersion="0" version="2.4.1">
+<widget android-versionCode="100017" id="com.peerio" ios-CFBundleVersion="0" version="2.4.12">
     <name>Peerio</name>
     <description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
@@ -117,7 +117,7 @@
     <preference name="xwalkMode" value="embedded"/>
     <preference name="xwalkMultipleApk" value="true"/>
     <plugin name="com.peerio.cordova.plugin.insomnia" spec="4.2.1"/>
-    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.9">
+    <plugin name="com.peerio.cordova.plugin.wkwebviewserver" spec="1.0.10">
         <variable name="WKWEBVIEW_SERVER_PORT" value="52341"/>
     </plugin>
     <plugin name="cc.fovea.cordova.purchase" spec="https://github.com/j3k0/cordova-plugin-purchase">
