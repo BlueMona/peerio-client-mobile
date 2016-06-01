@@ -13,7 +13,6 @@ class IosDriver(AbstractDriver):
         self.executor = executor
         self.capabilities = capabilities
         self.capabilities.update(extra)
-        self.connect()
 
     def __exit__(self):
         self.disconnect()

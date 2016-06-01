@@ -16,7 +16,6 @@ class AndroidDriver(AbstractDriver):
         self.chromium_capabilities = chromium_capabilities
         self.appium = None
         self.chromium = None
-        self.connect()
 
     def __exit__(self):
         self.disconnect()

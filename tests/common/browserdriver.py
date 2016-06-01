@@ -97,3 +97,7 @@ class BrowserDriver(AbstractDriver):
         clearChromeDBPath = os.path.join(os.path.dirname(__file__), '../../tools/clean_chrome_db.sh')
         os.system("sh " + clearChromeDBPath + "&")
         self.reload()
+
+    def accept_alert(self):
+        print "no system alerts in browser"
+
