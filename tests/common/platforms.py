@@ -40,12 +40,16 @@ def set_platform(platform):
 def platform_browser():
     return {
         'browserautomation': True,
+        'type': 'browser',
+        'device': False,
         'driver': lambda extra: BrowserDriver(True)
     }
 
 def platform_ios():
     return {
         'appium': True,
+        'type': 'ios',
+        'device': False,
         'driver': lambda extra: IosDriverFast(executor, ios_93(ios_basic()), extra)
     }
 
@@ -54,6 +58,8 @@ def platform_iosdevice():
     if not udid:
         raise Exception("No iOS devices connected")
     return {
+        'type': 'ios',
+        'device': True,
         'appium': True,
         'ios_webkit_debug_proxy': True,
         'driver': lambda extra: IosDriverFast(executor, ios_device(udid), extra)
@@ -63,6 +69,8 @@ def platform_androiddevice():
     device = getFirstPhysicalAndroidDeviceID()
     return {
         'appium': True,
+        'type': 'android',
+        'device': True,
         'chromedriver': True,
         'driver': lambda extra: AndroidDriver(executor, android_device(device["name"]), chromium_executor, chromium_basic(), extra)
     }
@@ -71,6 +79,8 @@ def platform_android():
     device = getFirstGenyMotionAndroidDeviceID()
     return {
         'platformName': 'GenyMotion',
+        'type': 'android',
+        'device': True, # genymotion simulators have full capabilities of a device, so adding true here
         'appium': True,
         'chromedriver': True,
         'driver': lambda extra: AndroidDriver(executor, android_600(android_basic(device["name"])), chromium_executor, chromium_basic(), extra)

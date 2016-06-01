@@ -1,6 +1,7 @@
 from common.helper import *
 from settings.settings import test_logins
 from time import strftime
+from time import sleep
 
 class LoginBase:
     def getWebSocketServer(self):
@@ -15,9 +16,9 @@ class LoginBase:
 
         tap_by_css('.btn-safe')
         assert wait_find_by_id('tabbar') != None
+        driver().accept_alert()
 
     def changeuser(self):
         sleep(1)
         return tap_by_css('#footer .btn')
-        sleep(1)
 

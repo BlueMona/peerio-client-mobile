@@ -3,6 +3,7 @@ import selenium
 import time
 import random
 import common.platforms
+import sys
 from settings.settings import *
 from websocket import create_connection
 from browserdriver import BrowserDriver
@@ -19,6 +20,8 @@ def driver():
 def connect(extra = {}):
     global driver
     driver = common.platforms.get_platform()['driver'](extra)
+    driver.device = common.platforms.get_platform()['device']
+    driver.platform = common.platforms.get_platform()['type']
     driver.connect()
 
 def create_driver(extra = {}):
@@ -30,8 +33,8 @@ def check_animation():
         if driver.find(css) != None:
             return False
         time.sleep(0.1)
-        print css
-    print '---'
+        print '-'
+    print '*'
     return True
 
 def wait_for(timeout, func, msg = None):
@@ -40,7 +43,7 @@ def wait_for(timeout, func, msg = None):
             time.sleep(0.1)
             r = func()
             if r:
-                print 'returning %s' % r
+                # print 'returning %s' % r
                 return r
             else:
                 print '.'
@@ -63,7 +66,7 @@ def find_by_css(selector):
     return driver.find(selector)
 
 def find_by_id(id):
-    return find_by_css("[id=%s]" % id)
+    return find_by_css("[id='%s']" % id)
 
 def wait_find_by_id(id):
     return wait_for(wait_timeout, lambda: find_by_id(id), "find by id %s" % id)
@@ -92,7 +95,7 @@ def wait_tap_by_css(selector):
 
 def tap_by_id(id):
     el = find_by_id(id)
-    return tap_by_css("[id=%s]" % id)
+    return tap_by_css('[id="%s"]' % id)
 
 def text_by_css(selector, text, slow=False):
     driver.text_by_css(selector, text, slow)

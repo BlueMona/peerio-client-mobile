@@ -70,6 +70,7 @@
                     <div className="buttons row">
                         {this.state.availableSubscriptions.map( i => (
                             <Peerio.UI.Tappable
+                                id={i.id}
                                 key={i.id}
                                 element="div"
                                 className={alreadySubscribed ? 'btn-disabled' : 'btn-safe'}
@@ -83,7 +84,7 @@
                 <div>{this.state.error}</div> :
                 <div className="list-item loader-item flex-row flex-align-center flex-justify-center"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
             return (
-                <div className="content without-tab-bar without-footer flex-col">
+                <div className="content without-tab-bar without-footer flex-col _purchaseContent">
                     <div className="headline">{t('payments_title')}</div>
                     {this.hasActiveSubscriptions() || this.hasCanceledSubscriptions() ?
                             <p>

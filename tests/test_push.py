@@ -3,7 +3,6 @@ import common.testcase
 import time
 from common.helper import *
 from common.peeriohelper import *
-from selenium.common.exceptions import NoSuchElementException
 
 class PushNotification(common.testcase.TestCase, LoginBase):
     def test_01_push(self):

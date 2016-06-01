@@ -69,3 +69,6 @@ class AbstractDriver:
             self.appium.switch_to_alert().accept()
         except:
             print "no alert found"
+
+    def accept_subscription(self):
+        print "not implemented"

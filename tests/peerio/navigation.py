@@ -21,9 +21,18 @@ def navigateToLogout():
     assert tap_by_css('.sidebar-menu ._logout')
     assert wait_find_by_id('username')
 
-def removeAlerts():
+def navigateToPurchase():
+    # make sure we're at the start page
+    navigateToStart()
+    assert tap_by_css('.sidebar-menu ._purchase')
+    assert wait_find_by_css('._purchaseContent')
+
+def removeAlerts(accept):
     el = find_by_css('.modal')
     while el != None:
-        tap_by_css(find_by_css('.modal .btn-danger'))
+        if accept:
+            tap_by_css(find_by_css('.modal .btn-danger'))
+        else:
+            tap_by_css(find_by_css('.modal .btn-safe'))
         sleep(1)
         el = find_by_css('.modal')
