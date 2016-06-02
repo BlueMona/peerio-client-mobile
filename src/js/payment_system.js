@@ -92,7 +92,7 @@ Peerio.PaymentSystem.init = function () {
                             L.info('loaded product: ' + p.id);
                         };
                         store.approved_cb && store.approved_cb(p);
-                    }, 1000);
+                    }, 500);
                 });
             },
             order: function (id) {
@@ -126,6 +126,10 @@ Peerio.PaymentSystem.init = function () {
                     Peerio.TinyDB.saveItem('subscription', true, Peerio.user.username);
                 p.owned = true;
                 p.canPurchase = false;
+                if(p.receipt) delete p.receipt;
+                if(Peerio.runtime.platform == 'ios') {
+                    p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
+                }
                 Peerio.Action.paymentProductUpdated(p); 
             }
         });
