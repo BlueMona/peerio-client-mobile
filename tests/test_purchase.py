@@ -7,7 +7,8 @@ from common.helper import *
 from common.peeriohelper import *
 import peerio
 
-def postreceipt(url, receipt64):
+def postreceipt(receipt64):
+    url = "https://sandbox.itunes.apple.com/verifyReceipt"
     data = json.dumps({"receipt-data": receipt64, "password": "***REMOVED***"})
     print data
     buffer = StringIO.StringIO()
