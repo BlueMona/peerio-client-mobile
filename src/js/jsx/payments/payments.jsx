@@ -9,12 +9,14 @@
             };
         },
         componentDidMount: function () {
-            this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(this.handleUpdate.bind(this, null))];
             var api = Peerio.PaymentSystem;
             api.tryLoad()
                 .then(api.getAllSubscriptions)
                 .then(s => this.setState({ availableSubscriptions: s }))
-                .catch(e => this.setState({ 'error': t('paymentsLoadingError') }));
+                .catch(e => this.setState({ 'error': t('paymentsLoadingError') }))
+                .finally(() => {
+                    this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(p => this.handleUpdate(p))];
+                });
         },
 
         componentWillUnmount: function () {
@@ -23,12 +25,14 @@
 
         handleUpdate: function (p) {
             this.forceUpdate();
-            L.info(p);
+            if(p.receipt && PeerioDebug) {
+                Peerio.UI.Alert.show({ text: p.receipt, serviceClass: '_receipt'});
+            }
         },
 
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
-            if(!forceSubscriptions && (!p.canPurchase || this.hasActiveSubscriptions())) return;
+            if(!forceSubscriptions && (/* !p.canPurchase || */ this.hasActiveSubscriptions())) return;
             store.order(p.id);
         },
 
