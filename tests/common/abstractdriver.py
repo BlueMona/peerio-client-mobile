@@ -58,3 +58,22 @@ class AbstractDriver:
         if self.restartPlatform:
             self.restartPlatform({ "noReset": False })
 
+    def dump(self):
+        xml = open("page_source.debug.xml", "w")
+        xml.write(self.appium.page_source.encode('utf-8'))
+        xml.close()
+
+    def accept_alert(self):
+        try:
+            self.appium.switch_to_alert().accept()
+        except:
+            print "no alert found"
+
+    def dismiss_alert(self):
+        try:
+            self.appium.switch_to_alert().dismiss()
+        except:
+            print "no alert found"
+
+    def accept_subscription(self):
+        print "not implemented"
