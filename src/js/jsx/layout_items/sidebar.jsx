@@ -123,13 +123,12 @@
                                         <i className="material-icons">help</i> {t('supportFeedback')}
                                     </Peerio.UI.Tappable>
 
-                                    {Peerio.user.getActiveSubscriptions().length ?
-                                        <Peerio.UI.Tappable className="_subscriptions" element="li" onTap={this.handlePaymentsView}>
-                                            <i className="material-icons">cloud</i> {t('payments_menu_view')}
-                                        </Peerio.UI.Tappable> :
-                                        <Peerio.UI.Tappable className="_purchase" element="li" onTap={this.handlePayments}>
-                                            <i className="material-icons">cloud_upload</i> {t('payments_menu')}
-                                        </Peerio.UI.Tappable>}
+                                    <Peerio.UI.Tappable className="_purchase" element="li" onTap={this.handlePayments}>
+                                        <i className="material-icons">cloud_upload</i> {t('payments_menu')}
+                                    </Peerio.UI.Tappable>
+                                    <Peerio.UI.Tappable className="_subscriptions" element="li" onTap={this.handlePaymentsView}>
+                                        <i className="material-icons">cloud</i> {t('payments_menu_view')}
+                                    </Peerio.UI.Tappable>
                                 </ul>
 
                                 <div className="flex-grow-1"></div>
