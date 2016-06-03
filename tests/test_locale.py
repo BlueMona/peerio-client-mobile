@@ -1,8 +1,9 @@
 import common.testcase
 import time
 from common.helper import *
+import peerio
 
-class LocaleTest(common.testcase.TestCase, SignupBase):
+class LocaleTest(common.testcase.TestCase):
     locales = {
         "en": {
             "login": "Login",
@@ -30,12 +31,12 @@ class LocaleTest(common.testcase.TestCase, SignupBase):
     def test_02_locale_passphrase(self):
         self.restart()
         self.locale_test("fr")
-        self.signup(self.checkPassphraseLocale)
+        peerio.signup(self.checkPassphraseLocale)
 
     def test_03_locale_after_signup(self):
         self.restart()
         self.locale_test("fr")
-        self.signup()
+        peerio.signup()
         wait_find_by_css('._setupWizard')
         assert get_text_by_css('.btn-safe') == self.locales["fr"]["signup"]
 

@@ -2,7 +2,6 @@ import unittest
 import os
 import sys
 import pdb
-from selenium.common.exceptions import NoSuchElementException
 from random import randint
 from time import sleep
 from time import strftime
@@ -15,11 +14,11 @@ import pycurl
 import peerio
 logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
-class Signup(common.testcase.TestCase, peerio.SignupBase):
+class Signup(common.testcase.TestCase):
     def test_001_signup(self):
-        self.signup()
-        logging.info(self.username)
-        logging.info(self.phrase)
+        r = peerio.signup()
+        logging.info(r['username'])
+        logging.info(r['phrase'])
 
     def test_020_setup_wizard(self):
         wait_find_by_css('._setupWelcome')
