@@ -75,11 +75,7 @@ def wait_find_by_css(selector):
     return wait_for(wait_timeout, lambda: find_by_css(selector), "find by selector %s" % selector)
 
 def wait_not_find_by_css(selector):
-    try:
-        wait_find_by_css(selector)
-    except:
-        return True
-    return False
+    return wait_for(wait_timeout, lambda: not find_by_css(selector), "find by selector %s" % selector)
 
 def tap_by_css(selector):
     el = find_by_css(selector)
@@ -115,3 +111,15 @@ def option_by_css(selector, value):
 
 def value_by_css(selector):
     return driver.value_by_css(selector)
+
+def find_by_xpath(selector):
+    return driver.find_by_xpath(selector)
+
+def wait_find_by_xpath(selector):
+    return wait_for(wait_timeout, lambda: find_by_xpath(selector), "find by xpath %s" % selector)
+
+def click_by_xpath(selector):
+    return driver.click_by_xpath(selector)
+
+def text_by_xpath(selector):
+    return driver.text_by_xpath(selector)

@@ -27,7 +27,7 @@ def navigateToPurchase():
     assert tap_by_css('.sidebar-menu ._purchase')
     assert wait_find_by_css('._purchaseContent')
 
-def removeAlerts(accept):
+def removeAlerts(accept=False):
     el = find_by_css('.modal')
     while el != None:
         if accept:

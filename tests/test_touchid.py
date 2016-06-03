@@ -1,11 +1,7 @@
-import unittest
 import common.testcase
-import time
 from common.helper import *
-from common.peeriohelper import *
-from selenium.common.exceptions import NoSuchElementException
 
-class TouchID(common.testcase.TestCase, LoginBase):
+class TouchID(common.testcase.TestCase):
     def test_01_push(self):
         if driver().wipe:
             driver().wipe()
