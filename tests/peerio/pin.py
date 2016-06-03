@@ -1,9 +1,9 @@
 from common.helper import *
 
 def removePin():
-    removePin = find_by_css('.setPin .btn-danger')
+    removePin = find_by_css('._setPin .btn-danger')
     if removePin != None:
-        tap_by_css('.setPin .btn-danger')
+        tap_by_css('._setPin .btn-danger')
         wait_tap_by_css('.modal .btn-safe')
 
 def tapPin(number):

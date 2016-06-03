@@ -1,11 +1,8 @@
-import unittest
 import common.testcase
 import time
 from common.helper import *
-from common.peeriohelper import *
-from selenium.common.exceptions import NoSuchElementException
 
-class LocaleTest(common.testcase.TestCase, LoginBase, SignupBase):
+class LocaleTest(common.testcase.TestCase, SignupBase):
     locales = {
         "en": {
             "login": "Login",

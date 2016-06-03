@@ -4,7 +4,6 @@ import unittest
 import common.testcase
 import time
 from common.helper import *
-from common.peeriohelper import *
 import peerio
 
 def postreceipt(receipt64):
@@ -26,9 +25,9 @@ def receipt():
     url = "https://sandbox.itunes.apple.com/verifyReceipt"
     print postreceipt(url, receipt)
 
-class Purchase(common.testcase.TestCase, peerio.LoginBase):
+class Purchase(common.testcase.TestCase):
     def test_01_order(self):
-        self.login()
+        peerio.login()
         peerio.navigateToPurchase()
         purchase = 'com.peerio.storage.50.monthly'
         wait_find_by_id(purchase)
