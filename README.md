@@ -40,7 +40,7 @@ In order to use the ios emulator you may have to `npm install ios-sim`. You will
 `gulp run-android`
 `gulp run-ios`
 
-If building fails, or when switching branches, run `.reinstall_platforms_and_plugins.sh`. 
+If building fails, or when switching branches, run `./reinstall_platforms_and_plugins.sh`. 
 
 ## To build
 
