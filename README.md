@@ -24,11 +24,12 @@ chmod a+x ./generate_changelog.sh ./release_android.sh
 
 ### using bower link
 
-for the live development of `peerio-client-api,`` the following should be done:
+for the live development of `peerio-client-api`, the following should be done:
 
+```
 bower link # in peerio-client-api directory creates a link to the component named the same as dir name (peerio-client-api)
-
 bower link peerio-client-api # in peerio-client-mobile directory creates a symbolic link to the upper dir
+```
 
 then run `gulp watch` in the peerio-client-api repo.
 
@@ -38,6 +39,8 @@ In order to use the ios emulator you may have to `npm install ios-sim`. You will
 
 `gulp run-android`
 `gulp run-ios`
+
+If building fails, or when switching branches, run `.reinstall_platforms_and_plugins.sh`. 
 
 ## To build
 
