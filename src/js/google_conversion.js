@@ -43,7 +43,7 @@ Peerio.GoogleConversion.init = function () {
         });
     };
 
-    // if (Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun)
-    //     api.subscription = Peerio.Dispatcher.onConnected(api.trackInstall);
+    if (Peerio.runtime.platform == 'ios' && Peerio.runtime.firstRun)
+        api.subscription = Peerio.Dispatcher.onConnected(api.trackInstall);
 
 };
