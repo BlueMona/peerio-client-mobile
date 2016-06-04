@@ -120,3 +120,7 @@ def getFirstGenyMotionAndroidDeviceID():
         return next(x for x in getAndroidDevices() if x["type"] == "genymotion")
     except StopIteration:
         raise Exception("No GenyMotion Android devices connected")
+
+def enableSimulatorTouchID():
+    path = os.path.join(os.path.dirname(__file__), '../../tools/enable-simulator-touchid.app')
+    res = commands.getstatusoutput("open %s" % path)

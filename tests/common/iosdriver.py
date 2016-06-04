@@ -6,6 +6,7 @@ from abstractdriver import AbstractDriver
 import selenium
 import appium
 from selenium.common.exceptions import NoSuchElementException
+import common.processes
 
 class IosDriver(AbstractDriver):
     def __init__(self, executor, capabilities, extra = {}):
@@ -80,4 +81,8 @@ class IosDriver(AbstractDriver):
         })
         self.appium = appium.webdriver.Remote(command_executor=self.executor,
                             desired_capabilities=settings_capabilities)
+
+    def enable_touchid(self):
+        common.processes.enableSimulatorTouchID()
+
 

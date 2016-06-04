@@ -8,7 +8,7 @@ import peerio
 
 def postreceipt(receipt64):
     url = "https://sandbox.itunes.apple.com/verifyReceipt"
-    data = json.dumps({"receipt-data": receipt64, "password": "***REMOVED***"})
+    data = json.dumps({"receipt-data": receipt64, "password": "40c5db2957774411b90ead83660d0a11"})
     print data
     buffer = StringIO.StringIO()
     c = pycurl.Curl()
@@ -36,7 +36,6 @@ class Purchase(common.testcase.TestCase):
             print 'browser mock'
             wait_find_by_css('.modal')
             peerio.removeAlerts(True)
-
 
         if driver().platform == 'ios':
             print 'executing ios test tree'
