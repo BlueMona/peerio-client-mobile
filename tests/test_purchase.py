@@ -37,6 +37,5 @@ class Purchase(common.testcase.TestCase):
             wait_find_by_css('.modal')
             peerio.removeAlerts(True)
 
-
         if driver().platform == 'ios':
             print 'executing ios test tree'
