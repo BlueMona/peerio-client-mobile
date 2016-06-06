@@ -33,7 +33,7 @@
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
             if(!forceSubscriptions && (/* !p.canPurchase || */ this.hasActiveSubscriptions())) return;
-            store.order(p.id);
+            Peerio.PaymentSystem.startOrder(p);
         },
 
         handleViewSubscriptions: function () {

@@ -116,19 +116,36 @@ Peerio.PaymentSystem.init = function () {
         };
     }
 
+    api.startOrder = function (p) {
+        p.inProgress = true;
+        store.order(p.id);
+    };
+
     if(store) {
         // we approve paid subscriptions automatically
         // only consummable products are approved on the store side
         store.when('product').approved( function (p) { 
             // p.finish(); 
             if(p.state == store.APPROVED) {
-                if(Peerio.user) 
-                    Peerio.TinyDB.saveItem('subscription', true, Peerio.user.username);
-                p.owned = true;
-                p.canPurchase = false;
-                if(p.receipt) delete p.receipt;
-                if(Peerio.runtime.platform == 'ios') {
-                    p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
+                // if(Peerio.user) 
+                //     Peerio.TinyDB.saveItem('subscription', true, Peerio.user.username);
+                // p.owned = true;
+                // p.canPurchase = false;
+                if(p.inProgress) {
+                    if(Peerio.runtime.platform == 'ios') {
+                        p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
+                        if(p.receipt) {
+                            Peerio.user.registerMobilePurchaseApple(p.receipt)
+                            .then( () => {
+                                p.finish();
+                                Peerio.Action.paymentProductUpdated(p); 
+                            })
+                            .catch( e => {
+                                Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
+                            });
+                        }
+                    }
+                    p.inProgress = null;
                 }
                 Peerio.Action.paymentProductUpdated(p); 
             }
