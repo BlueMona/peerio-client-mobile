@@ -8,7 +8,7 @@ import peerio
 
 def postreceipt(receipt64):
     url = "https://sandbox.itunes.apple.com/verifyReceipt"
-    data = json.dumps({"receipt-data": receipt64, "password": ""})
+    data = json.dumps({"receipt-data": receipt64, "password": "***REMOVED***"})
     print data
     buffer = StringIO.StringIO()
     c = pycurl.Curl()
