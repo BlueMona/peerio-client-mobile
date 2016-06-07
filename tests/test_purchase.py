@@ -35,7 +35,12 @@ class Purchase(common.testcase.TestCase):
         if driver().platform == 'browser':
             print 'browser mock'
             wait_find_by_css('.modal')
-            peerio.removeAlerts(True)
+            # accept alert
+            peerio.removeAlerts(True, '._paymentConfirm')
+            wait_find_by_css('._receipt')
+            text = get_text_by_css('._receipt p')
+            assert text == purchase
+            peerio.removeAlerts(True, '._receipt')
 
         if driver().platform == 'ios':
             print 'executing ios test tree'
