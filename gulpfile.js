@@ -48,7 +48,7 @@ var babelOptions = {
 
 // extracting --cli --parameters
 var knownOptions = {
-    boolean: ['noapi', 'release', 'injectd', 'injectr'],
+    boolean: ['noapi', 'release', 'injectd', 'injectr', 'as'],
     default: {}
 };
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
@@ -330,6 +330,8 @@ gulp.task('static-files', function () {
 // peerio-api-client repository is watched if --api option is provided and copied to www too
 // http server watches www folder and reloads
 gulp.task('serve', ['compile'], function () {
+    // starting automation server if '--as' flag is specified
+    options.as && automationServer();
     // starting http server with watcher
     browserSync.init({
         notify: false,
@@ -471,7 +473,6 @@ gulp.task('find-duplicate-locale-strings', function () {
     console.log('---------------');
 });
 
-
 // UTILITY FUNCTIONS
 function bump(version) {
     gulp.src(paths.config_xml)
@@ -496,3 +497,11 @@ function bowerInstaller() {
     cp.execSync('bower-installer');
     console.log('...bower-installer end');
 }
+
+function automationServer() {
+    cp.execSync('ps -A | grep [b]rowserautomationserver.py | awk \'{print $1}\' | xargs kill -9');
+    var baserver = cp.spawn('python',  ['tests/browserautomationserver.py'], {
+        stdio: 'inherit'
+    });
+}
+

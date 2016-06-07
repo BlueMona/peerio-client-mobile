@@ -39,7 +39,6 @@ def set_platform(platform):
 
 def platform_browser():
     return {
-        'browserautomation': True,
         'type': 'browser',
         'device': False,
         'driver': lambda extra: BrowserDriver(True)
