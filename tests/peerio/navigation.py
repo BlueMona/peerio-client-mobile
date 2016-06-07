@@ -27,12 +27,12 @@ def navigateToPurchase():
     assert tap_by_css('.sidebar-menu ._purchase')
     assert wait_find_by_css('._purchaseContent')
 
-def removeAlerts(accept=False):
-    el = find_by_css('.modal')
+def removeAlerts(accept=False,selector='.modal'):
+    el = find_by_css(selector)
     while el != None:
         if accept:
-            tap_by_css(find_by_css('.modal .btn-danger'))
-        else:
             tap_by_css(find_by_css('.modal .btn-safe'))
+        else:
+            tap_by_css(find_by_css('.modal .btn-danger'))
         sleep(1)
-        el = find_by_css('.modal')
+        el = find_by_css(selector)
