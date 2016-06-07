@@ -145,6 +145,21 @@ Peerio.PaymentSystem.init = function () {
                             });
                         }
                     }
+                    if(Peerio.runtime.platform == 'android') {
+                        if(p.transaction) {
+                            Peerio.user.registerMobilePurchaseAndroid(JSON.stringify(p.transaction.receipt), 
+                                                                      p.transaction.signature, 
+                                                                      p.transaction.purchaseToken)
+                            .then( () => {
+                                p.finish();
+                                Peerio.Action.paymentProductUpdated(p); 
+                            })
+                            .catch( e => {
+                                Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
+                            });
+                        }
+                    }
+ 
                     p.inProgress = null;
                 }
                 Peerio.Action.paymentProductUpdated(p); 
