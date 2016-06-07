@@ -72,9 +72,6 @@
             if (!user || !user.settings) return null;
             // TODO: remove when quota is calculated by server
             var total = user.quota.total;
-            if (user.subscription && user.subscription.active) {
-                total += user.subscription.amount;
-            }
             var quotaUsed = Peerio.Helpers.formatBytes(user.quota.user);
             var quota = Peerio.Helpers.formatBytes(total);
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));

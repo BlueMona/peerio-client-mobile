@@ -62,13 +62,6 @@
                 }
             });
 
-            // TODO: remove mock when server responds well
-            Peerio.Dispatcher.onPaymentProductUpdated( p => {
-                if(p.owned) {
-                    Peerio.user.subscription = { active: true, amount: 50 * 1024 * 1024 * 1024 };
-                }
-            });
-
             Peerio.Dispatcher.onServerWarning(warning => {
                 Peerio.UI.Alert.show({ text: warning.msg, serviceClass: '_serverWarning' })
                     .then(() => Peerio.user.clearWarning(warning));

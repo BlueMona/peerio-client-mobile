@@ -51,16 +51,6 @@ Peerio.PaymentSystem.init = function () {
         return Promise.resolve(true);
     };
 
-    api.tryLoadSubscriptionStatus = function () {
-        try {
-            // TODO: implement loading the subscription status from the server (or it should be supplied via settings)
-            return Peerio.TinyDB.getItem('subscription', Peerio.user.username)
-                    .then(s => Peerio.user.subscription = {active: s, amount: 50 * 1024 * 1024 * 1024 });
-        } catch (e) {
-            return Promise.reject(e);
-        }
-    };
-
     api.tryLoad = function () {
         try {
             return api.loadProductsFromServer();
@@ -96,7 +86,10 @@ Peerio.PaymentSystem.init = function () {
                 });
             },
             order: function (id) {
-                Peerio.UI.Confirm.show({text:id})
+                Peerio.UI.Confirm.show({
+                    text:id,
+                    serviceClass: '_paymentConfirm'
+                })
                 .then( () => {
                     var p = store.products.filter( p => p.id == id )[0];
                     p.state = store.APPROVED;
@@ -121,51 +114,62 @@ Peerio.PaymentSystem.init = function () {
         store.order(p.id);
     };
 
+    api.process = {};
+    api.process.approved = {};
+
+    api.process.approved.ios = function (p) {
+        p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
+        if(p.receipt) {
+            Peerio.user.registerMobilePurchaseApple(p.receipt)
+                .then( () => {
+                    p.finish();
+                    Peerio.Action.paymentProductUpdated(p); 
+                })
+                .catch( e => {
+                    Peerio.UI.Alert.show({ 
+                        text: 'Error registering mobile purchase. Please contact support',
+                    });
+                });
+        }
+    };
+
+    api.process.approved.android = function (p) {
+        if(p.transaction) {
+            p.receipt = p.transaction.receipt;
+            Peerio.user.registerMobilePurchaseAndroid(
+                JSON.stringify(p.transaction.receipt), 
+                p.transaction.signature, 
+                p.transaction.purchaseToken)
+                .then( () => {
+                    p.finish();
+                    Peerio.Action.paymentProductUpdated(p); 
+                })
+                .catch( e => {
+                    Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
+                });
+        }
+    };
+
+    api.process.approved.browser = function (p) {
+        p.receipt = p.id;
+        p.finish();
+        Peerio.Action.paymentProductUpdated(p); 
+    };
+
     if(store) {
         // we approve paid subscriptions automatically
         // only consummable products are approved on the store side
         store.when('product').approved( function (p) { 
             // p.finish(); 
             if(p.state == store.APPROVED) {
-                // if(Peerio.user) 
-                //     Peerio.TinyDB.saveItem('subscription', true, Peerio.user.username);
-                // p.owned = true;
-                // p.canPurchase = false;
                 if(p.inProgress) {
-                    if(Peerio.runtime.platform == 'ios') {
-                        p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
-                        if(p.receipt) {
-                            Peerio.user.registerMobilePurchaseApple(p.receipt)
-                            .then( () => {
-                                p.finish();
-                                Peerio.Action.paymentProductUpdated(p); 
-                            })
-                            .catch( e => {
-                                Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
-                            });
-                        }
-                    }
-                    if(Peerio.runtime.platform == 'android') {
-                        if(p.transaction) {
-                            Peerio.user.registerMobilePurchaseAndroid(JSON.stringify(p.transaction.receipt), 
-                                                                      p.transaction.signature, 
-                                                                      p.transaction.purchaseToken)
-                            .then( () => {
-                                p.finish();
-                                Peerio.Action.paymentProductUpdated(p); 
-                            })
-                            .catch( e => {
-                                Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
-                            });
-                        }
-                    }
- 
+                    api.process.approved[Peerio.runtime.platform](p);
                     p.inProgress = null;
+                } else {
+                    Peerio.Action.paymentProductUpdated(p); 
                 }
-                Peerio.Action.paymentProductUpdated(p); 
             }
         });
-        // api.loadProductsFromServer();
     }
 };
 
