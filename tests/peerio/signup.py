@@ -1,6 +1,8 @@
 from common.helper import *
 from settings.settings import test_logins
 from time import strftime
+import logging
+logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
 def signup(passCb = None):
     username = None
@@ -32,8 +34,15 @@ def signup(passCb = None):
     wait_find_by_css('textarea')
     text_by_css('textarea', phrase)
     tap_by_css('.btn-safe')
+    logging.info(username)
+    logging.info(phrase)
     return {
         "username": username,
         "phrase": phrase
     }
 
+def signupSkip():
+    signup()
+    wait_find_by_css('._setupWelcome')
+    tap_by_css('.btn-primary')
+    wait_find_by_id('tabbar')

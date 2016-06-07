@@ -9,16 +9,12 @@ from settings.settings import *
 from common.helper import *
 from mailinator_curl import get_code_for
 import common.testcase
-import logging
 import pycurl
 import peerio
-logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
 class Signup(common.testcase.TestCase):
     def test_001_signup(self):
         r = peerio.signup()
-        logging.info(r['username'])
-        logging.info(r['phrase'])
 
     def test_020_setup_wizard(self):
         wait_find_by_css('._setupWelcome')

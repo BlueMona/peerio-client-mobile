@@ -15,7 +15,10 @@
                 .then(s => this.setState({ availableSubscriptions: s }))
                 .catch(e => this.setState({ 'error': t('paymentsLoadingError') }))
                 .finally(() => {
-                    this.subscriptions = [Peerio.Dispatcher.onPaymentProductUpdated(p => this.handleUpdate(p))];
+                    this.subscriptions = [
+                        Peerio.Dispatcher.onPaymentProductUpdated(p => this.handleUpdate(p)),
+                        Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null))
+                    ];
                 });
         },
 
@@ -24,15 +27,19 @@
         },
 
         handleUpdate: function (p) {
+            if(p.cancelled || p.error || p.receipt) {
+                this.setState({inProgress: false});
+            }
             this.forceUpdate();
-            if(p.receipt && PeerioDebug) {
-                Peerio.UI.Alert.show({ text: p.receipt, serviceClass: '_receipt'});
+            if(p.receipt) {
+                this.transitionTo('payments_view_subscriptions');
             }
         },
 
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
             if(!forceSubscriptions && (/* !p.canPurchase || */ this.hasActiveSubscriptions())) return;
+            this.setState({inProgress: true});
             Peerio.PaymentSystem.startOrder(p);
         },
 
@@ -102,7 +109,7 @@
                             </p> : null}
 
 
-                    { this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
+                    { !this.state.inProgress && this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
                         availableSubscriptions : loader
                     }
                 </div>

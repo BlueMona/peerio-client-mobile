@@ -115,10 +115,20 @@ def value_by_css(selector):
 def find_by_xpath(selector):
     return driver.find_by_xpath(selector)
 
+def swipe_find_by_xpath(selector):
+    for i in xrange(10):
+        if(find_by_xpath(selector)):
+            return True
+        driver.appium.swipe(0, 0, 0, 500, 1000)
+    return False
+
 def wait_find_by_xpath(selector):
     return wait_for(wait_timeout, lambda: find_by_xpath(selector), "find by xpath %s" % selector)
 
 def click_by_xpath(selector):
+    return driver.click_by_xpath(selector)
+def wait_click_by_xpath(selector):
+    wait_find_by_xpath(selector)
     return driver.click_by_xpath(selector)
 
 def text_by_xpath(selector, value):

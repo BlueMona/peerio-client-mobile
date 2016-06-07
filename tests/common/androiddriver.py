@@ -63,4 +63,23 @@ class AndroidDriver(AbstractDriver):
     def execute_script(self, script):
         return self.chromium.execute_script(script)
 
+    def open_settings(self):
+        self.disconnect()
+        # appium can automate only one app
+        deviceName = self.capabilities['deviceName']
+
+        sc = {
+            'appPackage': 'com.android.settings',
+            'appActivity': '.Settings',
+            'platformName': 'Android',
+            'device': 'Android',
+            'deviceName': deviceName,
+            'udid': deviceName,
+            'newCommandTimeout': 12000,
+            'autoLaunch': True
+        }
+
+        self.appium = appium.webdriver.Remote(command_executor=self.executor,
+                            desired_capabilities=sc)
+
 

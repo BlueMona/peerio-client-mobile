@@ -69,7 +69,9 @@ Peerio.PaymentSystem.init = function () {
             APPROVED: 'approved',
             when: function () {
                 return {
-                    approved: function (cb) { store.approved_cb = cb; }
+                    approved: function (cb) { store.approved_cb = cb; },
+                    cancelled: function (cb) { store.cancelled_cb = cb; },
+                    error: function (cb) { store.error_cb = cb; }
                 };
             },
             refresh: function () {
@@ -110,6 +112,9 @@ Peerio.PaymentSystem.init = function () {
     }
 
     api.startOrder = function (p) {
+        p.cancelled = null;
+        p.error = null;
+        p.receipt = null;
         p.inProgress = true;
         store.order(p.id);
     };
@@ -157,8 +162,14 @@ Peerio.PaymentSystem.init = function () {
     };
 
     if(store) {
-        // we approve paid subscriptions automatically
-        // only consummable products are approved on the store side
+        store.when('product').cancelled( function (p) { 
+            p.cancelled = true;
+        });
+
+        store.when('product').error( function (p) { 
+            p.error = true;
+        });
+
         store.when('product').approved( function (p) { 
             // p.finish(); 
             if(p.state == store.APPROVED) {
