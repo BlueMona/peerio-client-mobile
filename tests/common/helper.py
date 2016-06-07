@@ -121,5 +121,5 @@ def wait_find_by_xpath(selector):
 def click_by_xpath(selector):
     return driver.click_by_xpath(selector)
 
-def text_by_xpath(selector):
-    return driver.text_by_xpath(selector)
+def text_by_xpath(selector, value):
+    return driver.text_by_xpath(selector, value)
