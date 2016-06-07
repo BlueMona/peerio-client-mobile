@@ -85,7 +85,6 @@ class BrowserDriver(AbstractDriver):
     # slowly entering things makes no sense in browser, so we override it
     def text_by_css(self, selector, text, slow=False):
         self.clear(selector)
-        time.sleep(0.3)
         self.send_keys(selector, text)
 
     def option_by_css(self, selector, value):
