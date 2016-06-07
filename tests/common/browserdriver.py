@@ -28,9 +28,14 @@ class BrowserDriver(AbstractDriver):
         self.connect_socket()
 
     def communicate(self, data):
+        self.ping()
+        self.sendsocket(data)
+        return self.ws.recv()
+
+    def ping(self):
         while True:
             try:
-                self.sendsocket(data)
+                self.sendsocket(jsonpickle.encode({"action": "ping"}))
                 return self.ws.recv()
             except websocket._exceptions.WebSocketTimeoutException:
                 self.connect_socket()
@@ -62,6 +67,7 @@ class BrowserDriver(AbstractDriver):
         return selector
 
     def reload(self):
+        self.ping()
         self.ws.settimeout(60)
         self.sendsocket(jsonpickle.encode({"action": "reload"}))
         val = self.ws.recv()
@@ -79,6 +85,7 @@ class BrowserDriver(AbstractDriver):
     # slowly entering things makes no sense in browser, so we override it
     def text_by_css(self, selector, text, slow=False):
         self.clear(selector)
+        time.sleep(0.3)
         self.send_keys(selector, text)
 
     def option_by_css(self, selector, value):

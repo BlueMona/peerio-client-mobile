@@ -21,6 +21,9 @@ Peerio.AutomationSocket.init = function () {
             new ReconnectingWebSocket(host, null, options);
 
         api.automationActions = {
+            ping: function (el, data) {
+                data.result = 'pong';
+            },
             send_keys: function (el, data) {
                 el.value += data.value;
                 Peerio.Helpers.simulateChange(el);
