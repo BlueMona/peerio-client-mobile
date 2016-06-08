@@ -338,7 +338,7 @@ Peerio.Helpers.init = function () {
     api.waitUntil = function(timeout, checkLambda) {
         var checker = (resolve, reject) => {
             if(checkLambda()) return resolve(true);
-            if(timeout-- > 0) return window.setTimeout( () => checker(resolve, reject), 1000);
+            if(timeout-- > 0) return window.setTimeout( () => checker(resolve, reject), 200);
             reject('operation timed out'); 
         };
         return new Promise(checker);
