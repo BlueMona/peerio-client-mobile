@@ -31,7 +31,7 @@ GENERATED_CHANGELOG.md
 
 # tests cache
 tests/.cache
-tests/interactive.py
+tests/console.py
 
 /locales
 /backup
