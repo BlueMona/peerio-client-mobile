@@ -63,7 +63,7 @@
             });
 
             Peerio.Dispatcher.onServerWarning(warning => {
-                Peerio.UI.Alert.show({ text: warning.msg, serviceClass: '_serverWarning' })
+                Peerio.UI.Alert.show({ text: t(warning.msg), serviceClass: '_serverWarning' })
                     .then(() => Peerio.user.clearWarning(warning));
             });
         },
