@@ -84,11 +84,11 @@
             if (searchResults === false) {
                 resultNode = <div className="spinner"></div>;
             } else if (searchResults.username) { //assuming single search result
-                resultNode = <Peerio.UI.ContactRequestTemplate 
+                resultNode = <Peerio.UI.ContactRequestTemplate
                     username={this.state.searchResults.username}
                     item={this.state.searchResults}
                     select={(item, selected) => {
-                        if (this.selectedUsers.indexOf(item.username) === -1) 
+                        if (this.selectedUsers.indexOf(item.username) === -1)
                             this.selectedUsers.push(item.username);
                         else
                             this.selectedUsers.splice(item.username, 1);
@@ -102,6 +102,7 @@
                     </p>
 
                     <p>{t('contact_invitePrompt')}</p>
+                    {/*TODO Make this button the main action when there are no contacts to select. - Paul */}
                     <Peerio.UI.Tappable element="div" className="btn-md btn-safe" onTap={this.inviteByEmail}>
                         {t('contact_inviteSendButton')}
                     </Peerio.UI.Tappable>
@@ -128,7 +129,7 @@
                                 ref="searchInput"/>
                         </div>
                         <div className="buttons">
-                            <Peerio.UI.Tappable element="div" className="btn-safe" onTap={this.handleSearchForContacts}>
+                            <Peerio.UI.Tappable element="div" className="btn-primary" onTap={this.handleSearchForContacts}>
                                 <i className="material-icons">search</i> {t('button_searchAgain')}
                             </Peerio.UI.Tappable>
                         </div>
