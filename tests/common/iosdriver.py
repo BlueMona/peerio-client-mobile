@@ -6,6 +6,7 @@ from abstractdriver import AbstractDriver
 import selenium
 import appium
 from selenium.common.exceptions import NoSuchElementException
+import common.processes
 
 class IosDriver(AbstractDriver):
     def __init__(self, executor, capabilities, extra = {}):
@@ -13,7 +14,6 @@ class IosDriver(AbstractDriver):
         self.executor = executor
         self.capabilities = capabilities
         self.capabilities.update(extra)
-        self.connect()
 
     def __exit__(self):
         self.disconnect()
@@ -24,6 +24,7 @@ class IosDriver(AbstractDriver):
 
     def connect(self):
         self.disconnect()
+        print self.capabilities
         self.appium = appium.webdriver.Remote(command_executor=self.executor,
                             desired_capabilities=self.capabilities)
         self.wait_for_view_origin(self.appium, '//UIAWebView')
@@ -70,28 +71,18 @@ class IosDriver(AbstractDriver):
     def execute_script(self, script):
         return self.appium.execute_script(script)
 
-class IosDriverFast(IosDriver):
-    def tap(self, selector):
-        self.switch_to_webview()
-        selector = selector.replace('"', '\\"')
-        script = 'el = document.querySelector("%s"); '
-        script += 'el.dispatchEvent(new CustomEvent("simulatetap"));'
-        script += 'return el;'
-        el = self.js(script % selector)
-        return el
+    #----- payment system block
+    def launch_settings(self):
+        self.disconnect()
+        settings_capabilities = self.capabilities.copy()
+        settings_capabilities.update({
+            "app": "com.apple.Preferences",
+            "noReset": True
+        })
+        self.appium = appium.webdriver.Remote(command_executor=self.executor,
+                            desired_capabilities=settings_capabilities)
 
-    def send_keys(self, selector, text):
-        self.switch_to_webview()
-        selector = selector.replace('"', '\\"')
-        text = text.replace('"', '\\"')
-        script = 'el = document.querySelector("%s"); '
-        script += 'el.value += "%s"; '
-        script += 'el.dispatchEvent(new Event("input", { bubbles: true }));'
-        script += 'return el;'
-        el = self.js(script % (selector, text))
-        return el
+    def enable_touchid(self):
+        common.processes.enableSimulatorTouchID()
 
-    # slowly entering things makes no sense in browser, so we override it
-    def text_by_css(self, selector, text, slow=False):
-        self.clear(selector)
-        self.send_keys(selector, text)
+

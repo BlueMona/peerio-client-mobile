@@ -9,6 +9,7 @@
  */
 
 var Peerio = this.Peerio || {};
+
 Peerio.Config = {};
 
 Peerio.Config.init = function () {

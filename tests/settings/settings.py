@@ -22,9 +22,14 @@ test_logins = {
         'secret': 'fished richter retarded buyer council'
     },
     'wss://hocuspocus.peerio.com': {
-        'user': 't20160426200617',
-        'secret': 'require opinions ants heather missile'
+        'user': 't20160527172900',
+        'secret': 'casket perish telegram obviously contempt'
     }
+}
+
+ios_sandbox_testers = {
+    'peeriotest5@etcetera.ws': 'Lamar_10',
+    'peeriotest4@etcetera.ws': 'Lamar_10'
 }
 
 wait_timeout = 15
@@ -48,10 +53,12 @@ def ios_basic():
         'launchTimeout': 90000,
         'platformVersion': '9.3',
         'deviceName': 'iPhone 6s Plus',
-        'autoAcceptAlerts': True, # so that system dialogs are accepted
+        # 'autoAcceptAlerts': False, # so that system dialogs are accepted
+        # 'autoDismissAlerts': True, # so that system dialogs are accepted
         'autoLaunch': False,
         'noReset': True,
-        'newCommandTimeout': 12000
+        'newCommandTimeout': 12000,
+        'nativeInstrumentsLib': False
     }
 
 def ios_92(config):
@@ -96,7 +103,7 @@ def android_basic(deviceName):
         'newCommandTimeout': 12000,
         'noReset': True,
         'androidDeviceSocket': android_package + '_devtools_remote',
-        'autoLaunch': False,
+        'autoLaunch': False
     }
 
 def android_600(config):

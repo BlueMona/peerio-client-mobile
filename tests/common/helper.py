@@ -3,6 +3,7 @@ import selenium
 import time
 import random
 import common.platforms
+import sys
 from settings.settings import *
 from websocket import create_connection
 from browserdriver import BrowserDriver
@@ -11,7 +12,7 @@ global driver
 
 __defaultTimeout = 30
 __defaultAnimationTimeout = 5
-__animationClasses = ['.animate-enter', '.animate-leave']
+__animationClasses = ['.animate-enter']
 
 def driver():
     return driver
@@ -19,25 +20,36 @@ def driver():
 def connect(extra = {}):
     global driver
     driver = common.platforms.get_platform()['driver'](extra)
+    driver.device = common.platforms.get_platform()['device']
+    driver.platform = common.platforms.get_platform()['type']
+    driver.connect()
+
+def create_driver(extra = {}):
+    global driver
+    driver = common.platforms.get_platform()['driver'](extra)
 
 def check_animation():
     for css in __animationClasses:
-        try:
-            driver.find(css)
-            time.sleep(3)
-            break
-        except selenium.common.exceptions.NoSuchElementException:
-            continue
-        except:
-            print "unexpected error"
-            raise
+        if driver.find(css) != None:
+            return False
+        time.sleep(0.1)
+        print '-'
+    print '*'
+    return True
 
 def wait_for(timeout, func, msg = None):
     for i in xrange(timeout):
         try:
             time.sleep(0.1)
-            return func()
-        except:
+            r = func()
+            if r:
+                # print 'returning %s' % r
+                return r
+            else:
+                print '.'
+                time.sleep(1)
+        except Exception as e:
+            print e
             print '.'
             time.sleep(1)
     raise Exception('timeout waiting for: %s, %s' % (func, msg))
@@ -54,7 +66,7 @@ def find_by_css(selector):
     return driver.find(selector)
 
 def find_by_id(id):
-    return find_by_css("[id=%s]" % id)
+    return find_by_css("[id='%s']" % id)
 
 def wait_find_by_id(id):
     return wait_for(wait_timeout, lambda: find_by_id(id), "find by id %s" % id)
@@ -63,11 +75,7 @@ def wait_find_by_css(selector):
     return wait_for(wait_timeout, lambda: find_by_css(selector), "find by selector %s" % selector)
 
 def wait_not_find_by_css(selector):
-    try:
-        wait_find_by_css(selector)
-    except:
-        return True
-    return False
+    return wait_for(wait_timeout, lambda: not find_by_css(selector), "find by selector %s" % selector)
 
 def tap_by_css(selector):
     el = find_by_css(selector)
@@ -79,10 +87,11 @@ def tap_by_css(selector):
 def wait_tap_by_css(selector):
     el = wait_find_by_css(selector)
     driver.tap(selector)
+    return el != None
 
 def tap_by_id(id):
     el = find_by_id(id)
-    tap_by_css("[id=%s]" % id)
+    return tap_by_css('[id="%s"]' % id)
 
 def text_by_css(selector, text, slow=False):
     driver.text_by_css(selector, text, slow)
@@ -102,3 +111,25 @@ def option_by_css(selector, value):
 
 def value_by_css(selector):
     return driver.value_by_css(selector)
+
+def find_by_xpath(selector):
+    return driver.find_by_xpath(selector)
+
+def swipe_find_by_xpath(selector):
+    for i in xrange(10):
+        if(find_by_xpath(selector)):
+            return True
+        driver.appium.swipe(0, 0, 0, 500, 1000)
+    return False
+
+def wait_find_by_xpath(selector):
+    return wait_for(wait_timeout, lambda: find_by_xpath(selector), "find by xpath %s" % selector)
+
+def click_by_xpath(selector):
+    return driver.click_by_xpath(selector)
+def wait_click_by_xpath(selector):
+    wait_find_by_xpath(selector)
+    return driver.click_by_xpath(selector)
+
+def text_by_xpath(selector, value):
+    return driver.text_by_xpath(selector, value)

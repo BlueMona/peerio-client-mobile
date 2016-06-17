@@ -22,7 +22,7 @@
 
         render: function () {
             return (
-                <div>
+                <div className="_setupContactImport">
                     <div className="headline">{t('importContacts')}</div>
                     {!this.state.inProgress ? (<div>
                         <p className="centered-text">

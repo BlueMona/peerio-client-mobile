@@ -7,6 +7,7 @@ import selenium
 import random
 
 class AbstractDriver:
+    restartPlatform = None
     def __init__(self):
         return
 
@@ -36,7 +37,7 @@ class AbstractDriver:
         self.viewOrigin = viewElement.location
         print '...success'
 
-    def connect(self):
+    def connect(self, extra = {}):
         print "stub"
 
     def reload(self):
@@ -77,3 +78,23 @@ class AbstractDriver:
 
     def accept_subscription(self):
         print "not implemented"
+
+    def find_by_xpath(self, xpath):
+        if not self.appium:
+            raise Exception("Driver has no appium defined")
+        try:
+            return self.appium.find_element_by_xpath(xpath)
+        except:
+            return False
+
+    def click_by_xpath(self, xpath):
+        el = self.find_by_xpath(xpath)
+        assert(el)
+        el.click()
+
+    def text_by_xpath(self, xpath, text):
+        el = self.find_by_xpath(xpath)
+        assert(el)
+        el.click()
+        el.send_keys(text)
+

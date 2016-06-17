@@ -2,12 +2,11 @@ import unittest
 import common.testcase
 import time
 from common.helper import *
-from common.peeriohelper import *
-from selenium.common.exceptions import NoSuchElementException
+import peerio
 
-class PushNotification(common.testcase.TestCase, LoginBase):
+class PushNotification(common.testcase.TestCase):
     def test_01_push(self):
-        self.login()
+        peerio.login()
         execute_script("Peerio.NativeAPI.notifications = []")
         res = execute_script("return Peerio.NativeAPI.notifications")
         assert len(res) == 0

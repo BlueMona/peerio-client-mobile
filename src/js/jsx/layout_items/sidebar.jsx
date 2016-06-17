@@ -19,6 +19,7 @@
             Peerio.Dispatcher.onSidebarToggle(this.toggle);
             Peerio.Dispatcher.onHardMenuButton(this.toggle);
             Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null));
+            Peerio.Dispatcher.onPaymentProductUpdated(this.forceUpdate.bind(this, null));
             //sidebar is never unmounted so we don't unsubscribe
         },
         //--- CUSTOM FN
@@ -52,6 +53,12 @@
             Peerio.NativeAPI.openEmailWindow('support@peerio.com',
                                              'Peerio support/feedback request');
         },
+        handlePayments: function () {
+            this.toggleAndTransition('payments');
+        },
+        handlePaymentsView: function () {
+            this.toggleAndTransition('payments_view_subscriptions');
+        },
         signOut: function () {
             Peerio.NativeAPI.signOut();
         },
@@ -63,8 +70,10 @@
             var twoFactor;
             var user = Peerio.user;
             if (!user || !user.settings) return null;
+            // TODO: remove when quota is calculated by server
+            var total = user.quota.total;
             var quotaUsed = Peerio.Helpers.formatBytes(user.quota.user);
-            var quota = Peerio.Helpers.formatBytes(user.quota.total);
+            var quota = Peerio.Helpers.formatBytes(total);
             var quotaPercent = Math.floor(user.quota.user / (user.quota.total / 100));
 
             pinNode = Peerio.user.PINIsSet ? t('passcode_remove') : t('passcode_set');
@@ -96,27 +105,32 @@
                                         <i className="material-icons">person</i> {t('profile')}
                                     </Peerio.UI.Tappable>
 
-                                    <Peerio.UI.Tappable tag="li"
+                                    <Peerio.UI.Tappable className='_passcode' tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'security')}>
-                                        <i className="material-icons">security</i>{t('security')}
+                                        <i className="material-icons">security</i> {t('security')}
                                     </Peerio.UI.Tappable>
 
                                     <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'preference_settings')}>
                                         <i className="material-icons">settings</i> {t('preferences')}
                                     </Peerio.UI.Tappable>
-
                                 </ul>
                                 <ul>
                                     <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
                                         <i className="material-icons">help</i> {t('supportFeedback')}
                                     </Peerio.UI.Tappable>
-                                </ul>
 
+                                    <Peerio.UI.Tappable className="_purchase" element="li" onTap={this.handlePayments}>
+                                        <i className="material-icons">cloud_upload</i> {t('payments_menu')}
+                                    </Peerio.UI.Tappable>
+                                    <Peerio.UI.Tappable className="_subscriptions" element="li" onTap={this.handlePaymentsView}>
+                                        <i className="material-icons">cloud</i> {t('payments_menu_view')}
+                                    </Peerio.UI.Tappable>
+                                </ul>
 
                                 <div className="flex-grow-1"></div>
                                 <ul>
-                                    <Peerio.UI.Tappable element="li"
+                                    <Peerio.UI.Tappable className="_logout" element="li"
                                                         onTap={this.signOut}><i
                                         className="material-icons">power_settings_new</i> {t('signOut')}
 

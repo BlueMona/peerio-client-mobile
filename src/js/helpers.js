@@ -311,8 +311,21 @@ Peerio.Helpers.init = function () {
     };
 
     api.simulateTouch = function (element) {
-        var evt = new CustomEvent('simulatetap');
-        element.dispatchEvent(evt);
+        if(element) {
+            var evt = new CustomEvent('simulatetap');
+            element.dispatchEvent(evt);
+        }
+        return Promise.resolve(true);
+    };
+
+    api.simulateTouchSelector = function (selector) {
+        return api.simulateTouch(document.querySelector(selector));
+    };
+
+    api.sleep = function (time) {
+        return new Promise((resolve, reject) => {
+            window.setTimeout(resolve, time);
+        });
     };
 
     api.simulateChange = function (element) {
@@ -320,6 +333,15 @@ Peerio.Helpers.init = function () {
         element.dispatchEvent(ev);
         var ev = new Event('change', { bubbles: true });
         element.dispatchEvent(ev);
+    };
+
+    api.waitUntil = function(timeout, checkLambda) {
+        var checker = (resolve, reject) => {
+            if(checkLambda()) return resolve(true);
+            if(timeout-- > 0) return window.setTimeout( () => checker(resolve, reject), 200);
+            reject('operation timed out'); 
+        };
+        return new Promise(checker);
     };
 
     /**

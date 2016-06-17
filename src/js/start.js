@@ -77,6 +77,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
             Peerio.Helpers.getPreferredLocale()
             .then(Peerio.Translator.loadLocale);
 
+            Peerio.PaymentSystem.init();
             window.PeerioDebug && PeerioDebug.afterStart && PeerioDebug.afterStart();
 
             return Promise.resolve();

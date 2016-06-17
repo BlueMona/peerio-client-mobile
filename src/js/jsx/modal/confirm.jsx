@@ -36,7 +36,7 @@
             var text = this.props.text || 'confirm text';
 
             return (
-                <div className="modal alert-wrapper">
+                <div className={classNames('modal', 'alert-wrapper', this.props.serviceClass)}>
                     <div className="alert">
 
                         <div className="alert-content">

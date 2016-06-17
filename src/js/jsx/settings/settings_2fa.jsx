@@ -58,6 +58,8 @@
         },
 
         startEnable2FA: function() {
+            /*
+             * this is highly annoying
             (!Peerio.user.addresses || Peerio.user.addresses.length == 0)
             && Peerio.UI.Confirm.show({
                 text: t('2fa_addressRequired'),
@@ -65,7 +67,7 @@
                 okText: t('button_addAddress')
             })
             .then(() => this.transitionTo('account_settings'))
-            .catch(() => true);
+            .catch(() => true); */
 
             if(!this.state.isEnabled2FA) {
                 /* trying to get a new code right away */

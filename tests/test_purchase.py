@@ -1,40 +1,49 @@
 import StringIO
 import pycurl, json
+import unittest
+import common.testcase
+import time
+from common.helper import *
+import peerio
 
-def postreceipt(receipt64):
-    url = "https://sandbox.itunes.apple.com/verifyReceipt"
-    data = json.dumps({"receipt-data": receipt64, "password": "***REMOVED***"})
-    print data
-    buffer = StringIO.StringIO()
-    c = pycurl.Curl()
-    c.setopt(c.URL, url)
-    c.setopt(c.WRITEDATA, buffer)
-    c.setopt(pycurl.POST, 1)
-    c.setopt(pycurl.POSTFIELDS, data)
-    c.perform()
-    c.close()
-    return buffer.getvalue()
-
-class Purchase(common.testcase.TestCase, peerio.LoginBase):
+class Purchase(common.testcase.TestCase):
     def test_01_order(self):
-        # need to reset our ios device here
-        self.login()
+        peerio.signupSkip()
         peerio.navigateToPurchase()
         purchase = 'com.peerio.storage.50.monthly'
         wait_find_by_id(purchase)
         if driver().platform == 'browser':
-            print 'browser mock'
-            tap_by_id(purchase)
-            wait_find_by_css('.modal')
-            peerio.removeAlerts(True)
+            self.browser(purchase)
+        if driver().platform == 'ios':
+            self.ios(purchase)
+        if driver().platform == 'android':
+            self.ios(purchase)
 
-        if driver().platform == 'ios' and driver().device:
-            print 'executing ios test tree'
-            # removing the alert offering to login to apple
-            time.sleep(2)
-            driver().dismiss_alert()
-            wait_find_by_id(purchase)
-            tap_by_id(purchase)
+    def browser(self, purchase):
+        print 'browser mock'
+        tap_by_id(purchase)
+        wait_find_by_css('.modal')
+        # accept alert
+        peerio.removeAlerts(True, '._paymentConfirm')
+        wait_find_by_css('._viewSubscriptions')
+        # wait_find_by_css('._receipt')
+        # text = get_text_by_css('._receipt p')
+        # assert text == purchase
+        # peerio.removeAlerts(True, '._receipt')
 
-        if driver().platform == 'android' and driver().device:
-            print 'executing android test tree'
+    def ios(self, purchase):
+        print 'executing ios test tree'
+        # remove the sign in to check your downloads thing
+        peerio.applestore.cancelSignIn()
+        tap_by_id(purchase)
+        peerio.applestore.signInSandbox('peeriotest11@etcetera.ws', 'Lamar_10')
+        peerio.applestore.acceptSubscription()
+        driver().switch_to_webview()
+        wait_find_by_css('._viewSubscriptions')
+        # wait_find_by_css('._receipt')
+        # receipt = get_text_by_css('._receipt p')
+        # assert len(receipt) > 0
+        # maybe we can do some additional validation here
+
+    def android(self, purchase):
+        print 'executing android test tree'

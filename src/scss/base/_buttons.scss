@@ -74,8 +74,15 @@ Footer Buttons                                       | Button Class/ID
   @extend .flex-col;
 
   padding: $padding-small;
-}
 
+  &.row {
+    @extend .flex-row;
+
+    .btn-safe, .btn-disabled {
+      width: 100%;
+    }
+  }
+}
 
 .btn {
   @include button-ripple;

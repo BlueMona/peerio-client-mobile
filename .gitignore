@@ -31,5 +31,9 @@ GENERATED_CHANGELOG.md
 
 # tests cache
 tests/.cache
+tests/console.py
 
 /locales
+/backup
+/*.debug.xml
+

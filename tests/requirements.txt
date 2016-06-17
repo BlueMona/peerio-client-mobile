@@ -7,3 +7,4 @@ selenium==2.53.1
 tornado==4.3
 websocket-client==0.37.0
 pycurl==7.43.0
+termcolor==1.1.0

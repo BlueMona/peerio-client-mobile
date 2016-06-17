@@ -71,7 +71,7 @@ def startIosDebugProxy():
     udid = getIPhoneDeviceID()
     if not udid:
         raise Exception("No iOS devices connected")
-    os.system("ios_webkit_debug_proxy -c %s:27753 &" % udid)
+    os.system("tools/ios_webkit_debug_proxy -c %s:27753 &" % udid)
     return True
 
 def killIosDebugProxy():
@@ -120,3 +120,7 @@ def getFirstGenyMotionAndroidDeviceID():
         return next(x for x in getAndroidDevices() if x["type"] == "genymotion")
     except StopIteration:
         raise Exception("No GenyMotion Android devices connected")
+
+def enableSimulatorTouchID():
+    path = os.path.join(os.path.dirname(__file__), '../../tools/enable-simulator-touchid.app')
+    res = commands.getstatusoutput("open %s" % path)

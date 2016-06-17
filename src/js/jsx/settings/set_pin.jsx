@@ -106,7 +106,7 @@
             }
 
             return (
-                <div>
+                <div className="_setPin">
                     {header}
                     <Peerio.UI.TalkativeProgress
                         enabled={this.state.inProgress}
