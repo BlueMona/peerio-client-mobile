@@ -46,6 +46,8 @@ Peerio.ActionExtension.init = function () {
         'KeyboardWillHide',
         'KeyboardDidHide',
         //------- PAYMENTS
-        'PaymentProductUpdated'
+        'PaymentProductUpdated',
+        'PaymentProductCancelled',
+        'PaymentProductError'
     ].forEach(Peerio.Action.add);
 };

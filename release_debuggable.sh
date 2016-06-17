@@ -4,7 +4,7 @@ set -e
 
 echo ==================== COMPILING ASSETS ====================
 # gulp compile --release
-gulp compile
+# gulp compile
 
 
 echo =============== BUILDING ANDROID PROJECT =================

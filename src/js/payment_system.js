@@ -125,56 +125,52 @@ Peerio.PaymentSystem.init = function () {
     api.process.approved.ios = function (p) {
         p.receipt = window.storekit.receiptForTransaction[p.transaction.id];
         if(p.receipt) {
-            Peerio.user.registerMobilePurchaseApple(p.receipt)
-                .then( () => {
-                    p.finish();
-                    Peerio.Action.paymentProductUpdated(p); 
-                })
-                .catch( e => {
-                    Peerio.UI.Alert.show({ 
-                        text: 'Error registering mobile purchase. Please contact support',
-                    });
-                });
+            return Peerio.user.registerMobilePurchaseApple(p.receipt);
         }
+        return Promise.reject('no receipt found on the product');
     };
 
     api.process.approved.android = function (p) {
         if(p.transaction) {
             p.receipt = p.transaction.receipt;
-            Peerio.user.registerMobilePurchaseAndroid(
-                JSON.stringify(p.transaction.receipt), 
-                p.transaction.signature, 
-                p.transaction.purchaseToken)
-                .then( () => {
-                    p.finish();
-                    Peerio.Action.paymentProductUpdated(p); 
-                })
-                .catch( e => {
-                    Peerio.UI.Alert.show( { text: 'Error registering mobile purchase. Please contact support' } );
-                });
+            return Peerio.user.registerMobilePurchaseAndroid(
+                p.transaction.receipt, 
+                p.transaction.purchaseToken,
+                p.transaction.signature);
         }
+        return Promise.reject('no transaction found on the product');
     };
 
     api.process.approved.browser = function (p) {
         p.receipt = p.id;
-        p.finish();
-        Peerio.Action.paymentProductUpdated(p); 
+        return Promise.resolve(true);
     };
 
     if(store) {
         store.when('product').cancelled( function (p) { 
             p.cancelled = true;
+            Peerio.Action.paymentProductCancelled(p); 
         });
 
         store.when('product').error( function (p) { 
             p.error = true;
+            Peerio.Action.paymentProductError(p); 
         });
 
         store.when('product').approved( function (p) { 
-            // p.finish(); 
             if(p.state == store.APPROVED) {
                 if(p.inProgress) {
-                    api.process.approved[Peerio.runtime.platform](p);
+                    api.process.approved[Peerio.runtime.platform](p)
+                        .then( () => {
+                            p.finish();
+                            Peerio.Action.paymentProductUpdated(p); 
+                        })
+                        .catch( e => {
+                            L.error(e);
+                            p.errorText = t('payments_operationErrorRemote');
+                            Peerio.Action.paymentProductError(p); 
+                        });
+
                     p.inProgress = null;
                 } else {
                     Peerio.Action.paymentProductUpdated(p); 

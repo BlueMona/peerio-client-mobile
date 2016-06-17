@@ -13,10 +13,12 @@
             api.tryLoad()
                 .then(api.getAllSubscriptions)
                 .then(s => this.setState({ availableSubscriptions: s }))
-                .catch(e => this.setState({ 'error': t('paymentsLoadingError') }))
+                .catch(e => this.setState({ error: t('payments_loadingError') }))
                 .finally(() => {
                     this.subscriptions = [
                         Peerio.Dispatcher.onPaymentProductUpdated(p => this.handleUpdate(p)),
+                        Peerio.Dispatcher.onPaymentProductError(p => this.handleError(p)),
+                        Peerio.Dispatcher.onPaymentProductCancelled(p => this.handleCancelled(p)),
                         Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null))
                     ];
                 });
@@ -26,21 +28,28 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
+        handleCancelled: function (p) {
+            this.setState({inProgress: false, error: t('payments_operationCancelled')});
+        },
+
+        handleError: function (p) {
+            this.setState({inProgress: false, error: p.errorText || t('payments_operationErrorNative')});
+        },
+
         handleUpdate: function (p) {
-            if(p.cancelled || p.error || p.receipt) {
+            if(p.cancelled || p.error || p.receipt)
                 this.setState({inProgress: false});
-            }
             this.forceUpdate();
-            if(p.receipt) {
-                this.transitionTo('payments_view_subscriptions');
-            }
+            if(p.receipt)
+                this.transitionTo('messages');
         },
 
         handleOrder: function (p) {
             var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
             if(!forceSubscriptions && (/* !p.canPurchase || */ this.hasActiveSubscriptions())) return;
             this.setState({inProgress: true});
-            Peerio.PaymentSystem.startOrder(p);
+            // redraw the payment view so that it shows loader
+            window.setTimeout( () => Peerio.PaymentSystem.startOrder(p), 1000 );
         },
 
         handleViewSubscriptions: function () {
@@ -92,7 +101,7 @@
                 </div>
             );
             var loader = this.state.error ?
-                <div>{this.state.error}</div> :
+                <div className="input-group">{this.state.error}</div> :
                 <div className="list-item loader-item flex-row flex-align-center flex-justify-center"><span className="fa fa-circle-o-notch fa-spin"></span></div>;
             return (
                 <div className="content without-tab-bar without-footer flex-col _purchaseContent">
@@ -109,7 +118,7 @@
                             </p> : null}
 
 
-                    { !this.state.inProgress && this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
+                    { !this.state.error && !this.state.inProgress && this.state.availableSubscriptions && this.state.availableSubscriptions.length ?
                         availableSubscriptions : loader
                     }
                 </div>
