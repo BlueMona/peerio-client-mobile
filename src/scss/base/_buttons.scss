@@ -32,7 +32,7 @@ Button                                            | Button Class
 Footer Buttons                                       | Button Class/ID
 ---------------------------------------------------- | -----------------
 
-<div class="btn-global-action">Global Action Button</div>| `.btn-global-action`
+<div class="btn-primary-action">Global Action Button</div>| `.btn-primary-action`
 */
 
 // TODO Refactor all of the i { color: $white-100} stuff.
@@ -199,7 +199,7 @@ button:disabled,
 
 }
 
-.btn-global-action {
+.btn-primary-action {
   @include button-ripple;
 
   background-color: color(footer-btn-color);

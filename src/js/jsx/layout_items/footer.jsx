@@ -24,7 +24,9 @@
                 add_contact_import: {name: t('button_importContacts'), icon: 'person_add'},
                 add_contact_search: {name: t('button_addSelectedContact'), icon: 'person_add'},
                 new_message: {name: t('button_send'), icon: 'send'},
-                conversation: {name: t('button_send'), icon: 'send'}
+                conversation: {name: t('button_send'), icon: 'send'},
+                prepare_ghost: {name: t('prepare_ghost'), icon: 'send'},
+                share_ghost: {name: t('share_ghost'), icon: 'send'}
             }});
         },
         componentWillMount: function () {
@@ -41,10 +43,12 @@
         },
         //--- RENDER
         render: function () {
+          // TODO change greenButton var to something more discriptive. ie primaryActionBtn. This would match changes to styling.
+          // TODO add changes for ghost? s
             var greenButton = this.state.greenButtonIsVisible ? this.state.mainButtonActions[this.getRouteName()] : null;
             if (greenButton)
                 greenButton = (
-                    <Peerio.UI.Tappable id="greenButton" element="div" className="btn-global-action"
+                    <Peerio.UI.Tappable id="greenButton" element="div" className="btn-primary-action"
                                         onTap={greenButton.action || Peerio.Action.bigGreenButton}>
                         <i className="material-icons">{greenButton.icon}</i> {greenButton.name}
                     </Peerio.UI.Tappable>);

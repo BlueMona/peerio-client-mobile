@@ -45,13 +45,11 @@ class Signup(common.testcase.TestCase):
 
     def test_02_terms(self):
         print "account created"
-        
+
     def test_03_sendrequest(self):
         tap_by_css('.tab:nth-of-type(3)')
-        tap_by_css('.btn-global-action')
+        tap_by_css('.btn-primary-action')
         text_by_id('search', 'testadd2')
         tap_by_css('.btn-safe')
         tap_by_css('.checkbox-input')
-        tap_by_css('.btn-global-action')
-        
-        
+        tap_by_css('.btn-primary-action')
