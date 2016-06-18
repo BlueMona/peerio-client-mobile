@@ -28,7 +28,8 @@
                             <li className="subhead">{t('ghost_lifespan')}</li>
                             <li className="">
                                 Destroy after
-                                <input />
+                                {/* I think the max time is 7 days. */}
+                                <input size="1" type="text" maxLength="1"/>
                                 days.
                             </li>
                         </ul>
@@ -45,6 +46,11 @@
                                                     className="material-icons">
                                     share
                                 </Peerio.UI.Tappable>
+
+                            </li>
+
+                            <li>
+                              <Peerio.UI.LanguageSelect />
                             </li>
                         </ul>
                   </div>
