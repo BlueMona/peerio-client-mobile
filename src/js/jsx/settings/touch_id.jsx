@@ -115,7 +115,7 @@
             },
 
             isFeatureAvailable: function () {
-                return window.PeerioTouchIdKeychain ?
+                return (window.PeerioTouchIdKeychain && Peerio.runtime.platform == 'ios') ?
                     window.PeerioTouchIdKeychain.isFeatureAvailable() : Promise.resolve(false);
             }
         },
