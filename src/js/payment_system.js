@@ -29,8 +29,8 @@ Peerio.PaymentSystem.init = function () {
 
     api.getAllSubscriptions = function () {
         return api.loadProductsFromServer()
-            .then(() => Peerio.Helpers.waitUntil(30, api.loaded))
-            .then(() => store.products.filter(p => p.type == store.PAID_SUBSCRIPTION && p.loaded));
+            // .then(() => Peerio.Helpers.waitUntil(30, api.loaded))
+            .then(() => store.products.filter(p => p.type == store.PAID_SUBSCRIPTION));
     };
 
     api.parsers = [];
