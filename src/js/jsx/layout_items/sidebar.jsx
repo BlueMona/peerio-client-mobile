@@ -69,6 +69,7 @@
             var pinNode;
             var twoFactor;
             var user = Peerio.user;
+            var payments = Peerio.PaymentSystem.arePaymentsAvailable();
             if (!user || !user.settings) return null;
             // TODO: remove when quota is calculated by server
             var total = user.quota.total;
@@ -119,10 +120,10 @@
                                     <Peerio.UI.Tappable element="li" onTap={this.handleSupport}>
                                         <i className="material-icons">help</i> {t('supportFeedback')}
                                     </Peerio.UI.Tappable>
-
+                                    {payments ?
                                     <Peerio.UI.Tappable className="_purchase" element="li" onTap={this.handlePayments}>
                                         <i className="material-icons">cloud_upload</i> {t('payments_menu')}
-                                    </Peerio.UI.Tappable>
+                                    </Peerio.UI.Tappable> : null}
                                     <Peerio.UI.Tappable className="_subscriptions" element="li" onTap={this.handlePaymentsView}>
                                         <i className="material-icons">cloud</i> {t('payments_menu_view')}
                                     </Peerio.UI.Tappable>
