@@ -13,7 +13,10 @@
             api.tryLoad()
                 .then(api.getAllSubscriptions)
                 .then(s => this.setState({ availableSubscriptions: s }))
-                .catch(e => this.setState({ error: t('payments_loadingError') }))
+                .catch(e => {
+                    L.error(e);
+                    this.setState({ error: t('payments_loadingError') });
+                })
                 .finally(() => {
                     this.subscriptions = [
                         Peerio.Dispatcher.onPaymentProductUpdated(p => this.handleUpdate(p)),

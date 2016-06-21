@@ -24,9 +24,7 @@
                 .then(value => {
                     value ? this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID) :
                     this.steps.splice(2, 0, Peerio.UI.SetupWizardPin);
-                })
-                // component is not yet available for force update so we update it via state
-                .finally(this.setState());
+                });
         },
 
         handleNextStep: function () {

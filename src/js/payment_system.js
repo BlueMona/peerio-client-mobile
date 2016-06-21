@@ -7,8 +7,12 @@ Peerio.PaymentSystem.init = function () {
     var api = Peerio.PaymentSystem = {};
 
     api.arePaymentsAvailable = function () {
-        return (Peerio.runtime.platform === 'android') ||
-            (Peerio.runtime.platform === 'browser');
+        // if the server has no runtime settings
+        if(!Peerio.user.runtime || !Peerio.user.runtime.purchases) return true;
+
+        return (Peerio.runtime.platform === 'android' && Peerio.user.runtime.purchases.google.enabled === true) 
+        || (Peerio.runtime.platform === 'ios' && Peerio.user.runtime.purchases.ios.enabled === true)
+        || (Peerio.runtime.platform === 'browser');
     };
 
     api.hasSubscription = function () {
@@ -29,8 +33,8 @@ Peerio.PaymentSystem.init = function () {
 
     api.getAllSubscriptions = function () {
         return api.loadProductsFromServer()
-            .then(() => Peerio.Helpers.waitUntil(30, api.loaded))
-            .then(() => store.products.filter(p => p.type == store.PAID_SUBSCRIPTION && p.loaded));
+            // .then(() => Peerio.Helpers.waitUntil(30, api.loaded))
+            .then(() => store.products.filter(p => p.type == store.PAID_SUBSCRIPTION));
     };
 
     api.parsers = [];
