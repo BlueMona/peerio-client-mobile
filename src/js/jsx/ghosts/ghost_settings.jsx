@@ -2,12 +2,12 @@
     'use strict';
 
     Peerio.UI.NewGhost = React.createClass({
-        //  Confirms should be triggered based on the To input.
+        //  Confirm type should be triggered based on the To input.
 
         confirmGhost: function () {
             Peerio.UI.Confirm.show({
                 // TODO Ghost should link to a description of what a Ghost is.
-                // Do we have a custom confirm? Or some what to add a checkbox to the confirm.
+                // Do we have a custom confirm? Or some way to add a checkbox to the confirm? - paul
                 text: 'This doesn\’t appear to be a Peerio user. Would you like to send a Ghost?',
                 okText: 'Send Ghost'
             });
@@ -28,7 +28,7 @@
                             <li className="subhead">{t('ghost_lifespan')}</li>
                             <li className="">
                                 Destroy after
-                                {/* I think the max time is 7 days. */}
+                                {/* I think the max time is 7 days. - paul */}
                                 <input size="1" type="text" maxLength="1"/>
                                 days.
                             </li>
@@ -40,11 +40,7 @@
                                 <div>passphrase goes here</div>
                                 <Peerio.UI.Tappable element="i" onTap={this.copyContent}
                                                     className="material-icons">
-                                    content_copy
-                                </Peerio.UI.Tappable>
-                                <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
-                                                    className="material-icons">
-                                    share
+                                    refresh
                                 </Peerio.UI.Tappable>
 
                             </li>

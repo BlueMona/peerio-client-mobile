@@ -617,5 +617,10 @@
   "prepare_ghost": "Prepare Ghost",
   "share_ghost": "Share Ghost",
   "ghost_settings": "Ghost Settings",
-  "ghost_lifespan": "Lifespan"
+  "ghost_lifespan": "Lifespan",
+  "ghost_share": "Share Ghost",
+  "ghost_sent_msg": "Your message has been sent to ",
+  "ghost_passphrase_share": "You’ll need to share the passphrase to the Ghost",
+  "ghost_passphrase_share_helper": "We recommend sharing this passphrase over a different channel",
+  "ghost_passphrase_share_link": "Didn’t get the email? Want to share with someone else?"
 }
