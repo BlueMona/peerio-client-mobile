@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    Peerio.UI.NewGhost = React.createClass({
+    Peerio.UI.GhostSettings = React.createClass({
         //  Confirm type should be triggered based on the To input.
 
         confirmGhost: function () {

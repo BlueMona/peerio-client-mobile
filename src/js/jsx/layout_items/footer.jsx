@@ -25,8 +25,9 @@
                 add_contact_search: {name: t('button_addSelectedContact'), icon: 'person_add'},
                 new_message: {name: t('button_send'), icon: 'send'},
                 conversation: {name: t('button_send'), icon: 'send'},
-                prepare_ghost: {name: t('prepare_ghost'), icon: 'send'},
-                share_ghost: {name: t('share_ghost'), icon: 'send'}
+                ghost_new: {name: t('ghost_new'), icon: 'edit'},
+                ghost_settings: {name: t('ghost_settings'), icon: 'send'},
+                ghost_share: {name: t('ghost_share'), icon: 'send'}
             }});
         },
         componentWillMount: function () {

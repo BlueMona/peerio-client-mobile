@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    Peerio.UI.ShareGhost = React.createClass({
+    Peerio.UI.GhostShare = React.createClass({
 
         render: function () {
             return (
