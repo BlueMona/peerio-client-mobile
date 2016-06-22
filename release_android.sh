@@ -3,8 +3,7 @@
 set -e
 
 echo ==================== COMPILING ASSETS ====================
-# gulp compile --release
-gulp compile --injectd
+gulp compile --release
 
 echo ================= OPTIONAL VERSION BUMP ==================
 gulp bump
