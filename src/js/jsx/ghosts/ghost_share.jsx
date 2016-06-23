@@ -2,7 +2,6 @@
     'use strict';
 
     Peerio.UI.GhostShare = React.createClass({
-
         render: function () {
             return (
                 <div className="content without-tab-bar">
