@@ -102,10 +102,6 @@
                             <div className="flex-col flex-grow-1 sidebar-menu" ref="menu">
                                 <ul>
                                     <Peerio.UI.Tappable tag="li"
-                                                        onTap={this.toggleAndTransition.bind(this, 'ghost_new')}>
-                                        <i className="material-icons"></i> New Ghost
-                                    </Peerio.UI.Tappable>
-                                    <Peerio.UI.Tappable tag="li"
                                                         onTap={this.toggleAndTransition.bind(this, 'account_settings')}>
                                         <i className="material-icons">person</i> {t('profile')}
                                     </Peerio.UI.Tappable>

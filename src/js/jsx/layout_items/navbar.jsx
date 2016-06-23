@@ -116,7 +116,7 @@
                                 <Peerio.UI.Tappable onTap={Peerio.user.reSync}>
                                     <i className="material-icons">sync</i>
                                 </Peerio.UI.Tappable>
-                                : <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
+                                : <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'ghost_new')}>
                                 <i className="material-icons">edit</i>
                             </Peerio.UI.Tappable>
                         }
