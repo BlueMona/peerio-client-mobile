@@ -75,7 +75,10 @@
                         <div className="list-item-content flex-col flex-justify-center">
                             <div className="list-item-sup">{conv.username}</div>
                             {conv.displayName && <div className="list-item-title">{conv.displayName}</div>}
-                            <div className="list-item-description">{conv.subject}</div>
+                            <div className="list-item-description">
+                                {conv.isGhost ? <span>👻&nbsp;</span> : null}
+                                {conv.subject}
+                            </div>
                         </div>
 
                         <div className="list-item-content text-right">
