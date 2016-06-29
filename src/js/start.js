@@ -79,6 +79,7 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
             Peerio.PaymentSystem.init();
             Peerio.ContactHelper.init();
+            Peerio.Drafts.init();
             window.PeerioDebug && PeerioDebug.afterStart && PeerioDebug.afterStart();
 
             return Promise.resolve();

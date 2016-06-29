@@ -613,5 +613,22 @@
   "serverWarning_PaymentErrorTitle": "Payment Error",
   "serverWarning_PaymentError": "Your Peerio Pro plan could not be renewed due to a problem with your payment method. Please review your account information at https://account.peerio.com",
   "serverWarning_QuotaExceededTitle": "Storage Limit Exceeded",
-  "serverWarning_QuotaExcceded": "You're over your storage limit! Your account will have limited functionality until you purchase additional storage or remove some files from your account."
+  "serverWarning_QuotaExcceded": "You're over your storage limit! Your account will have limited functionality until you purchase additional storage or remove some files from your account.",
+  "prepare_ghost": "Prepare Ghost",
+  "share_ghost": "Send Ghost",
+  "ghost_settings": "Ghost Instructions",
+  "ghost_lifespan": "Lifespan",
+  "ghost_share": "Send Ghost",
+  "ghost_sent_msg": "As instructed, your Ghost will visit {ghost-recipient} for {ghost-expiry-days} and then disappear forever",
+  "ghost_passphrase_share": "Ghosts don't share secrets with just anybody, so you'll need to tell your recipient the Ghost's passphrase",
+  "ghost_passphrase_share_helper": "We recommend sharing this passphrase over a different channel",
+  "ghost_passphrase_share_link": "Didn’t get the email? Want to share with someone else?",
+  "ghost_mobile_settings": "Ghost settings",
+  "ghost_destroyAfter": "Destroy after",
+  "ghost_days": "days",
+  "ghost_new": "New Ghost",
+  "ghost_mobile_share": "Share Ghost",
+  "ghost_mobile_sent": "Your message has been sent to ",
+  "ghost_mobile_sent_share": "You'll need to share the passprase to the Ghost",
+  "ghost_toMessageList": "To Message List"
 }

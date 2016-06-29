@@ -28,6 +28,20 @@ Peerio.Config.init = function () {
             {code:'hr', name:'Hrvatski'},
             {code:'zh_CN', name:'中文'}];
 
+
+        cfg.dictLocales = {
+            'en': 'English',
+            'fr': 'Francais',
+            'de': 'Deutsch',
+            'es': 'Español',
+            'it': 'Italiano',
+            'ru': 'Русский',
+            'zh-CN': '汉语',
+            'nb-NO': 'Norsk (Bokmål)',
+            'tr': 'Türkçe',
+            'hu': 'Magyar'
+        };
+
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
         cfg.piwik = {

@@ -2,10 +2,11 @@
     'use strict';
 
     Peerio.UI.GhostNew = React.createClass({
+        mixins: [ReactRouter.Navigation],
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                Peerio.Dispatcher.onBigGreenButton(this.send)
+                Peerio.Dispatcher.onBigGreenButton(this.settings)
             ];
 
             this.list = [];
@@ -14,11 +15,38 @@
             Peerio.ContactHelper.tryCheckPermission();
         },
 
-        send: function () {
+        componentWillUnmount: function () {
+            Peerio.Dispatcher.unsubscribe(this.subscriptions);
+        },
+
+        settings: function () {
             var subject = this.refs.subject.getDOMNode().value;
             var body = this.refs.message.getDOMNode().value;
             var email = this.refs.email.getDOMNode().value;
-            if(!subject || !body || !email) return;
+            /*
+            if(!subject) {
+                Peerio.UI.Alert.show({text: t('ghost_enterSubject')});
+                return;
+            }
+
+            if(!body) {
+                Peerio.UI.Alert.show({text: t('ghost_enterBody')});
+                return;
+            }
+
+            if(!email) {
+                Peerio.UI.Alert.show({text: t('ghost_enterRecipient')});
+                return;
+            }
+            */
+
+            Peerio.Drafts.Ghost = {
+                subject: subject,
+                body: body,
+                email: email
+                };
+
+            this.transitionTo('ghost_settings');
         },
 
         handleEmailChange: function () {
@@ -30,7 +58,9 @@
         getInitialState: function () {
             return {
                 attachments: [],
-                email: ''
+                email: 'seavan@etcetera.ws',
+                subject: 'Test subject',
+                body: 'Some test body'
             };
         },
 
@@ -76,6 +106,7 @@
                             <input type="text" 
                                    autoComplete="off" 
                                    ref="subject" 
+                                   value={this.state.subject}
                                    className="subject" 
                                    placeholder={t('subject')}/>
 
@@ -98,7 +129,7 @@
                                     </li>);
                             })}
                         </ul>
-                        <textarea ref="message" className="message" placeholder={t('message_typePrompt')}></textarea>
+                        <textarea ref="message" className="message" placeholder={t('message_typePrompt')}>{this.state.body}</textarea>
                     </div>
                 </div>
             );

@@ -49,7 +49,7 @@ Peerio.UI.Routes = (
 
             <Route name="ghost_new" path="/app/new_ghost/:id?" handler={Peerio.UI.GhostNew} />
             <Route name="ghost_settings" path="/app/ghost_settings/:id?" handler={Peerio.UI.GhostSettings} />
-            <Route name="ghost_share" path="/app/ghost_settings/:id?" handler={Peerio.UI.GhostShare} />
+            <Route name="ghost_share" path="/app/ghost_share/:id?" handler={Peerio.UI.GhostShare} />
         </Route>
     </Route>
 );
