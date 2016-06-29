@@ -10,19 +10,46 @@
             };
         },
 
-        componentDidMount: function () {
+        on: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.share)
             ];
         },
 
-        componentWillUnmount: function () {
+        off: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
+        componentDidMount: function () {
+            this.on();
+        },
+
+        componentWillUnmount: function () {
+            this.off();
+        },
+
         share: function () {
+            // to prevent user from double-tapping
+            this.off();
             _.assign(Peerio.Drafts.Ghost, this.state);
-            this.replaceWith('ghost_share');
+
+            var api = Peerio.Ghost;
+            var draft = Peerio.Drafts.Ghost;
+            var g = api.create();
+            g.subject = draft.subject;
+            g.recipient = draft.email;
+            g.body = draft.body;
+            g.usePassphrase(draft.passphrase)
+                .then(() => api.send(g))
+                .then(() => {
+                    draft.id = g.id;
+                    L.info('all good');
+                    this.replaceWith('ghost_share');
+                })
+                .catch(e => {
+                    Peerio.UI.Alert.show({text: 'Error sending Ghost. Please contact support'});
+                    L.error(e);
+                });
         },
 
         updatePassphrase: function (phrase) {

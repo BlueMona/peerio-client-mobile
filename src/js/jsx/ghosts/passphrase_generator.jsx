@@ -10,7 +10,7 @@
         },
 
         generatePassphrase: function () {
-            var wordCount = 3;
+            var wordCount = 5;
             Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, wordCount)
                 .then(function (phrase) {
                     this.setState({passphrase: phrase});
