@@ -52,12 +52,30 @@ Peerio.ContactHelper.init = function () {
     }
 
     api.findContaining = function (start) {
+        if(api.forbidden) return Promise.resolve([]);
         var options = new ContactFindOptions();
         options.multiple = true;
         options.desiredFields = [navigator.contacts.fieldType.name, navigator.contacts.fieldType.emails];
         var requiredFields = [navigator.contacts.fieldType.emails];
         return new Promise((resolve, reject) => 
             navigator.contacts.find(requiredFields, resolve, reject, options));
+    };
+
+    api.tryCheckPermission = function () {
+        if(!!api.enabled) return Promise.resolve(true);
+        if(!!api.forbidden) return Promise.resolve(false);
+        return api.findContaining('nonexistentstubaddress@stub.com')
+            .then(r => {
+                api.enabled = true;
+                api.forbidden = false;
+                return true;
+            })
+            .catch(e => {
+                L.error(e);
+                api.enabled = false;
+                api.forbidden = true;
+                return false;
+            });
     };
 
     api.hasPermission = function () {

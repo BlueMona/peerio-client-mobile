@@ -11,6 +11,7 @@
             this.list = [];
             this.complete = new Awesomplete(this.refs.email.getDOMNode(), 
                                             {minChars: 1, maxItems: 3, list: this.list});
+            Peerio.ContactHelper.tryCheckPermission();
         },
 
         send: function () {
