@@ -18,7 +18,7 @@
         },
 
         openConversation: function () {
-            this.transitionTo('conversation', {id: this.props.item.id});
+            this.transitionTo(this.props.item.isGhost ? 'ghost_share' : 'conversation', {id: this.props.item.id});
         },
 
         destroyConversation: function () {
@@ -33,6 +33,7 @@
                 onAccept: this.destroyConversation
             });
         },
+
         render: function () {
             var conv = this.props.item;
             // building name to display for conversation item.
@@ -100,9 +101,7 @@
 
                     </Peerio.UI.Swiper>
                 </Peerio.UI.Tappable>
-
             );
         }
     });
-
 }());
