@@ -10,7 +10,7 @@
             ];
 
             this.list = [];
-            this.complete = new Awesomplete(this.refs.email.getDOMNode(), 
+            this.complete = new Awesomplete(this.refs.email.getDOMNode(),
                                             {minChars: 1, maxItems: 3, list: this.list});
             Peerio.ContactHelper.tryCheckPermission();
         },
@@ -89,13 +89,13 @@
                 <div className="content without-tab-bar">
                     <div id="new-message">
                         <div className="subject-inputs">
-                            <input type="text" 
-                                   required="required" 
-                                   autoComplete="off" 
-                                   autoCorrect="off" 
+                            <input type="text"
+                                   required="required"
+                                   autoComplete="off"
+                                   autoCorrect="off"
                                    autoCapitalize="off"
-                                   id="email" 
-                                   ref="email" 
+                                   id="email"
+                                   ref="email"
                                    className="email"
                                    placeholder={t('email')}
                                    value={this.state.email}
@@ -103,15 +103,15 @@
                         </div>
                     {/*TODO refactor message inputs */}
                         <div className="subject-inputs">
-                            <input type="text" 
-                                   autoComplete="off" 
-                                   ref="subject" 
+                            <input type="text"
+                                   autoComplete="off"
+                                   ref="subject"
                                    value={this.state.subject}
-                                   className="subject" 
+                                   className="subject"
                                    placeholder={t('subject')}/>
 
                             <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
-                                <i className="material-icons">attach_file</i>
+                                <i className="material-icons">image</i>
                                 <span
                                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
                             </Peerio.UI.Tappable>

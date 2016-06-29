@@ -25,12 +25,12 @@
                     <p>{t('ghost_mobile_sent_share')}</p>
 
                     <p><label>{t('Passphrase')}</label></p>
-                    <div className="flex-row" style={{'font-weight': 'bold', 'background': '#EFEFEF', 'line-height': '3em', 'padding': '1em'}}>
-                        <div style={{'width': '80%', 'text-align': 'center'}}>
+                    <div className="flex-row padding-base" style={{'font-weight': 'bold', 'background': 'rgba(0,0,0,.12)', 'line-height': '3em', padding: '8px 16px'}}>
+                        <div className="flex-grow-1">
                         {Peerio.Drafts.Ghost.passphrase}
                         </div>
                         <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
-                                            className="material-icons">
+                                            className="material-icons flex-shrink-0" >
                             share
                         </Peerio.UI.Tappable>
                     </div>

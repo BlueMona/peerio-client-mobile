@@ -34,14 +34,15 @@
                   <div className="content without-tab-bar">
                         <div className="headline">{t('ghost_mobile_settings')}</div>
                         <ul>
-                            <li className="subhead">{t('ghost_lifespan')}</li>
-                            <li className="">
-                                <span>
-                                Destroy after
-                                </span>
-                                {/* I think the max time is 7 days. - paul */}
-                                <input size="1" type="text" maxLength="1" value={this.state.days}/>
-                                days.
+
+                            <li className="flex-col flex-align-start">
+                              <label>{t('ghost_lifespan')}</label>
+                                <div>
+                                    Destroy after
+                                    {/* I think the max time is 7 days. - paul */}
+                                    <input size="1" type="text" maxLength="1" value={this.state.days} style={{width: 'inherit', margin: '0 4px', textAlign: 'center'}}/>
+                                    days.
+                                </div>
                             </li>
                         </ul>
                         <Peerio.UI.PassphraseGenerator callback={this.updatePassphrase}/>

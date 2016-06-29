@@ -629,6 +629,5 @@
   "ghost_new": "New Ghost",
   "ghost_mobile_share": "Share Ghost",
   "ghost_mobile_sent": "Your message has been sent to ",
-  "ghost_mobile_sent_share": "You'll need to share the passprase to the Ghost",
-  "ghost_toMessageList": "To Message List"
+  "ghost_mobile_sent_share": "You'll need to share the passprase to the Ghost"
 }

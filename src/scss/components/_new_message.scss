@@ -56,8 +56,13 @@ $recipients-height: 40px;
     display: flex;
     min-height: $recipients-height;
 
+    input {
+      border: 0;
+    }
+
     .awesomplete {
         width: 100%;
+        padding: 0 $padding-small;
     }
 
     #email {
