@@ -21,37 +21,29 @@
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
+
         componentDidMount: function () {
-            if (navigator.contacts) {
+            if(!navigator.contacts) return;
+            var options = new ContactFindOptions();
+            options.multiple = true;
+            options.desiredFields = [navigator.contacts.fieldType.name, navigator.contacts.fieldType.emails, navigator.contacts.fieldType.phoneNumbers];
 
-                var options = new ContactFindOptions();
-                options.multiple = true;
-                options.desiredFields = [navigator.contacts.fieldType.name, navigator.contacts.fieldType.emails, navigator.contacts.fieldType.phoneNumbers];
-
-                var requiredFields = [navigator.contacts.fieldType.emails, navigator.contacts.fieldType.phoneNumbers];
-                var deviceImportSuccess = this.deviceImportSuccess;
-                var deviceImportFailure = this.deviceImportFailure;
-                navigator.contacts.find(requiredFields, deviceImportSuccess, deviceImportFailure, options);
-
-            } else {
-                //dev mode
-                this.deviceImportSuccess([
-                                         { id: 9, emails: [ {value: 'seavan+10@gmail.com'} ], name: { formatted: 'Aram Avanesov' } },
-                                         { id: 10, emails: [ {value: 'seavan@gmail.com'},{value: 'seavan@gmail.com'},{value: 'seavan@gmail.com'} ], name: { formatted: 'Sam Avanesov' } },
-                                         { id: 11, emails: [ {value: 'seavan+10@gmail.com'} ], name: { formatted: 'Gaspar Avanesov'} },
-                                         { id: 12, emails: [ {value: 'seavan+10@gmail.com'} ], name: { formatted: 'Gaspar Avanesov'} },
-                                         { id: 13, emails: [ {value: 'seavan+10@gmail.com'} ], name: { formatted: 'Gaspar Avanesov'} },
-                ]);
-            }
+            var requiredFields = [navigator.contacts.fieldType.emails, navigator.contacts.fieldType.phoneNumbers];
+            var deviceImportSuccess = this.deviceImportSuccess;
+            var deviceImportFailure = this.deviceImportFailure;
+            navigator.contacts.find(requiredFields, deviceImportSuccess, deviceImportFailure, options);
         },
+
         deviceImportFailure: function () {
             Peerio.Action.showAlert({text: t('contact_permissionMissing')});
         },
+
         deviceImportSuccess: function (contacts) {
             contacts = Peerio.Util.filterDeviceContacts(contacts);
             this.searchForPeerioUsers(contacts);
 
         },
+
         searchForPeerioUsers: function (contacts) {
             this.setState({inProgress: true});
             var addressChunks = _.chunk(Peerio.Util.parseAddressesForLookup(contacts), 500);

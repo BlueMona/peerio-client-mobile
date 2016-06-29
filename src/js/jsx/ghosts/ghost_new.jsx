@@ -7,6 +7,10 @@
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
                 Peerio.Dispatcher.onBigGreenButton(this.send)
             ];
+
+            this.list = [];
+            this.complete = new Awesomplete(this.refs.email.getDOMNode(), 
+                                            {minChars: 1, maxItems: 3, list: this.list});
         },
 
         send: function () {
@@ -14,14 +18,39 @@
             var body = this.refs.message.getDOMNode().value;
             var email = this.refs.email.getDOMNode().value;
             if(!subject || !body || !email) return;
+        },
 
-
+        handleEmailChange: function () {
+            var email = this.refs.email.getDOMNode().value.replace(/[ '",;/]/, '');
+            this.setState({email: email});
+            this.updateCompletionDebounce(email);
         },
 
         getInitialState: function () {
             return {
-                attachments: []
+                attachments: [],
+                email: ''
             };
+        },
+
+        updateCompletionDebounce: function (email) {
+            if(this.debounce) window.clearTimeout(this.debounce);
+            this.debounce = window.setTimeout(() => {
+                this.updateCompletion(email);
+                this.debounce = null;
+            }, 100);
+        },
+
+        updateCompletion: function (email) {
+            Peerio.ContactHelper.findContaining(email)
+                .then( result => {
+                    this.list.splice(0, this.list.length);
+                    result.forEach( i => {
+                        i.emails && i.emails.forEach( email => this.list.push(email.value) );
+                    });
+                    this.complete.evaluate();
+                })
+                .catch( e => L.error(e) );
         },
 
         render: function () {
@@ -29,12 +58,25 @@
                 <div className="content without-tab-bar">
                     <div id="new-message">
                         <div className="subject-inputs">
-                            <input type="text" ref="email" className="email" placeholder={t('email')}/>
+                            <input type="text" 
+                                   required="required" 
+                                   autoComplete="off" 
+                                   autoCorrect="off" 
+                                   autoCapitalize="off"
+                                   id="email" 
+                                   ref="email" 
+                                   className="email"
+                                   placeholder={t('email')}
+                                   value={this.state.email}
+                                   onChange={this.handleEmailChange}/>
                         </div>
-
                     {/*TODO refactor message inputs */}
                         <div className="subject-inputs">
-                            <input type="text" ref="subject" className="subject" placeholder={t('subject')}/>
+                            <input type="text" 
+                                   autoComplete="off" 
+                                   ref="subject" 
+                                   className="subject" 
+                                   placeholder={t('subject')}/>
 
                             <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
                                 <i className="material-icons">attach_file</i>
