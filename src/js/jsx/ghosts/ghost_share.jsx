@@ -9,10 +9,27 @@
                 passphrase: Peerio.Drafts.Ghost.passphrase,
                 email: Peerio.Drafts.Ghost.email,
                 id: Peerio.Drafts.Ghost.id,
+                has_conv: this.props.params && this.props.params.id
             };
         },
 
         componentDidMount: function () {
+            if(this.props.params && this.props.params.id) {
+                Peerio.Conversation.getPrevMessagesPage(this.props.params.id, 0, 1)
+                    .then(c => {
+                        var g = JSON.parse(c[0].body);
+                        this.setState({
+                            email: g.recipient,
+                            passphrase: g.passphrase,
+                            id: g.id
+                        });
+                    })
+                    .catch(err => {
+                        Peerio.Action.showAlert({text: t('error_loadingConversation')});
+                        L.error('Failed to load ghost. {0}', err);
+                        this.goBack();
+                    });
+            }
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(() => this.transitionTo('messages'))
             ];
@@ -28,8 +45,10 @@
         },
 
         render: function () {
+            var eStyles = this.state.has_conv ? null : {'top': 0, zIndex: 10};
+            var eClasses = classNames({'content': true, 'without-tab-bar': true});
             return (
-                <div className="content without-tab-bar" style={{'top': 0, zIndex: 10}}>
+                <div className={eClasses} style={eStyles}>
                     <div className="headline">{t('ghost_mobile_share')}</div>
                     <p>{t('ghost_mobile_sent')} {this.state.email}</p>
                     <p>{t('ghost_mobile_sent_share')}</p>
@@ -50,8 +69,7 @@
                         </small>
                     </p>
                     <p>{t('ghost_passphrase_share_link')}</p>
-
-
+                    {this.state.id ? 
                     <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
                         <div style={{'width': '80%', 'text-align': 'center'}}>
                             {'https://ghost.peerio.com/g/' + this.state.id}
@@ -60,7 +78,7 @@
                                             className="material-icons">
                             share
                         </Peerio.UI.Tappable>
-                    </div>
+                    </div> : null}
                 </div>
             );
         }
