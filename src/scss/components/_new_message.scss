@@ -55,6 +55,14 @@ $recipients-height: 40px;
     border-top: $border-dark;
     display: flex;
     min-height: $recipients-height;
+
+    .awesomplete {
+        width: 100%;
+    }
+
+    #email {
+        background: none;
+    }
   }
 
   .to {
