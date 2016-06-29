@@ -1,5 +1,5 @@
 {
-  "name": "Peerio",
+  "name": "peerio",
   "version": "0.0.0",
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "authors": [
@@ -23,7 +23,8 @@
     "peerio-client-api": "git@github.com:PeerioTechnologies/peerio-client-api.git",
     "react-router": "~0.13.3",
     "peerio-copy": "git@github.com:PeerioTechnologies/peerio-copy.git#dev",
-    "reconnectingWebsocket": "git@github.com:joewalnes/reconnecting-websocket.git"
+    "reconnectingwebsocket": "git@github.com:joewalnes/reconnecting-websocket.git",
+    "awesomplete": "*"
   },
   "install": {
     "base": "www/bower",
@@ -37,7 +38,11 @@
     },
     "sources": {
       "peerio-client-api": "bower_components/peerio-client-api/dist/**",
-      "peerio-copy": { "mapping": {"bower_components/peerio-copy/client_en.json": "../en.json"}},
+      "peerio-copy": {
+        "mapping": {
+          "bower_components/peerio-copy/client_en.json": "../en.json"
+        }
+      },
       "react-router": "bower_components/react-router/build/umd/ReactRouter.js",
       "font-awesome": [
         "bower_components/font-awesome/css/font-awesome.css",
@@ -54,7 +59,11 @@
       ],
       "jssha": "bower_components/jssha/src/sha256.js",
       "classnames": "bower_components/classnames/index.js",
-      "reconnectingWebsocket": "bower_components/reconnectingWebsocket/reconnecting-websocket.js"
+      "reconnectingwebsocket": "bower_components/reconnectingWebsocket/reconnecting-websocket.js",
+      "awesomplete": [
+        "bower_components/awesomplete/awesomplete.css",
+        "bower_components/awesomplete/awesomplete.js"
+      ]
     }
   }
 }
