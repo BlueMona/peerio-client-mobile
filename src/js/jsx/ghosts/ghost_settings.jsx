@@ -39,6 +39,8 @@
             g.subject = draft.subject;
             g.recipient = draft.email;
             g.body = draft.body;
+            g.days = draft.days;
+            draft.files.forEach(f => g.addFile(f));
             g.usePassphrase(draft.passphrase)
                 .then(() => api.send(g))
                 .then(() => {
@@ -52,6 +54,11 @@
                 });
         },
 
+        setDays: function () {
+            var v = this.refs.days.getDOMNode().value;
+            this.setState({days: v});
+        },
+
         updatePassphrase: function (phrase) {
             this.setState({passphrase: phrase});
         },
@@ -61,15 +68,17 @@
                   <div className="content without-tab-bar">
                         <div className="headline">{t('ghost_mobile_settings')}</div>
                         <ul>
-
                             <li className="flex-col flex-align-start">
-                              <label>{t('ghost_lifespan')}</label>
-                                <div>
+                                <label>{t('ghost_lifespan')}</label>
+                                <span>
                                     Destroy after
-                                    {/* I think the max time is 7 days. - paul */}
-                                    <input size="1" type="text" maxLength="1" value={this.state.days} style={{width: 'inherit', margin: '0 4px', textAlign: 'center'}}/>
-                                    days.
+                                </span>
+                                <div className="input-select">
+                                    <select ref="days" value={this.state.days} onChange={this.setDays}>
+                                        {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
+                                    </select>
                                 </div>
+                                days.
                             </li>
                         </ul>
                         <Peerio.UI.PassphraseGenerator callback={this.updatePassphrase}/>

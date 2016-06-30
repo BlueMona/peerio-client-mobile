@@ -6,7 +6,8 @@
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                Peerio.Dispatcher.onBigGreenButton(this.settings)
+                Peerio.Dispatcher.onBigGreenButton(this.settings),
+                Peerio.Dispatcher.onFilesUpdated(this.updateFiles),
             ];
 
             this.list = [];
@@ -23,30 +24,28 @@
             var subject = this.refs.subject.getDOMNode().value;
             var body = this.refs.message.getDOMNode().value;
             var email = this.refs.email.getDOMNode().value;
-            /*
-            if(!subject) {
-                Peerio.UI.Alert.show({text: t('ghost_enterSubject')});
+            var e = null;
+            e = body ? e : t('ghost_enterBody');
+            e = subject ? e : t('ghost_enterSubject');
+            e = email ? e : t('ghost_enterRecipient');
+            
+            if(e) {
+                Peerio.UI.Alert.show({text: e});
                 return;
             }
-
-            if(!body) {
-                Peerio.UI.Alert.show({text: t('ghost_enterBody')});
-                return;
-            }
-
-            if(!email) {
-                Peerio.UI.Alert.show({text: t('ghost_enterRecipient')});
-                return;
-            }
-            */
 
             Peerio.Drafts.Ghost = {
                 subject: subject,
                 body: body,
-                email: email
-                };
+                email: email,
+                files: this.state.attachments
+            };
 
             this.transitionTo('ghost_settings');
+        },
+
+        handleSubjectChange: function () {
+            this.setState({subject: this.refs.subject.getDOMNode().value});
         },
 
         handleEmailChange: function () {
@@ -84,7 +83,45 @@
                 .catch( e => L.error(e) );
         },
 
+        addFile: function (file) {
+            this.state.attachments.push(file);
+            this.setState({attachments: this.state.attachments});
+        },
+
+        openFileSelect: function () {
+            Peerio.UI.Upload.show({ onComplete: this.addFile, isGhost: true });
+        },
+
+        updateFiles: function () {
+            this.forceUpdate();
+        },
+
+        detachFile: function (file) {
+            _.pull(this.state.attachments, file);
+            this.setState({attachments: this.state.attachments});
+        },
+
         render: function () {
+            var uploadNodes;
+            var uploads = Peerio.user.uploads.filter(i => i.isGhost);
+            if (uploads.length > 0) {
+                uploadNodes = [];
+                uploads.forEach(file => {
+                    var u = file.uploadState;
+                    if(!u) return;
+                    uploadNodes.push(
+                        <li className="list-item">
+                            <i className="list-item-thumb file-type material-icons">cloud_upload</i>
+                            <div className="list-item-content">
+                                <div className="list-item-title">
+                                    {t(u.stateName)}&nbsp;{u.totalChunks ? Math.round(u.currentChunk * 100/u.totalChunks) + '%' : ''} <i className="fa fa-circle-o-notch fa-spin"></i>
+                                </div>
+                                <div className="list-item-description">{file.name}</div>
+                            </div>
+                        </li>);
+                });
+            }
+
             return (
                 <div className="content without-tab-bar">
                     <div id="new-message">
@@ -107,6 +144,7 @@
                                    autoComplete="off"
                                    ref="subject"
                                    value={this.state.subject}
+                                   onChange={this.handleSubjectChange}
                                    className="subject"
                                    placeholder={t('subject')}/>
 
@@ -116,14 +154,16 @@
                                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
                             </Peerio.UI.Tappable>
                         </div>
-                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
-                            {this.state.attachments.map(id => {
-                                var file = Peerio.user.files.dict[id];
+                        <ul>
+                            {uploadNodes}
+                        </ul>
+                        <ul className={'' + (this.state.attachments.length ? '' : ' removed')}>
+                            {this.state.attachments.map(file => {
                                 return (
-                                    <li className={'attached-file' + (this.state.removed === id ? ' removed':'')}>
+                                    <li className={'attached-file' + (this.state.removed === file.id ? ' removed':'')}>
                                         { this.state.attachments.length ? file.name : null }
-                                        <Peerio.UI.Tappable element="i" ref="{id}" className="material-icons"
-                                                            onTap={this.detachFile.bind(this, id)}>
+                                        <Peerio.UI.Tappable element="i" ref={file.id} className="material-icons"
+                                                            onTap={this.detachFile.bind(this, file)}>
                                             highlight_off
                                         </Peerio.UI.Tappable>
                                     </li>);

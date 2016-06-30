@@ -41,7 +41,16 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
-        shareEverything: function () {
+        getLink: function () {
+            return 'https://ghost.peerio.com/g/' + this.state.id;
+        },
+
+        sharePassphrase: function () {
+            Peerio.NativeAPI.shareNativeDialog(this.state.passphrase);
+        },
+
+        shareLink: function () {
+            Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
         render: function () {
@@ -58,7 +67,7 @@
                         <div className="flex-grow-1">
                             {this.state.passphrase}
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
+                        <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
                                             className="material-icons flex-shrink-0" >
                             share
                         </Peerio.UI.Tappable>
@@ -72,9 +81,9 @@
                     {this.state.id ?
                     <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
                         <div className="flex-shrink-1 text-overflow">
-                            <a href={'https://ghost.peerio.com/g/' + this.state.id} target="_blank">{'https://ghost.peerio.com/g/' + this.state.id}</a>
+                            <a href={this.getLink()} target="_blank">{this.getLink()}</a>
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
+                        <Peerio.UI.Tappable element="i" onTap={this.shareLink}
                                             className="material-icons flex-shrink-0">
                             share
                         </Peerio.UI.Tappable>
