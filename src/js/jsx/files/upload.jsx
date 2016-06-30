@@ -2,6 +2,16 @@
     'use strict';
 
     Peerio.UI.Upload = React.createClass({
+        statics: {
+            show: function(params) {
+                return new Promise( (resolve, reject) => {
+                    params.onAccept = resolve;
+                    params.onReject = reject;
+                    Peerio.Action.showFileUpload(params);
+                });
+            }
+        },
+
         handleTakePicture: function (camera) {
             Peerio.NativeAPI.takePicture(camera)
                 .then(this.confirmFileSize)
@@ -10,6 +20,7 @@
                     return Peerio.user.uploadFile(fileInfo)
                         .then(function () {
                             Peerio.Action.showAlert({text: t('file_uploadComplete')});
+                            params.onAccept && params.onAccept(fileIno);
                         })
                         .catch(function (e) {
                             var message = e;
@@ -27,6 +38,7 @@
                 });
             this.props.onClose();
         },
+
         promptForFileName: function (fileUrl) {
             var fileExtension = Peerio.Helpers.getFileExtension(fileUrl);
             fileExtension = fileExtension ? fileExtension : 'jpg';
@@ -43,6 +55,7 @@
                     };
                 });
         },
+
         confirmFileSize: function (fileUrl) {
             return Peerio.FileSystem.plugin.getByURL(fileUrl)
                 .then(Peerio.FileSystem.plugin.getFileProperties)
@@ -59,6 +72,7 @@
                 });
 
         },
+
         render: function () {
             return (
                 <div className="modal item-select flex-col flex-justify-center">
@@ -76,7 +90,6 @@
                     </div>
                 </div>
             );
-
         }
     });
 

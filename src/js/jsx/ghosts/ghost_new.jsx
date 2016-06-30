@@ -23,22 +23,15 @@
             var subject = this.refs.subject.getDOMNode().value;
             var body = this.refs.message.getDOMNode().value;
             var email = this.refs.email.getDOMNode().value;
-            /*
-            if(!subject) {
-                Peerio.UI.Alert.show({text: t('ghost_enterSubject')});
+            var e = null;
+            e = body ? e : t('ghost_enterBody');
+            e = subject ? e : t('ghost_enterSubject');
+            e = email ? e : t('ghost_enterRecipient');
+            
+            if(e) {
+                Peerio.UI.Alert.show({text: e});
                 return;
             }
-
-            if(!body) {
-                Peerio.UI.Alert.show({text: t('ghost_enterBody')});
-                return;
-            }
-
-            if(!email) {
-                Peerio.UI.Alert.show({text: t('ghost_enterRecipient')});
-                return;
-            }
-            */
 
             Peerio.Drafts.Ghost = {
                 subject: subject,
@@ -47,6 +40,10 @@
                 };
 
             this.transitionTo('ghost_settings');
+        },
+
+        handleSubjectChange: function () {
+            this.setState({subject: this.refs.subject.getDOMNode().value});
         },
 
         handleEmailChange: function () {
@@ -84,6 +81,14 @@
                 .catch( e => L.error(e) );
         },
 
+        addFile: function (fileInfo) {
+            L.info(fileInfo);
+        },
+
+        openFileSelect: function () {
+            Peerio.UI.Upload.show({ onAccept: this.addFile });
+        },
+
         render: function () {
             return (
                 <div className="content without-tab-bar">
@@ -107,6 +112,7 @@
                                    autoComplete="off"
                                    ref="subject"
                                    value={this.state.subject}
+                                   onChange={this.handleSubjectChange}
                                    className="subject"
                                    placeholder={t('subject')}/>
 
