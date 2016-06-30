@@ -41,7 +41,16 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
-        shareEverything: function () {
+        getLink: function () {
+            return 'https://ghost.peerio.com/g/' + this.state.id;
+        },
+
+        sharePassphrase: function () {
+            Peerio.NativeAPI.shareNativeDialog(this.state.passphrase);
+        },
+
+        shareLink: function () {
+            Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
         render: function () {
@@ -58,7 +67,7 @@
                         <div style={{'width': '80%', 'text-align': 'center'}}>
                         {this.state.passphrase}
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
+                        <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
                                             className="material-icons">
                             share
                         </Peerio.UI.Tappable>
@@ -68,13 +77,13 @@
                         {t('ghost_passphrase_share_helper')}
                         </small>
                     </p>
-                    <p>{t('ghost_passphrase_share_link')}</p>
                     {this.state.id ? 
-                    <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
-                        <div style={{'width': '80%', 'text-align': 'center'}}>
-                            {'https://ghost.peerio.com/g/' + this.state.id}
+                    <div className="flex-row" style={{'line-height': '1em', 'padding': '1em'}}>
+                        <p>{t('ghost_passphrase_share_link')}</p>
+                        <div style={{'font-size': '80%', 'width': '80%', 'text-align': 'center'}}>
+                            {this.getLink()}
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
+                        <Peerio.UI.Tappable element="i" onTap={this.shareLink}
                                             className="material-icons">
                             share
                         </Peerio.UI.Tappable>
