@@ -39,6 +39,7 @@
             g.subject = draft.subject;
             g.recipient = draft.email;
             g.body = draft.body;
+            g.days = draft.days;
             g.usePassphrase(draft.passphrase)
                 .then(() => api.send(g))
                 .then(() => {
