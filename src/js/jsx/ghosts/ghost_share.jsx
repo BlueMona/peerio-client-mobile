@@ -63,12 +63,12 @@
                     <p>{t('ghost_mobile_sent_share')}</p>
 
                     <p><label>{t('Passphrase')}</label></p>
-                    <div className="flex-row" style={{'font-weight': 'bold', 'background': '#EFEFEF', 'line-height': '2em', 'padding': '0.5em'}}>
-                        <div style={{'width': '80%', 'text-align': 'center'}}>
-                        {this.state.passphrase}
+                    <div className="flex-row padding-base" style={{'font-weight': 'bold', 'background': 'rgba(0,0,0,.12)', 'line-height': '3em', padding: '8px 16px'}}>
+                        <div className="flex-grow-1">
+                            {this.state.passphrase}
                         </div>
                         <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
-                                            className="material-icons">
+                                            className="material-icons flex-shrink-0" >
                             share
                         </Peerio.UI.Tappable>
                     </div>
@@ -77,10 +77,10 @@
                         {t('ghost_passphrase_share_helper')}
                         </small>
                     </p>
-                    {this.state.id ? 
-                    <div className="flex-row" style={{'line-height': '1em', 'padding': '1em'}}>
-                        <p>{t('ghost_passphrase_share_link')}</p>
-                        <div style={{'font-size': '80%', 'width': '80%', 'text-align': 'center'}}>
+                    <p>{t('ghost_passphrase_share_link')}</p>
+                    {this.state.id ?
+                    <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
+                        <div style={{'width': '80%', 'text-align': 'center'}}>
                             {this.getLink()}
                         </div>
                         <Peerio.UI.Tappable element="i" onTap={this.shareLink}

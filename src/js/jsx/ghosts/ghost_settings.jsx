@@ -66,10 +66,10 @@
                   <div className="content without-tab-bar">
                         <div className="headline">{t('ghost_mobile_settings')}</div>
                         <ul>
-                            <li className="subhead">{t('ghost_lifespan')}</li>
-                            <li className="">
+                            <li className="flex-col flex-align-start">
+                                <label>{t('ghost_lifespan')}</label>
                                 <span>
-                                Destroy after
+                                    Destroy after
                                 </span>
                                 <div className="input-select">
                                     <select ref="days" value={this.state.days} onChange={this.setDays}>

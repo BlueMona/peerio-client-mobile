@@ -29,28 +29,28 @@
             var localeNodes = Object.keys(Peerio.Config.dictLocales).map(l => <option value={l}>{Peerio.Config.dictLocales[l]}</option>);
             return (
                 <ul>
-                    <li className="subhead">{t('passphrase')}</li>
+                      <li className="flex-col flex-align-start">
+                          <label>{t('passphrase')}</label>
+                          <div className="input-select">
+                              <select ref="lang"
+                                      id="language-select"
+                                      onChange={this.generatePassphrase}>
+                                  {localeNodes}
+                              </select>
+                              <Peerio.UI.Tappable tag="i"
+                                                  className="material-icons"
+                                                  onTap={this.showDropdown}>
+                                  arrow_drop_down
+                              </Peerio.UI.Tappable>
+                          </div>
+                      </li>
                     <li className="passphrase">
-                        <div>{this.state.passphrase}</div>
-                        <Peerio.UI.Tappable element="i" onTap={this.generatePassphrase}
-                                            className="material-icons">
-                            refresh
-                        </Peerio.UI.Tappable>
-
-                    </li>
-                    <li>
-                        <div className="input-select">
-                            <select ref="lang"
-                                    id="language-select"
-                                    onChange={this.generatePassphrase}>
-                                {localeNodes}
-                            </select>
-                            <Peerio.UI.Tappable tag="i"
-                                                className="material-icons"
-                                                onTap={this.showDropdown}>
-                                arrow_drop_down
+                            <div>{this.state.passphrase}</div>
+                            <Peerio.UI.Tappable element="i" onTap={this.generatePassphrase}
+                                                className="material-icons">
+                                refresh
                             </Peerio.UI.Tappable>
-                        </div>
+
                     </li>
                 </ul>
             );
