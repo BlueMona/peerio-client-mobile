@@ -71,11 +71,11 @@
                     <p>{t('ghost_passphrase_share_link')}</p>
                     {this.state.id ?
                     <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
-                        <div style={{'width': '80%', 'text-align': 'center'}}>
-                            {'https://ghost.peerio.com/g/' + this.state.id}
+                        <div className="flex-shrink-1 text-overflow">
+                            <a href={'https://ghost.peerio.com/g/' + this.state.id} target="_blank">{'https://ghost.peerio.com/g/' + this.state.id}</a>
                         </div>
                         <Peerio.UI.Tappable element="i" onTap={this.shareEverything}
-                                            className="material-icons">
+                                            className="material-icons flex-shrink-0">
                             share
                         </Peerio.UI.Tappable>
                     </div> : null}

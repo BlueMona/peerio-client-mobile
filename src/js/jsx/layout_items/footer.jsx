@@ -25,7 +25,7 @@
                 add_contact_search: {name: t('button_addSelectedContact'), icon: 'person_add'},
                 new_message: {name: t('button_send'), icon: 'send'},
                 conversation: {name: t('button_send'), icon: 'send'},
-                ghost_new: {name: t('ghost_mobile_settings'), icon: 'edit'},
+                ghost_new: {name: t('ghost_mobile_settings'), icon: 'send'},
                 ghost_settings: {name: t('ghost_mobile_share'), icon: 'send'},
                 ghost_share: {name: t('ghost_toMessageList'), icon: 'send'}
             }});
