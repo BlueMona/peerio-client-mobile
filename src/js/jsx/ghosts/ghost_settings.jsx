@@ -52,6 +52,11 @@
                 });
         },
 
+        setDays: function () {
+            var v = this.refs.days.getDOMNode().value;
+            this.setState({days: v});
+        },
+
         updatePassphrase: function (phrase) {
             this.setState({passphrase: phrase});
         },
@@ -66,8 +71,11 @@
                                 <span>
                                 Destroy after
                                 </span>
-                                {/* I think the max time is 7 days. - paul */}
-                                <input size="1" type="text" maxLength="1" value={this.state.days}/>
+                                <div className="input-select">
+                                    <select ref="days" value={this.state.days} onChange={this.setDays}>
+                                        {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
+                                    </select>
+                                </div>
                                 days.
                             </li>
                         </ul>
