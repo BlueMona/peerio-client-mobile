@@ -40,6 +40,7 @@
             g.recipient = draft.email;
             g.body = draft.body;
             g.days = draft.days;
+            draft.files.forEach(f => g.addFile(f));
             g.usePassphrase(draft.passphrase)
                 .then(() => api.send(g))
                 .then(() => {

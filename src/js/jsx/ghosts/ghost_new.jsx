@@ -37,8 +37,9 @@
             Peerio.Drafts.Ghost = {
                 subject: subject,
                 body: body,
-                email: email
-                };
+                email: email,
+                files: this.state.attachments
+            };
 
             this.transitionTo('ghost_settings');
         },
@@ -85,7 +86,6 @@
         addFile: function (file) {
             this.state.attachments.push(file);
             this.setState({attachments: this.state.attachments});
-            L.info(file);
         },
 
         openFileSelect: function () {
@@ -103,9 +103,10 @@
 
         render: function () {
             var uploadNodes;
-            if (Peerio.user.uploads.length > 0) {
+            var uploads = Peerio.user.uploads.filter(i => i.isGhost);
+            if (uploads.length > 0) {
                 uploadNodes = [];
-                Peerio.user.uploads.forEach(file => {
+                uploads.forEach(file => {
                     var u = file.uploadState;
                     if(!u) return;
                     uploadNodes.push(
