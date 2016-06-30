@@ -16,24 +16,28 @@
             Peerio.NativeAPI.takePicture(camera)
                 .then(this.confirmFileSize)
                 .then(this.promptForFileName)
-                .then(function (fileInfo) {
+                .then( fileInfo => {
+                    fileInfo.isGhost = this.props.isGhost;
                     return Peerio.user.uploadFile(fileInfo)
-                        .then(function () {
-                            Peerio.Action.showAlert({text: t('file_uploadComplete')});
-                            params.onAccept && params.onAccept(fileIno);
+                        .then(file => {
+                            this.props.onComplete && this.props.onComplete(file);
+                            return Peerio.Action.showAlert({text: t('file_uploadComplete')});
                         })
-                        .catch(function (e) {
+                        .then(this.props.resolve)
+                        .catch(e => {
                             var message = e;
                             if(e && e.code === 413)
                                 message = t('file_uploadStorageExceeded');
                             Peerio.Action.showAlert({text: t('file_uploadFailed') + ' ' + message });
+                            this.props.reject(e);
                         });
                 })
                 // this catch handles user cancel on confirm/prompt
                 .catch((e)=> {
                     L.error(e);
+                    this.props.reject(e);
                 })
-                .finally(function () {
+                .finally(() => {
                     if (camera) Peerio.NativeAPI.cleanupCamera();
                 });
             this.props.onClose();
