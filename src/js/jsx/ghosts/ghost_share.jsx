@@ -42,7 +42,7 @@
         },
 
         getLink: function () {
-            return 'https://ghost.peerio.com/g/' + this.state.id;
+            return 'https://ghost.peerio.com/?' + this.state.id;
         },
 
         sharePassphrase: function () {
