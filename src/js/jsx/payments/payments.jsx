@@ -48,7 +48,7 @@
         },
 
         handleOrder: function (p) {
-            var forceSubscriptions = PeerioDebug && PeerioDebug.forceSubscriptions;
+            var forceSubscriptions = window.PeerioDebug && PeerioDebug.forceSubscriptions;
             if(!forceSubscriptions && (/* !p.canPurchase || */ this.hasActiveSubscriptions())) return;
             this.setState({inProgress: true});
             // redraw the payment view so that it shows loader
