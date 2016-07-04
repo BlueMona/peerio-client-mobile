@@ -77,6 +77,12 @@
                                     <select ref="days" value={this.state.days} onChange={this.setDays}>
                                         {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
                                     </select>
+
+                                    <Peerio.UI.Tappable tag="i"
+                                                        className="material-icons"
+                                                        onTap={this.showDropdown}>
+                                        arrow_drop_down
+                                    </Peerio.UI.Tappable>
                                 </div>
                                 days.
                             </li>
