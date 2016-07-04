@@ -20,6 +20,7 @@ Peerio.Config.init = function () {
         var cfg = Peerio.Config = {};
 
         cfg.defaultLocale = 'en';
+        cfg.defaultWordCount = 5;
 
         cfg.locales = [
             {code:'en', name:'English'},

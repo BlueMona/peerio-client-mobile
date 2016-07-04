@@ -3,6 +3,7 @@
 
     Peerio.UI.GhostNew = React.createClass({
         mixins: [ReactRouter.Navigation],
+
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
@@ -11,9 +12,14 @@
             ];
 
             this.list = [];
-            this.complete = new Awesomplete(this.refs.email.getDOMNode(),
+            var email = this.refs.email.getDOMNode();
+            this.complete = new Awesomplete(email,
                                             {minChars: 1, maxItems: 3, list: this.list});
+            email.addEventListener('awesomplete-selectcomplete', e => this.setState({email: e.text.value}));
             Peerio.ContactHelper.tryCheckPermission();
+
+            Peerio.PhraseGenerator.getPassPhrase(Peerio.Config.defaultLocale, Peerio.Config.defaultWordCount)
+                .then(phrase => this.state.ghost.useFilePassphrase(phrase));
         },
 
         componentWillUnmount: function () {
@@ -34,12 +40,12 @@
                 return;
             }
 
-            Peerio.Drafts.Ghost = {
-                subject: subject,
-                body: body,
-                email: email,
-                files: this.state.attachments
-            };
+            var g = this.state.ghost;
+            g.body = body;
+            g.recipient = email;
+            g.subject = subject;
+
+            Peerio.Drafts.Ghost = g;
 
             this.transitionTo('ghost_settings');
         },
@@ -56,7 +62,7 @@
 
         getInitialState: function () {
             return {
-                attachments: []
+                ghost: Peerio.Ghost.create()
             };
         },
 
@@ -81,12 +87,14 @@
         },
 
         addFile: function (file) {
-            this.state.attachments.push(file);
-            this.setState({attachments: this.state.attachments});
+            this.state.ghost.addFile(file);
+            this.forceUpdate();
         },
 
         openFileSelect: function () {
-            Peerio.UI.Upload.show({ onComplete: this.addFile, isGhost: true });
+            // make sure we initialized the file passphrase
+            if(!this.state.ghost.filePublicKey) return;
+            Peerio.UI.Upload.show({ onComplete: this.addFile, isGhost: true, ghostPublicKey: this.state.ghost.filePublicKey });
         },
 
         updateFiles: function () {
@@ -94,8 +102,8 @@
         },
 
         detachFile: function (file) {
-            _.pull(this.state.attachments, file);
-            this.setState({attachments: this.state.attachments});
+            _.pull(this.state.ghost.files, file);
+            this.forceUpdate();
         },
 
         render: function () {
@@ -103,11 +111,11 @@
             var uploads = Peerio.user.uploads.filter(i => i.isGhost);
             if (uploads.length > 0) {
                 uploadNodes = [];
-                uploads.forEach(file => {
+                uploads.forEach((file, i) => {
                     var u = file.uploadState;
                     if(!u) return;
                     uploadNodes.push(
-                        <li className="list-item">
+                        <li className="list-item" key={i}>
                             <i className="list-item-thumb file-type material-icons">cloud_upload</i>
                             <div className="list-item-content">
                                 <div className="list-item-title">
@@ -148,18 +156,18 @@
                             <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
                                 <i className="material-icons">image</i>
                                 <span
-                                    className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
+                                    className={'icon-counter' + (this.state.ghost.files.length ? '' : ' hide')}>{this.state.ghost.files.length}</span>
                             </Peerio.UI.Tappable>
                         </div>
                         <ul className={uploads.length > 0 ? '': 'hide'}>
                             {uploadNodes}
                         </ul>
-                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
-                            {this.state.attachments.map(file => {
+                        <ul className={'attached-files' + (this.state.ghost.files.length ? '' : ' removed')}>
+                            {this.state.ghost.files.map((file, i) => {
                                 return (
-                                    <li className={'attached-file' + (this.state.removed === file.id ? ' removed':'')}>
-                                        { this.state.attachments.length ? file.name : null }
-                                        <Peerio.UI.Tappable element="i" ref={file.id} className="material-icons"
+                                    <li className={'attached-file'}>
+                                        { this.state.ghost.files.length ? file.name : null }
+                                        <Peerio.UI.Tappable element="i" key={i} className="material-icons"
                                                             onTap={this.detachFile.bind(this, file)}>
                                             highlight_off
                                         </Peerio.UI.Tappable>

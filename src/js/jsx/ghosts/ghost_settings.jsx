@@ -34,17 +34,11 @@
             _.assign(Peerio.Drafts.Ghost, this.state);
 
             var api = Peerio.Ghost;
-            var draft = Peerio.Drafts.Ghost;
-            var g = api.create();
-            g.subject = draft.subject;
-            g.recipient = draft.email;
-            g.body = draft.body;
-            g.days = draft.days;
-            draft.files.forEach(f => g.addFile(f));
-            g.usePassphrase(draft.passphrase)
+            var g = Peerio.Drafts.Ghost;
+            g.days = this.state.days;
+            g.usePassphrase(this.state.passphrase)
                 .then(() => api.send(g))
                 .then(() => {
-                    draft.id = g.id;
                     L.info('all good');
                     this.replaceWith('ghost_share');
                 })

@@ -1,5 +1,6 @@
 (function () {
     'use strict';
+
     Peerio.UI.PassphraseGenerator = React.createClass({
         getInitialState: function () {
             return {};
@@ -10,8 +11,7 @@
         },
 
         generatePassphrase: function () {
-            var wordCount = 5;
-            Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, wordCount)
+            Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, Peerio.Config.defaultWordCount)
                 .then(function (phrase) {
                     this.setState({passphrase: phrase});
                     this.props.callback && this.props.callback(phrase);
