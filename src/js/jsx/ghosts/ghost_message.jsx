@@ -6,9 +6,6 @@
 
         getInitialState: function () {
             return {
-                passphrase: Peerio.Drafts.Ghost.passphrase,
-                email: Peerio.Drafts.Ghost.recipient,
-                id: Peerio.Drafts.Ghost.id,
                 has_conv: this.props.params && this.props.params.id
             };
         },
@@ -55,9 +52,10 @@
             Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
-        render: {
+        render: function () {
             return (
                 <div className="content without-tab-bar">
+                    GHOST MESSAGE
                     <p>{this.state.subject}</p>
                     <p>{this.state.message}</p>
 
@@ -88,10 +86,9 @@
                                             className="material-icons flex-shrink-0">
                             share
                         </Peerio.UI.Tappable>
-                    </div>
+                    </div> : null}
                 </div>
             );
         }
     });
-}
-());
+}());

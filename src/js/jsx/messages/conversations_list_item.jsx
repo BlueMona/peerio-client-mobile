@@ -18,7 +18,7 @@
         },
 
         openConversation: function () {
-            this.transitionTo(this.props.item.isGhost ? 'ghost_share' : 'conversation', {id: this.props.item.id});
+            this.transitionTo(this.props.item.isGhost ? 'ghost_message' : 'conversation', {id: this.props.item.id});
         },
 
         destroyConversation: function () {
