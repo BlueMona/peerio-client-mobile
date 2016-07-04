@@ -63,7 +63,7 @@
                     <p>{t('ghost_mobile_sent_share')}</p>
 
                     <p><label>{t('Passphrase')}</label></p>
-                    <div className="flex-row padding-base" style={{'font-weight': 'bold', 'background': 'rgba(0,0,0,.12)', 'line-height': '3em', padding: '8px 16px'}}>
+                    <div className="flex-row flex-align-center section-highlight">
                         <div className="flex-grow-1">
                             {this.state.passphrase}
                         </div>
