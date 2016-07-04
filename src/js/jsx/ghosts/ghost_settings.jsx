@@ -70,15 +70,22 @@
                         <ul>
                             <li className="flex-col flex-align-start">
                                 <label>{t('ghost_lifespan')}</label>
-                                <span>
+                                <div className="flex-row flex-align-center">
                                     Destroy after
-                                </span>
-                                <div className="input-select">
-                                    <select ref="days" value={this.state.days} onChange={this.setDays}>
-                                        {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
-                                    </select>
+                                    <div className="input-select" style={{margin: '0 8px', width: 'inherit'}}>
+                                        <select ref="days" value={this.state.days} onChange={this.setDays}>
+                                            {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
+                                        </select>
+
+                                        <Peerio.UI.Tappable tag="i"
+                                                            className="material-icons"
+                                                            onTap={this.showDropdown}>
+                                            arrow_drop_down
+                                        </Peerio.UI.Tappable>
+                                    </div>
+                                    days.
                                 </div>
-                                days.
+
                             </li>
                         </ul>
                         <Peerio.UI.PassphraseGenerator callback={this.updatePassphrase}/>

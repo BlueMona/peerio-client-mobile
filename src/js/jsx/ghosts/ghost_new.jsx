@@ -30,7 +30,7 @@
             e = body ? e : t('ghost_enterBody');
             e = subject ? e : t('ghost_enterSubject');
             e = email ? e : t('ghost_enterRecipient');
-            
+
             if(e) {
                 Peerio.UI.Alert.show({text: e});
                 return;
@@ -153,10 +153,10 @@
                                     className={'icon-counter' + (this.state.attachments.length ? '' : ' hide')}>{this.state.attachments.length}</span>
                             </Peerio.UI.Tappable>
                         </div>
-                        <ul>
+                        <ul className={uploads.length > 0 ? '': 'hide'}>
                             {uploadNodes}
                         </ul>
-                        <ul className={'' + (this.state.attachments.length ? '' : ' removed')}>
+                        <ul className={'attached-files' + (this.state.attachments.length ? '' : ' removed')}>
                             {this.state.attachments.map(file => {
                                 return (
                                     <li className={'attached-file' + (this.state.removed === file.id ? ' removed':'')}>
