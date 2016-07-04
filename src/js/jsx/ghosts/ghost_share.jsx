@@ -7,7 +7,7 @@
         getInitialState: function () {
             return {
                 passphrase: Peerio.Drafts.Ghost.passphrase,
-                email: Peerio.Drafts.Ghost.email,
+                email: Peerio.Drafts.Ghost.recipient,
                 id: Peerio.Drafts.Ghost.id,
                 has_conv: this.props.params && this.props.params.id
             };
@@ -21,6 +21,8 @@
                         this.setState({
                             email: g.recipient,
                             passphrase: g.passphrase,
+                            message: g.message,
+                            subject: g.subject,
                             id: g.id
                         });
                     })
@@ -62,6 +64,10 @@
                     <p>{t('ghost_mobile_sent')} {this.state.email}</p>
                     <p>{t('ghost_mobile_sent_share')}</p>
 
+                    {/* TODO: make look nice */}
+                    <p>{this.state.subject}</p>
+                    <p>{this.state.message}</p>
+                    {/* TODO: make look nice */}
                     <p><label>{t('Passphrase')}</label></p>
                     <div className="flex-row padding-base" style={{'font-weight': 'bold', 'background': 'rgba(0,0,0,.12)', 'line-height': '3em', padding: '8px 16px'}}>
                         <div className="flex-grow-1">

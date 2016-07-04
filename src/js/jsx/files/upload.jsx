@@ -9,6 +9,9 @@
                     params.onReject = reject;
                     Peerio.Action.showFileUpload(params);
                 });
+            },
+
+            upload: function(fileInfo) {
             }
         },
 
@@ -18,6 +21,7 @@
                 .then(this.promptForFileName)
                 .then( fileInfo => {
                     fileInfo.isGhost = this.props.isGhost;
+                    fileInfo.ghostPublicKey = this.props.ghostPublicKey;
                     return Peerio.user.uploadFile(fileInfo)
                         .then(file => {
                             this.props.onComplete && this.props.onComplete(file);
