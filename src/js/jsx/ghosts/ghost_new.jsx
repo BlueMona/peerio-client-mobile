@@ -11,8 +11,10 @@
             ];
 
             this.list = [];
-            this.complete = new Awesomplete(this.refs.email.getDOMNode(),
+            var email = this.refs.email.getDOMNode();
+            this.complete = new Awesomplete(email,
                                             {minChars: 1, maxItems: 3, list: this.list});
+            email.addEventListener('awesomplete-selectcomplete', e => this.setState({email: e.text.value}));
             Peerio.ContactHelper.tryCheckPermission();
         },
 
