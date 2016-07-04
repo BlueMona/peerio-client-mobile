@@ -56,10 +56,7 @@
 
         getInitialState: function () {
             return {
-                attachments: [],
-                email: 'seavan@etcetera.ws',
-                subject: 'Test subject',
-                body: 'Some test body'
+                attachments: []
             };
         },
 
