@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </Peerio.UI.Tappable>
-                <div className="content without-tab-bar without-footer conversation flex-col">
+                <div className="content without-tab-bar without-footer flex-col ghost">
                     <div className="flex-grow-1">
                         <ul className={'attached-files' + (this.state.files.length ? '' : ' removed')}>
                             {this.state.files.map((file, i) => {

@@ -26,7 +26,8 @@ $msg-distance: 16px;
 $big-side-distance: 34px;
 $avatar-size: 29px;
 
-.conversation {
+.conversation,
+.ghost {
   margin-top: 36px;
   bottom: 64px !important;
   color: color(p-blue-darker);
@@ -342,6 +343,11 @@ $avatar-size: 29px;
   background: #fafafa;
   border-top: $border-dark;
 
+  .ghost & {
+    position: relative;
+    top: 0;
+  }
+
   &.removed {
     height: 0;
     overflow: hidden;
@@ -368,6 +374,10 @@ $avatar-size: 29px;
     font-size: 12px;
     margin: 0 $margin-small 0 0;
     opacity: 1;
+
+    .ghost & {
+      padding: 0 $padding-small;
+    }
 
     &.removed {
       transition: $speed-normal;
