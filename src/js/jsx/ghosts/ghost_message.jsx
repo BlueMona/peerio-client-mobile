@@ -6,7 +6,9 @@
 
         getInitialState: function () {
             return {
-                has_conv: this.props.params && this.props.params.id
+                open: false,
+                has_conv: this.props.params && this.props.params.id,
+                files: []
             };
         },
 
@@ -20,6 +22,7 @@
                             passphrase: g.passphrase,
                             message: g.message,
                             subject: g.subject,
+                            files: g.files || [],
                             id: g.id
                         });
                     })
@@ -56,13 +59,6 @@
             this.setState({open: !this.state.open});
         },
 
-        getInitialState: function () {
-            return {
-                open: false,
-                ghost: Peerio.Ghost.create()
-            };
-        },
-
         render: function () {
             return (
               <div>
@@ -86,11 +82,11 @@
                 </Peerio.UI.Tappable>
                 <div className="content without-tab-bar without-footer conversation flex-col">
                     <div className="flex-grow-1">
-                        <ul className={'attached-files' + (this.state.ghost.files.length ? '' : ' removed')}>
-                            {this.state.ghost.files.map((file, i) => {
+                        <ul className={'attached-files' + (this.state.files.length ? '' : ' removed')}>
+                            {this.state.files.map((file, i) => {
                                 return (
                                     <li className={'attached-file'}>
-                                        { this.state.ghost.files.length ? file.name : null }
+                                        { this.state.files.length ? file.name : null }
                                     </li>);
                             })}
                         </ul>
