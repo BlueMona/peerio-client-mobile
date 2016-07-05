@@ -25,7 +25,7 @@
                     return Peerio.user.uploadFile(fileInfo)
                         .then(file => {
                             this.props.onComplete && this.props.onComplete(file);
-                            return Peerio.Action.showAlert({text: t('file_uploadComplete')});
+                            return this.props.silent ? Promise.resolve(true) : Peerio.Action.showAlert({text: t('file_uploadComplete')});
                         })
                         .then(this.props.resolve)
                         .catch(e => {

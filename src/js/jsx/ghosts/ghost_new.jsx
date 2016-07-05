@@ -94,7 +94,7 @@
         openFileSelect: function () {
             // make sure we initialized the file passphrase
             if(!this.state.ghost.filePublicKey) return;
-            Peerio.UI.Upload.show({ onComplete: this.addFile, isGhost: true, ghostPublicKey: this.state.ghost.filePublicKey });
+            Peerio.UI.Upload.show({ silent: true, onComplete: this.addFile, isGhost: true, ghostPublicKey: this.state.ghost.filePublicKey });
         },
 
         updateFiles: function () {
