@@ -19,7 +19,7 @@
                 if (token.isLink)
                     return <Peerio.UI.Tappable
                         key={i}
-                        element="span"
+                        element="a"
                         className="message-link"
                         onTap={this.open.bind(this, token.toHref())}>{token.toString()}</Peerio.UI.Tappable>;
                 else
