@@ -34,6 +34,11 @@ $avatar-size: 29px;
   border-bottom: $border-dark;
   padding-bottom: 50px;
 
+  &.without-footer {
+    bottom: 0 !important;
+    padding-bottom: 20px;
+  }
+
   .item {
     width: 100%;
     padding: 0 $padding-base 0 $edge-distance;
@@ -176,7 +181,7 @@ $avatar-size: 29px;
   right: 0;
   width: 100%;
   top: $navbar-height;
-  z-index: $z-tabbar;
+  z-index: 4;
   height: 36px;
   color: $white-100;
   line-height: 36px;

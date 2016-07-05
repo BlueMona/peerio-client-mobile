@@ -623,7 +623,7 @@
   "ghost_passphrase_share": "Ghosts don't share secrets with just anybody, so you'll need to tell your recipient the Ghost's passphrase",
   "ghost_passphrase_share_helper": "We recommend sharing this passphrase over a different channel",
   "ghost_passphrase_share_link": "Didn’t get the email? Want to share with someone else?",
-  "ghost_mobile_settings": "Prepare to send",
+  "ghost_mobile_settings": "Prepare Ghost",
   "ghost_destroyAfter": "Destroy after",
   "ghost_days": "days",
   "ghost_new": "New Ghost",

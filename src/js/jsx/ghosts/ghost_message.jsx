@@ -52,12 +52,50 @@
             Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
+        toggle: function () {
+            this.setState({open: !this.state.open});
+        },
+
+        getInitialState: function () {
+            return {
+                open: false,
+                ghost: Peerio.Ghost.create()
+            };
+        },
+
         render: function () {
             return (
-                <div className="content without-tab-bar">
-                    GHOST MESSAGE
-                    <p>{this.state.subject}</p>
-                    <p>{this.state.message}</p>
+              <div>
+                <Peerio.UI.Tappable id="conversation-head" onTap={this.toggle}>
+                    <div className={'participants' + (this.state.open ? ' open' : '')}>
+                      {this.state.email}
+                    </div>
+                    <div className="conversation-info">
+                        <div className="subject">
+                            {this.state.subject}
+                        </div>
+                        {/*
+                            currently used to left align subject,
+                            future functionality could mimic messages once we allow users to send to multiple recipients
+                        */}
+                        <div className="counter"></div>
+                        <div>
+                          <i className="material-icons">info_outline</i>
+                        </div>
+                    </div>
+                </Peerio.UI.Tappable>
+                <div className="content without-tab-bar without-footer conversation flex-col">
+                    <div className="flex-grow-1">
+                        <ul className={'attached-files' + (this.state.ghost.files.length ? '' : ' removed')}>
+                            {this.state.ghost.files.map((file, i) => {
+                                return (
+                                    <li className={'attached-file'}>
+                                        { this.state.ghost.files.length ? file.name : null }
+                                    </li>);
+                            })}
+                        </ul>
+                        <p>{this.state.message}</p>
+                    </div>
 
                     <p>
                       <label>{t('Passphrase')}</label>
@@ -88,6 +126,7 @@
                         </Peerio.UI.Tappable>
                     </div> : null}
                 </div>
+              </div>
             );
         }
     });
