@@ -38,6 +38,7 @@
                 </div>);
 
             var text = this.props.text || '';
+            text = this.props.linkify ? <Peerio.UI.Linkify text={text} onOpen={Peerio.NativeAPI.openInBrowser}/> : text;
 
             return (
                 <div className={classNames('modal', 'alert-wrapper', this.props.serviceClass)}>
