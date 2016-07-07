@@ -23,6 +23,8 @@
                             message: g.message,
                             subject: g.subject,
                             files: g.files || [],
+                            lifeSpanInSeconds: g.lifeSpanInSeconds,
+                            expired: Peerio.Ghost.expired(g),
                             id: g.id
                         });
                     })
@@ -96,22 +98,28 @@
                     <p>
                       <label>{t('Passphrase')}</label>
                     </p>
-                    <div className="flex-row flex-align-center section-highlight">
-                        <div className="flex-grow-1">
-                            {this.state.passphrase}
-                        </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
-                                            className="material-icons flex-shrink-0" >
-                            share
-                        </Peerio.UI.Tappable>
-                    </div>
+                    {this.state.expired ? 
+                        <div className="flex-row flex-align-center section-highlight">
+                            <div className="flex-grow-1">
+                                {t('ghost_expired') + ' ' + moment(this.state.expired).format('MMMM Do YYYY, h:mm:ss')}
+                            </div>
+                        </div> :
+                        <div className="flex-row flex-align-center section-highlight">
+                            <div className="flex-grow-1">
+                                {this.state.passphrase}
+                            </div>
+                            <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
+                                                className="material-icons flex-shrink-0" >
+                                share
+                            </Peerio.UI.Tappable>
+                        </div>}
                     <p>
                         <small>
                         {t('ghost_passphrase_share_helper')}
                         </small>
                     </p>
                     <p>{t('ghost_passphrase_share_link')}</p>
-                    {this.state.id ?
+                    {this.state.id && !this.state.expired ?
                     <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
                         <div className="flex-shrink-1 text-overflow">
                             <a href={this.getLink()} target="_blank">{this.getLink()}</a>
