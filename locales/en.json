@@ -635,6 +635,7 @@
   "ghost_enterRecipient": "Please enter the recipient",
   "ghost_enterBody": "Please enter body",
   "ghost_enterSubject": "Please enter subject",
+  "ghost_waitUpload": "Please wait until upload finishes",
   "currentReleaseOnGithub": "Current release",
   "ghost_loadFail":"Failed to load ghost",
   "ghost_fileDownloadFail":"Failed to download file",

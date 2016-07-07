@@ -34,6 +34,7 @@
             e = body ? e : t('ghost_enterBody');
             e = subject ? e : t('ghost_enterSubject');
             e = email ? e : t('ghost_enterRecipient');
+            e = this.getGhostUploads().length ? t('ghost_waitUpload') : e;
 
             if(e) {
                 Peerio.UI.Alert.show({text: e});
@@ -106,9 +107,13 @@
             this.forceUpdate();
         },
 
+        getGhostUploads: function () {
+            return Peerio.user.uploads.filter(i => i.isGhost);
+        },
+
         render: function () {
             var uploadNodes;
-            var uploads = Peerio.user.uploads.filter(i => i.isGhost);
+            var uploads = this.getGhostUploads();
             if (uploads.length > 0) {
                 uploadNodes = [];
                 uploads.forEach((file, i) => {
