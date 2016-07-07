@@ -65,7 +65,7 @@
                             <li className="flex-col flex-align-start">
                                 <label>{t('ghost_lifespan')}</label>
                                 <div className="flex-row flex-align-center">
-                                    Destroy after
+                                    {t('ghost_destroyAfter')}
                                     <div className="input-select" style={{margin: '0 8px', width: 'inherit'}}>
                                         <select ref="days" value={this.state.days} onChange={this.setDays}>
                                             {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
@@ -77,7 +77,7 @@
                                             arrow_drop_down
                                         </Peerio.UI.Tappable>
                                     </div>
-                                    days.
+                                    {t('ghost_days')}
                                 </div>
 
                             </li>
