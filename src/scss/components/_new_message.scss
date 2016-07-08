@@ -26,17 +26,6 @@ $recipients-height: 40px;
       max-height: 96px;
       overflow: hidden;
       overflow-y: scroll;
-
-      &:focus .subject-inputs{
-        min-height: inherit;
-        height: inherit;
-      }
-
-      .subject-inputs{
-        min-height: 0;
-        height: 0;
-        overflow: hidden;
-      }
     }
   }
 
@@ -70,9 +59,24 @@ $recipients-height: 40px;
     }
   }
 
-  .subject-inputs {
+  .subject-input {
     border-bottom: $border-dark;
     border-top: $border-dark;
+  }
+
+  .recipient-input{
+    min-height: 0 !important;
+    height: 0;
+    overflow: hidden;
+
+    &.open{
+      min-height: 40px !important;
+    }
+  }
+
+
+  .subject-input,
+  .recipient-input {
     display: flex;
     min-height: $recipients-height;
 

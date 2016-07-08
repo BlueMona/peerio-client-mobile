@@ -155,7 +155,7 @@
                         <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
                             <div className="to">To</div>
                             <div className="names">{r}
-                                <div className="subject-inputs">
+                                <div className="recipient-input">
                                     <input type="text"
                                        required="required"
                                        autoComplete="off"
@@ -177,7 +177,7 @@
                             </div>
                         </Peerio.UI.Tappable>
                     {/*TODO refactor message inputs */}
-                        <div className="subject-inputs">
+                        <div className="subject-input">
                             <input type="text"
                                    autoComplete="off"
                                    ref="subject"
