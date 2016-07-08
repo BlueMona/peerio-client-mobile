@@ -113,11 +113,13 @@
                     <div id="app-lock">
                         {
                             this.state.outOfSync ?
-                                <Peerio.UI.Tappable onTap={Peerio.user.reSync}>
-                                    <i className="material-icons">sync</i>
+                                <Peerio.UI.Tappable onTap={Peerio.user.reSync} element="i" className="material-icons">
+                                    sync
                                 </Peerio.UI.Tappable>
                                 :
-                            ''
+                            <Peerio.UI.Tappable element="i" onTap={this.transitionTo.bind(this, 'ghost_new')} className="material-icons">
+                                edit
+                            </Peerio.UI.Tappable>
                         }
                     </div>
 

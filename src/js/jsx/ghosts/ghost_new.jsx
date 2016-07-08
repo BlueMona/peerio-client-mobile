@@ -62,8 +62,12 @@
         },
 
         getInitialState: function () {
+            var recipients = this.props.params.id ? [this.props.params.id] : [];
+
             return {
-                ghost: Peerio.Ghost.create()
+                ghost: Peerio.Ghost.create(),
+                recipients: recipients,
+                attachments: []
             };
         },
 
@@ -85,6 +89,10 @@
                     this.complete.evaluate();
                 })
                 .catch( e => L.error(e) );
+        },
+
+        openContactSelect: function () {
+            Peerio.Action.showContactSelect({preselected: this.state.recipients.slice()});
         },
 
         addFile: function (file) {
@@ -144,20 +152,18 @@
             return (
                 <div className="content without-tab-bar">
                     <div id="new-message">
-                        <div className="subject-inputs">
                         <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
-                            <div className="to">To:</div>
+                            <div className="to">To</div>
                             <div className="names">{r}</div>
                             <div className="add-btn">
                                 {/*If peerio users*/}
-                                <i className="material-icons">person</i>
+                                <i className="material-icons">person_add</i>
                                 {/*else*/}
-                                <i className="ghost-dark">person</i>
+                                <i className="ghost-dark"></i>
                 <span
                     className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </div>
                         </Peerio.UI.Tappable>
-                        </div>
                     {/*TODO refactor message inputs */}
                         <div className="subject-inputs">
                             <input type="text"
