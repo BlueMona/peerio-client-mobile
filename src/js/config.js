@@ -43,7 +43,7 @@ Peerio.Config.init = function () {
             'hu': 'Magyar'
         };
 
-        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
+        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://hocuspocus.peerio.com';
 
         cfg.piwik = {
             server: 'https://piwik.peerio.com/piwik.php',

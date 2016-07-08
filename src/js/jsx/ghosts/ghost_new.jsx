@@ -112,6 +112,15 @@
         },
 
         render: function () {
+            // added recipients should take the styling here, regardless if it's a peerio user or an email
+            var r = this.state.recipients.map(function (username) {
+                var c = Peerio.user.contacts.dict[username];
+                return <span className="name-selected" key={username}>
+                {c && c.fullName || ''} &bull; {username}
+                <Peerio.UI.Tappable element="i" className="material-icons" onTap='this.shouldRemoveRecipient'>cancel</Peerio.UI.Tappable></span>;
+            });
+
+
             var uploadNodes;
             var uploads = this.getGhostUploads();
             if (uploads.length > 0) {
@@ -136,17 +145,18 @@
                 <div className="content without-tab-bar">
                     <div id="new-message">
                         <div className="subject-inputs">
-                            <input type="text"
-                                   required="required"
-                                   autoComplete="off"
-                                   autoCorrect="off"
-                                   autoCapitalize="off"
-                                   id="email"
-                                   ref="email"
-                                   className="email"
-                                   placeholder={t('email')}
-                                   value={this.state.email}
-                                   onChange={this.handleEmailChange}/>
+                        <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
+                            <div className="to">To:</div>
+                            <div className="names">{r}</div>
+                            <div className="add-btn">
+                                {/*If peerio users*/}
+                                <i className="material-icons">person</i>
+                                {/*else*/}
+                                <i className="ghost-dark">person</i>
+                <span
+                    className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
+                            </div>
+                        </Peerio.UI.Tappable>
                         </div>
                     {/*TODO refactor message inputs */}
                         <div className="subject-inputs">

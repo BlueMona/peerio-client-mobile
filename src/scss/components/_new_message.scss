@@ -40,14 +40,22 @@ $recipients-height: 40px;
   }
 
   .name-selected {
-    font-size: .9em;
+    font-size: 12px;
     background-color: color(p-blue-light-10);
     color: $white-100;
-    border-radius: 4px;
-    padding: 4px;
-    display: inline-block;
+    border-radius: 12px;
+    padding: 2px 4px 2px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin: 2px;
     word-break: break-all;
+
+    i {
+      margin-left: 4px;
+      font-size: 20px;
+      color: $white-70;
+    }
   }
 
   .subject-inputs {

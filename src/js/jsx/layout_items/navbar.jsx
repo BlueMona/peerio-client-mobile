@@ -51,7 +51,7 @@
             if(window.isPeerioDownTimer) return;
             window.isPeerioDownTimer = window.setTimeout(() => {
                 this.cancelAnimation();
-                this.animateIsPeerioDownTimer = 
+                this.animateIsPeerioDownTimer =
                     window.setInterval(() => this.animateIsPeerioDown(), 2000);
                 window.isPeerioDownTimer = null;
             }, 5000);
@@ -66,7 +66,7 @@
         },
 
         cancelIsPeerioDown: function () {
-            if(this.isPeerioDownTimer) { 
+            if(this.isPeerioDownTimer) {
                 window.clearTimeout(this.isPeerioDownTimer);
                 this.isPeerioDownTimer = null;
             }
@@ -116,10 +116,8 @@
                                 <Peerio.UI.Tappable onTap={Peerio.user.reSync}>
                                     <i className="material-icons">sync</i>
                                 </Peerio.UI.Tappable>
-                                : 
-                            <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'ghost_new')}>
-                                👻
-                            </Peerio.UI.Tappable>
+                                :
+                            ''
                         }
                     </div>
 

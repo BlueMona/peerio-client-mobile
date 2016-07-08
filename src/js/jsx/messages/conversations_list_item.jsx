@@ -66,7 +66,7 @@
                                       className="list-item-swipe-wrapper">
 
                         <div className="list-item-thumb">
-                            {conv.hasFiles ?
+                            {conv.isGhost ? <i className="ghost-dark"></i> : conv.hasFiles ?
                                 (<div className="icon-with-label">
                                     <i className={'material-icons'}>attach_file</i>
                                 </div>)
@@ -77,7 +77,6 @@
                             <div className="list-item-sup">{conv.username}</div>
                             {conv.displayName && <div className="list-item-title">{conv.displayName}</div>}
                             <div className="list-item-description">
-                                {conv.isGhost ? <span>👻&nbsp;</span> : null}
                                 {conv.subject}
                             </div>
                         </div>
