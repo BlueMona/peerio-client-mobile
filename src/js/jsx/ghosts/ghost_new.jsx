@@ -124,7 +124,7 @@
             var r = this.state.recipients.map(function (username) {
                 var c = Peerio.user.contacts.dict[username];
                 return <span className="name-selected" key={username}>
-                {c && c.fullName || ''} &bull; {username}
+                {c && c.fullName || ''} &bull; <span className="text-overflow">{username}</span>
                 <Peerio.UI.Tappable element="i" className="material-icons" onTap='this.shouldRemoveRecipient'>cancel</Peerio.UI.Tappable></span>;
             });
 
@@ -154,14 +154,26 @@
                     <div id="new-message">
                         <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
                             <div className="to">To</div>
-                            <div className="names">{r}</div>
+                            <div className="names">{r}
+                                <div className="subject-inputs">
+                                    <input type="text"
+                                       required="required"
+                                       autoComplete="off"
+                                       autoCorrect="off"
+                                       autoCapitalize="off"
+                                       id="email"
+                                       ref="email"
+                                       className="email"
+                                       value={this.state.email}
+                                       onChange={this.handleEmailChange}/>
+                                </div>
+                            </div>
                             <div className="add-btn">
                                 {/*If peerio users*/}
                                 <i className="material-icons">person_add</i>
                                 {/*else*/}
                                 <i className="ghost-dark"></i>
-                <span
-                    className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
+                                <span className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </div>
                         </Peerio.UI.Tappable>
                     {/*TODO refactor message inputs */}
