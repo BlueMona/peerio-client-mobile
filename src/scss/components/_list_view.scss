@@ -235,7 +235,9 @@ li {
     }
 
     .list-item-thumb {
+      box-sizing: content-box;
       min-width: 24px;
+      padding-right: $padding-base;
       flex: 0 0 auto;
       text-align: center;
       align-self: center;

@@ -79,9 +79,9 @@
                         </Peerio.UI.Tappable>
                     </div>
                     <p>
-                        <small>
+                        <div className="caption">
                         {t('ghost_passphrase_share_helper')}
-                        </small>
+                        </div>
                     </p>
                     <p>{t('ghost_passphrase_share_link')}</p>
                     {this.state.id ?
