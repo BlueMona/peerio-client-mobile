@@ -44,10 +44,10 @@
 
                         <div className="conversation-info">
                             <div className="subject">{c.subject}</div>
-                            <div className="counter flex-row flex-align-center flex-justify-center">
+                            <div className="counter">
                                 <i className="material-icons">people</i> {counter}
                             </div>
-                            <Peerio.UI.Tappable onTap={this.openInfo} className="info flex-row flex-align-center flex-justify-center">
+                            <Peerio.UI.Tappable onTap={this.openInfo} className="info">
                                 <i className="material-icons">info_outline</i>
                             </Peerio.UI.Tappable>
 

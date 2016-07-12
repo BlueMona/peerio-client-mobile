@@ -77,7 +77,9 @@
                             future functionality could mimic messages once we allow users to send to multiple recipients
                         */}
                         <div className="counter"></div>
-                        <i className="material-icons">info_outline</i>
+                        <div className="info">
+                            <i className="material-icons">info_outline</i>
+                        </div>
 
                     </div>
                 </Peerio.UI.Tappable>
