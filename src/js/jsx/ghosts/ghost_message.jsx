@@ -98,12 +98,13 @@
                     <p>
                       <label>{t('Passphrase')}</label>
                     </p>
-                    {this.state.expired ? 
+                    {this.state.expired ?
                         <div className="flex-row flex-align-center section-highlight">
                             <div className="flex-grow-1">
-                                {t('ghost_expired') + ' ' + moment(this.state.expired).format('MMMM Do YYYY, h:mm:ss')}
+                                <span className="text-red txt-lrg">{t('ghost_expired') + ' ' + moment(this.state.expired).format('MMMM Do YYYY, h:mm:ss')}</span>
                             </div>
                         </div> :
+                      <div>  
                         <div className="flex-row flex-align-center section-highlight">
                             <div className="flex-grow-1">
                                 {this.state.passphrase}
@@ -112,23 +113,23 @@
                                                 className="material-icons flex-shrink-0" >
                                 share
                             </Peerio.UI.Tappable>
-                        </div>}
-                    <p>
-                        <small>
-                        {t('ghost_passphrase_share_helper')}
-                        </small>
-                    </p>
-                    <p>{t('ghost_passphrase_share_link')}</p>
-                    {this.state.id && !this.state.expired ?
-                    <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
-                        <div className="flex-shrink-1 text-overflow">
-                            <a href={this.getLink()} target="_blank">{this.getLink()}</a>
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareLink}
-                                            className="material-icons flex-shrink-0">
-                            share
-                        </Peerio.UI.Tappable>
-                    </div> : null}
+                        <p className="caption">
+                            {t('ghost_passphrase_share_helper')}
+                        </p>
+                      </div>}
+
+
+                    {this.state.id && !this.state.expired ?
+                      <div>
+                        <p>{t('ghost_passphrase_share_link')}</p>
+                        <p className="flex-row caption">
+                                <a href={this.getLink()} target="_blank" className="flex-shrink-1 text-overflow">{this.getLink()}</a>
+                            <Peerio.UI.Tappable element="i" onTap={this.shareLink}
+                                                className="material-icons flex-shrink-0">
+                                share
+                            </Peerio.UI.Tappable>
+                        </p></div> : null}
                 </div>
               </div>
             );

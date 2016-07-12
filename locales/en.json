@@ -460,7 +460,6 @@
   "error_messageDelivery": "Failed to deliver message to following recipients:",
   "error_messageSend": "Failed to send message.",
   "error_addressFormat": "Sorry, that doesn't look like a valid email or phone number.",
-  "error_recipientFormat": "Sorry, that doesn't look like a valid username or email address.",
   "input_required": "Required",
   "login_forgetUsername": "Tap to switch users or forget username.",
   "login_loginButton": "{#login}",
