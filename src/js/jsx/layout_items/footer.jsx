@@ -15,7 +15,7 @@
             this.setState({mainButtonActions : {
                 messages: {
                     name: t('button_composeMessage'),
-                    action: this.transitionTo.bind(this, 'new_message'),
+                    action: this.transitionTo.bind(this, 'ghost_new'),
                     icon: 'edit'
                 },
                 files: {name: t('button_uploadFile'), action: Peerio.Action.showFileUpload, icon: 'cloud_upload'},
