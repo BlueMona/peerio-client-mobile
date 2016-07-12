@@ -24,13 +24,9 @@
             this.setMode(MODE_DEFAULT);
             var email = this.refs.email.getDOMNode();
             this.complete = new Awesomplete(email,
-                                            {minChars: 1, maxItems: 3, list: this.list});
-            email.addEventListener('awesomplete-selectcomplete', e => {
-                var r = this.state.recipients;
-                r.push(e.text.value);
-                this.setState({recipients: r, email: ''});
+                                            {minChars: 1, maxItems: 3, list: this.list, item: this.completionItem});
+            email.addEventListener('awesomplete-selectcomplete', e => this.tryAddFromInput(e.text.value.value));
 
-            });
             Peerio.ContactHelper.tryCheckPermission();
 
             Peerio.PhraseGenerator.getPassPhrase(Peerio.Config.defaultLocale, Peerio.Config.defaultWordCount)
@@ -42,9 +38,17 @@
         },
 
         setMode: function(mode) {
+            if(this.state.mode == MODE_GHOST && this.state.ghost.files.length)
+                return;
+
+            if(this.state.attachments.length)
+                return;
+
             mode != this.state.mode &&  
                 Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? 'ghost_new' : 'new_message');
             this.setState({mode: mode});
+
+            this.list.splice(0, this.list.length);
         },
 
         processAction: function () {
@@ -70,6 +74,7 @@
         },
 
         acceptFileSelection: function (selection) {
+            this.setMode(MODE_MESSAGE);
             this.setState({attachments: selection});
         },
 
@@ -80,11 +85,11 @@
         ghostSettings: function () {
             var subject = this.refs.subject.getDOMNode().value;
             var body = this.refs.message.getDOMNode().value;
-            var email = this.refs.email.getDOMNode().value;
+            var recipients = this.state.recipients;
             var e = null;
             e = body ? e : t('ghost_enterBody');
             e = subject ? e : t('ghost_enterSubject');
-            e = email ? e : t('ghost_enterRecipient');
+            e = recipients.length ? e : t('ghost_enterRecipient');
             e = this.getGhostUploads().length ? t('ghost_waitUpload') : e;
 
             if(e) {
@@ -94,7 +99,7 @@
 
             var g = this.state.ghost;
             g.body = body;
-            g.recipient = email;
+            g.recipients = recipients;
             g.subject = subject;
 
             Peerio.Drafts.Ghost = g;
@@ -153,8 +158,8 @@
             return true;
         },
 
-        tryAddFromInput: function () {
-            var current = this.refs.email.getDOMNode().value;
+        tryAddFromInput: function (r) {
+            var current = r || this.refs.email.getDOMNode().value;
             current && current.length && this.tryAdd(current) && this.setState({email: ''});
         },
 
@@ -192,24 +197,55 @@
             };
         },
 
-        updateCompletionDebounce: function (email) {
+        updateCompletionDebounce: function (search) {
             if(this.debounce) window.clearTimeout(this.debounce);
             this.debounce = window.setTimeout(() => {
-                this.updateCompletion(email);
+                this.updateCompletion(search);
                 this.debounce = null;
             }, 100);
         },
 
-        updateCompletion: function (email) {
-            Peerio.ContactHelper.findContaining(email)
+        lookupUserContacts: function (search) {
+            return _.map(Peerio.Util.filterFirst(Peerio.user.contacts.arr, 
+                                    c => c.fullNameAndUsername.toLowerCase().indexOf(search) != -1,
+                                    5), c => c.username);
+        },
+
+        updateCompletion: function (search) {
+            search = search.toLowerCase();
+            Peerio.ContactHelper.findContaining(search)
                 .then( result => {
                     this.list.splice(0, this.list.length);
-                    result.forEach( i => {
-                        i.emails && i.emails.forEach( email => this.list.push(email.value) );
+
+                    // first add contacts from our peerio user list
+                    this.state.mode != MODE_GHOST && this.lookupUserContacts(search)
+                        .forEach(item =>
+                                 this.state.recipients.indexOf(item) == -1 && 
+                                 this.list.push({label: item, value: { value: item}}));
+
+                    // then add contacts from our phone list
+                    this.state.mode != MODE_MESSAGE && result.forEach( i => {
+                        i.emails && i.emails.forEach( email => this.state.recipients.indexOf(email.value) == -1 && this.list.push({
+                            label: email.value, 
+                            value: {
+                                isGhost: true,
+                                value: email.value
+                            }
+                        }) );
                     });
+
                     this.complete.evaluate();
                 })
                 .catch( e => L.error(e) );
+        },
+
+        completionItem: function (suggestionText, userInput) {
+            var r = document.createElement('li');
+            r.innerHTML = Peerio.Util.interpolate(
+                '<i class="{0}"></i><span>{1}</span>', 
+                [suggestionText.value.isGhost ? 'ghost-dark' : 'peerio-dark',
+                suggestionText.value.value.replace(userInput, '<mark>' + userInput + '</mark>')]);
+            return r;
         },
 
         openContactSelect: function () {
@@ -239,9 +275,13 @@
             if(this.state.mode == MODE_GHOST) {
                 _.pull(this.state.ghost.files, file);
                 this.forceUpdate();
+                if(this.state.ghost.files.length == 0 && this.state.recipients == 0)
+                    this.setMode(MODE_DEFAULT);
             } else {
-                _.pull(this.state.attachments, file);
+                _.pull(this.state.attachments, file.id);
                 this.setState({attachments: this.state.attachments});
+                if(this.state.attachments.length == 0 && this.state.recipients == 0)
+                    this.setMode(MODE_DEFAULT);
             }
         },
 
@@ -305,6 +345,7 @@
                                        ref="email"
                                        className="email"
                                        value={this.state.email}
+                                       onBlur={this.tryAddFromInput}
                                        onKeyDown={this.handleEmailKeyDown}
                                        onChange={this.handleEmailChange}/>
                                 </div>

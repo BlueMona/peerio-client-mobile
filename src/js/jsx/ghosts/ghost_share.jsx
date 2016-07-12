@@ -7,7 +7,7 @@
         getInitialState: function () {
             return {
                 passphrase: Peerio.Drafts.Ghost.passphrase,
-                email: Peerio.Drafts.Ghost.recipient,
+                recipients: Peerio.Drafts.Ghost.recipients,
                 id: Peerio.Drafts.Ghost.id,
                 has_conv: this.props.params && this.props.params.id
             };
@@ -19,7 +19,7 @@
                     .then(c => {
                         var g = JSON.parse(c[0].body);
                         this.setState({
-                            email: g.recipient,
+                            recipients: g.recipients,
                             passphrase: g.passphrase,
                             message: g.message,
                             subject: g.subject,
@@ -61,7 +61,7 @@
             return (
                 <div className={eClasses} style={eStyles}>
                     <div className="headline">{t('ghost_mobile_share')}</div>
-                    <p>{t('ghost_mobile_sent')} {this.state.email}</p>
+                    <p>{t('ghost_mobile_sent')} {this.state.recipients}</p>
                     <p>{t('ghost_mobile_sent_share')}</p>
 
                     {/* TODO: make look nice */}

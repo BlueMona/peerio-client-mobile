@@ -18,7 +18,7 @@
                     .then(c => {
                         var g = JSON.parse(c[0].body);
                         this.setState({
-                            email: g.recipient,
+                            recipients: g.recipients,
                             passphrase: g.passphrase,
                             message: g.message,
                             subject: g.subject,
@@ -66,7 +66,7 @@
               <div>
                 <Peerio.UI.Tappable id="conversation-head" onTap={this.toggle}>
                     <div className={'participants' + (this.state.open ? ' open' : '')}>
-                      {this.state.email}
+                      {this.state.recipients ? this.state.recipients.join(', ') : null}
                     </div>
                     <div className="conversation-info">
                         <div className="subject">
