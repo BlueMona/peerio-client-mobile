@@ -18,14 +18,14 @@ $recipients-height: 40px;
     min-height: $recipients-height;
     align-items: center;
     padding-right: 0;
-    max-height: 96px;
-    overflow: hidden;
+    // max-height: 96px;
+    // overflow: hidden;
 
     .names {
       flex-grow: 1;
-      max-height: 96px;
-      overflow: hidden;
-      overflow-y: scroll;
+      // max-height: 96px;
+      // overflow: hidden;
+      // overflow-y: scroll;
     }
   }
 
@@ -87,6 +87,7 @@ $recipients-height: 40px;
     .awesomplete {
         max-width: 100%;
         padding: 0 $padding-small;
+        position: static !important;
     }
 
     #email {

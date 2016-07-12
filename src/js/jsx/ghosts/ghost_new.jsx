@@ -1,21 +1,36 @@
 (function () {
     'use strict';
 
+    var MODE_DEFAULT = 0;
+    var MODE_MESSAGE = 1;
+    var MODE_GHOST = 2;
+
     Peerio.UI.GhostNew = React.createClass({
         mixins: [ReactRouter.Navigation],
 
         componentDidMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onFilesSelected(this.acceptFileSelection),
-                Peerio.Dispatcher.onBigGreenButton(this.settings),
+                Peerio.Dispatcher.onBigGreenButton(this.processAction),
                 Peerio.Dispatcher.onFilesUpdated(this.updateFiles),
+                Peerio.Dispatcher.onContactsSelected(this.acceptContactSelection),
             ];
 
             this.list = [];
+            this.actions = {};
+            this.actions[MODE_DEFAULT] = () => false;
+            this.actions[MODE_MESSAGE] = () => this.messageSend();
+            this.actions[MODE_GHOST] = () => this.ghostSettings();
+            this.setMode(MODE_DEFAULT);
             var email = this.refs.email.getDOMNode();
             this.complete = new Awesomplete(email,
                                             {minChars: 1, maxItems: 3, list: this.list});
-            email.addEventListener('awesomplete-selectcomplete', e => this.setState({email: e.text.value}));
+            email.addEventListener('awesomplete-selectcomplete', e => {
+                var r = this.state.recipients;
+                r.push(e.text.value);
+                this.setState({recipients: r, email: ''});
+
+            });
             Peerio.ContactHelper.tryCheckPermission();
 
             Peerio.PhraseGenerator.getPassPhrase(Peerio.Config.defaultLocale, Peerio.Config.defaultWordCount)
@@ -26,7 +41,43 @@
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
 
-        settings: function () {
+        setMode: function(mode) {
+            mode != this.state.mode &&  
+                Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? 'ghost_new' : 'new_message');
+            this.setState({mode: mode});
+        },
+
+        processAction: function () {
+            return this.actions[this.state.mode]();
+        },
+
+        messageSend: function () {
+            if (!this.state.recipients.length)
+                return Peerio.Action.showAlert({text: t('message_selectContacts')});
+
+            if (this.state.sending) return;
+
+            this.setState({sending: true});
+
+            Peerio.Conversation()
+                .reply(this.state.recipients, this.refs.message.getDOMNode().value,
+                    this.state.attachments, this.refs.subject.getDOMNode().value)
+                .then(this.goBack)
+                .catch(err => {
+                    Peerio.Action.showAlert({text: t('error_messageSend') + ' ' + err});
+                    this.setState({sending: false});
+                });
+        },
+
+        acceptFileSelection: function (selection) {
+            this.setState({attachments: selection});
+        },
+
+        openMessageFileSelect: function () {
+            Peerio.Action.showFileSelect({preselected: this.state.attachments.slice()});
+        },
+
+        ghostSettings: function () {
             var subject = this.refs.subject.getDOMNode().value;
             var body = this.refs.message.getDOMNode().value;
             var email = this.refs.email.getDOMNode().value;
@@ -55,6 +106,76 @@
             this.setState({subject: this.refs.subject.getDOMNode().value});
         },
 
+        focusRecipient: function (e) {
+            this.refs.email.getDOMNode().focus();
+            e.preventDefault();
+            return false;
+        },
+
+        shouldRemoveRecipient: function (r) {
+            var i = this.state.recipients.indexOf(r);
+            if(i == -1) return;
+            this.state.recipients.splice(i, 1);
+            this.setState({recipients: this.state.recipients});
+            this.state.recipients.length || this.setMode(MODE_DEFAULT);
+        },
+
+        /**
+         * Add a recipient to the state
+         * @return  true if the recipient already exists or is successfully added
+         *          false if the recipient could not be added
+         */
+        tryAdd: function (r) {
+            // check if there's already the same recipient added
+            if(this.state.recipients.indexOf(r) != -1) return true;
+
+            // if there's a peerio user in contacts with that name
+            var peerioUser = Peerio.user.contacts.dict[r];
+            if(peerioUser) {
+                this.setMode(MODE_MESSAGE);
+            }
+
+            // if look like an email
+            var email = !peerioUser;
+            if(email) {
+                // we should also tell user that he's about to send ghost, so
+                this.setMode(MODE_GHOST);
+            }
+
+            if(!peerioUser && !email) {
+                Peerio.UI.Alert.show({text: t('error_recipientFormat')});
+                return false;
+            }
+
+            this.state.recipients.push(r);
+            this.setState({recipients: this.state.recipients});
+
+            return true;
+        },
+
+        tryAddFromInput: function () {
+            var current = this.refs.email.getDOMNode().value;
+            current && current.length && this.tryAdd(current) && this.setState({email: ''});
+        },
+
+        handleEmailKeyDown: function (e) {
+            var current = this.refs.email.getDOMNode().value;
+            switch(e.keyCode) {
+                // space, enter, comma, semicolon
+                case 32: case 13: case 188: case 186:
+                    this.tryAddFromInput();
+                    e.preventDefault();
+                    break;
+                // backspace
+                case 8: 
+                    if(current.length) break;
+                    if(this.state.recipients.length)
+                        this.shouldRemoveRecipient(this.state.recipients[this.state.recipients.length - 1]);
+                    e.preventDefault();
+                    break;
+            }
+        },
+
         handleEmailChange: function () {
             var email = this.refs.email.getDOMNode().value.replace(/[ '",;/]/, '');
             this.setState({email: email});
@@ -66,7 +187,7 @@
 
             return {
                 ghost: Peerio.Ghost.create(),
-                recipients: recipients,
+                recipients: [],
                 attachments: []
             };
         },
@@ -92,7 +213,11 @@
         },
 
         openContactSelect: function () {
-            Peerio.Action.showContactSelect({preselected: this.state.recipients.slice()});
+            this.state.mode != MODE_GHOST && Peerio.Action.showContactSelect({preselected: this.state.recipients.slice()});
+        },
+
+        acceptContactSelection: function (selection) {
+            selection.forEach(r => this.tryAdd(r));
         },
 
         addFile: function (file) {
@@ -100,7 +225,7 @@
             this.forceUpdate();
         },
 
-        openFileSelect: function () {
+        openGhostFileSelect: function () {
             // make sure we initialized the file passphrase
             if(!this.state.ghost.filePublicKey) return;
             Peerio.UI.Upload.show({ silent: true, onComplete: this.addFile, isGhost: true, ghostPublicKey: this.state.ghost.filePublicKey });
@@ -111,8 +236,13 @@
         },
 
         detachFile: function (file) {
-            _.pull(this.state.ghost.files, file);
-            this.forceUpdate();
+            if(this.state.mode == MODE_GHOST) {
+                _.pull(this.state.ghost.files, file);
+                this.forceUpdate();
+            } else {
+                _.pull(this.state.attachments, file);
+                this.setState({attachments: this.state.attachments});
+            }
         },
 
         getGhostUploads: function () {
@@ -121,11 +251,19 @@
 
         render: function () {
             // added recipients should take the styling here, regardless if it's a peerio user or an email
-            var r = this.state.recipients.map(function (username) {
+            var r = this.state.recipients.map(username => {
                 var c = Peerio.user.contacts.dict[username];
-                return <span className="name-selected" key={username}>
-                {c && c.fullName || ''} &bull; <span className="text-overflow">{username}</span>
-                <Peerio.UI.Tappable element="i" className="material-icons" onTap='this.shouldRemoveRecipient'>cancel</Peerio.UI.Tappable></span>;
+                var displayName = c && c.fullName || username;
+                return (
+                    <span className="name-selected" key={username}>
+                        <span className="text-overflow">{displayName}</span>
+                        <Peerio.UI.Tappable element="i" 
+                                            className="material-icons" 
+                                            onTap={this.shouldRemoveRecipient.bind(this, username)}>
+                            cancel
+                        </Peerio.UI.Tappable>
+                    </span>
+                );
             });
 
 
@@ -149,13 +287,15 @@
                 });
             }
 
+            var attachedFiles = this.state.mode == MODE_GHOST ? this.state.ghost.files : this.state.attachments;
+
             return (
                 <div className="content without-tab-bar">
                     <div id="new-message">
-                        <Peerio.UI.Tappable className="recipients" onTap={this.openContactSelect}>
+                        <div className="recipients" onMouseDown={this.focusRecipient}>
                             <div className="to">To</div>
                             <div className="names">{r}
-                                <div className="recipient-input">
+                                <div className="open recipient-input">
                                     <input type="text"
                                        required="required"
                                        autoComplete="off"
@@ -165,17 +305,16 @@
                                        ref="email"
                                        className="email"
                                        value={this.state.email}
+                                       onKeyDown={this.handleEmailKeyDown}
                                        onChange={this.handleEmailChange}/>
                                 </div>
                             </div>
-                            <div className="add-btn">
-                                {/*If peerio users*/}
-                                <i className="material-icons">person_add</i>
-                                {/*else*/}
-                                <i className="ghost-dark"></i>
+                            <Peerio.UI.Tappable element="div" onTap={this.openContactSelect} className="add-btn">
+                                {this.state.mode == MODE_GHOST ? 
+                                <i className="ghost-dark"></i> : <i className="material-icons">person_add</i>}
                                 <span className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
-                            </div>
-                        </Peerio.UI.Tappable>
+                            </Peerio.UI.Tappable>
+                        </div>
                     {/*TODO refactor message inputs */}
                         <div className="subject-input">
                             <input type="text"
@@ -186,20 +325,23 @@
                                    className="subject"
                                    placeholder={t('subject')}/>
 
-                            <Peerio.UI.Tappable className="attach-btn" onTap={this.openFileSelect}>
+                            <Peerio.UI.Tappable 
+                                className="attach-btn" 
+                                onTap={this.state.mode == MODE_GHOST ? this.openGhostFileSelect : this.openMessageFileSelect}>
                                 <i className="material-icons">image</i>
                                 <span
-                                    className={'icon-counter' + (this.state.ghost.files.length ? '' : ' hide')}>{this.state.ghost.files.length}</span>
+                                    className={'icon-counter' + (attachedFiles.length ? '' : ' hide')}>{attachedFiles.length}</span>
                             </Peerio.UI.Tappable>
                         </div>
                         <ul className={uploads.length > 0 ? '': 'hide'}>
                             {uploadNodes}
                         </ul>
-                        <ul className={'attached-files' + (this.state.ghost.files.length ? '' : ' removed')}>
-                            {this.state.ghost.files.map((file, i) => {
+                        <ul className={'attached-files' + (attachedFiles.length ? '' : ' removed')}>
+                            {attachedFiles.map((file, i) => {
+                                file = file.name ? file : Peerio.user.files.dict[file];
                                 return (
                                     <li className={'attached-file'}>
-                                        { this.state.ghost.files.length ? file.name : null }
+                                        {file.name}
                                         <Peerio.UI.Tappable element="i" key={i} className="material-icons"
                                                             onTap={this.detachFile.bind(this, file)}>
                                             highlight_off
