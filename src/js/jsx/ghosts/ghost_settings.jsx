@@ -6,7 +6,7 @@
 
         getInitialState: function () {
             return {
-                days: Peerio.Drafts.Ghost.days || 2
+                days: Peerio.Drafts.Ghost.days || 1
             };
         },
 
