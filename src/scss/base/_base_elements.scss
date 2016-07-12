@@ -4,7 +4,8 @@
 html {
   // Root font size. All other font sizes should be in rem units
   box-sizing: border-box;
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.5;
   user-select: none;
 
   * {
@@ -186,8 +187,8 @@ hr {
 }
 
 p {
-  margin-bottom: .7em;
-  margin-top: .2em;
+  margin-bottom: 0;
+  margin-top: $margin-base;
   padding: 0 $padding-base;
 }
 

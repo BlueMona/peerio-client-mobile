@@ -87,7 +87,19 @@
                         </p>
                         <p className="flex-row flex-align-center">
                             <i className="material-icons">add</i>
+                            50GB file storage
+                        </p>
+                        <p className="flex-row flex-align-center">
+                            <i className="material-icons">add</i>
+                            Unlimited Ghosts
+                        </p>
+                        <p className="flex-row flex-align-center">
+                            <i className="material-icons">add</i>
                             Priority email support
+                        </p>
+                        <p className="flex-row flex-align-center">
+                            <i className="material-icons">add</i>
+                            <em>More features coming soon</em>
                         </p>
                     </div>
                     <div className="buttons row">
