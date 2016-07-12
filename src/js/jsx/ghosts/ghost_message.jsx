@@ -77,9 +77,8 @@
                             future functionality could mimic messages once we allow users to send to multiple recipients
                         */}
                         <div className="counter"></div>
-                        <div>
-                          <i className="material-icons">info_outline</i>
-                        </div>
+                        <i className="material-icons">info_outline</i>
+
                     </div>
                 </Peerio.UI.Tappable>
                 <div className="content without-tab-bar without-footer flex-col ghost">
@@ -104,7 +103,7 @@
                                 <span className="text-red txt-lrg">{t('ghost_expired') + ' ' + moment(this.state.expired).format('MMMM Do YYYY, h:mm:ss')}</span>
                             </div>
                         </div> :
-                      <div>  
+                      <div>
                         <div className="flex-row flex-align-center section-highlight">
                             <div className="flex-grow-1">
                                 {this.state.passphrase}
