@@ -4,11 +4,16 @@ div.awesomplete > ul {
   background: $white-100;
   border: 0;
   border-radius: 2px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  margin: 6px 0 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+  margin: 0;
+  transform-origin: center top;
 
   &:before {
     border: 0;
     padding: 0;
+  }
+
+  & > li {
+    padding: $padding-small $padding-base;
   }
 }

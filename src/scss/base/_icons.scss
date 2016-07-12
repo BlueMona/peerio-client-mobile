@@ -124,7 +124,7 @@ Icon                                       | File-type  | Code
   display: inline-block;
   width: 1em;
   height: 1em;
-  line-height: inherit;
+  line-height: 1;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -151,7 +151,7 @@ Icon                                       | File-type  | Code
   transition: 200ms;
   background-repeat: no-repeat;
   align-items: center;
-  
+
   &:active {
     opacity: 1;
   }

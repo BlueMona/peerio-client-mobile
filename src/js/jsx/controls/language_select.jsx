@@ -21,7 +21,7 @@
         // TODO refactor this to a generic select
         render: function () {
             return (
-                <div className="input-select">
+                <div className="input-select flex-row flex-align-center">
                     <select ref="select"
                             id="language-select"
                             onChange={this.changeLocale}>
