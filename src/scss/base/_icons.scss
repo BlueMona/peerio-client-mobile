@@ -166,3 +166,28 @@ Icon                                       | File-type  | Code
   background-image: url(../media/img/ghost-dark.svg);
   opacity: .54;
 }
+
+.peerio-light,
+.peerio-dark {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  transition: 200ms;
+  background-repeat: no-repeat;
+  background-size: contain;
+  align-items: center;
+  
+  &:active {
+    opacity: 1;
+  }
+}
+
+.peerio-light {
+  background-image: url(../media/img/peerio-light.png);
+  opacity: .7;
+}
+
+.peerio-dark {
+  background-image: url(../media/img/peerio-dark.png);
+  opacity: .54;
+}
