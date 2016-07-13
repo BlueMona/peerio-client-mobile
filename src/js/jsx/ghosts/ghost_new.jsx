@@ -141,14 +141,15 @@
             }
 
             // if look like an email
-            var email = !peerioUser;
+            var email = !peerioUser && Peerio.Helpers.isValidEmail(r);
             if(email) {
                 // we should also tell user that he's about to send ghost, so
                 this.setMode(MODE_GHOST);
             }
 
             if(!peerioUser && !email) {
-                Peerio.UI.Alert.show({text: t('error_recipientFormat')});
+                Peerio.UI.Alert.show({text: t('error_recipientFormat')})
+                    .then(() => this.setState({email: ''}));
                 return false;
             }
 
