@@ -164,6 +164,10 @@
             current && current.length && this.tryAdd(current) && this.setState({email: ''});
         },
 
+        recipientBlur: function () {
+            this.tryAddFromInput();
+        },
+
         handleEmailKeyDown: function (e) {
             var current = this.refs.email.getDOMNode().value;
             switch(e.keyCode) {
@@ -346,7 +350,7 @@
                                        ref="email"
                                        className="email"
                                        value={this.state.email}
-                                       onBlur={this.tryAddFromInput}
+                                       onBlur={this.recipientBlur}
                                        onKeyDown={this.handleEmailKeyDown}
                                        onChange={this.handleEmailChange}/>
                                 </div>
