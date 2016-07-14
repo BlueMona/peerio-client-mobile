@@ -663,5 +663,7 @@
   "newGhostRecipientError": "Invalid email address",
   "newGhostRecipientErrorText": "Please enter a valid email address.",
   "newGhostSendError": "Ghost Error",
-  "newGhostSendErrorText": "Your Ghost could not be sent."
+  "newGhostSendErrorText": "Your Ghost could not be sent.",
+  "ghostOverQuota": "You've used your five Ghosts for the month. Upgrade to Peerio Pro to become a Ghost-whisperer and send as many Ghosts as you like!",
+  "publicKeyHelp": "What is this?"
 }
