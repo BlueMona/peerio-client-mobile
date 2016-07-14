@@ -44,7 +44,7 @@
             if(this.state.attachments.length)
                 return;
 
-            mode != this.state.mode &&  
+            mode != this.state.mode &&
                 Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? 'ghost_new' : 'new_message');
             this.setState({mode: mode});
 
@@ -181,7 +181,7 @@
                     e.preventDefault();
                     break;
                 // backspace
-                case 8: 
+                case 8:
                     if(current.length) break;
                     if(this.state.recipients.length)
                         this.shouldRemoveRecipient(this.state.recipients[this.state.recipients.length - 1]);
@@ -215,7 +215,7 @@
         },
 
         lookupUserContacts: function (search) {
-            return _.map(Peerio.Util.filterFirst(Peerio.user.contacts.arr, 
+            return _.map(Peerio.Util.filterFirst(Peerio.user.contacts.arr,
                                     c => c.fullNameAndUsername.toLowerCase().indexOf(search) != -1,
                                     5), c => c.username);
         },
@@ -229,13 +229,13 @@
                     // first add contacts from our peerio user list
                     this.state.mode != MODE_GHOST && this.lookupUserContacts(search)
                         .forEach(item =>
-                                 this.state.recipients.indexOf(item) == -1 && 
+                                 this.state.recipients.indexOf(item) == -1 &&
                                  this.list.push({label: item, value: { value: item}}));
 
                     // then add contacts from our phone list
                     this.state.mode != MODE_MESSAGE && result.forEach( i => {
                         i.emails && i.emails.forEach( email => this.state.recipients.indexOf(email.value) == -1 && this.list.push({
-                            label: email.value, 
+                            label: email.value,
                             value: {
                                 isGhost: true,
                                 value: email.value
@@ -251,7 +251,7 @@
         completionItem: function (suggestionText, userInput) {
             var r = document.createElement('li');
             r.innerHTML = Peerio.Util.interpolate(
-                '<i class="{0}"></i><span>{1}</span>', 
+                '<i class="{0}"></i><span>{1}</span>',
                 [suggestionText.value.isGhost ? 'ghost-dark' : 'peerio-dark',
                 suggestionText.value.value.replace(userInput, '<mark>' + userInput + '</mark>')]);
             return r;
@@ -306,8 +306,8 @@
                 return (
                     <span className="name-selected" key={username}>
                         <span className="text-overflow">{displayName}</span>
-                        <Peerio.UI.Tappable element="i" 
-                                            className="material-icons" 
+                        <Peerio.UI.Tappable element="i"
+                                            className="material-icons"
                                             onTap={this.shouldRemoveRecipient.bind(this, username)}>
                             cancel
                         </Peerio.UI.Tappable>
@@ -337,7 +337,8 @@
             }
 
             var attachedFiles = this.state.mode == MODE_GHOST ? this.state.ghost.files : this.state.attachments;
-
+            var attachIcon = this.state.mode === MODE_GHOST ? 'image' : 'attach_file';
+            
             return (
                 <div className="content without-tab-bar">
                     <div id="new-message">
@@ -360,7 +361,7 @@
                                 </div>
                             </div>
                             <Peerio.UI.Tappable element="div" onTap={this.openContactSelect} className="add-btn">
-                                {this.state.mode == MODE_GHOST ? 
+                                {this.state.mode == MODE_GHOST ?
                                 <i className="ghost-dark"></i> : <i className="material-icons">person_add</i>}
                                 <span className={'icon-counter' + (this.state.recipients.length ? '' : ' hide')}>{this.state.recipients.length}</span>
                             </Peerio.UI.Tappable>
@@ -375,10 +376,10 @@
                                    className="subject"
                                    placeholder={t('subject')}/>
 
-                            <Peerio.UI.Tappable 
-                                className="attach-btn" 
+                            <Peerio.UI.Tappable
+                                className="attach-btn"
                                 onTap={this.state.mode == MODE_GHOST ? this.openGhostFileSelect : this.openMessageFileSelect}>
-                                <i className="material-icons">image</i>
+                                <i className="material-icons">{attachIcon}</i>
                                 <span
                                     className={'icon-counter' + (attachedFiles.length ? '' : ' hide')}>{attachedFiles.length}</span>
                             </Peerio.UI.Tappable>
