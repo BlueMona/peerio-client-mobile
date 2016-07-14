@@ -21,7 +21,7 @@
             this.actions[MODE_DEFAULT] = () => false;
             this.actions[MODE_MESSAGE] = () => this.messageSend();
             this.actions[MODE_GHOST] = () => this.ghostSettings();
-            this.setMode(MODE_DEFAULT);
+
             var email = this.refs.email.getDOMNode();
             this.complete = new Awesomplete(email,
                                             {minChars: 1, maxItems: 3, list: this.list, item: this.completionItem});
@@ -197,11 +197,11 @@
         },
 
         getInitialState: function () {
-            var recipients = this.props.params.id ? [this.props.params.id] : [];
 
             return {
                 ghost: Peerio.Ghost.create(),
-                recipients: [],
+                recipients: this.props.params.id ? [this.props.params.id] : [],
+                mode: this.props.params.id ? MODE_MESSAGE : MODE_DEFAULT,
                 attachments: []
             };
         },
