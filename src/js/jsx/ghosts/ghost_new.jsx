@@ -94,7 +94,7 @@
 
             var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
             paywall = paywall[0] ? paywall[0] : null;
-            e = paywall && paywall.usage >= paywall.limit ? t('ghostOverQuota') : e;
+            e = paywall && paywall.limit && paywall.usage >= paywall.limit ? t('ghostOverQuota') : e;
 
             if(e) {
                 Peerio.UI.Alert.show({text: e});
