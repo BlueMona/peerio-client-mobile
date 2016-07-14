@@ -63,6 +63,7 @@
             });
 
             Peerio.Dispatcher.onServerWarning(warning => {
+                warning.msg = Peerio.Translator.has(warning.msg + '_mobile') ? (warning.msg + '_mobile') : warning.msg;
                 Peerio.UI.Alert.show({ text: t(warning.msg), serviceClass: '_serverWarning', linkify: true })
                     .then(() => Peerio.user.clearWarning(warning));
             });
