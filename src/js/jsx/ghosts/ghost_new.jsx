@@ -346,10 +346,10 @@
 
             var attachedFiles = this.state.mode == MODE_GHOST ? this.state.ghost.files : this.state.attachments;
             var attachIcon = this.state.mode === MODE_GHOST ? 'image' : 'attach_file';
-            
+
             return (
                 <div className="content without-tab-bar">
-                    <div id="new-message">
+                    <div id="new-message" className={'mode ' + (this.state.mode === MODE_GHOST ? 'ghost-mode' :'')}>
                         <div className="recipients" onMouseDown={this.focusRecipient}>
                             <div className="to">To</div>
                             <div className="names">{r}

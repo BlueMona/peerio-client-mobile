@@ -412,3 +412,22 @@ $avatar-size: 29px;
     }
   }
 }
+
+
+#new-message.mode {
+  background: $white-100;
+  transition: $speed-fast;
+
+  &.ghost-mode {
+    background: rgba($p-blue, 0.2);
+
+    .name-selected {
+      color: $black-87;
+      background: $white-70;
+
+      i {
+        color: $black-54;
+      }
+    }
+  }
+}
