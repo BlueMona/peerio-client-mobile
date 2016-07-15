@@ -125,7 +125,7 @@
                       <div>
                         <p>{t('ghost_passphrase_share_link')}</p>
                         <p className="flex-row caption">
-                                <a href={this.getLink()} target="_blank" className="flex-shrink-1 text-overflow">{this.getLink()}</a>
+                            <Peerio.UI.Linkify text={this.getLink()} suppressWarning={true}/>
                             <Peerio.UI.Tappable element="i" onTap={this.shareLink}
                                                 className="material-icons flex-shrink-0">
                                 share
