@@ -15,5 +15,22 @@ div.awesomplete > ul {
 
   & > li {
     padding: $padding-small $padding-base;
+
+    &[aria-selected="true"]  {
+       background: $black-38;
+
+       & mark {
+         background: $black-12;
+         color: inherit;
+       }
+    }
   }
+}
+
+div.awesomplete mark {
+  background: $black-12;
+}
+
+div.awesomplete li:hover mark {
+  background: $black-12;
 }
