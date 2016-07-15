@@ -73,10 +73,11 @@
                             {this.state.subject}
                         </div>
                         <div className="counter">
-                            <Peerio.UI.Tappable element="i" onTap={this.shareLink}
-                                                className="material-icons flex-shrink-0">
-                                link
-                            </Peerio.UI.Tappable>
+                            {this.state.id && !this.state.expired ?
+                                <Peerio.UI.Tappable element="i" onTap={this.shareLink}
+                                                    className="material-icons flex-shrink-0">
+                                    link
+                                </Peerio.UI.Tappable> : null}
                         </div>
                         <div className="info">
                             <i className="material-icons">info_outline</i>
