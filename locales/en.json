@@ -608,7 +608,6 @@
   "noMatchesFound": "No matches found",
   "serverWarning_WelcomeTitle": "Welcome to Peerio Pro!",
   "serverWarning_Welcome": "A Pro Plan has been successfully registered to your account. You can view your plan benefits and learn how to manage your account at https://peerio.zendesk.com/hc/en-us/articles/208395556",
-  "serverWarning_Welcome_mobile": "A Pro Plan has been successfully registered to your account. You can view your plan benefits and learn how to manage your account at https://peerio.zendesk.com/hc/en-us/articles/208395556",
   "serverWarning_CancelledTitle": "Peerio Pro Plan Cancelled",
   "serverWarning_Cancelled": "Your Peerio Pro plan has been cancelled. Your benefits will expire on the end date of your plan and your plan will not be renewed.",
   "serverWarning_ExpireTitle": "Your Pro Plan Will Expire Soon",

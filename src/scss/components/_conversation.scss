@@ -176,6 +176,10 @@ $avatar-size: 29px;
   }
 }
 
+.ghost p {
+  white-space: pre-line;
+}
+
 #conversation-head {
   position: absolute;
   left: 0;
@@ -213,7 +217,7 @@ $avatar-size: 29px;
 
   .counter {
     @extend .flex-row;
-
+    line-height: 1;
     margin: 0 $margin-small 0 auto;
     white-space: nowrap;
 
