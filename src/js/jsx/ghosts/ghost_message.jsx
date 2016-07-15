@@ -72,12 +72,11 @@
                         <div className="subject">
                             {this.state.subject}
                         </div>
-                        {/*
-                            currently used to left align subject,
-                            future functionality could mimic messages once we allow users to send to multiple recipients
-                        */}
                         <div className="counter">
-                            <i className="material-icons">link</i>
+                            <Peerio.UI.Tappable element="i" onTap={this.shareLink}
+                                                className="material-icons flex-shrink-0">
+                                link
+                            </Peerio.UI.Tappable>
                         </div>
                         <div className="info">
                             <i className="material-icons">info_outline</i>
@@ -93,18 +92,20 @@
                           </div>
                       </div> :
                       <div>
-                        <div className="flex-col flex-align-start section-highlight">
-                            <label>{t('Passphrase')}</label>
-                            <div className="flex-row txt-med flex-align-center">
-                                <div className="flex-grow-1">{this.state.passphrase}</div>
-                                <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
-                                                    className="material-icons flex-shrink-0" >
-                                    share
-                                </Peerio.UI.Tappable>
-                            </div>
-                        </div>
-                        <p className="caption text-red" style={{marginBottom: '16px'}}>{t('ghost_passphrase_share_helper')}</p>
-                    </div>}
+                          <div className="flex-col flex-align-start section-highlight">
+                              <label>{t('Passphrase')}</label>
+                              <div className="flex-row txt-med flex-align-center">
+                                  <div className="flex-grow-1">{this.state.passphrase}</div>
+                                    <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
+                                                        className="material-icons flex-shrink-0">
+                                        share
+                                    </Peerio.UI.Tappable>
+                              </div>
+                          </div>
+                          <p className="caption text-red" style={{marginBottom: '16px'}}>
+                              {t('ghost_passphrase_share_helper')}
+                          </p>
+                      </div>}
 
                     <div className="flex-grow-1">
                         <ul className={'attached-files' + (this.state.files.length ? '' : ' removed')}>
