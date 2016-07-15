@@ -43,7 +43,7 @@
                     this.replaceWith('ghost_share');
                 })
                 .catch(e => {
-                    Peerio.UI.Alert.show({text: 'Error sending Ghost. Please contact support'});
+                    Peerio.UI.Alert.show({text: t('newGhostSendErrorText')});
                     L.error(e);
                 });
         },
