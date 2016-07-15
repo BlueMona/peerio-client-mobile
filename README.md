@@ -35,6 +35,8 @@ then run `gulp watch` in the peerio-client-api repo.
 
 ## To run
 
+`gulp serve` runs a webserver on localhost:3000 -- you'll need to open www/index.html to use the app. 
+
 In order to use the ios emulator you may have to `npm install ios-sim`. You will also need the Android SDK with platform tools and build tools. 
 
 `gulp run-android`
