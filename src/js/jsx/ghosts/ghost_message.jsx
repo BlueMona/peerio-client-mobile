@@ -113,7 +113,7 @@
                             {this.state.files.map((file, i) => {
                                 return (
                                     <li className={'attached-file'}>
-                                        { this.state.files.length ? file.name : null }
+                                        <span>{ this.state.files.length ? file.name : null }</span>
                                     </li>);
                             })}
                         </ul>
