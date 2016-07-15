@@ -46,6 +46,7 @@
 
             mode != this.state.mode &&
                 Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? 'ghost_new' : 'new_message');
+            this.state.mode = mode;
             this.setState({mode: mode});
 
             this.list.splice(0, this.list.length);
@@ -138,22 +139,29 @@
             // check if there's already the same recipient added
             if(this.state.recipients.indexOf(r) != -1) return true;
 
+            var e = null;
             // if there's a peerio user in contacts with that name
             var peerioUser = Peerio.user.contacts.dict[r];
-            if(peerioUser) {
-                this.setMode(MODE_MESSAGE);
-            }
-
-            // if look like an email
+            // if looks like an email
             var email = !peerioUser && Peerio.Helpers.isValidEmail(r);
-            if(email) {
-                // we should also tell user that he's about to send ghost, so
-                this.setMode(MODE_GHOST);
+
+            if(this.state.recipients.length == 0) {
+                email && this.setMode(MODE_GHOST);
+                peerioUser && this.setMode(MODE_MESSAGE);
             }
 
-            if(!peerioUser && !email) {
-                Peerio.UI.Alert.show({text: t('error_recipientFormat')})
-                    .then(() => this.setState({email: ''}));
+            if(!peerioUser && !email)
+                e = 'error_recipientFormat';
+            if(!peerioUser && this.state.mode == MODE_MESSAGE)
+                e = 'error_onlyPeerioUser';
+            if(!email && this.state.mode == MODE_GHOST)
+                e = 'error_onlyGhostUser';
+            if(email && !peerioUser && this.state.attachments.length && this.state.mode != MODE_GHOST)
+                e = 'error_onlyPeerioUserFile';
+
+            if(e) {
+                this.setState({email: ''});
+                Peerio.UI.Alert.show({text: t(e)});
                 return false;
             }
 
