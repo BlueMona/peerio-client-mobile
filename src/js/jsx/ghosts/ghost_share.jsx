@@ -68,32 +68,31 @@
                     <p>{this.state.subject}</p>
                     <p>{this.state.message}</p>
                     {/* TODO: make look nice */}
-                    <p><label>{t('Passphrase')}</label></p>
-                    <div className="flex-row flex-align-center section-highlight">
-                        <div className="flex-grow-1">
-                            {this.state.passphrase}
+
+                    <div className="flex-col flex-align-start section-highlight">
+                        <label>{t('Passphrase')}</label>
+                        <div className="flex-row txt-med flex-align-center">
+                            <div className="flex-grow-1">{this.state.passphrase}</div>
+                            <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
+                                                className="material-icons flex-shrink-0" >
+                                share
+                            </Peerio.UI.Tappable>
                         </div>
-                        <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
-                                            className="material-icons flex-shrink-0" >
-                            share
-                        </Peerio.UI.Tappable>
                     </div>
+                    <p className="caption text-red">{t('ghost_passphrase_share_helper')}</p>
                     <p>
-                        <div className="caption">
-                        {t('ghost_passphrase_share_helper')}
-                        </div>
+                        <label>{t('ghost_passphrase_share_link')}</label>
                     </p>
-                    <p>{t('ghost_passphrase_share_link')}</p>
                     {this.state.id ?
-                    <div className="flex-row" style={{'font-size': '80%', 'line-height': '1em', 'padding': '1em'}}>
-                        <div className="flex-shrink-1 text-overflow">
+                    <p className="flex-row">
+                        <span className="flex-shrink-1 text-overflow">
                             <a href={this.getLink()} target="_blank">{this.getLink()}</a>
-                        </div>
+                        </span>
                         <Peerio.UI.Tappable element="i" onTap={this.shareLink}
                                             className="material-icons flex-shrink-0">
                             share
                         </Peerio.UI.Tappable>
-                    </div> : null}
+                    </p> : null}
                 </div>
             );
         }

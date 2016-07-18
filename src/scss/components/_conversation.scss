@@ -176,6 +176,10 @@ $avatar-size: 29px;
   }
 }
 
+.ghost p {
+  white-space: pre-line;
+}
+
 #conversation-head {
   position: absolute;
   left: 0;
@@ -213,7 +217,7 @@ $avatar-size: 29px;
 
   .counter {
     @extend .flex-row;
-
+    line-height: 1;
     margin: 0 $margin-small 0 auto;
     white-space: nowrap;
 
@@ -364,16 +368,17 @@ $avatar-size: 29px;
     border-radius: 12px;
     color: $black-54;
     display: inline-flex;
-    padding: 0 4px 0 $padding-small;
-    max-height: 24px;
-    min-height: 24px;
-    width: auto;
-    max-width: 120px;
-    min-width: 88px;
     flex: 1 0 auto;
     font-size: 12px;
+    max-height: 24px;
+    max-width: 120px;
     margin: 0 $margin-small 0 0;
+    min-height: 24px;
+    min-width: 88px;
     opacity: 1;
+    padding: 0 4px 0 $padding-small;
+    text-align: center;
+    width: auto;
 
     .ghost & {
       padding: 0 $padding-small;
@@ -404,6 +409,25 @@ $avatar-size: 29px;
 
       &:hover {
         color: $white-100;
+      }
+    }
+  }
+}
+
+
+#new-message.mode {
+  background: $white-100;
+  transition: $speed-fast;
+
+  &.ghost-mode {
+    background: rgba($p-blue, 0.15);
+
+    .name-selected {
+      color: $black-87;
+      background: $white-70;
+
+      i {
+        color: $black-54;
       }
     }
   }
