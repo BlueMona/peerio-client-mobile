@@ -3,7 +3,7 @@
 
     Peerio.UI.PassphraseGenerator = React.createClass({
         getInitialState: function () {
-            return {};
+            return {locale: Peerio.Translator.locale};
         },
 
         componentDidMount: function () {
@@ -11,7 +11,9 @@
         },
 
         generatePassphrase: function () {
-            Peerio.PhraseGenerator.getPassPhrase(this.refs.lang.getDOMNode().value, Peerio.Config.defaultWordCount)
+            var l = this.refs.lang.getDOMNode().value;
+            this.setState({locale: l});
+            Peerio.PhraseGenerator.getPassPhrase(l, Peerio.Config.defaultWordCount)
                 .then(function (phrase) {
                     this.setState({passphrase: phrase});
                     this.props.callback && this.props.callback(phrase);
@@ -33,6 +35,7 @@
                           <label>{t('passphrase')}</label>
                           <div className="input-select">
                               <select ref="lang"
+                                      value={this.state.locale}
                                       id="language-select"
                                       onChange={this.generatePassphrase}>
                                   {localeNodes}
