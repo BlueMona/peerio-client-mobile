@@ -16,22 +16,18 @@
             return (
                 <div className="content without-tab-bar without-footer flex-col _viewSubscriptions">
                     <div className="headline">{t('payments_viewSubscriptions')}</div>
-                    <Peerio.UI.PaymentsSubscriptionList 
-                        items={Peerio.user.getActiveSubscriptions()} 
+                    <Peerio.UI.PaymentsSubscriptionList
+                        items={Peerio.user.getActiveSubscriptions()}
                         title={t('payments_activeSubscriptions')}/>
-                    <Peerio.UI.PaymentsSubscriptionList 
-                        items={Peerio.user.getCanceledSubscriptions()} 
+                    <Peerio.UI.PaymentsSubscriptionList
+                        items={Peerio.user.getCanceledSubscriptions()}
                         title={t('payments_canceledSubscriptions')}/>
-                    <ul>
-                        <li className="list-item">
-                            <label>{t('payments_planInfo')}</label>
-                            <div className="info-content">
-                                <p>
-                                    <Peerio.UI.Linkify suppressWarning={true} text={'https://peerio.zendesk.com/hc/en-us/articles/210426066'}/>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
+
+                    <p>
+                        <a href="https://peerio.zendesk.com/hc/en-us/articles/210426066" target="_blank">
+                            {t('payments_planInfo')}
+                        </a>
+                    </p>
                 </div>
             );
         }
