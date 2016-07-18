@@ -16,18 +16,33 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
     // Main function executes when all systems are ready (dom, device)
     function main() {
+        var uiPauseTimeout = null;
+        var androidDelay = 30000;
         // we want this to be executed ASAP, so we don't use Actions but add explicit handlers instead
         document.addEventListener('pause', function () {
             console.log('UI PAUSE');
             if (Peerio.Socket) {
-                Peerio.Socket.disconnect();
+                if(uiPauseTimeout) {
+                    window.clearTimeout(uiPauseTimeout);
+                    uiPauseTimeout = window.setTimeout(Peerio.Socket.disconnect,
+                                                       Peerio.runtime.platform == 'android' ? androidDelay : 0);
+                }
             }
         }, true);
         document.addEventListener('resume', function () {
             console.log('UI RESUME');
+            if(!!Peerio.AppState.connected && Peerio.runtime.platform == 'android') {
+                console.log('already connected');
+                return;
+            }
             if (Peerio.Socket) {
                 Peerio.Socket.connect();
                 Peerio.Socket.ensureWorkerAlive();
+
+                if(uiPauseTimeout) {
+                    window.clearTimeout(uiPauseTimeout);
+                    uiPauseTimeout = null;
+                }
             }
         }, true);
 
