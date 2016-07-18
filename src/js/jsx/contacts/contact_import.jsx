@@ -164,7 +164,7 @@
                                     )}/>)
                         }
                         <div className="headline-divider">{t('contact_importInvite')}</div>
-                        { inviteItems.length === 0 ? (<p>{t('contact_noContantsFound')}</p>) : (
+                        { inviteItems.length === 0 ? (<p>{t('contact_noContactsFound')}</p>) : (
                             <Peerio.UI.List
                                 selectAllText={t('importContactsSelectAll')}
                                 items={inviteItems}
