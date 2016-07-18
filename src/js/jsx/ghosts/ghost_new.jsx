@@ -403,7 +403,7 @@
                                         {file.name}
                                         <Peerio.UI.Tappable element="i" key={i} className="material-icons"
                                                             onTap={this.detachFile.bind(this, file)}>
-                                            highlight_off
+                                            cancel
                                         </Peerio.UI.Tappable>
                                     </li>);
                             })}

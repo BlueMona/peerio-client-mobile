@@ -344,7 +344,7 @@ $avatar-size: 29px;
   overflow-y: hidden;
   overflow-x: scroll;
   white-space: nowrap;
-  background: #fafafa;
+  background: transparent;
   border-top: $border-dark;
 
   .ghost & {
@@ -422,7 +422,8 @@ $avatar-size: 29px;
   &.ghost-mode {
     background: rgba($p-blue, 0.15);
 
-    .name-selected {
+    .name-selected,
+    .attached-file {
       color: $black-87;
       background: $white-70;
 
