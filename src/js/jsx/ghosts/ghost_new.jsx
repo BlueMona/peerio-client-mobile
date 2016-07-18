@@ -284,6 +284,16 @@
             Peerio.UI.Upload.show({ silent: true, onComplete: this.addFile, isGhost: true, ghostPublicKey: this.state.ghost.filePublicKey });
         },
 
+        openFileSelect: function () {
+            var email = this.refs.email.getDOMNode();
+            if(email == document.activeElement) {
+                email.blur();
+                return false;
+            }
+            return this.state.mode == MODE_GHOST ? 
+                this.openGhostFileSelect : this.openMessageFileSelect;
+        },
+
         updateFiles: function () {
             this.forceUpdate();
         },
@@ -386,7 +396,7 @@
 
                             <Peerio.UI.Tappable
                                 className="attach-btn"
-                                onTap={this.state.mode == MODE_GHOST ? this.openGhostFileSelect : this.openMessageFileSelect}>
+                                onTap={this.openFileSelect}>
                                 <i className="material-icons">{attachIcon}</i>
                                 <span
                                     className={'icon-counter' + (attachedFiles.length ? '' : ' hide')}>{attachedFiles.length}</span>
