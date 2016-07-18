@@ -9,7 +9,6 @@ $recipients-height: 40px;
 
   .attached-files {
     position: initial;
-    background: $white-100;
     border-top: 0;
   }
 
@@ -110,7 +109,7 @@ $recipients-height: 40px;
     text-overflow: ellipsis;
 
     &:focus {
-      background-color: lighten(color(list-item-bg), 5%);
+      background: transparent;
       border: 0;
     }
   }
