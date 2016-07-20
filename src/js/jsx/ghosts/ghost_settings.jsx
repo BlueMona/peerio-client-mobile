@@ -6,7 +6,7 @@
 
         getInitialState: function () {
             return {
-                days: Peerio.Drafts.Ghost.days || 1
+                days: Peerio.Drafts.Ghost.days || 7
             };
         },
 
@@ -68,7 +68,7 @@
                                     {t('ghost_destroyAfter')}
                                     <div className="input-select" style={{margin: '0 8px', width: 'inherit'}}>
                                         <select ref="days" value={this.state.days} onChange={this.setDays}>
-                                            {[1,2,3,4,5,6,7].map(i => <option value={i}>{i}</option>)}
+                                            {[1,2,3,4,5,6,7,8,9,10].map(i => <option value={i}>{i}</option>)}
                                         </select>
 
                                         <Peerio.UI.Tappable tag="i"
