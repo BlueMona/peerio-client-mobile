@@ -31,6 +31,8 @@
 
             Peerio.PhraseGenerator.getPassPhrase(Peerio.Config.defaultLocale, Peerio.Config.defaultWordCount)
                 .then(phrase => this.state.ghost.useFilePassphrase(phrase));
+
+            Peerio.Action.showBigGreenButton(t('button_send'));
         },
 
         componentWillUnmount: function () {
@@ -45,7 +47,7 @@
                 return;
 
             mode != this.state.mode &&
-                Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? 'ghost_new' : 'new_message');
+                Peerio.Action.showBigGreenButton(mode == MODE_GHOST ? t('prepare_ghost') : t('button_send'));
             this.state.mode = mode;
             this.setState({mode: mode});
 
@@ -92,10 +94,6 @@
             e = subject ? e : t('ghost_enterSubject');
             e = recipients.length ? e : t('ghost_enterRecipient');
             e = this.getGhostUploads().length ? t('ghost_waitUpload') : e;
-
-            var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
-            paywall = paywall[0] ? paywall[0] : null;
-            e = paywall && paywall.limit && paywall.usage >= paywall.limit ? t('ghostOverQuota') : e;
 
             if(e) {
                 Peerio.UI.Alert.show({text: e});
@@ -145,7 +143,11 @@
             // if looks like an email
             var email = !peerioUser && Peerio.Helpers.isValidEmail(r);
 
-            if(this.state.recipients.length == 0) {
+            var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
+            paywall = paywall[0] ? paywall[0] : null;
+            e = email && paywall && paywall.limit && paywall.usage >= paywall.limit ? t('ghostOverQuota') : e;
+
+            if(!e && this.state.recipients.length == 0) {
                 email && this.setMode(MODE_GHOST);
                 peerioUser && this.setMode(MODE_MESSAGE);
             }

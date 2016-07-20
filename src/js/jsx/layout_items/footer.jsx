@@ -6,9 +6,11 @@
 
     Peerio.UI.Footer = React.createClass({
         mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
+
         getInitialState: function () {
             return {greenButtonIsVisible: true};
         },
+
         buildActions: function(){
             // route name: { button text, button action }
             // default action is Peerio.Action.bigGreenButton
@@ -30,18 +32,33 @@
                 ghost_share: {name: t('ghost_toMessageList'), icon: 'send'}
             }});
         },
+
         componentWillMount: function () {
             this.buildActions();
 
             this.subscriptions = [
                 Peerio.Dispatcher.onHideBigGreenButton(()=>this.setState({greenButtonIsVisible: false})),
-                Peerio.Dispatcher.onShowBigGreenButton(()=>this.setState({greenButtonIsVisible: true})),
+                Peerio.Dispatcher.onShowBigGreenButton((custom_text, custom_icon) => {
+                    if(custom_text || custom_icon) {
+                        var mainButtonActions = this.state.mainButtonActions;
+                        var route = mainButtonActions[this.getRouteName()];
+                        if(custom_text) route.name = custom_text;
+                        if(custom_icon) route.icon = custom_icon;
+                        mainButtonActions[this.getRouteName] = route;
+                        this.setState({mainButtonActions: mainButtonActions});
+                    }
+                    this.setState({
+                        greenButtonIsVisible: true,
+                    });
+                }),
                 Peerio.Dispatcher.onLocaleChanged(this.buildActions)
             ];
         },
+
         componentWillUnmount: function () {
             Peerio.Dispatcher.unsubscribe(this.subscriptions);
         },
+
         //--- RENDER
         render: function () {
           // TODO change greenButton var to something more discriptive. ie primaryActionBtn. This would match changes to styling.
@@ -61,5 +78,4 @@
             );
         }
     });
-
 }());
