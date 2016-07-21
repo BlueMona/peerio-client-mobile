@@ -86,7 +86,7 @@
                     {this.state.id ?
                     <p className="flex-row">
                         <span className="flex-shrink-1 text-overflow">
-                            <a href={this.getLink()} target="_blank">{this.getLink()}</a>
+                            <Peerio.UI.Linkify text={this.getLink()} suppressWarning={true}/>
                         </span>
                         <Peerio.UI.Tappable element="i" onTap={this.shareLink}
                                             className="material-icons flex-shrink-0">
