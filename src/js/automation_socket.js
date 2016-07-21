@@ -12,6 +12,7 @@ Peerio.AutomationSocket.init = function () {
     var api = Peerio.AutomationSocket = {};
 
     api.start = function (host) {
+        if(Peerio.runtime.platform != 'browser') return;
         var options = {
             maxReconnectInterval: 3,
             // maxReconnectAttempts: 10, // set this to block indefinite reconnecting
