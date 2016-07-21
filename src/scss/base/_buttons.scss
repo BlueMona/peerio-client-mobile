@@ -95,7 +95,6 @@ Footer Buttons                                       | Button Class/ID
   border-radius: $radius-default;
   color: $white-100;
   min-width: 88px;
-  height: 36px;
   min-height: 36px;
   line-height: 36px;
   text-transform: uppercase;
@@ -128,7 +127,7 @@ Footer Buttons                                       | Button Class/ID
   @extend .flex-shrink-0;
 
   margin: $margin-small 0;
-  width: 85px;
+  min-width: 85px;
 }
 
 // looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.

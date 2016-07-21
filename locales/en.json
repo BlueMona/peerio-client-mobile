@@ -581,9 +581,9 @@
   "touch_keychain": "Enabling Touch ID requires using your keychain, would you like to proceed?",
   "touch_notAvailable": "Fingerprint identification unavailable",
   "supportFeedback": "Support/Feedback",
-  "payments_title": "Get Peerio Pro",
+  "payments_title": "Upgrade your storage",
   "payments_existingTitle": "Plan details",
-  "payments_menu": "Get Peerio Pro",
+  "payments_menu": "Upgrade your storage",
   "payments_menu_view": "Manage Subscriptions",
   "payments_hasSubscription": "You already have a subscription",
   "payments_hasCanceledSubscription": "You have canceled subscriptions",
@@ -612,7 +612,7 @@
   "noMatchesFound": "No matches found",
   "serverWarning_WelcomeTitle": "Welcome to Peerio Pro!",
   "serverWarning_Welcome_mobile": "A Pro Plan has been registered to your account. You can view your plan benefits and learn how to manage your account at https://peerio.zendesk.com/hc/en-us/articles/208395556",
-  "serverWarning_Welcome": "A Pro Plan has been registered to your account. You can view your plan benefits and learn <a href='https://peerio.zendesk.com/hc/en-us/articles/208395556' target='_blank'>how to manage your account</a>.",
+  "serverWarning_Welcome": "A Pro Plan has been registered to your account. You can view your plan benefits and learn <a href='https://peerio.zendesk.com/hc/en-us/articles/208395556'>how to manage your account</a>.",
   "serverWarning_CancelledTitle": "Peerio Pro Plan Cancelled",
   "serverWarning_Cancelled": "Your Peerio Pro plan has been cancelled. Your pro benefits will expire on the end date of your plan and your plan will not be renewed.",
   "serverWarning_ExpireTitle": "Your Pro Plan Will Expire Soon",
@@ -673,8 +673,8 @@
   "publicKeyHelp": "What is this?",
   "ghostOnboardTitle": "<emphasis>Introducing Ghosts!</>",
   "ghostOnboardText": "You can now send secure messages to anyone, even if they don't have Peerio! When composing a message, enter an email address instead of a Peerio contact and a Ghost will deliver your message. <ghostLink>Learn more</>.",
-  "error_onlyPeerioUser": "Peerio messages can only be sent to other Peerio users. To send a Ghost, remove all recipients and enter a valid email address.",
-  "error_onlyPeerioUserFile": "At the moment, files in your cloud can only be sent to other Peerio users. If you wish to send a file with a Ghost, please remove all attachments, enter a valid email address, and then upload files.",
-  "error_onlyGhostUser": "By entering an email address as a recipient you have entered Ghost mode! Please enter a valid email address, or if you wish to send a Peerio message, please remove your current recipients and enter Peerio usernames instead.",
-  "error_recipientFormat": "Sorry, we couldn't find a Peerio user or email address associated with that name in your contacts."
+  "error_onlyPeerioUser": "You have already added a Peerio user as the first recipient. You can only add more Peerio users as the recipients. If you wish to send a Ghost to an arbitrary email, delete all recipients and enter valid email addresses",
+  "error_onlyPeerioUserFile": "You have already attached a file from your cloud to the message. You can only send files from your cloud to Peerio users. If you wish to send a file to an arbitrary email, delete all attachments, enter valid email addresses and upload the file afterwards",
+  "error_onlyGhostUser": "You have already added an email address as the first recipient. You are sending a Ghost to an arbitrary email address. If you wish to send a regular Peerio message, delete all recipients and enter usernames from your accepted contact list",
+  "error_recipientFormat": "Sorry, we couldn't find a user with that name in your approved contacts and that doesn't look like a valid email address."
 }
