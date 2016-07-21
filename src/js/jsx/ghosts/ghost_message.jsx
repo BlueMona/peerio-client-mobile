@@ -54,8 +54,7 @@
         },
 
         shareLink: function () {
-            // Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
-            Peerio.NativeAPI.openInBrowser(this.getLink());
+            Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
         toggle: function () {
