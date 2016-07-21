@@ -293,7 +293,7 @@
                 return false;
             }
             return this.state.mode == MODE_GHOST ? 
-                this.openGhostFileSelect : this.openMessageFileSelect;
+                this.openGhostFileSelect() : this.openMessageFileSelect();
         },
 
         updateFiles: function () {
