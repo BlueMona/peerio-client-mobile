@@ -68,6 +68,8 @@
 
         // removes any rendered modal by id
         removeModal: function (id) {
+            if(this.state.activeModals.length > 1)
+                this.state.activeModals.forEach(m => {m.component.props.noAnimation = true;});
             for (var i = 0; i < this.state.activeModals.length; i++) {
                 if (this.state.activeModals[i].id === id) {
                     this.setState(function (prevState) {

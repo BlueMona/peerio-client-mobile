@@ -53,7 +53,7 @@
                             {btns}
                         </div>
                     </div>
-                    <div className="dim-background"></div>
+                    <div className={classNames('dim-background', {'no-animation': this.props.noAnimation})}></div>
                 </div>
             );
         }
