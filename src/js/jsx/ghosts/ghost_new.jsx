@@ -302,7 +302,7 @@
                 email.blur();
                 return false;
             }
-            return this.state.mode == MODE_GHOST ? 
+            return this.state.mode == MODE_GHOST ?
                 this.openGhostFileSelect() : this.openMessageFileSelect();
         },
 
@@ -367,7 +367,7 @@
             }
 
             var attachedFiles = this.state.mode == MODE_GHOST ? this.state.ghost.files : this.state.attachments;
-            var attachIcon = this.state.mode === MODE_GHOST ? 'image' : 'attach_file';
+            var attachIcon = this.state.mode === MODE_GHOST ? 'add_a_photo' : 'attach_file';
 
             return (
                 <div className="content without-tab-bar">
