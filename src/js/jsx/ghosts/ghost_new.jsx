@@ -145,7 +145,8 @@
 
             var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
             paywall = paywall[0] ? paywall[0] : null;
-            e = email && paywall && paywall.limit && paywall.usage >= paywall.limit ? t('ghostOverQuota') : e;
+            paywall = paywall && paywall.limit && paywall.usage >= paywall.limit;
+            e = email && paywall ? t('ghostOverQuota') : e;
 
             if(!e && this.state.recipients.length == 0) {
                 email && this.setMode(MODE_GHOST);
@@ -163,7 +164,12 @@
 
             if(e) {
                 this.setState({email: ''});
-                Peerio.UI.Alert.show({text: t(e)});
+                if(paywall)
+                    Peerio.UI.Confirm.show({text: t('ghostOverQuota'), headline: t('payments_title')})
+                        .then(() => this.transitionTo('payments'))
+                        .catch(e => L.silly(e));
+                else
+                    Peerio.UI.Alert.show({text: t(e)});
                 return false;
             }
 
