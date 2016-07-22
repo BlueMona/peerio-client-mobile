@@ -165,7 +165,11 @@
             if(e) {
                 this.setState({email: ''});
                 if(paywall)
-                    Peerio.UI.Confirm.show({text: t('ghostOverQuota'), headline: t('payments_title')})
+                    Peerio.UI.Confirm.show({
+                        text: t('ghostOverQuota'), 
+                        headline: t('payments_title'),
+                        okText: t('payments_title')
+                    })
                         .then(() => this.transitionTo('payments'))
                         .catch(e => L.silly(e));
                 else
