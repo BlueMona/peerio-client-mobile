@@ -57,42 +57,44 @@
 
         render: function () {
             var eStyles = this.state.has_conv ? null : {'top': 0, zIndex: 10};
-            var eClasses = classNames({'content': true, 'without-tab-bar': true});
+            var eClasses = classNames({'content': true, 'without-tab-bar': true, 'flex-col': true});
             return (
                 <div className={eClasses} style={eStyles}>
-                    <div className="headline">{t('ghost_mobile_share')}</div>
-                    <p>{t('ghost_mobile_sent')} {this.state.recipients}</p>
-                    <p>{t('ghost_mobile_sent_share')}</p>
+                    <div className="mode ghost-mode flex-grow-1">
+                        <div className="headline">{t('ghost_mobile_share')}</div>
+                        <p>{t('ghost_mobile_sent')} {this.state.recipients}</p>
+                        <p>{t('ghost_mobile_sent_share')}</p>
 
-                    {/* TODO: make look nice */}
-                    <p>{this.state.subject}</p>
-                    <p>{this.state.message}</p>
-                    {/* TODO: make look nice */}
+                        {/* TODO: make look nice */}
+                        <p>{this.state.subject}</p>
+                        <p>{this.state.message}</p>
+                        {/* TODO: make look nice */}
 
-                    <div className="flex-col flex-align-start section-highlight">
-                        <label>{t('Passphrase')}</label>
-                        <div className="flex-row txt-med flex-align-center">
-                            <div className="flex-grow-1">{this.state.passphrase}</div>
-                            <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
-                                                className="material-icons flex-shrink-0" >
+                        <div className="flex-col flex-align-start section-highlight">
+                            <label>{t('Passphrase')}</label>
+                            <div className="flex-row txt-med flex-align-center">
+                                <div className="flex-grow-1">{this.state.passphrase}</div>
+                                <Peerio.UI.Tappable element="i" onTap={this.sharePassphrase}
+                                                    className="material-icons flex-shrink-0" >
+                                    share
+                                </Peerio.UI.Tappable>
+                            </div>
+                        </div>
+                        <p className="caption text-red">{t('ghost_passphrase_share_helper')}</p>
+                        <p>
+                            <label>{t('ghost_passphrase_share_link')}</label>
+                        </p>
+                        {this.state.id ?
+                        <p className="flex-row">
+                            <span className="flex-shrink-1 text-overflow">
+                                <Peerio.UI.Linkify text={this.getLink()} suppressWarning={true}/>
+                            </span>
+                            <Peerio.UI.Tappable element="i" onTap={this.shareLink}
+                                                className="material-icons flex-shrink-0">
                                 share
                             </Peerio.UI.Tappable>
-                        </div>
+                        </p> : null}
                     </div>
-                    <p className="caption text-red">{t('ghost_passphrase_share_helper')}</p>
-                    <p>
-                        <label>{t('ghost_passphrase_share_link')}</label>
-                    </p>
-                    {this.state.id ?
-                    <p className="flex-row">
-                        <span className="flex-shrink-1 text-overflow">
-                            <Peerio.UI.Linkify text={this.getLink()} suppressWarning={true}/>
-                        </span>
-                        <Peerio.UI.Tappable element="i" onTap={this.shareLink}
-                                            className="material-icons flex-shrink-0">
-                            share
-                        </Peerio.UI.Tappable>
-                    </p> : null}
                 </div>
             );
         }
