@@ -28,6 +28,7 @@
                 this.tosRequested = true;
 
                 Peerio.UI.Confirm.show({
+                        stacked: true,
                         headline: t('tosUpdateRequestTitle'),
                         text: <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
                                                   onTap={this.handleTOSRead}>

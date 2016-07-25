@@ -67,6 +67,8 @@
                 Peerio.UI.Alert.show({ text: t(warning.msg), serviceClass: '_serverWarning', linkify: true })
                     .then(() => Peerio.user.clearWarning(warning));
             });
+
+            Peerio.Dispatcher.onAuthenticated(Peerio.UI.TouchId.showOfferIfNeeded);
         },
         notifyOnUpdate: function (expired) {
             var text = expired

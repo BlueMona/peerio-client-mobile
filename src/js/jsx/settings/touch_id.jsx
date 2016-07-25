@@ -52,15 +52,16 @@
             },
 
             showOfferIfNeeded: function () {
-                Peerio.UI.TouchId.isFeatureAvailable()
+                return Peerio.UI.TouchId.isFeatureAvailable()
                     .then(value => {
-                        if(!value) return;
+                        if(!value) return false;
                         Peerio.UI.TouchId.hasUserSeenOffer()
                             .then((value) => {
-                                if (value) return Promise.resolve(false);
+                                if (value) return false;
                                 Peerio.UI.Confirm.show({
                                     text: t('setup_touchTitle'),
-                                    caption: t('setup_touchDescription')
+                                    caption: t('setup_touchDescription'),
+                                    stacked: true
                                 })
                                 .then(() => {
                                     return Peerio.UI.TouchId.clearKeyPair()
@@ -70,7 +71,7 @@
                                 .catch(() => true)
                                 .then(() => Peerio.UI.TouchId.setUserSeenOffer());
 
-                                return Promise.resolve(true);
+                                return true;
                             })
                             .catch(err => L.silly(err));
                     });

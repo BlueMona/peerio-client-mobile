@@ -94,8 +94,10 @@
 
             var nodes = [];
             // we only display the first modal, the next one will be displayed when you close the prev. one
-            for (var i = 0; i < Math.min(1, this.state.activeModals.length); i++)
-                nodes.push(this.state.activeModals[i].component);
+            for (var i = 0; i < this.state.activeModals.length; i++) {
+                var m = this.state.activeModals[i].component;
+                (m.props.stacked || i < 1) && nodes.push(m);
+            }
 
             return (<div className={className}>{nodes}</div>);
         }

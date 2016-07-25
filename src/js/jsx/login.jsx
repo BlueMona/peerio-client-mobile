@@ -92,7 +92,6 @@
         handleLoginSuccess: function () {
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
-            !this.trackSuccessfulSignup && Peerio.UI.TouchId.showOfferIfNeeded();
 
             Peerio.Helpers.checkFileSystemEncryption();
 
