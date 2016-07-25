@@ -62,13 +62,19 @@
                 // we got the newer version run for the first time
                 // time for some action!
                 if(semver.compare(currentVersion, GHOST_MILESTONE) >= 0)
-                    Peerio.UI.Alert.show({text: t('ghostOnboardText'), headline: t('ghostOnboardTitle')});
+                    Peerio.UI.Alert.show({text: t('ghostOnboardText', {}, {'ghostLink': s => 
+                        <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
+                        onTap={this.handleGhostLink}>{s}</Peerio.UI.Tappable>}), headline: t('ghostOnboardTitle')});
                 Peerio.user.updateMobileClientVersion(currentVersion);
             }
         },
 
         handleTOSRead: function () {
             Peerio.NativeAPI.openInBrowser('https://github.com/PeerioTechnologies/peerio-documentation/blob/master/Terms_of_Use.md');
+        },
+
+        handleGhostLink: function () {
+            Peerio.NativeAPI.openInBrowser('https://blog.peerio.com/ghost-encrypt-anything-to-anyone-2bb65d5dd2bd');
         },
 
         handleHardwareBack: function () {
