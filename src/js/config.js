@@ -23,27 +23,28 @@ Peerio.Config.init = function () {
         cfg.defaultWordCount = 5;
 
         cfg.locales = [
-            {code:'en', name:'English'},
+            {code:'zh_CN', name:'中文'},
+	    {code:'en', name:'English'},
+	    {code:'es', name:'Español'},
             {code:'fr', name:'Français'},
-            {code:'es', name:'Español'},
-            {code:'hr', name:'Hrvatski'},
-            {code:'zh_CN', name:'中文'}];
+	    {code:'hr', name:'Hrvatski'},];
 
 
         cfg.dictLocales = {
-            'en': 'English',
-            'fr': 'Francais',
+ 	    'zh-CN': '汉语',
             'de': 'Deutsch',
+            'en': 'English',
             'es': 'Español',
+            'fr': 'Francais',
             'it': 'Italiano',
+	    'hu': 'Magyar',
+	    'nb-NO': 'Norsk (Bokmål)',
             'ru': 'Русский',
-            'zh-CN': '汉语',
-            'nb-NO': 'Norsk (Bokmål)',
             'tr': 'Türkçe',
-            'hu': 'Magyar'
+
         };
 
-        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://hocuspocus.peerio.com';
+        cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 
         cfg.piwik = {
             server: 'https://piwik.peerio.com/piwik.php',
