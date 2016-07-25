@@ -87,13 +87,13 @@
                 </Peerio.UI.Tappable>
                 <div className="content without-tab-bar without-footer flex-col ghost">
                   {this.state.expired ?
-                      <div className="flex-row flex-align-center section-highlight">
+                      <div className="flex-row flex-align-center section-highlight flex-shrink-0">
                           <div className="flex-grow-1">
                               <span className="text-red txt-med">{t('ghost_expired') + ' ' + moment(this.state.expired).format('MMMM Do YYYY, h:mm:ss')}</span>
                           </div>
                       </div> :
                       <div>
-                          <div className="flex-col flex-align-start section-highlight">
+                          <div className="flex-col flex-align-start section-highlight flex-shrink-0">
                               <label>{t('Passphrase')}</label>
                               <div className="flex-row txt-med flex-align-center">
                                   <div className="flex-grow-1">{this.state.passphrase}</div>

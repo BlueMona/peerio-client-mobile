@@ -113,7 +113,8 @@ The only difference between the three are whether they have one or two button an
       margin-bottom: 20px;
     }
     p {
-      padding: 0
+      padding: 0;
+      margin-top: 0;
     }
   }
   .alert-btns {
@@ -133,6 +134,6 @@ The only difference between the three are whether they have one or two button an
 
   .no-animation {
     z-index: ($z-alert - 1);
-    animation: none !important; 
+    animation: none !important;
   }
 }

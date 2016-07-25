@@ -60,29 +60,29 @@
         render: function () {
             return (
                   <div className="content without-tab-bar">
-                        <div className="headline">{t('ghost_mobile_settings')}</div>
-                        <ul>
-                            <li className="flex-col flex-align-start">
-                                <label>{t('ghost_lifespan')}</label>
-                                <div className="flex-row flex-align-center">
-                                    {t('ghost_destroyAfter')}
-                                    <div className="input-select" style={{margin: '0 8px', width: 'inherit'}}>
-                                        <select ref="days" value={this.state.days} onChange={this.setDays}>
-                                            {[1,2,3,4,5,6,7,8,9,10].map(i => <option value={i}>{i}</option>)}
-                                        </select>
+                      <div className="headline">{t('ghost_mobile_settings')}</div>
+                      <ul>
+                          <li className="flex-col flex-align-start">
+                              <label>{t('ghost_lifespan')}</label>
+                              <div className="flex-row flex-align-center">
+                                  {t('ghost_destroyAfter')}
+                                  <div className="input-select" style={{margin: '0 8px', width: 'inherit'}}>
+                                      <select ref="days" value={this.state.days} onChange={this.setDays}>
+                                          {[1,2,3,4,5,6,7,8,9,10].map(i => <option value={i}>{i}</option>)}
+                                      </select>
 
-                                        <Peerio.UI.Tappable tag="i"
-                                                            className="material-icons"
-                                                            onTap={this.showDropdown}>
-                                            arrow_drop_down
-                                        </Peerio.UI.Tappable>
-                                    </div>
-                                    {t('ghost_days')}
-                                </div>
+                                      <Peerio.UI.Tappable tag="i"
+                                                          className="material-icons"
+                                                          onTap={this.showDropdown}>
+                                          arrow_drop_down
+                                      </Peerio.UI.Tappable>
+                                  </div>
+                                  {t('ghost_days')}
+                              </div>
 
-                            </li>
-                        </ul>
-                        <Peerio.UI.PassphraseGenerator callback={this.updatePassphrase}/>
+                          </li>
+                      </ul>
+                      <Peerio.UI.PassphraseGenerator callback={this.updatePassphrase}/>
                   </div>
             );
         }

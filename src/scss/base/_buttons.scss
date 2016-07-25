@@ -87,9 +87,10 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;
+  display: inline-flex;
   font-size: 14px;
   font-weight: 400;
+  justify-content: center;
   text-align: center;
   margin: $margin-small;
   border-radius: $radius-default;
@@ -100,8 +101,10 @@ Footer Buttons                                       | Button Class/ID
   text-transform: uppercase;
   cursor: pointer;
 
+
   i {
     color: currentColor;
+    line-height: inherit;
 
     &:first-child {
       margin-right: $margin-small;
