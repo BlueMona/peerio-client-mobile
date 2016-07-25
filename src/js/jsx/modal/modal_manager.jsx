@@ -36,7 +36,7 @@
                 Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
                 Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
                 Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
-                Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync)),
+                Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync, {stacked: true})),
 
                 Peerio.Dispatcher.onRemoveModal(this.removeModal)
             ];
