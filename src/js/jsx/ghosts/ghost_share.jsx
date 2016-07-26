@@ -33,7 +33,8 @@
                     });
             }
             this.subscriptions = [
-                Peerio.Dispatcher.onBigGreenButton(() => this.transitionTo('messages'))
+                Peerio.Dispatcher.onBigGreenButton(() => this.transitionTo('messages')),
+                Peerio.Dispatcher.onSettingsUpdated(this.forceUpdate.bind(this, null))
             ];
 
             Peerio.Drafts.Ghost = {};
@@ -60,11 +61,10 @@
             var eClasses = classNames({'content': true, 'without-tab-bar': true, 'flex-col': true});
             var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
             paywall = paywall[0] ? paywall[0] : null;
-            paywall = paywall && paywall.limit && paywall.usage >= paywall.limit;
             var ghostsLeft = paywall.limit - paywall.usage;
             return (
                 <div className={eClasses} style={eStyles}>
-                    <div className="mode ghost-mode flex-grow-1">
+                    <div className="mode ghost-mode flex-grow-1 flex-col">
                         <div className="headline">{t('ghost_mobile_share')}</div>
                         <p>{t('ghost_mobile_sent')} {this.state.recipients}</p>
                         <p>{t('ghost_mobile_sent_share')}</p>
@@ -98,13 +98,18 @@
                                 share
                             </Peerio.UI.Tappable>
                         </p> : null}
-
-                        <ul><li>
-                          {
-                            paywall ?
-                              <span> You have {ghostsLeft} left this month</span> : null
-                          }
-                        </li></ul>
+                        <div className="flex-grow-1"></div>
+                        <div className="paywall">
+                            <div className="paywall-msg">
+                                { paywall.limit >  paywall.usage ?
+                                  <span>{t('ghostCountUpdate', {ghostsLeft: ghostsLeft}, {emphasis: segment => <strong>{segment}</strong>})} </span>:
+                                  <span> {t('paywallMsg')}</span>
+                                }
+                            </div>
+                            <div className="paywall-upgrade">{ paywall.limit === paywall.usage ?
+                                <Peerio.UI.Tappable element="a" onTap="routeToUpgradePage">{t('paywallUpgrade')}</Peerio.UI.Tappable> : null }
+                            </div>
+                        </div>
                     </div>
                 </div>
             );

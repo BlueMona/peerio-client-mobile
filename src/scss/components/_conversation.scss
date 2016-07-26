@@ -437,11 +437,26 @@ $avatar-size: 29px;
 
 .ghost-mode {
   .passphrase {
+    align-items: center;
     height: 48px;
-    line-height: 48px;
     margin-top: $margin-small;
     font-weight: 800;
     font-size: 16px;
     color: $black-87;
+  }
+
+  .paywall {
+    margin-bottom: $margin-base;
+    text-align: center;
+
+    .paywall-msg {
+      height: 24px;
+      line-height: 24px;
+    }
+
+    .paywall-upgrade {
+      height: 48px;
+      line-height: 48px;
+    }
   }
 }
