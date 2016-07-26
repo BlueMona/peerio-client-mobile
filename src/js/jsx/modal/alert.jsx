@@ -53,6 +53,8 @@
                             </div>
                             <p>{text}</p>
                         </div>
+                        {this.props.icon ? 
+                            <div className='alert-icon'>{this.props.icon}</div> : null }
                         <div className="alert-btns">
                             {btns}
                         </div>
