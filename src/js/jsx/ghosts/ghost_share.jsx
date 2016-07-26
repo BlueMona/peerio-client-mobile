@@ -58,6 +58,10 @@
         render: function () {
             var eStyles = this.state.has_conv ? null : {'top': 0, zIndex: 10};
             var eClasses = classNames({'content': true, 'without-tab-bar': true, 'flex-col': true});
+            var paywall = Peerio.user.paywall ? Peerio.user.paywall.ghost : null;
+            paywall = paywall[0] ? paywall[0] : null;
+            paywall = paywall && paywall.limit && paywall.usage >= paywall.limit;
+            var ghostsLeft = paywall.limit - paywall.usage;
             return (
                 <div className={eClasses} style={eStyles}>
                     <div className="mode ghost-mode flex-grow-1">
@@ -94,6 +98,13 @@
                                 share
                             </Peerio.UI.Tappable>
                         </p> : null}
+
+                        <ul><li>
+                          {
+                            paywall ?
+                              <span> You have {ghostsLeft} left this month</span> : null
+                          }
+                        </li></ul>
                     </div>
                 </div>
             );

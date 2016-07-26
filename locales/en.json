@@ -676,5 +676,8 @@
   "error_onlyPeerioUser": "Peerio messages can only be sent to other Peerio users. To send a Ghost, remove all recipients and enter a valid email address.",
   "error_onlyPeerioUserFile": "At the moment, files in your cloud can only be sent to other Peerio users. If you wish to send a file with a Ghost, please remove all attachments, enter a valid email address, and then upload files.",
   "error_onlyGhostUser": "By entering an email address as a recipient you have entered Ghost mode! Please enter a valid email address, or if you wish to send a Peerio message, please remove your current recipients and enter Peerio usernames instead.",
-  "error_recipientFormat": "Sorry, we couldn't find a Peerio user or email address associated with that name in your contacts."
+  "error_recipientFormat": "Sorry, we couldn't find a Peerio user or email address associated with that name in your contacts.",
+  "upgrade": "Upgrade",
+  "downloadPeerioHeader": "Simple security by <emphasis>Peerio</>",
+  "downloadPeerioContent": "<url>Download our cross-platform app</> for more features like encrypted messaging, emails, file sharing, and cloud storage"
 }

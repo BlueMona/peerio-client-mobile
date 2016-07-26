@@ -30,8 +30,8 @@
         render: function () {
             var localeNodes = Object.keys(Peerio.Config.dictLocales).map(l => <option value={l}>{Peerio.Config.dictLocales[l]}</option>);
             return (
-                <ul>
-                      <li className="flex-col flex-align-start">
+                <div className="section-highlight" style={{marginTop: "16px"}}>
+                      <div className="flex-col flex-align-start">
                           <label>{t('passphrase')}</label>
                           <div className="input-select">
                               <select ref="lang"
@@ -46,16 +46,16 @@
                                   arrow_drop_down
                               </Peerio.UI.Tappable>
                           </div>
-                      </li>
-                    <li className="passphrase">
-                            <div>{this.state.passphrase}</div>
+                      </div>
+                    <div className="passphrase txt-med flex-row">
+                            <div className="flex-grow-1">{this.state.passphrase}</div>
                             <Peerio.UI.Tappable element="i" onTap={this.generatePassphrase}
                                                 className="material-icons">
                                 refresh
                             </Peerio.UI.Tappable>
 
-                    </li>
-                </ul>
+                    </div>
+                </div>
             );
         }
     });

@@ -116,6 +116,11 @@ The only difference between the three are whether they have one or two button an
       padding: 0;
       margin-top: 0;
     }
+
+    .alert-icon {
+      margin-bottom: $margin-base;
+      img { width: 112px;}
+    }
   }
   .alert-btns {
     flex-grow: 0;

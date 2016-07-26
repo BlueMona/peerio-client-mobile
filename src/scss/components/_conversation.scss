@@ -434,3 +434,14 @@ $avatar-size: 29px;
     }
   }
 }
+
+.ghost-mode {
+  .passphrase {
+    height: 48px;
+    line-height: 48px;
+    margin-top: $margin-small;
+    font-weight: 800;
+    font-size: 16px;
+    color: $black-87;
+  }
+}

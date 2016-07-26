@@ -51,10 +51,11 @@
                             <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
                                 {this.props.headline}
                             </div>
+                            {this.props.icon ?
+                                <div className='alert-icon flex-row flex-justify-center flex-align-center'><img src={this.props.icon} /></div> : null }
                             <p>{text}</p>
                         </div>
-                        {this.props.icon ? 
-                            <div className='alert-icon'>{this.props.icon}</div> : null }
+
                         <div className="alert-btns">
                             {btns}
                         </div>
