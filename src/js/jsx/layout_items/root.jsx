@@ -68,7 +68,11 @@
                     .then(() => Peerio.user.clearWarning(warning));
             });
 
-            Peerio.Dispatcher.onAuthenticated(Peerio.UI.TouchId.showOfferIfNeeded);
+            Peerio.Dispatcher.onAuthenticated(this.offerTouchID);
+        },
+        offerTouchID: function () {
+            if(!Peerio.UI.justRegistered)
+                Peerio.UI.TouchId.showOfferIfNeeded();
         },
         notifyOnUpdate: function (expired) {
             var text = expired
