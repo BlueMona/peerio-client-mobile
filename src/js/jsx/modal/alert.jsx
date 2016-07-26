@@ -24,6 +24,10 @@
             }
         },
 
+        getDefaultProps: function () {
+            return {exclusive: true};
+        },
+
         handleAction: function() {
             this.props.onClose();
             this.props.onAccept && this.props.onAccept();

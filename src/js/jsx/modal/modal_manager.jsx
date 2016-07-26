@@ -32,11 +32,11 @@
             this.subscriptions = [
                 Peerio.Dispatcher.onShowAlert(this.showModal.bind(this, Peerio.UI.Alert)),
                 Peerio.Dispatcher.onShowConfirm(this.showModal.bind(this, Peerio.UI.Confirm)),
-                Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt, {stacked: true})),
-                Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect, {stacked: true})),
-                Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect, {stacked: true})),
-                Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload, {stacked: true})),
-                Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync, {stacked: true})),
+                Peerio.Dispatcher.onShowPrompt(this.showModal.bind(this, Peerio.UI.Prompt)),
+                Peerio.Dispatcher.onShowContactSelect(this.showModal.bind(this, Peerio.UI.ContactSelect)),
+                Peerio.Dispatcher.onShowFileSelect(this.showModal.bind(this, Peerio.UI.FileSelect)),
+                Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
+                Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync)),
 
                 Peerio.Dispatcher.onRemoveModal(this.removeModal)
             ];
@@ -94,9 +94,10 @@
 
             var nodes = [];
             // we only display the first modal, the next one will be displayed when you close the prev. one
+            var exclusiveCount = 0;
             for (var i = 0; i < this.state.activeModals.length; i++) {
                 var m = this.state.activeModals[i].component;
-                (m.props.stacked || i < 1) && nodes.push(m);
+                (!m.props.exclusive || (m.props.exclusive && exclusiveCount++ < 1)) && nodes.push(m);
             }
 
             return (<div className={className}>{nodes}</div>);
