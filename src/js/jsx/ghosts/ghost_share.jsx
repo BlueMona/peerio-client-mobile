@@ -56,6 +56,10 @@
             Peerio.NativeAPI.shareNativeDialog(t('ghost_mobile_share'), t('ghost_mobile_share'), this.getLink() );
         },
 
+        handlePayments: function() {
+          this.transitionTo('payments');
+        },
+
         render: function () {
             var eStyles = this.state.has_conv ? null : {'top': 0, zIndex: 10};
             var eClasses = classNames({'content': true, 'without-tab-bar': true, 'flex-col': true});
@@ -106,9 +110,11 @@
                                   <span> {t('paywallMsg')}</span>
                                 }
                             </div>
-                            <div className="paywall-upgrade">{ paywall.limit === paywall.usage ?
-                                <Peerio.UI.Tappable element="a" onTap="routeToUpgradePage">{t('paywallUpgrade')}</Peerio.UI.Tappable> : null }
-                            </div>
+                            { paywall.limit === paywall.usage ?
+                                <div className="paywall-upgrade">
+                                    <Peerio.UI.Tappable element="a" onTap={this.handlePayments}>{t('paywallUpgrade')}</Peerio.UI.Tappable>
+                                </div> : null
+                            }
                         </div>
                     </div>
                 </div>
