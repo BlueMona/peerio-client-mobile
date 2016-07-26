@@ -16,6 +16,7 @@
 
         componentDidMount: function () {
             this.checkTOS();
+            this.checkClientVersion();
         },
 
         componentWillUnmount: function () {
