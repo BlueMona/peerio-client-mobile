@@ -23,17 +23,17 @@ Peerio.Config.init = function () {
         cfg.defaultWordCount = 5;
 
         cfg.locales = [
-            {code:'zh_CN', name:'中文'},
 	    {code:'en', name:'English'},
+            {code:'zh_CN', name:'中文'},
 	    {code:'es', name:'Español'},
             {code:'fr', name:'Français'},
 	    {code:'hr', name:'Hrvatski'},];
 
 
         cfg.dictLocales = {
+            'en': 'English',
  	    'zh-CN': '汉语',
             'de': 'Deutsch',
-            'en': 'English',
             'es': 'Español',
             'fr': 'Francais',
             'it': 'Italiano',
