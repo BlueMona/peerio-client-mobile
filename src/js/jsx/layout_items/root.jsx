@@ -68,6 +68,7 @@
                     .then(() => Peerio.user.clearWarning(warning));
             });
 
+            //TODO: actually is not very nice to check for touch id availability on every onAuthenticated event
             Peerio.Dispatcher.onAuthenticated(this.offerTouchID);
         },
         offerTouchID: function () {

@@ -72,7 +72,6 @@
         },
 
         postAuth: function () {
-            Peerio.UI.justRegistered = false;
             Peerio.Dispatcher.unsubscribe(this.postAuth);
 
             Peerio.NativeAPI.enablePushNotifications()
