@@ -16,17 +16,17 @@ class Signup(common.testcase.TestCase):
     def test_001_signup(self):
         r = peerio.signup()
 
-    def test_020_setup_wizard(self):
-        wait_find_by_css('._setupWelcome')
-        assert wait_tap_by_css('.btn-safe')
-        wait_find_by_css('._setupEmail')
-        assert wait_tap_by_css('.btn')
-        wait_find_by_css('._setupPin')
-        assert wait_tap_by_css('.btn')
-        wait_find_by_css('._setupContactImport')
-        assert wait_tap_by_css('.btn')
-        wait_find_by_css('._setupOptIn')
-        assert wait_tap_by_css('.btn-safe')
+    # def test_020_setup_wizard(self):
+    #     wait_find_by_css('._setupWelcome')
+    #     assert wait_tap_by_css('.btn-safe')
+    #     wait_find_by_css('._setupEmail')
+    #     assert wait_tap_by_css('.btn')
+    #     wait_find_by_css('._setupPin')
+    #     assert wait_tap_by_css('.btn')
+    #     wait_find_by_css('._setupContactImport')
+    #     assert wait_tap_by_css('.btn')
+    #     wait_find_by_css('._setupOptIn')
+    #     assert wait_tap_by_css('.btn-safe')
 
     # def test_030_usability_research(self):
     #     wait_find_by_css('.headline')
