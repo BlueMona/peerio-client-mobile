@@ -9,8 +9,7 @@
                 Peerio.Dispatcher.onTransitionTo(this.handleTransition),
                 Peerio.Dispatcher.onResume(this.handleResume),
                 Peerio.Dispatcher.onAuthenticated(this.checkTOS),
-                Peerio.Dispatcher.onSettingsUpdated(this.checkTOS),
-                Peerio.Dispatcher.onSettingsUpdated(this.checkClientVersion)
+                Peerio.Dispatcher.onSettingsUpdated(this.checkTOS)
             ];
         },
 
@@ -56,7 +55,8 @@
                 L.error('Invalid user client version provided: ' + version + ' ' + currentVersion);
                 return;
             }
-
+            if(this.clientVersionAlert) return;
+            this.clientVersionAlert = true;
             var GHOST_MILESTONE = '2.5.7';
 
             if(semver.compare(currentVersion, version) > 0) {
