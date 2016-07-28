@@ -9,7 +9,7 @@ echo ================= OPTIONAL VERSION BUMP ==================
 # gulp bump
 
 echo =============== BUILDING ANDROID PROJECT =================
-cordova build android
+cordova build android --release
 
 function signapk(){
   echo ==========================================================
