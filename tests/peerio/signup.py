@@ -4,6 +4,10 @@ from time import strftime
 import logging
 logging.basicConfig(filename='testrun.log',level=logging.INFO)
 
+def writeTestrun(str):
+    with open("testrun.log", "a") as f:
+        f.write(str)
+
 def signup(passCb = None):
     username = None
     phrase = None
@@ -34,8 +38,8 @@ def signup(passCb = None):
     wait_find_by_css('textarea')
     text_by_css('textarea', phrase)
     tap_by_css('.btn-safe')
-    logging.info(username)
-    logging.info(phrase)
+    writeTestrun("PeerioDebug.user = '%s';\n" % username)
+    writeTestrun("PeerioDebug.pass = '%s';\n" % phrase)
     return {
         "username": username,
         "phrase": phrase

@@ -40,8 +40,9 @@
 #sidemenu-toggle, #app-lock, #global-back {
   height: 48px;
   width: 48px;
-  line-height: 48px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   i.fa {
     margin: 0;

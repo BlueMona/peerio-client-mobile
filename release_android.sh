@@ -6,10 +6,10 @@ echo ==================== COMPILING ASSETS ====================
 gulp compile --release
 
 echo ================= OPTIONAL VERSION BUMP ==================
-gulp bump
+# gulp bump
 
 echo =============== BUILDING ANDROID PROJECT =================
-cordova build --release android
+cordova build android --release
 
 function signapk(){
   echo ==========================================================

@@ -9,7 +9,6 @@ $recipients-height: 40px;
 
   .attached-files {
     position: initial;
-    background: $white-100;
     border-top: 0;
   }
 
@@ -18,14 +17,14 @@ $recipients-height: 40px;
     min-height: $recipients-height;
     align-items: center;
     padding-right: 0;
-    max-height: 96px;
-    overflow: hidden;
+    // max-height: 96px;
+    // overflow: hidden;
 
     .names {
       flex-grow: 1;
-      max-height: 96px;
-      overflow: hidden;
-      overflow-y: scroll;
+      // max-height: 96px;
+      // overflow: hidden;
+      // overflow-y: scroll;
     }
   }
 
@@ -40,21 +39,59 @@ $recipients-height: 40px;
   }
 
   .name-selected {
-    font-size: .9em;
+    font-size: 12px;
     background-color: color(p-blue-light-10);
     color: $white-100;
-    border-radius: 4px;
-    padding: 4px;
-    display: inline-block;
+    border-radius: 12px;
+    padding: 2px 4px 2px 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin: 2px;
     word-break: break-all;
+    max-width: 164px;
+
+    i {
+      margin-left: 4px;
+      font-size: 20px;
+      color: $white-70;
+    }
   }
 
-  .subject-inputs {
+  .subject-input {
     border-bottom: $border-dark;
     border-top: $border-dark;
+  }
+
+  .recipient-input{
+    min-height: 0 !important;
+    height: 0;
+    overflow: hidden;
+
+    &.open{
+      min-height: 40px !important;
+    }
+  }
+
+
+  .subject-input,
+  .recipient-input {
     display: flex;
     min-height: $recipients-height;
+
+    input {
+      border: 0;
+    }
+
+    .awesomplete {
+        width: 100%;
+        position: static !important;
+    }
+
+    #email {
+        background: none;
+        height: 40px;
+    }
   }
 
   .to {
@@ -71,7 +108,7 @@ $recipients-height: 40px;
     text-overflow: ellipsis;
 
     &:focus {
-      background-color: lighten(color(list-item-bg), 5%);
+      background: transparent;
       border: 0;
     }
   }
@@ -83,6 +120,7 @@ $recipients-height: 40px;
     padding: $padding-small;
     border: 0;
     flex-grow: 1;
+    background: rgba(0,0,0,0);
   }
 }
 

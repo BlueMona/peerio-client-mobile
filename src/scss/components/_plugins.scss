@@ -1,0 +1,36 @@
+// Awesomplete
+
+div.awesomplete > ul {
+  background: $white-100;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+  margin: 0;
+  transform-origin: center top;
+
+  &:before {
+    border: 0;
+    padding: 0;
+  }
+
+  & > li {
+    padding: $padding-small $padding-base;
+
+    &[aria-selected="true"]  {
+       background: $black-38;
+
+       & mark {
+         background: $black-12;
+         color: inherit;
+       }
+    }
+  }
+}
+
+div.awesomplete mark {
+  background: $black-12;
+}
+
+div.awesomplete li:hover mark {
+  background: $black-12;
+}

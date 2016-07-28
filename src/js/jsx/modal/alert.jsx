@@ -24,6 +24,10 @@
             }
         },
 
+        getDefaultProps: function () {
+            return {exclusive: true};
+        },
+
         handleAction: function() {
             this.props.onClose();
             this.props.onAccept && this.props.onAccept();
@@ -47,13 +51,16 @@
                             <div className={'headline' + (!this.props.headline ? ' hide' : '')}>
                                 {this.props.headline}
                             </div>
+                            {this.props.icon ?
+                                <div className='alert-icon flex-row flex-justify-center flex-align-center'><img src={this.props.icon} /></div> : null }
                             <p>{text}</p>
                         </div>
+
                         <div className="alert-btns">
                             {btns}
                         </div>
                     </div>
-                    <div className="dim-background"></div>
+                    <div className={classNames('dim-background', {'no-animation': this.props.noAnimation})}></div>
                 </div>
             );
         }

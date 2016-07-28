@@ -26,13 +26,19 @@ $msg-distance: 16px;
 $big-side-distance: 34px;
 $avatar-size: 29px;
 
-.conversation {
+.conversation,
+.ghost {
   margin-top: 36px;
   bottom: 64px !important;
   color: color(p-blue-darker);
   user-select: initial;
   border-bottom: $border-dark;
   padding-bottom: 50px;
+
+  &.without-footer {
+    bottom: 0 !important;
+    padding-bottom: 20px;
+  }
 
   .item {
     width: 100%;
@@ -170,13 +176,17 @@ $avatar-size: 29px;
   }
 }
 
+.ghost p {
+  white-space: pre-line;
+}
+
 #conversation-head {
   position: absolute;
   left: 0;
   right: 0;
   width: 100%;
   top: $navbar-height;
-  z-index: $z-tabbar;
+  z-index: 4;
   height: 36px;
   color: $white-100;
   line-height: 36px;
@@ -207,7 +217,7 @@ $avatar-size: 29px;
 
   .counter {
     @extend .flex-row;
-
+    line-height: 1;
     margin: 0 $margin-small 0 auto;
     white-space: nowrap;
 
@@ -334,8 +344,13 @@ $avatar-size: 29px;
   overflow-y: hidden;
   overflow-x: scroll;
   white-space: nowrap;
-  background: #fafafa;
+  background: transparent;
   border-top: $border-dark;
+
+  .ghost & {
+    position: relative;
+    top: 0;
+  }
 
   &.removed {
     height: 0;
@@ -353,15 +368,21 @@ $avatar-size: 29px;
     border-radius: 12px;
     color: $black-54;
     display: inline-flex;
-    padding: 0 4px 0 $padding-small;
-    height: 24px;
-    width: auto;
-    max-width: 120px;
-    min-width: 88px;
     flex: 1 0 auto;
     font-size: 12px;
+    max-height: 24px;
+    max-width: 120px;
     margin: 0 $margin-small 0 0;
+    min-height: 24px;
+    min-width: 88px;
     opacity: 1;
+    padding: 0 4px 0 $padding-small;
+    text-align: center;
+    width: auto;
+
+    .ghost & {
+      padding: 0 $padding-small;
+    }
 
     &.removed {
       transition: $speed-normal;
@@ -389,6 +410,53 @@ $avatar-size: 29px;
       &:hover {
         color: $white-100;
       }
+    }
+  }
+}
+
+
+#new-message.mode,
+.mode {
+  background: $white-100;
+  transition: $speed-fast;
+
+  &.ghost-mode {
+    background: rgba($p-blue, 0.15);
+
+    .name-selected,
+    .attached-file {
+      color: $black-87;
+      background: $white-70;
+
+      i {
+        color: $black-54;
+      }
+    }
+  }
+}
+
+.ghost-mode {
+  .passphrase {
+    align-items: center;
+    height: 48px;
+    margin-top: $margin-small;
+    font-weight: 800;
+    font-size: 16px;
+    color: $black-87;
+  }
+
+  .paywall {
+    margin-bottom: $margin-base;
+    text-align: center;
+
+    .paywall-msg {
+      height: 24px;
+      line-height: 24px;
+    }
+
+    .paywall-upgrade {
+      height: 48px;
+      line-height: 48px;
     }
   }
 }

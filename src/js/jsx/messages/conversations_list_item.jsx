@@ -18,7 +18,7 @@
         },
 
         openConversation: function () {
-            this.transitionTo('conversation', {id: this.props.item.id});
+            this.transitionTo(this.props.item.isGhost ? 'ghost_message' : 'conversation', {id: this.props.item.id});
         },
 
         destroyConversation: function () {
@@ -33,6 +33,7 @@
                 onAccept: this.destroyConversation
             });
         },
+
         render: function () {
             var conv = this.props.item;
             // building name to display for conversation item.
@@ -65,7 +66,7 @@
                                       className="list-item-swipe-wrapper">
 
                         <div className="list-item-thumb">
-                            {conv.hasFiles ?
+                            {conv.isGhost ? <i className="ghost-dark"></i> : conv.hasFiles ?
                                 (<div className="icon-with-label">
                                     <i className={'material-icons'}>attach_file</i>
                                 </div>)
@@ -75,7 +76,9 @@
                         <div className="list-item-content flex-col flex-justify-center">
                             <div className="list-item-sup">{conv.username}</div>
                             {conv.displayName && <div className="list-item-title">{conv.displayName}</div>}
-                            <div className="list-item-description">{conv.subject}</div>
+                            <div className="list-item-description">
+                                {conv.subject}
+                            </div>
                         </div>
 
                         <div className="list-item-content text-right">
@@ -97,9 +100,7 @@
 
                     </Peerio.UI.Swiper>
                 </Peerio.UI.Tappable>
-
             );
         }
     });
-
 }());

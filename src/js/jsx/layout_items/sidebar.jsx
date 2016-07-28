@@ -42,9 +42,6 @@
         handleAddContact: function () {
             this.toggleAndTransition('add_contact');
         },
-        handleNewMessage: function () {
-            this.toggleAndTransition('new_message');
-        },
         handleUpload: function () {
             this.toggleAndTransition('files');
             Peerio.Action.showFileUpload();

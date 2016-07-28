@@ -20,13 +20,29 @@ Peerio.Config.init = function () {
         var cfg = Peerio.Config = {};
 
         cfg.defaultLocale = 'en';
+        cfg.defaultWordCount = 5;
 
         cfg.locales = [
-            {code:'en', name:'English'},
+	    {code:'en', name:'English'},
+            {code:'zh_CN', name:'中文'},
+	    {code:'es', name:'Español'},
             {code:'fr', name:'Français'},
-            {code:'es', name:'Español'},
-            {code:'hr', name:'Hrvatski'},
-            {code:'zh_CN', name:'中文'}];
+	    {code:'hr', name:'Hrvatski'},];
+
+
+        cfg.dictLocales = {
+            'en': 'English',
+ 	    'zh-CN': '汉语',
+            'de': 'Deutsch',
+            'es': 'Español',
+            'fr': 'Francais',
+            'it': 'Italiano',
+	    'hu': 'Magyar',
+	    'nb-NO': 'Norsk (Bokmål)',
+            'ru': 'Русский',
+            'tr': 'Türkçe',
+
+        };
 
         cfg.webSocketServer = (window.PeerioDebug && PeerioDebug.server) || 'wss://app.peerio.com';
 

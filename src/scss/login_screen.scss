@@ -8,9 +8,7 @@
   @extend .flex-align-center;
 
   .buttons {
-    left: 0;
-    right: 0;
-    position: absolute;
+    width: 100%;
   }
 }
 

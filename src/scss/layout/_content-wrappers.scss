@@ -137,6 +137,5 @@ Content wrappers have modifier classes for special scenarios, like `.content-wra
 
 .section-highlight {
   background: $black-12;
-  margin: #{$margin-base*2} 0;
-  padding: $margin-base $margin-base #{$margin-base*1.25};
+  padding: $margin-base;
 }

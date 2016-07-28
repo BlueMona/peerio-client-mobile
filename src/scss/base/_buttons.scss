@@ -32,7 +32,7 @@ Button                                            | Button Class
 Footer Buttons                                       | Button Class/ID
 ---------------------------------------------------- | -----------------
 
-<div class="btn-global-action">Global Action Button</div>| `.btn-global-action`
+<div class="btn-primary-action">Global Action Button</div>| `.btn-primary-action`
 */
 
 // TODO Refactor all of the i { color: $white-100} stuff.
@@ -87,22 +87,24 @@ Footer Buttons                                       | Button Class/ID
 .btn {
   @include button-ripple;
   padding: 0 $padding-small;
-  display: inline-block;
+  display: inline-flex;
   font-size: 14px;
   font-weight: 400;
+  justify-content: center;
   text-align: center;
   margin: $margin-small;
   border-radius: $radius-default;
   color: $white-100;
   min-width: 88px;
-  height: 36px;
   min-height: 36px;
   line-height: 36px;
   text-transform: uppercase;
   cursor: pointer;
 
+
   i {
     color: currentColor;
+    line-height: inherit;
 
     &:first-child {
       margin-right: $margin-small;
@@ -128,7 +130,7 @@ Footer Buttons                                       | Button Class/ID
   @extend .flex-shrink-0;
 
   margin: $margin-small 0;
-  width: 85px;
+  min-width: 85px;
 }
 
 // looking at the style guide, this button style doesn't offer much affordance. I would consider removing it.
@@ -199,7 +201,7 @@ button:disabled,
 
 }
 
-.btn-global-action {
+.btn-primary-action {
   @include button-ripple;
 
   background-color: color(footer-btn-color);

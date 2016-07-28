@@ -51,7 +51,7 @@
             if(window.isPeerioDownTimer) return;
             window.isPeerioDownTimer = window.setTimeout(() => {
                 this.cancelAnimation();
-                this.animateIsPeerioDownTimer = 
+                this.animateIsPeerioDownTimer =
                     window.setInterval(() => this.animateIsPeerioDown(), 2000);
                 window.isPeerioDownTimer = null;
             }, 5000);
@@ -66,7 +66,7 @@
         },
 
         cancelIsPeerioDown: function () {
-            if(this.isPeerioDownTimer) { 
+            if(this.isPeerioDownTimer) {
                 window.clearTimeout(this.isPeerioDownTimer);
                 this.isPeerioDownTimer = null;
             }
@@ -113,11 +113,12 @@
                     <div id="app-lock">
                         {
                             this.state.outOfSync ?
-                                <Peerio.UI.Tappable onTap={Peerio.user.reSync}>
-                                    <i className="material-icons">sync</i>
+                                <Peerio.UI.Tappable onTap={Peerio.user.reSync} element="i" className="material-icons">
+                                    sync
                                 </Peerio.UI.Tappable>
-                                : <Peerio.UI.Tappable onTap={this.transitionTo.bind(this, 'new_message')}>
-                                <i className="material-icons">edit</i>
+                                :
+                            <Peerio.UI.Tappable element="i" onTap={this.transitionTo.bind(this, 'ghost_new')} className="material-icons">
+                                edit
                             </Peerio.UI.Tappable>
                         }
                     </div>

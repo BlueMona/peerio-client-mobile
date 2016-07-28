@@ -68,6 +68,8 @@
 
         // removes any rendered modal by id
         removeModal: function (id) {
+            if(this.state.activeModals.length > 1)
+                this.state.activeModals.forEach(m => {m.component.props.noAnimation = true;});
             for (var i = 0; i < this.state.activeModals.length; i++) {
                 if (this.state.activeModals[i].id === id) {
                     this.setState(function (prevState) {
@@ -91,8 +93,12 @@
              Peerio.NativeAPI.hideKeyboard(); */
 
             var nodes = [];
-            for (var i = 0; i < this.state.activeModals.length; i++)
-                nodes.push(this.state.activeModals[i].component);
+            // we only display the first modal, the next one will be displayed when you close the prev. one
+            var exclusiveCount = 0;
+            for (var i = 0; i < this.state.activeModals.length; i++) {
+                var m = this.state.activeModals[i].component;
+                (!m.props.exclusive || (m.props.exclusive && exclusiveCount++ < 1)) && nodes.push(m);
+            }
 
             return (<div className={className}>{nodes}</div>);
         }

@@ -9,7 +9,7 @@
         doSignup: function () {
 
             this.setState({activeStep: this.steps.length - 1});
-
+            Peerio.UI.justRegistered = true;
             Peerio.Auth.signup(this.data.name.username,
                 this.data.pass.passphrase,
                 this.data.name.firstName,

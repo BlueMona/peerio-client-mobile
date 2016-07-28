@@ -5,11 +5,11 @@
         render: function () {
             var visible = this.props.items && this.props.items.length;
             return visible ? (
-                    <ul className="flex-list">
-                        <li className="subhead">{this.props.title}</li>
+                    <div>
+                        <p className="subhead">{this.props.title}</p>
                         {this.props.items.map( (s, i) => (
                             <Peerio.UI.PaymentsSubscriptionListItem subscription={s} key={i}/>))}
-                    </ul>
+                    </div>
             ) : null;
         }
     });

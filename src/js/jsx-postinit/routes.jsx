@@ -46,6 +46,11 @@ Peerio.UI.Routes = (
             <Route name="security" path="/app/security" handler={Peerio.UI.Security} />
             <Route name="payments" path="/app/payments" handler={Peerio.UI.Payments} />
             <Route name="payments_view_subscriptions" path="/app/subscriptions" handler={Peerio.UI.PaymentsViewSubscriptions} />
+
+            <Route name="ghost_new" path="/app/new_ghost/:id?" handler={Peerio.UI.GhostNew} />
+            <Route name="ghost_message" path="/app/ghost_message/:id?" handler={Peerio.UI.GhostMessage} />
+            <Route name="ghost_settings" path="/app/ghost_settings/:id?" handler={Peerio.UI.GhostSettings} />
+            <Route name="ghost_share" path="/app/ghost_share/:id?" handler={Peerio.UI.GhostShare} />
         </Route>
     </Route>
 );

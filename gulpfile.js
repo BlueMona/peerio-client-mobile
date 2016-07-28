@@ -54,6 +54,7 @@ var knownOptions = {
 var supportedBrowsers = ['ios >= 3.2', 'chrome >= 37', 'android >= 4.2'];
 
 var options = minimist(process.argv.slice(2), knownOptions);
+var debugVersion = null;
 
 // put all the paths here
 var paths = {
@@ -114,6 +115,10 @@ gulp.task('index', function () {
     // a piece of replacement code
     if (!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
     if (options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
+    if(debugVersion) { 
+        console.log('replacing debug version to: ' + debugVersion);
+        result = result.pipe(replace(/<!-- debugVersion -->/mg, '<script>window.AppVersion = {version: "' + debugVersion + '"};</script>'));
+    }
 
     console.log(options.injectd);
     var injectFile = options.injectd ? 'debug.staging.js' : (options.injectr ? 'debug.prod.js' : null);
@@ -126,6 +131,16 @@ gulp.task('index', function () {
     return result.pipe(gulp.dest('./www'));
 });
 
+/* insert version for gulp serve mock */
+gulp.task('browser-version', function (done) {
+    var parser = new xml2js.Parser();
+    fs.readFile('./config.xml', function (err, data) {
+        parser.parseString(data, function (err, result) {
+            debugVersion = result.widget.$.version;
+            done();
+        });
+    });
+});
 
 gulp.task('check-plugins', function(done) {
     var syncExec = require('sync-exec');
@@ -329,7 +344,7 @@ gulp.task('static-files', function () {
 // sass an jsx files are watched and compiled to www
 // peerio-api-client repository is watched if --api option is provided and copied to www too
 // http server watches www folder and reloads
-gulp.task('serve', ['compile'], function () {
+gulp.task('serve', ['compile', 'browser-version'], function () {
     // starting automation server if '--as' flag is specified
     options.as && automationServer();
     // starting http server with watcher

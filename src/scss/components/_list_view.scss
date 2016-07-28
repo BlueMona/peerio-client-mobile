@@ -145,7 +145,7 @@ li {
   .checkbox-input,
   .avatar {
     &:first-child {
-      margin-right: 32px;
+      margin-right: $margin-base;
     }
   }
 
@@ -235,7 +235,10 @@ li {
     }
 
     .list-item-thumb {
+      box-sizing: content-box;
       min-width: 24px;
+      height: 24px;
+      padding-right: $padding-base;
       flex: 0 0 auto;
       text-align: center;
       align-self: center;
@@ -245,6 +248,7 @@ li {
       align-self: center;
       flex: 0 0 20px;
       text-align: center;
+      height: 24px;
 
     }
 
@@ -293,7 +297,7 @@ li {
   width: 29px;
   text-align: center;
   font-size: 24px;
-  margin-right: $margin-base;
+  margin-right: 0;
   opacity: .8;
 }
 

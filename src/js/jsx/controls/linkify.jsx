@@ -9,9 +9,11 @@
             return nextProps.text !== this.props.text;
         },
         open: function (href) {
-            Peerio.UI.Confirm.show({text: t('openLinkWarning')})
-                .then(() => this.props.onOpen(href))
-                .catch(() => true);
+            var action = this.props.onOpen || Peerio.NativeAPI.openInBrowser;
+            var p = this.props.suppressWarning ? Promise.resolve(true) :
+                Peerio.UI.Confirm.show({text: t('openLinkWarning')});
+            return p.then(() => action(href))
+                .catch(e => L.error(e));
         },
         render: function () {
             this.text = this.props.text;

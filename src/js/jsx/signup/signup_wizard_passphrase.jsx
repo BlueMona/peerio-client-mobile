@@ -34,22 +34,9 @@
             this.props.handleNextStep({pass: this.state});
         },
 
-        dictLocales: {
-            'en': 'English',
-            'fr': 'Francais',
-            'de': 'Deutsch',
-            'es': 'Español',
-            'it': 'Italiano',
-            'ru': 'Русский',
-            'zh-CN': '汉语',
-            'nb-NO': 'Norsk (Bokmål)',
-            'tr': 'Türkçe',
-            'hu': 'Magyar'
-        },
-
         render: function () {
-            var localeNodes = Object.keys(this.dictLocales).map(l => <option value={l}>{this.dictLocales[l]}</option>);
-            var locale = this.dictLocales[Peerio.Translator.locale] ? Peerio.Translator.locale : 'en';
+            var localeNodes = Object.keys(Peerio.Config.dictLocales).map(l => <option value={l}>{Peerio.Config.dictLocales[l]}</option>);
+            var locale = Peerio.Config.dictLocales[Peerio.Translator.locale] ? Peerio.Translator.locale : 'en';
             return (
                 <fieldset key={'signup-step-1'}>
                     <div className="headline">{t('yourPassphrase')}</div>

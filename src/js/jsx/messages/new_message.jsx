@@ -73,7 +73,8 @@
             var r = this.state.recipients.map(function (username) {
                 var c = Peerio.user.contacts.dict[username];
                 return <span className="name-selected" key={username}>
-                {c && c.fullName || ''} &bull; {username}</span>;
+                {c && c.fullName || ''} &bull; {username}
+                <Peerio.UI.Tappable element="i" className="material-icons">cancel</Peerio.UI.Tappable></span>;
             });
             return (
                 <div className="content without-tab-bar">

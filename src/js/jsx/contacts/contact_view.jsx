@@ -16,7 +16,7 @@
         },
 
         startConversationWithContact: function () {
-            this.transitionTo('new_message', {id: this.contact.username});
+            this.transitionTo('ghost_new', {id: this.contact.username});
         },
 
 
