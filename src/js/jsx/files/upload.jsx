@@ -33,13 +33,13 @@
                             if(e && e.code === 413)
                                 message = t('file_uploadStorageExceeded');
                             Peerio.Action.showAlert({text: t('file_uploadFailed') + ' ' + message });
-                            this.props.reject && this.props.reject(e);
+                            this.props.reject(e);
                         });
                 })
                 // this catch handles user cancel on confirm/prompt
                 .catch((e)=> {
                     L.error(e);
-                    this.props.reject && this.props.reject(e);
+                    this.props.reject(e);
                 })
                 .finally(() => {
                     if (camera) Peerio.NativeAPI.cleanupCamera();
