@@ -103,19 +103,6 @@
                             </Peerio.UI.Tappable>
                         </p> : null}
                         <div className="flex-grow-1"></div>
-                        <div className="paywall">
-                            <div className="paywall-msg">
-                                { paywall.limit >  paywall.usage ?
-                                  <span>{t('ghostCountUpdate', {ghostsLeft: ghostsLeft}, {emphasis: segment => <strong>{segment}</strong>})} </span>:
-                                  <span> {t('paywallMsg')}</span>
-                                }
-                            </div>
-                            { paywall.limit === paywall.usage ?
-                                <div className="paywall-upgrade">
-                                    <Peerio.UI.Tappable element="a" onTap={this.handlePayments}>{t('paywallUpgrade')}</Peerio.UI.Tappable>
-                                </div> : null
-                            }
-                        </div>
                     </div>
                 </div>
             );
