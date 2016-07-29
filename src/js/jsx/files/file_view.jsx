@@ -92,7 +92,7 @@
                             <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleRemove}>{t('file_removeCloudButton')}</Peerio.UI.Tappable>}
 
                         {file.creator === Peerio.user.username ?
-                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleNuke}>{t('file_nukeButton')}s</Peerio.UI.Tappable> : null }
+                            <Peerio.UI.Tappable className="btn-danger" element="div" onTap={this.handleNuke}>{t('file_nukeButton')}</Peerio.UI.Tappable> : null }
                     </div>);
             }
 
