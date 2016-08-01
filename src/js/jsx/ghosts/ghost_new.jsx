@@ -117,7 +117,6 @@
         focusRecipient: function (e) {
             this.refs.email.getDOMNode().focus();
             e.preventDefault();
-            return false;
         },
 
         shouldRemoveRecipient: function (r) {
@@ -188,7 +187,13 @@
             current && current.length && this.tryAdd(current) && this.setState({email: ''});
         },
 
+        recipientFocusChange: function () {
+            var email = this.refs.email.getDOMNode();
+            this.setState({recipientFocused: email == document.activeElement});
+        },
+
         recipientBlur: function () {
+            this.recipientFocusChange();
             this.tryAddFromInput();
         },
 
@@ -375,7 +380,7 @@
                         <div className="recipients" onMouseDown={this.focusRecipient}>
                             <div className="to">To</div>
                             <div className="names">{r}
-                                <div className="open recipient-input">
+                                <div className={classNames('recipient-input', {'open': this.state.recipientFocused || this.state.recipients.length == 0})}>
                                     <input type="text"
                                        required="required"
                                        autoComplete="off"
@@ -385,6 +390,7 @@
                                        ref="email"
                                        className="email"
                                        value={this.state.email}
+                                       onFocus={this.recipientFocusChange}
                                        onBlur={this.recipientBlur}
                                        onKeyDown={this.handleEmailKeyDown}
                                        onChange={this.handleEmailChange}/>
