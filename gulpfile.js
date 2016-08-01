@@ -101,7 +101,7 @@ gulp.task('compile', ['bower-installer'], function (done) {
     return runSequence.apply(null, tasks);
 });
 
-gulp.task('index', function () {
+gulp.task('index', ['browser-version'], function () {
     var target = gulp.src(paths.html_src);
     var sourcesJs = gulp.src(paths.js_inject, {read: false});
     var sourcesJsx = gulp.src(paths.jsx_inject, {read: false});
@@ -115,9 +115,10 @@ gulp.task('index', function () {
     // a piece of replacement code
     if (!options.release) result = result.pipe(replace(/<!-- release -->[^]*?<!-- \/release -->\s*\r*\n*/mg, ''));
     if (options.release) result = result.pipe(replace(/<!-- debug -->[^]*?<!-- \/debug -->\s*\r*\n*/mg, ''));
+    console.log('DEBUG VERSION ' + debugVersion);
     if(debugVersion) { 
         console.log('replacing debug version to: ' + debugVersion);
-        result = result.pipe(replace(/<!-- debugVersion -->/mg, '<script>window.AppVersion = {version: "' + debugVersion + '"};</script>'));
+        // result = result.pipe(replace(/<!-- debugVersion -->/mg, '<script>window.AppVersion = {version: "' + debugVersion + '"};</script>'));
     }
 
     console.log(options.injectd);
@@ -137,6 +138,7 @@ gulp.task('browser-version', function (done) {
     fs.readFile('./config.xml', function (err, data) {
         parser.parseString(data, function (err, result) {
             debugVersion = result.widget.$.version;
+            console.log(debugVersion);
             done();
         });
     });
