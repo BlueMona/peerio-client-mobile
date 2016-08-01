@@ -62,7 +62,7 @@
             if(semver.compare(currentVersion, version) > 0) {
                 // we got the newer version run for the first time
                 // time for some action!
-                if(semver.compare(currentVersion, GHOST_MILESTONE) >= 0)
+                if(semver.compare(version, GHOST_MILESTONE) <= 0)
                     Peerio.UI.Alert.show({text: t('ghostOnboardText', {}, {'ghostLink': s =>
                         <Peerio.UI.Tappable element="a" style={{textDecoration: 'underline'}}
                         onTap={this.handleGhostLink}>{s}</Peerio.UI.Tappable>}), headline: t('ghostOnboardTitle'), icon: 'media/img/product-ghost-sm.png'});
