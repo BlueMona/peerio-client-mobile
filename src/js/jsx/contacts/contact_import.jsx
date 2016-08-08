@@ -46,33 +46,31 @@
 
         searchForPeerioUsers: function (contacts) {
             this.setState({inProgress: true});
-            var addressChunks = _.chunk(Peerio.Util.parseAddressesForLookup(contacts), 500);
+            var addressChunks = _.chunk(Peerio.Util.parseAddressesForLookup(contacts), 50);
             //index contacts by ID to merge with foundUsers.
+            contacts = contacts.filter(i => i.emails.length);
             contacts = _.keyBy(contacts, 'id');
             var importPromise = Promise.resolve(true);
+            var foundUsers = [];
             addressChunks.forEach( addressChunk => {
                 var searchAddresses = {addresses: addressChunk};
                 importPromise = importPromise
                 .then( () => Peerio.Net.addressLookup(searchAddresses))
                 .then( (returnData) => {
-                    var foundUsers = _.filter(returnData, function (i) {
-                        return i.username;
-                    });
-                    foundUsers = _.keyBy(foundUsers, 'id');
-                    if (this.state.availableContacts.length) {
-                        contacts = _.merge(this.state.availableContacts, foundUsers);
-                    } else {
-                        contacts = _.merge(contacts, foundUsers);
-                    }
-                    this.setState({availableContacts: contacts});
+                    returnData.forEach(i => i.username && foundUsers.push(i));
                 })
-                .catch( (e) => L.error(e) );
+                .catch( (e) => L.error('error importing') );
             });
 
             importPromise = importPromise
-            .then( () => new Promise( function(resolve, reject) {
-                window.setTimeout(resolve, 100);
-            }) );
+                .then( () => {
+                    foundUsers = _.keyBy(foundUsers, 'id');
+                    contacts = _.merge(contacts, foundUsers);
+                    this.setState({availableContacts: contacts});
+                })
+                .then( () => new Promise( function(resolve, reject) {
+                    window.setTimeout(resolve, 100);
+                }) );
 
             importPromise.finally( () => {
                 this.setState({inProgress: false});
@@ -106,8 +104,6 @@
             var requestItems = [];
             var inviteItems = [];
             _.forOwn(this.state.availableContacts, (contact, contactID) => {
-                L.info(this.state);
-                // contact.username = 'test' + contactID;
                 if (contact.username) {
                     requestItems.push(contact);
                 } else if (contact.emails.length) {
