@@ -10,13 +10,6 @@
             }
         },
 
-        componentWillMount: function() {
-            Peerio.user.getInviteCode()
-                .then( (code) => {
-                    code && code.inviteCode && this.setState( { inviteCode: code.inviteCode } );
-                });
-        },
-
         getInitialState: function() {
             return {
                 searchString: ''
