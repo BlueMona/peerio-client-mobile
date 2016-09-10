@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var sh = require('shelljs');
 var fs = require('fs');
-var xeditor = require('gulp-xml-editor');
 var semver = require('semver');
 var react = require('gulp-react');
 var browserSync = require('browser-sync').create();
@@ -432,12 +431,12 @@ gulp.task('bump', ['version'], function () {
 });
 
 gulp.task('version', function () {
-    gulp.src(paths.config_xml)
-        .pipe(xeditor(function (xml) {
-            var oldVer = xml.root().attr('version').value();
-            console.log('Current app version: ' + oldVer);
-            return xml;
-        }));
+    // gulp.src(paths.config_xml)
+    //     .pipe(xeditor(function (xml) {
+    //         var oldVer = xml.root().attr('version').value();
+    //         console.log('Current app version: ' + oldVer);
+    //         return xml;
+    //     }));
 });
 
 gulp.task('test', function (done) {

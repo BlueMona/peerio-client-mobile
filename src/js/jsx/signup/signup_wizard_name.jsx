@@ -12,6 +12,11 @@
             };
         },
 
+        componentDidMount: function () {
+            window.PeerioDebug && 
+                this.setState({ username: 't' + Date.now() }, this.validateUsername);
+        },
+
         getInitialState: function () {
             return this.props.data.name
             || {

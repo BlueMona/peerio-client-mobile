@@ -42,8 +42,7 @@
             this.steps = [
                 Peerio.UI.SignupWizardTOS,
                 Peerio.UI.SignupWizardName,
-                Peerio.UI.SignupWizardPassphrase,
-                Peerio.UI.SignupWizardConfirm,
+                Peerio.UI.SignupWizardPin,
                 Peerio.UI.SignupWizardSpinner
             ];
         },
@@ -82,39 +81,38 @@
                 progressBarSteps.push(<div className={activeClass} key={'div' + i}></div>);
             }
 
+            var nextPrevFooter = this.state.activeStep < this.steps.length - 1 ?
+                <div className={classNames(
+                    'flex-row',
+                    this.state.activeStep < 1 ?
+                        ' flex-justify-end' : ' flex-justify-between'
+                )}>
+                    <Peerio.UI.Tappable
+                        element='div'
+                        className={classNames(
+                            'btn-back', {'hide': this.state.activeStep < 1}
+                        )}
+                        onTap={this.handlePreviousStep}>
+                        <i className="material-icons">chevron_left</i>
+                        {t('button_back')}
+                    </Peerio.UI.Tappable>
+                    <Peerio.UI.Tappable
+                        element="div"
+                        className="btn"
+                        onTap={this.transitionTo.bind(this,'login')}>
+                        {t('button_exit')}
+                    </Peerio.UI.Tappable>
+                </div>
+                : null;
             return (
                 <div>
                     <div className="content-wrapper-signup flex-grow-1 flex-col">
-                        <div className="progress-bar">
-                            {progressBarSteps}
-                        </div>
-
                         <div className="signup-form flex-col flex-grow-1">
-                            <ReactCSSTransitionGroup transitionName="animate" className="flex-shrink-0 flex-grow-1">
+                            <div transitionName="animate" className="flex-shrink-0 flex-grow-1">
                                 {currentStep}
-                            </ReactCSSTransitionGroup>
-                            <div className={classNames(
-                                'flex-row',
-                                this.state.activeStep < 1 ?
-                                    ' flex-justify-end' : ' flex-justify-between'
-                            )}>
-                                <Peerio.UI.Tappable
-                                    element='div'
-                                    className={classNames(
-                                        'btn-back', {'hide': this.state.activeStep < 1}
-                                    )}
-                                    onTap={this.handlePreviousStep}>
-                                    <i className="material-icons">chevron_left</i>
-                                    {t('button_back')}
-                                </Peerio.UI.Tappable>
-                                <Peerio.UI.Tappable
-                                    element="div"
-                                    className="btn"
-                                    onTap={this.transitionTo.bind(this,'login')}>
-                                    {t('button_exit')}
-                                </Peerio.UI.Tappable>
                             </div>
                         </div>
+                        {nextPrevFooter}
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
                 </div>

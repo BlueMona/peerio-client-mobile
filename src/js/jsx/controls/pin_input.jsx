@@ -36,7 +36,7 @@
             });
         },
 
-        handleLoginFail: function () {
+        handleLoginFail: function (errorText) {
             if (this.state.failNumber > 1) {
                 this.setState({failNumber: 0}, () => {
                     window.setTimeout(() => this.handleLoginFail(), 10000);
@@ -44,9 +44,10 @@
                 return;
             }
             this.refs.pinPad.getDOMNode().classList.add('shake');
-            this.setState({failNumber: this.state.failNumber + 1, inProgress: false});
+            this.setState({failNumber: this.state.failNumber + 1, inProgress: false, errorText: errorText});
             window.setTimeout(() => {
                 this.refs.pinPad.getDOMNode().classList.remove('shake');
+                this.setState({ errorText: undefined });
             }, 1000);
         },
 
@@ -130,24 +131,12 @@
         },
 
         componentWillMount: function () {
-            Peerio.UI.TouchId.hasTouchID(this.props.username)
+            this.props.username && Peerio.UI.TouchId.hasTouchID(this.props.username)
                 .then((value) => this.setState({touchid: !!value}));
         },
 
         render: function () {
-            return (
-                <div className="modal pin-pad" ref="pinPad">
-                    <div className="headline-md text-center margin-small padding-small text-overflow">
-                        {t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
-                    </div>
-                    { this.state.inProgress ?
-                        this.renderProgress() :
-                        this.renderIndicators(this.state.pin.length, this.props.pinLength) }
-                    {this.renderRow([1, 2, 3]) }
-                    {this.renderRow([4, 5, 6]) }
-                    {this.renderRow([7, 8, 9]) }
-                    {this.renderRow([0]) }
-
+            var footer = !this.props.hideNormalFooter ?
                     <div id="footer">
                         {this.renderTextButton({
                             text: t('login_changeUserButton'),
@@ -156,11 +145,32 @@
                         }
                         { this.state.touchid && !this.state.pin.length ?
                             this.renderTouchID() :
-
                             this.state.pin.length ?
                                 this.renderPINDelete() : null
                         }
+                    </div> : null;
+
+            var customFooter = this.props.showExitTitle ?
+                    <div id="footer" style={{ 'justify-content': 'flex-end' }}>
+                        {this.renderTextButton({
+                            text: this.props.showExitTitle,
+                            handler: this.props.onExit
+                        })}
+                    </div> : null;
+            return (
+                <div className="modal pin-pad" ref="pinPad">
+                    <div className="headline-md text-center margin-small padding-small text-overflow">
+                        {this.state.errorText || this.props.title || t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
                     </div>
+                    { this.state.inProgress ?
+                        this.renderProgress() :
+                        this.renderIndicators(this.state.pin.length, this.props.pinLength) }
+                    {this.renderRow([1, 2, 3]) }
+                    {this.renderRow([4, 5, 6]) }
+                    {this.renderRow([7, 8, 9]) }
+                    {this.renderRow([0]) }
+                        {footer}
+                        {customFooter}
                 </div>);
         }
     });

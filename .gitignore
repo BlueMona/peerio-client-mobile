@@ -10,6 +10,7 @@ tags
 
 # build release apk output
 /bin
+/build
 
 # npm and bower cache
 /bower_components
