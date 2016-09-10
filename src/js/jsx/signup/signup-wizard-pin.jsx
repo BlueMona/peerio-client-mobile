@@ -5,7 +5,7 @@
         mixins: [ReactRouter.Navigation],
 
         getInitialState: function () {
-            return this.props.data.pass
+            return this.props.data && this.props.data.pass
             || {
                 confirm: false
             };
@@ -36,8 +36,12 @@
         confirmPin: function (pin) {
             if(this.state.pin != pin)
                 window.setTimeout(() => this.refs.confirmPin.handleLoginFail(t('passcode_tryagain')), 0);
-            else 
-                this.handleNextStep();
+            else {
+                var username = this.props.data ? this.props.data.name.username : Peerio.user.username;
+                var passphrase = Peerio.user.passphrase || this.state.passphrase;
+                Peerio.Auth.savePinnedPassphrase(username, this.state.pin, passphrase)
+                .then(this.handleNextStep);
+            }
         },
 
         tryAgain: function () {
@@ -49,7 +53,8 @@
         },
 
         handleNextStep: function () {
-            this.props.handleNextStep({pass: this.state, signup: true});
+            this.props.onClose && this.props.onClose();
+            this.props.handleNextStep && this.props.handleNextStep({pass: this.state, signup: true});
         },
 
         render: function () {

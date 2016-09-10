@@ -686,5 +686,10 @@
   "downloadPeerioContent": "<url>Download our mobile and desktop apps</> for more features like encrypted messaging, emails, file sharing, and cloud storage.",
   "ghostCountUpdate":"You have <emphasis>{ghostsLeft}</> Ghosts left this month",
   "paywallMsg": "You've used all your Ghosts for the month.",
-  "paywallUpgrade": "Upgrade to Peerio Pro to unlock unlimited Ghosts"
+  "paywallUpgrade": "Upgrade to Peerio Pro to unlock unlimited Ghosts",
+  "passphrase_notset": "Passprase is not saved. Please reinstall the app",
+  "passphrase_wrongpin": "Wrong pin entered",
+  "passphrase_show": "Show passphrase",
+  "passphrase_show_title": "Show passphrase",
+  "passphrase_enterpin": "Please enter pin"
 }

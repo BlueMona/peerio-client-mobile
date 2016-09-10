@@ -90,6 +90,10 @@
             });
         },
         handleLoginSuccess: function () {
+            if(!Peerio.user.PINIsSet && this.afterLogin) {
+                Peerio.user.passphrase = this.afterLogin;
+                Peerio.Action.forcePin();
+            }
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
 
@@ -206,6 +210,10 @@
             // getting passphrase, if not provided in the args
             var passNode = this.refs.passphrase ? this.refs.passphrase.getDOMNode() : null;
             passNode && passNode.blur();
+
+            if (passNode && passNode.value) {
+                this.afterLogin = passNode.value;
+            }
 
             var userValue = userNode ? userNode.value : this.state.savedLogin.username;
             var passValue = passNode ? passNode.value : passOrPin;

@@ -8,10 +8,10 @@
         render: function () {
             return (
                 <div className="content without-tab-bar without-footer">
-                  <Peerio.UI.SetPin/>
-                  <Peerio.UI.Settings2FA/>
+                    <Peerio.UI.ShowPassphrase />
+                    <Peerio.UI.Settings2FA />
                 </div>
-              );
+            );
         }
     });
 

@@ -30,7 +30,7 @@
             }
             this.setState({pin: this.state.pin + num}, () => {
                 if (this.state.pin.length === this.props.pinLength) {
-                    this.props.onEnterPin(this.state.pin);
+                    this.props.onEnterPin(this.state.pin, this.props.onClose);
                     this.setState({pin: '', inProgress: true});
                 }
             });
@@ -154,24 +154,30 @@
                     <div id="footer" style={{ 'justify-content': 'flex-end' }}>
                         {this.renderTextButton({
                             text: this.props.showExitTitle,
-                            handler: this.props.onExit
+                            handler: () => {
+                                this.props.onClose && this.props.onClose();
+                                this.props.onExit
+                            }
                         })}
                     </div> : null;
             return (
-                <div className="modal pin-pad" ref="pinPad">
-                    <div className="headline-md text-center margin-small padding-small text-overflow">
-                        {this.state.errorText || this.props.title || t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
-                    </div>
-                    { this.state.inProgress ?
-                        this.renderProgress() :
+                <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: 100, color: 'white' }}>
+                    <div className="modal pin-pad" ref="pinPad">
+                        <div className="headline-md text-center margin-small padding-small text-overflow">
+                            {this.state.errorText || this.props.title || t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
+                        </div>
+                        { this.state.inProgress ?
+                            this.renderProgress() :
                         this.renderIndicators(this.state.pin.length, this.props.pinLength) }
-                    {this.renderRow([1, 2, 3]) }
+                        {this.renderRow([1, 2, 3]) }
                     {this.renderRow([4, 5, 6]) }
                     {this.renderRow([7, 8, 9]) }
                     {this.renderRow([0]) }
                         {footer}
                         {customFooter}
-                </div>);
+                    </div>
+                </div>
+                );
         }
     });
 

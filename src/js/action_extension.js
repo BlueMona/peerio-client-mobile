@@ -48,6 +48,9 @@ Peerio.ActionExtension.init = function () {
         //------- PAYMENTS
         'PaymentProductUpdated',
         'PaymentProductCancelled',
-        'PaymentProductError'
+        'PaymentProductError',
+        //-------
+        'AskPin',
+        'ForcePin'
     ].forEach(Peerio.Action.add);
 };

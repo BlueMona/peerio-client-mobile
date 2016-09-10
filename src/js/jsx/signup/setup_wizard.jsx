@@ -22,8 +22,7 @@
 
             Peerio.UI.TouchId.isFeatureAvailable()
                 .then(value => {
-                    value ? this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID) :
-                    this.steps.splice(2, 0, Peerio.UI.SetupWizardPin);
+                    value && this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID);
                 });
         },
 
