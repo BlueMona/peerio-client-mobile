@@ -43,7 +43,7 @@
                 }, 0);
             else {
                 var username = this.props.data ? this.props.data.name.username : Peerio.user.username;
-                var passphrase = Peerio.user.passphrase || this.state.passphrase;
+                var passphrase = (Peerio.user && Peerio.user.passphrase) || this.state.passphrase;
                 Peerio.Auth.savePinnedPassphrase(username, this.state.pin, passphrase)
                 .then(this.handleNextStep);
             }
