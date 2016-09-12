@@ -35,7 +35,12 @@
 
         confirmPin: function (pin) {
             if(this.state.pin != pin)
-                window.setTimeout(() => this.refs.confirmPin.handleLoginFail(t('passcode_tryagain')), 0);
+                window.setTimeout(() => {
+                    this.refs.confirmPin.handleLoginFail(
+                        t('passcode_tryagain'),
+                        () => this.setState({ confirm: false })
+                    );
+                }, 0);
             else {
                 var username = this.props.data ? this.props.data.name.username : Peerio.user.username;
                 var passphrase = Peerio.user.passphrase || this.state.passphrase;

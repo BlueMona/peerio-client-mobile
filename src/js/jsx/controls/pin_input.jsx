@@ -36,7 +36,7 @@
             });
         },
 
-        handleLoginFail: function (errorText) {
+        handleLoginFail: function (errorText, callback) {
             if (this.state.failNumber > 1) {
                 this.setState({failNumber: 0}, () => {
                     window.setTimeout(() => this.handleLoginFail(), 10000);
@@ -48,6 +48,7 @@
             window.setTimeout(() => {
                 this.refs.pinPad.getDOMNode().classList.remove('shake');
                 this.setState({ errorText: undefined });
+                callback && callback();
             }, 1000);
         },
 
