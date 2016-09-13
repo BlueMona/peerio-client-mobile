@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.SignupWizardPassphrase = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return this.props.data.pass

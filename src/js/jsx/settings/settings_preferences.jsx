@@ -1,7 +1,7 @@
 (function () {
 
     Peerio.UI.PreferenceSettings = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return this.getSettings();

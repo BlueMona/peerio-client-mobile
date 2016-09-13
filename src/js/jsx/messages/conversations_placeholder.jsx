@@ -5,7 +5,7 @@
      * Message list item component
      */
     Peerio.UI.ConversationsPlaceholder = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         render: function () {
             return (
                 <div className='content list-view'>

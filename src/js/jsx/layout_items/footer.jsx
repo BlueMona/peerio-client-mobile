@@ -5,7 +5,7 @@
     'use strict';
 
     Peerio.UI.Footer = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
+        mixins: [Peerio.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
 
         getInitialState: function () {
             return {greenButtonIsVisible: true};

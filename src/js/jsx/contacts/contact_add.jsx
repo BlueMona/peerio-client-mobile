@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.AddContact = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         statics: {
             importContactsWarning: function() {

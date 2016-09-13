@@ -5,7 +5,7 @@
     'use strict';
 
     Peerio.UI.NavBar = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
+        mixins: [Peerio.Navigation, ReactRouter.State, Peerio.UI.Mixins.RouteTools],
 
         //--- REACT EVENTS
         getInitialState: function () {

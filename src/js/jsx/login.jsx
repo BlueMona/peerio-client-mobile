@@ -6,7 +6,7 @@
     'use strict';
 
     Peerio.UI.Login = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         //--- CONSTANTS
         // scalable passphrase font settings
         maxFontSize: 2,

@@ -4,7 +4,7 @@
     var PIN_LENGTH = 6;
 
     Peerio.UI.SetPin = React.createClass({
-        mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
+        mixins: [Peerio.Navigation, Peerio.UI.AutoFocusMixin],
 
         getInitialState: function () {
             return {

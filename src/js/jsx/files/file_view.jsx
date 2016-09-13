@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.FileView = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         componentWillMount: function () {
             this.subscription = [
                 Peerio.Dispatcher.onFilesUpdated(this.forceUpdate.bind(this, null))

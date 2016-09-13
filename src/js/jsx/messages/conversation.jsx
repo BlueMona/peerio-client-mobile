@@ -3,7 +3,7 @@
 
     // Main component, entry point for React app
     Peerio.UI.Conversation = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State],
+        mixins: [Peerio.Navigation, ReactRouter.State],
         //----- REACT EVENTS
         getInitialState: function () {
             return {

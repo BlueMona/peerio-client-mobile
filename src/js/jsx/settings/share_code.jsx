@@ -6,7 +6,7 @@
     var shareLink = 'http://www.peerio.com/invite.html?code={0}';
 
     Peerio.UI.ShareCode = React.createClass({
-        mixins:[ReactRouter.Navigation],
+        mixins:[Peerio.Navigation],
 
         getInitialState: function() {
             return { inviteCode: null };

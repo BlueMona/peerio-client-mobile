@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.SignupWizardName = React.createClass({
-        mixins: [ReactRouter.Navigation, Peerio.UI.AutoFocusMixin],
+        mixins: [Peerio.Navigation, Peerio.UI.AutoFocusMixin],
 
         getDefaultProps: function() {
             return {

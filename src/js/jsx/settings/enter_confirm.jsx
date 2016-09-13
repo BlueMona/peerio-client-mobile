@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.EnterConfirm = React.createClass({
-        mixins:[ReactRouter.Navigation],
+        mixins:[Peerio.Navigation],
 
         componentDidMount: function () {
             var element = React.findDOMNode(this.refs.textInput);

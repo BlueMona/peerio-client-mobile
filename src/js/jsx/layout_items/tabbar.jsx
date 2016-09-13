@@ -5,7 +5,7 @@
      * UI component containing messages/files/contacts tab selector
      */
     Peerio.UI.TabBar = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State],
+        mixins: [Peerio.Navigation, ReactRouter.State],
         componentWillMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onUnreadStateChanged(this.forceUpdate.bind(this, null))

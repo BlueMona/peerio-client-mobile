@@ -6,7 +6,7 @@
 
     Peerio.UI.SideBar = React.createClass({
 
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         //--- REACT EVENTS
         getInitialState: function () {
             return {

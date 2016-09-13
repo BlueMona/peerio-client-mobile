@@ -6,7 +6,7 @@
     var MODE_GHOST = 2;
 
     Peerio.UI.GhostNew = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         componentDidMount: function () {
             this.subscriptions = [

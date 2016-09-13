@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.ConversationInfo = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State],
+        mixins: [Peerio.Navigation, ReactRouter.State],
         getInitialState: function () {
             return {conversation: null};
         },
@@ -69,7 +69,7 @@
 
     //FileNode renders a single file in the conversation info component.
     var FileNode = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         getInitialState: function () {
             return {file: Peerio.user.files.dict[this.props.id]};
         },
@@ -97,7 +97,7 @@
 
     //ContactNode renders a single contact in the conversation info component.
     var ContactNode = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         openContactView: function () {
             this.transitionTo('contact', {id: this.props.username});
         },

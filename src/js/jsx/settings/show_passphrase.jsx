@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.ShowPassphrase = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return {

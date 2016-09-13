@@ -134,6 +134,7 @@
         componentWillMount: function () {
             this.props.username && Peerio.UI.TouchId.hasTouchID(this.props.username)
                 .then((value) => this.setState({touchid: !!value}));
+            Peerio.NativeAPI.hideKeyboard();
         },
 
         render: function () {

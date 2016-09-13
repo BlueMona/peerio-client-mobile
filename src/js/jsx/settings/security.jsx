@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.Security = React.createClass({
-        mixins:[ReactRouter.Navigation],
+        mixins:[Peerio.Navigation],
 
         //--- RENDER
         render: function () {

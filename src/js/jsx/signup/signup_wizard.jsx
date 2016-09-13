@@ -4,7 +4,7 @@
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
     Peerio.UI.SignupWizard = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         doSignup: function () {
 

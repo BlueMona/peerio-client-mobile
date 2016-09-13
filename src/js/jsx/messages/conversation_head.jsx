@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.ConversationHead = React.createClass({
-        mixins: [ReactRouter.Navigation, ReactRouter.State],
+        mixins: [Peerio.Navigation, ReactRouter.State],
         getInitialState: function () {
             return {open: false};
         },

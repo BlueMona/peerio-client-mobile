@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.SignupWizardOptIn = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         handleDataOptIn: function (enable) {
             (enable ? Peerio.DataCollection.enable() : Peerio.DataCollection.disable())

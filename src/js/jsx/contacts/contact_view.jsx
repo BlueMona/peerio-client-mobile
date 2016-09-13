@@ -3,7 +3,7 @@
 
 
     Peerio.UI.ContactView = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         componentWillMount: function () {
             this.subscriptions = [
                 Peerio.Dispatcher.onBigGreenButton(this.startConversationWithContact),

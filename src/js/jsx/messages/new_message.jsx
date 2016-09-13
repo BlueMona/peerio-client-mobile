@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.NewMessage = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         //--- REACT EVENTS
         getInitialState: function () {
             var recipients = this.props.params.id ? [this.props.params.id] : [];

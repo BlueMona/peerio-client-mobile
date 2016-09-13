@@ -5,7 +5,7 @@
      * Message list item component
      */
     Peerio.UI.Message = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         openFileView: function (id) {
             this.transitionTo('file', {id: id});
         },

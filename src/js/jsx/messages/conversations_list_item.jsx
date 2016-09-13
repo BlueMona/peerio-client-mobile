@@ -5,7 +5,7 @@
      * Message list item component
      */
     Peerio.UI.ConversationsListItem = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return {swiped: false};

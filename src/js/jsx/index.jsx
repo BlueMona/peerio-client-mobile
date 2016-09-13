@@ -6,7 +6,7 @@
     'use strict';
 
     Peerio.UI.Index = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         componentDidMount: function () {
             this.replaceWith('/login');
        },

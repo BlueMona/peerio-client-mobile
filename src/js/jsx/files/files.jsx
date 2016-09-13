@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.Files = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         componentDidMount: function () {
             this.subscriptions = [

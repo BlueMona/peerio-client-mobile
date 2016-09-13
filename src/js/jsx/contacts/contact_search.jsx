@@ -2,7 +2,7 @@
     'use strict';
 
     Peerio.UI.AddContactSearch = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
         getInitialState: function () {
             return {searchString: this.props.params.id, searchResults: false};
         },

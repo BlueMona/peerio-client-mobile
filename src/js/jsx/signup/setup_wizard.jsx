@@ -4,7 +4,7 @@
     var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
     Peerio.UI.SetupWizard = React.createClass({
-        mixins: [ReactRouter.Navigation],
+        mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return {
