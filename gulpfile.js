@@ -20,8 +20,6 @@ var cp = require('child_process');
 var inject = require('gulp-inject');
 var series = require('stream-series');
 var replace = require('gulp-replace');
-var xcode = require('./extra/peerio-xcode.js');
-var plist = require('plist');
 var colors = require('colors');
 var xml2js = require('xml2js');
 
@@ -226,39 +224,12 @@ gulp.task('localize', function () {
 });
 
 gulp.task('prepare-plist', function () {
-    var info = plist.parse(fs.readFileSync(paths.project_plist, 'utf8'));
-    var change = false;
-    var itsEncryption = true;
-    var complianceCode = '50fca128-07a4-40a7-8a57-e48418e296ec';
-    if (info['ITSAppUsesNonExemptEncryption'] != itsEncryption) {
-        change = true;
-        info['ITSAppUsesNonExemptEncryption'] = itsEncryption;
-    }
-    if (info['ITSEncryptionExportComplianceCode'] != complianceCode) {
-        change = true;
-        info['ITSEncryptionExportComplianceCode'] = complianceCode;
-    }
-    if (change) {
-        console.log('Applying changes to plist file');
-        fs.writeFileSync(paths.project_plist, plist.build(info));
-    } else {
-        console.log('No changes to plist needed. Skipping');
-    }
+    cp.execSync('cp extra/ios/*.plist platforms/ios/Peerio/');
+    cp.execSync('cp extra/ios/*.entitlements platforms/ios/Peerio/');
 });
 
 gulp.task('prepare-pbx', function () {
-    var profile = options.release ?
-        '762f2597-7db7-4626-8eba-117f50135387' : false;
-    xcode.apply({
-        path: 'platforms/ios/Peerio.xcodeproj/project.pbxproj',
-        push: true,
-        dataProtection: true,
-        team: '7L45B96YPK',
-        profile: profile,
-        disableBitcode: true,
-        deploymentTarget: '8.2',
-        targetedDeviceFamily: 1
-    });
+    cp.execSync('cp extra/ios/project.pbxproj platforms/ios/Peerio.xcodeproj');
 });
 
 gulp.task('prepare', ['prepare-pbx', 'prepare-plist'], function () {
