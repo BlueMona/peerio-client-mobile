@@ -48,6 +48,7 @@
         },
 
         handleNextStep: function (data) {
+            Peerio.NativeAPI.hideKeyboard();
             if (data) _.extend(this.data, data);
             if (this.state.activeStep >= this.steps.length - 1) {
                 return;
@@ -59,6 +60,7 @@
         },
 
         handlePreviousStep: function () {
+            Peerio.NativeAPI.hideKeyboard();
             if (this.state.activeStep >= 1)
                 this.setState({activeStep: --this.state.activeStep});
             else

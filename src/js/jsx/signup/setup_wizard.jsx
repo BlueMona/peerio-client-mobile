@@ -27,6 +27,7 @@
         },
 
         handleNextStep: function () {
+            Peerio.NativeAPI.hideKeyboard();
             if (this.state.activeStep >= this.steps.length - 1) {
                 this.transitionTo('messages');
                 return;
@@ -35,6 +36,7 @@
         },
 
         handlePreviousStep: function () {
+            Peerio.NativeAPI.hideKeyboard();
             this.setState({activeStep: this.state.activeStep - 1});
         },
 
