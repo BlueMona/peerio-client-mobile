@@ -59,6 +59,9 @@
   },
   "homepage": "https://github.com/PeerioTechnologies/peerio-client-mobile",
   "scripts": {
-      "localize": "tx pull -af"
+    "localize": "tx pull -af"
+  },
+  "devDependencies": {
+    "eslint": "^3.5.0"
   }
 }
