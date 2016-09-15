@@ -161,7 +161,7 @@
                             text: this.props.showExitTitle,
                             handler: () => {
                                 this.props.onClose && this.props.onClose();
-                                this.props.onExit
+                                this.props.onExit && this.props.onExit();
                             }
                         }) : null}
                     </div> : null;

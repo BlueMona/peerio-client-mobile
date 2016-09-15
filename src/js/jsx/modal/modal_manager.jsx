@@ -38,7 +38,7 @@
                 Peerio.Dispatcher.onShowFileUpload(this.showModal.bind(this, Peerio.UI.Upload)),
                 Peerio.Dispatcher.onSyncStarted(this.showModal.bind(this, Peerio.UI.Sync)),
                 Peerio.Dispatcher.onAskPin(this.showModal.bind(this, Peerio.UI.PinInput)),
-                Peerio.Dispatcher.onForcePin(this.showModal.bind(this, Peerio.UI.SignupWizardPin)),
+                Peerio.Dispatcher.onForcePin(() => this.showModal(Peerio.UI.SignupWizardPin, { skippable: true })),
 
                 Peerio.Dispatcher.onRemoveModal(this.removeModal)
             ];

@@ -2,8 +2,6 @@
     'use strict';
 
     Peerio.UI.SignupWizardPin = React.createClass({
-        mixins: [Peerio.Navigation],
-
         getInitialState: function () {
             return this.props.data && this.props.data.pass
             || {
@@ -19,10 +17,15 @@
             this.askNewPin();
         },
 
+        skip: function () {
+            Peerio.TinyDB.saveItem('skipPin', true, Peerio.user.username);
+        },
+
         askNewPin: function () {
             Peerio.Action.askPin({
                 onEnterPin: this.enterNewPin,
-                showExitTitle: t('button_back'),
+                onExit: this.props.skippable ? this.skip.bind(this) : null,
+                showExitTitle: this.props.skippable ? t('skip') : t('button_back'),
                 title: t('passphrase_enternewpin'),
                 hideTouchID: true,
                 hideChangeUser: true

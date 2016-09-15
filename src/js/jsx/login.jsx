@@ -92,7 +92,9 @@
         handleLoginSuccess: function () {
             if(!Peerio.user.PINIsSet && this.afterLogin) {
                 Peerio.user.passphrase = this.afterLogin;
-                Peerio.Action.forcePin();
+                Peerio.TinyDB.getItem('skipPin', Peerio.user.username)
+                    .then(val =>
+                          !val && Peerio.Action.forcePin());
             }
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
