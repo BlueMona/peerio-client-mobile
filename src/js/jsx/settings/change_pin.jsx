@@ -82,7 +82,7 @@
 
             Peerio.Auth.savePinnedPassphrase(Peerio.user.username, pin, this.passphrase)
                 .then( () => {
-                    Peerio.UI.Alert.show({ text: t('success')});
+                    Peerio.UI.Alert.show({ text: t('successPINchange')});
                 });
         },
 
