@@ -24,9 +24,13 @@
                         title={t('payments_canceledSubscriptions')}/>
 
                     <p>
-                        <a href="https://peerio.zendesk.com/hc/en-us/articles/210426066" target="_blank">
+                        <Peerio.UI.Tappable
+                            element="a"
+                            onTap={() => {
+                                Peerio.NativeAPI.openInBrowser('https://peerio.zendesk.com/hc/en-us/articles/210426066');
+                            }}>
                             {t('payments_planInfo')}
-                        </a>
+                        </Peerio.UI.Tappable>
                     </p>
                 </div>
             );
