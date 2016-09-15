@@ -98,7 +98,7 @@
         },
 
         renderTouchID: function () {
-            return (
+            return this.props.hideTouchID ? null : (
                 <Peerio.UI.Tappable
                     element="div"
                     className="btn flex-justify-center flex-col"
@@ -140,12 +140,12 @@
         render: function () {
             var footer = !this.props.hideNormalFooter ?
                     <div id="footer">
-                        {this.renderTextButton({
+                        {this.props.hideChangeUser ? null : this.renderTextButton({
                             text: t('login_changeUserButton'),
                             handler: this.props.onChangeUser
                         })
                         }
-                        { this.state.touchid && !this.state.pin.length ?
+                        { !this.props.hideTouchID && this.state.touchid && !this.state.pin.length ?
                             this.renderTouchID() :
                             this.state.pin.length ?
                                 this.renderPINDelete() : null
@@ -153,14 +153,17 @@
                     </div> : null;
 
             var customFooter = this.props.showExitTitle ?
-                    <div id="footer" style={{ 'justify-content': 'flex-end' }}>
-                        {this.renderTextButton({
+                    <div id="footer">
+                        {
+                            this.state.pin.length ?
+                        this.renderPINDelete() : <div></div> }
+                        {this.props.showExitTitle ? this.renderTextButton({
                             text: this.props.showExitTitle,
                             handler: () => {
                                 this.props.onClose && this.props.onClose();
                                 this.props.onExit
                             }
-                        })}
+                        }) : null}
                     </div> : null;
             return (
                 <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: 100, color: 'white' }}>

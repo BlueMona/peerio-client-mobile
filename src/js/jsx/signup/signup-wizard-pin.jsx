@@ -62,6 +62,10 @@
             this.props.handleNextStep && this.props.handleNextStep({pass: this.state, signup: true});
         },
 
+        handlePreviousStep: function () {
+            this.props.handlePreviousStep && this.props.handlePreviousStep();
+        },
+
         render: function () {
             var enterPin = this.state.confirm ? 
                 <Peerio.UI.PinInput
@@ -74,12 +78,13 @@
                     title={t('passcode_confirm')} /> :
                 <Peerio.UI.PinInput
                     ref="createPin"
+                    onClose={this.handlePreviousStep}
                     onEnterPin={this.createPin}
                     onExit={this.exit}
                     hideNormalFooter={true}
                     showExitTitle={t('button_back')}
                     key="enter"
-                    title={t('passcode_enter')} />;
+                    title={t('passcode_inputPlaceholder')} />;
             return (
                 <fieldset key={'signup-step-pin'}>
                     {enterPin}

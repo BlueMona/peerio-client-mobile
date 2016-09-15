@@ -691,6 +691,8 @@
   "passphrase_show": "Show Recovery Password",
   "passphrase_show_title": "Show Recovery Password",
   "passphrase_enterpin": "Please enter your PIN",
+  "passphrase_enternewpin": "Please enter new PIN",
+  "passphrase_confirmnewpin": "Please confirm new PIN",
   "PINSetupRequired": "Login faster by setting a PIN for this device. If this is not a device you use regularly you can skip this step.",
   "enterCurrentPINorPassphrase": "Enter your PIN or Recovery Password",
   "unlockSettings": "Unlock",

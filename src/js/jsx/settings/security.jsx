@@ -8,6 +8,7 @@
         render: function () {
             return (
                 <div className="content without-tab-bar without-footer">
+                    <Peerio.UI.ChangePin />
                     <Peerio.UI.ShowPassphrase />
                     <Peerio.UI.Settings2FA />
                 </div>
