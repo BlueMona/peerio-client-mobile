@@ -53,7 +53,7 @@
                             </div>
                             {this.props.icon ?
                                 <div className='alert-icon flex-row flex-justify-center flex-align-center'><img src={this.props.icon} /></div> : null }
-                            <p>{text}</p>
+                            <p className="selectable-text">{text}</p>
                         </div>
 
                         <div className="alert-btns">

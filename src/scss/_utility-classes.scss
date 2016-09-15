@@ -179,3 +179,8 @@ Colors are placed in a SASS map object called `$colors`. The colors can be acces
     filter: blur(3px);
   }
 }
+
+.selectable-text {
+  -webkit-user-select: all;
+  user-select: all;        
+}
