@@ -1,12 +1,13 @@
 (function () {
     'use strict';
 
-    Peerio.UI.SetupWizardStart = React.createClass({
+    Peerio.UI.SetupWizardPassphrase = React.createClass({
         mixins: [Peerio.Navigation],
 
         getInitialState: function () {
             return {
-                activeStep: 0
+                activeStep: 0,
+                passphrase: Peerio.autoLogin.passphrase
             };
         },
 
@@ -18,23 +19,20 @@
             return (
                 <div className="_setupWelcome">
                     <div>
-                        <div className="headline">{t('setup_startTitle')}</div>
+                        <div className="headline">{t('yourPassphrase')}</div>
+                    </div>
+                    <div>
                         <p>
-                            {t('setup_startDescription')}
+                            {t('infoAlertPassphraseMobile')}
                         </p>
-                        <p>
-                            {t('setup_startDescription2')}
+                        <p className="txt-lrg">
+                            {this.state.passphrase}
                         </p>
                     </div>
                     <div className="buttons">
                         <Peerio.UI.Tappable element='div' className="btn-safe"
                                             key={'next' + this.state.activeStep} onTap={this.nextStep}>
-                            {t('button_getStarted')}
-                        </Peerio.UI.Tappable>
-
-                        <Peerio.UI.Tappable element='div' className='btn-primary'
-                                            onTap={this.transitionTo.bind(this, 'messages')}>
-                            {t('button_maybeLater')}
+                            {t('ok')}
                         </Peerio.UI.Tappable>
                     </div>
                 </div>
@@ -43,3 +41,4 @@
     });
 
 }());
+

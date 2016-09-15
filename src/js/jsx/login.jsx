@@ -59,8 +59,7 @@
             this.trackSuccessfulSignup = !!Peerio.autoLogin;
             if (Peerio.autoLogin) {
                 var autoLogin = Peerio.autoLogin;
-                // in case smth fails we clean this first
-                Peerio.autoLogin = null;
+                // clean autologin in tabs
                 this.refs.username.getDOMNode().value = autoLogin.username;
                 this.refs.passphrase.getDOMNode().value = autoLogin.passphrase;
                 this.handleSubmit();

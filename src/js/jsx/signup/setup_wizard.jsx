@@ -14,6 +14,7 @@
 
         componentWillMount: function () {
             this.steps = [
+                Peerio.UI.SetupWizardPassphrase,
                 Peerio.UI.SetupWizardStart,
                 Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardContactImport,
@@ -22,7 +23,7 @@
 
             Peerio.UI.TouchId.isFeatureAvailable()
                 .then(value => {
-                    value && this.steps.splice(2, 0, Peerio.UI.SetupWizardTouchID);
+                    value && this.steps.splice(3, 0, Peerio.UI.SetupWizardTouchID);
                 });
         },
 
@@ -53,7 +54,7 @@
                     'flex-row flex-shrink-0',
                     this.state.activeStep === 1  ?
                         ' flex-justify-end' : ' flex-justify-between',
-                    this.state.activeStep < 1 ?
+                    this.state.activeStep < 2 ?
                         ' hide' : ''
                 )}>
                     <Peerio.UI.Tappable

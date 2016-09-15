@@ -22,6 +22,7 @@
   "emailOrPhone": "Email or mobile number",
   "yourPassphrase": "Your Recovery Password",
   "infoAlertPassphrase": "For stronger security, Peerio uses a <a href='https://peerio.zendesk.com/hc/en-us/articles/203657405' target='_blank'>randomly generated Recovery Password</a>. <br><br><strong>You are the only one who knows this Recovery Password!</strong> If you lose it, you will permanently lose access to your account. We recommend writing your Recovery Password down on paper, or storing it in a secure password manager.",
+  "infoAlertPassphraseMobile": "For stronger security, Peerio uses a randomly generated Recovery Password. You are the only one who knows this Recovery Password! If you lose it, you will permanently lose access to your account. We recommend writing your Recovery Password down on paper, or storing it in a secure password manager.",
   "signupPassphraseConfirm": "Use this Recovery Password?",
   "signupPassphraseConfirmText": "<ul><li><a href='https://peerio.zendesk.com/hc/en-us/articles/206331095' target='_blank'>Only you know this Recovery Password.</a></li> <li>If you lose it, your data will be lost forever.</li><li><a href='https://peerio.zendesk.com/hc/en-us/articles/206330895' target='_blank'>Store your Recovery Password somewhere safe!</a></li><br><strong>Please enter your Recovery Password in order to continue.</strong>",
   "signupYourGeneratedPassphrase": "Your generated Recovery Password:",
@@ -691,8 +692,8 @@
   "passphrase_show": "Show Recovery Password",
   "passphrase_show_title": "Show Recovery Password",
   "passphrase_enterpin": "Please enter your PIN",
-  "passphrase_enternewpin": "Please enter new PIN",
-  "passphrase_confirmnewpin": "Please confirm new PIN",
+  "passphrase_enternewpin": "Set a PIN for this device",
+  "passphrase_confirmnewpin": "Please confirm your PIN",
   "PINSetupRequired": "Login faster by setting a PIN for this device. If this is not a device you use regularly you can skip this step.",
   "enterCurrentPINorPassphrase": "Enter your PIN or Recovery Password",
   "unlockSettings": "Unlock",
@@ -700,5 +701,6 @@
   "incorrectPasswordOrPINTitle": "Wrong PIN or Recovery Password",
   "incorrectPasswordOrPIN": "Please try again.",
   "peerioPINconfirm": "Confirm",
-  "PINDoesNotMatch": "Confirmation doesn't match" 
+  "PINDoesNotMatch": "Confirmation doesn't match", 
+  "successPINchange": "Your PIN has been changed"
 }
