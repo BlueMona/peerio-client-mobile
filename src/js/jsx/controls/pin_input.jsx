@@ -30,7 +30,7 @@
             }
             this.setState({pin: this.state.pin + num}, () => {
                 if (this.state.pin.length === this.props.pinLength) {
-                    this.props.onEnterPin(this.state.pin, this.props.onClose);
+                    this.props.onEnterPin(this.state.pin, this.props.onClose, this.handleLoginFail);
                     this.setState({pin: '', inProgress: true});
                 }
             });

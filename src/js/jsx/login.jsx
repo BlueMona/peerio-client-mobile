@@ -89,6 +89,7 @@
                 Peerio.DataCollection.trackCountry(code);
             });
         },
+
         handleLoginSuccess: function () {
             if(!Peerio.user.PINIsSet && this.afterLogin) {
                 Peerio.user.passphrase = this.afterLogin;

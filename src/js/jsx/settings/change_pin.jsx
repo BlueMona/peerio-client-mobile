@@ -80,10 +80,10 @@
                 return;
             }
 
-            Peerio.UI.Alert.show({ text: t('success')});
-
             Peerio.Auth.savePinnedPassphrase(Peerio.user.username, pin, this.passphrase)
-                .then(this.handleNextStep);
+                .then( () => {
+                    Peerio.UI.Alert.show({ text: t('success')});
+                });
         },
 
         //--- RENDER

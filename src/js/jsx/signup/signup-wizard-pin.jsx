@@ -15,6 +15,57 @@
             this.generatePassphrase();
         },
 
+        componentDidMount: function () {
+            this.askNewPin();
+        },
+
+        askNewPin: function () {
+            Peerio.Action.askPin({
+                onEnterPin: this.enterNewPin,
+                showExitTitle: t('button_back'),
+                title: t('passphrase_enternewpin'),
+                hideTouchID: true,
+                hideChangeUser: true
+            });
+        },
+
+        askNewPinConfirm: function () {
+            Peerio.Action.askPin({
+                onEnterPin: this.enterNewPinConfirm,
+                showExitTitle: t('button_back'),
+                title: t('passphrase_confirmnewpin'),
+                hideTouchID: true,
+                hideChangeUser: true
+            });
+        },
+
+        enterNewPin: function (pin, onClose, onError) {
+            onClose();
+            this.pin = pin;
+            this.askNewPinConfirm();
+        },
+
+        enterNewPinConfirm: function (pin, onClose, onError) {
+            if (pin !== this.pin) {
+                window.setTimeout(() => onError(
+                    t('passcode_simple'),
+                    () => {
+                        onClose();
+                        this.askNewPin();
+                    }
+                ), 0);
+                return;
+            }
+
+            onClose();
+
+            var username = this.props.data ? this.props.data.name.username : Peerio.user.username;
+            var passphrase = (Peerio.user && Peerio.user.passphrase) || this.state.passphrase;
+            Peerio.Auth.savePinnedPassphrase(username, pin, passphrase)
+                .then(this.handleNextStep);
+        },
+
+
         wordCount: 5,
 
         generatePassphrase: function () {
@@ -67,27 +118,8 @@
         },
 
         render: function () {
-            var enterPin = this.state.confirm ? 
-                <Peerio.UI.PinInput
-                    ref="confirmPin"
-                    onEnterPin={this.confirmPin}
-                    onExit={this.tryAgain}
-                    hideNormalFooter={true}
-                    showExitTitle={t('button_back')}
-                    key="confirm"
-                    title={t('passcode_confirm')} /> :
-                <Peerio.UI.PinInput
-                    ref="createPin"
-                    onClose={this.handlePreviousStep}
-                    onEnterPin={this.createPin}
-                    onExit={this.exit}
-                    hideNormalFooter={true}
-                    showExitTitle={t('button_back')}
-                    key="enter"
-                    title={t('passcode_inputPlaceholder')} />;
             return (
                 <fieldset key={'signup-step-pin'}>
-                    {enterPin}
                 </fieldset>);
         }
     });
