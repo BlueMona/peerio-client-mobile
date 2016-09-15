@@ -2,10 +2,17 @@
     'use strict';
 
     Peerio.UI.ShowPassphrase = React.createClass({
-        mixins: [Peerio.Navigation],
+
+        componentDidMount: function () {
+            Peerio.Auth.hasPinnedPassphrase(Peerio.user.username)
+                .then(val => {
+                    this.setState({ available: val });
+                });
+        },
 
         getInitialState: function () {
             return {
+                available: false
             };
         },
 
@@ -52,14 +59,13 @@
 
             ui = this.state.askPin ? askPinUI : ui;
 
-            return (
+            return !this.state.available ? null : (
                 <div>
                     {header}
                     <div>
                         {ui}
                     </div>
                 </div>
-
             );
         }
     });
