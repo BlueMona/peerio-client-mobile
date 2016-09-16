@@ -26,6 +26,7 @@
         toggle: function () {
             this.state.open ? Peerio.DataCollection.App.closeSideBarNoAction() : Peerio.DataCollection.App.openSideBar();
             this.setState({open: !this.state.open});
+            Peerio.NativeAPI.hideKeyboard();
         },
 
         toggleAndTransition: function (route) {
