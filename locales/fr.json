@@ -22,6 +22,7 @@
     "emailOrPhone": "Courriel ou numéro de cellulaire",
     "yourPassphrase": "Votre mot de passe de récupération",
     "infoAlertPassphrase": "Pour une sécurité accrue, Peerio utilise un <a href='https://peerio.zendesk.com/hc/en-us/articles/203657405' target='_blank'>mot de passe de récupération généré aléatoirement</a>. <br>;<;br><strong>Vous êtes le seul à connaître ce mot de passe de récupération !</strong> Si vous le perdez, vous perdrez irrémédiablement l'accès à votre compte. Nous vous recommandons de prendre votre mot de passe de récupération en note ou de le conserver grâce à un gestionnaire de mots de passe sécurisé.",
+    "infoAlertPassphraseMobile": "Pour une sécurité accrue, Peerio utilise un mot de passe de récupération généré aléatoirement. Vous êtes le seul à connaître ce mot de passe de récupération ! Si vous le perdez, vous perdrez irrémédiablement l'accès à votre compte. Nous vous recommandons de prendre votre mot de passe de récupération en note ou de le conserver grâce à un gestionnaire de mots de passe sécurisé.",
     "signupPassphraseConfirm": "Utiliser ce mot de passe de récupération ?",
     "signupPassphraseConfirmText": "<ul><li><a href='https://peerio.zendesk.com/hc/en-us/articles/206331095' target='_blank'>Ce mot de passe de récupération n'est connu que de vous.</a></li> <li>Si vous le perdez, vous n'aurez plus jamais accès à vos données.</li><li><a href='https://peerio.zendesk.com/hc/en-us/articles/206330895' target='_blank'>Conservez votre mot de passe de récupération dans un endroit sûr !</a></li><br><strong>Veuillez saisir votre mot de passe de récupération afin de poursuivre.</strong>",
     "signupYourGeneratedPassphrase": "Votre mot de passe de récupération généré :",
@@ -689,6 +690,8 @@
     "passphrase_show": "Montrer le mot de passe de récupération",
     "passphrase_show_title": "Montrer le mot de passe de récupération",
     "passphrase_enterpin": "Veuillez saisir votre NIP",
+    "passphrase_enternewpin": "Définir un NIP pour cet appareil",
+    "passphrase_confirmnewpin": "Veuillez confirmer votre NIP",
     "PINSetupRequired": "Connectez-vous plus rapidement en définissant un NIP pour cet appareil. Si vous n'utilisez pas cet appareil régulièrement, vous pouvez ignorer cette étape.",
     "enterCurrentPINorPassphrase": "Saisir vote NIP ou mot de passe de récupération",
     "unlockSettings": "Déverrouiller",
@@ -696,5 +699,6 @@
     "incorrectPasswordOrPINTitle": "NIP ou mot de passe de récupération erronés",
     "incorrectPasswordOrPIN": "Veuillez ressayer.",
     "peerioPINconfirm": "Confirmer",
-    "PINDoesNotMatch": "La confirmation ne correspond pas"
+    "PINDoesNotMatch": "La confirmation ne correspond pas",
+    "successPINchange": "Votre NIP a été changé"
 }
