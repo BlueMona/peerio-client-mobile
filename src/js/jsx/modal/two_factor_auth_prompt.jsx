@@ -32,6 +32,10 @@
             this.focusInput();
         },
 
+        componentDidUnmount: function () {
+            Peerio.NativeAPI.hideKeyboard();
+        },
+
         onChangeAuthy: function () {
             var currentCode = this.state.authyCode;
             if (event.target.value.match(/^[0-9]*$/i)) {
