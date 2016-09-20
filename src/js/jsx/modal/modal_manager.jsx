@@ -78,7 +78,8 @@
                         // it's ok to access mutable 'i' in here, because once it's found it will not change
                         prevState.activeModals.splice(i, 1);
                     });
-                    Peerio.NativeAPI.hideKeyboard();
+                    document.activeElement && document.activeElement.blur()
+                    window.setTimeout(() => Peerio.NativeAPI.hideKeyboard(), 0);
                     return;
                 }
             }
