@@ -27,6 +27,7 @@ Peerio.Config.init = function () {
             {code:'zh_CN', name:'中文'},
 	    {code:'es', name:'Español'},
             {code:'fr', name:'Français'},
+            {code:'ru', name:'Русский'},
 	    {code:'hr', name:'Hrvatski'},];
 
 

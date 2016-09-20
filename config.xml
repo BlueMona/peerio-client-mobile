@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="100042" id="com.peerio" ios-CFBundleVersion="0" version="2.9.4">
+<widget android-versionCode="100044" id="com.peerio" ios-CFBundleVersion="0" version="2.9.6">
     <name>Peerio</name>
     <description>
         Secure message and file sharing for everyone. Work anywhere with our cloud. Keep your data safe with end-to-end
