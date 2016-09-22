@@ -25,10 +25,13 @@ Peerio.Config.init = function () {
         cfg.locales = [
 	    {code:'en', name:'English'},
             {code:'zh_CN', name:'中文'},
+	    {code:'de', name:'Deutsch'},
 	    {code:'es', name:'Español'},
             {code:'fr', name:'Français'},
             {code:'ru', name:'Русский'},
-	    {code:'hr', name:'Hrvatski'},];
+            {code:'hr', name:'Hrvatski'},
+	    {code:'fi_FI', name:'Suomi'}
+        ];
 
 
         cfg.dictLocales = {
