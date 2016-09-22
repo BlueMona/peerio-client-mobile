@@ -26,7 +26,9 @@
                 firstNameValid: true,
                 firstName: '',
                 lastNameValid: true,
-                lastName: ''
+                lastName: '',
+                emailValid: true,
+                email: ''
             };
         },
 
@@ -61,6 +63,14 @@
             this.setState({
                 lastNameValid: Peerio.Helpers.isNameValid(name),
                 lastName: name
+            });
+        },
+
+        validateEmail: function () {
+            var email = this.refs.email.getDOMNode().value;
+            this.setState({
+                emailValid: Peerio.Helpers.isValidEmail(email),
+                email: email
             });
         },
 
@@ -108,11 +118,11 @@
                             spellCheck="false"/>
                     </div>
                     <div className="input-group">{
-                        (this.state.lastNameValid === null || this.state.lastNameValid === true)
+                        (this.state.emailValid  === null || this.state.emailValid === true)
                         ? <label htmlFor="email">{t('email')}</label>
                         : <label htmlFor="email" className="red-bold">{t('error_invalidEmail')}</label>
                         }
-                        <input type="email" name="user_last_name" id="user_last_name" ref="lastName"
+                        <input type="email" name="user_email" id="user_email" ref="email"
                             value={this.state.email}
                             onChange={this.validateEmail} autoComplete="off" autoCorrect="off" autoCapitalize="off"
                             spellCheck="false"/>

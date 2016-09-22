@@ -453,6 +453,7 @@
   "error_invite": "Error sending an invite. Please contact support.",
   "error_emptyUsername": "Username cannot be empty.",
   "error_invalidName": "Invalid name",
+  "error_invalidEmail": "Invalid email",
   "error_loginFailed": "Login failed.",
   "error_passphraseNotMatching": "Master Passwords do not match.",
   "error_fileDownload": "Failed to download file.",

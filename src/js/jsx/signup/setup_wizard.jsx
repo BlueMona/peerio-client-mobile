@@ -14,7 +14,7 @@
 
         componentWillMount: function () {
             this.steps = [
-                Peerio.UI.SetupWizardContactImport,
+                Peerio.UI.SetupWizardContactImport
             ];
 
             Peerio.UI.TouchId.isFeatureAvailable()
@@ -45,12 +45,11 @@
                     handleNextStep: this.handleNextStep
                 });
             var button = (
-
                 <div className={classNames(
                     'flex-row flex-shrink-0',
-                    this.state.activeStep === 1  ?
+                    this.state.activeStep === 0  ?
                         ' flex-justify-end' : ' flex-justify-between',
-                    this.state.activeStep < 2 ?
+                    this.state.activeStep < 0 ?
                         ' hide' : ''
                 )}>
                     <Peerio.UI.Tappable
@@ -78,11 +77,7 @@
             }
 
             return (
-
                 <div className="content-wrapper-signup flex-col">
-                    <div className="progress-bar">
-                        {progressBarSteps}
-                    </div>
                     <ReactCSSTransitionGroup
                         className="flex-grow-1 flex-shrink-1 _setupWizard"
                         style={{overflow:'auto'}}
