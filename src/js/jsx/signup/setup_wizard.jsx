@@ -14,11 +14,7 @@
 
         componentWillMount: function () {
             this.steps = [
-                Peerio.UI.SetupWizardPassphrase,
-                Peerio.UI.SetupWizardStart,
-                Peerio.UI.SetupWizardEmail,
                 Peerio.UI.SetupWizardContactImport,
-                Peerio.UI.SignupWizardOptIn
             ];
 
             Peerio.UI.TouchId.isFeatureAvailable()

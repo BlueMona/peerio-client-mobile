@@ -40,7 +40,6 @@
             Peerio.DataCollection.Signup.startSignup();
             this.data = {};
             this.steps = [
-                Peerio.UI.SignupWizardTOS,
                 Peerio.UI.SignupWizardName,
                 Peerio.UI.SignupWizardPin,
                 Peerio.UI.SignupWizardSpinner

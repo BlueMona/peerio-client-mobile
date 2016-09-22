@@ -13,7 +13,7 @@
         },
 
         componentDidMount: function () {
-            window.PeerioDebug && 
+            window.PeerioDebug &&
                 this.setState({ username: 't' + Date.now() }, this.validateUsername);
         },
 
@@ -107,6 +107,23 @@
                             onChange={this.validateLastName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
                             spellCheck="false"/>
                     </div>
+                    <div className="input-group">{
+                        (this.state.lastNameValid === null || this.state.lastNameValid === true)
+                        ? <label htmlFor="email">{t('email')}</label>
+                        : <label htmlFor="email" className="red-bold">{t('error_invalidEmail')}</label>
+                        }
+                        <input type="email" name="user_last_name" id="user_last_name" ref="lastName"
+                            value={this.state.email}
+                            onChange={this.validateEmail} autoComplete="off" autoCorrect="off" autoCapitalize="off"
+                            spellCheck="false"/>
+                    </div>
+
+                    <p style={{marginBottom: '20px'}} className="caption light">{t('signup_TOSRequestText', null, {
+                        tosLink: link => <Peerio.UI.Tappable element="a"
+                                                             style={{textDecoration: 'underline', color: '#fff'}}
+                                                             onTap={this.handleTOS}>{link}</Peerio.UI.Tappable>
+                    })}</p>
+
 
                     <div className="buttons">{
                         this.state.usernameValid === true && this.state.firstNameValid && this.state.lastNameValid
