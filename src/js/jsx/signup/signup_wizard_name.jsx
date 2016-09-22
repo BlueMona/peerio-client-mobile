@@ -71,7 +71,7 @@
         render: function () {
             return (
                 <fieldset key={'signup-step-0'} className="animate-enter">
-                    <div className="headline">{t('basicInformation')}</div>
+                    <div className="headline">{t('profile')}</div>
                     <Peerio.UI.TrackSubState name="basic"/>
 
                     <div className="input-group">{
