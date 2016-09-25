@@ -2,15 +2,7 @@
     'use strict';
 
     Peerio.UI.SignupWizardName = React.createClass({
-        mixins: [Peerio.Navigation, Peerio.UI.AutoFocusMixin],
-
-        getDefaultProps: function() {
-            return {
-                autoFocus: true,
-                focusNode: 'username',
-                focusDelay: 1000
-            };
-        },
+        mixins: [Peerio.Navigation],
 
         componentDidMount: function () {
             window.PeerioDebug &&
@@ -26,9 +18,7 @@
                 firstNameValid: true,
                 firstName: '',
                 lastNameValid: true,
-                lastName: '',
-                emailValid: true,
-                email: ''
+                lastName: ''
             };
         },
 
@@ -66,21 +56,13 @@
             });
         },
 
-        validateEmail: function () {
-            var email = this.refs.email.getDOMNode().value;
-            this.setState({
-                emailValid: Peerio.Helpers.isValidEmail(email),
-                email: email
-            });
-        },
-
         handleNextStep: function () {
             this.props.handleNextStep({ name: this.state });
         },
 
         render: function () {
             return (
-                <fieldset key={'signup-step-0'} className="animate-enter">
+                <fieldset key={'signup-step-0'} className="animate-enter no-scroll-hack">
                     <div className="headline">{t('profile')}</div>
                     <Peerio.UI.TrackSubState name="basic"/>
 
@@ -115,16 +97,6 @@
                         <input type="text" name="user_last_name" id="user_last_name" ref="lastName"
                             value={this.state.lastName}
                             onChange={this.validateLastName} autoComplete="off" autoCorrect="off" autoCapitalize="off"
-                            spellCheck="false"/>
-                    </div>
-                    <div className="input-group">{
-                        (this.state.emailValid  === null || this.state.emailValid === true)
-                        ? <label htmlFor="email">{t('email')}</label>
-                        : <label htmlFor="email" className="red-bold">{t('error_invalidEmail')}</label>
-                        }
-                        <input type="email" name="user_email" id="user_email" ref="email"
-                            value={this.state.email}
-                            onChange={this.validateEmail} autoComplete="off" autoCorrect="off" autoCapitalize="off"
                             spellCheck="false"/>
                     </div>
 

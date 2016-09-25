@@ -112,8 +112,8 @@
                             <div transitionName="animate" className="flex-shrink-0 flex-grow-1">
                                 {currentStep}
                             </div>
+                            {nextPrevFooter}
                         </div>
-                        {nextPrevFooter}
                     </div>
                     <RouteHandler passphrase={this.state.passphrase} doSignup={this.doSignup}/>
                 </div>

@@ -339,7 +339,6 @@ Peerio.NativeAPI.init = function () {
     };
 
     /**
-<<<<<<< HEAD
      * Opens email window
      */
     api.openEmailWindow = function (to, subject) {
@@ -352,9 +351,6 @@ Peerio.NativeAPI.init = function () {
 
     /**
      * Get carrier info
-=======
-     * Get carrier info
->>>>>>> master
      */
     api.getCarrierInfo = function () {
         return new Promise((resolve, reject) => {

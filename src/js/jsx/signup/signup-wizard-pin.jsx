@@ -51,7 +51,7 @@
         enterNewPinConfirm: function (pin, onClose, onError) {
             if (pin !== this.pin) {
                 window.setTimeout(() => onError(
-                    t('passcode_simple'),
+                    t('passcode_tryagain'),
                     () => {
                         onClose();
                         this.askNewPin();

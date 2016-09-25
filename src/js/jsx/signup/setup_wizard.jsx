@@ -16,10 +16,13 @@
             this.steps = [
                 Peerio.UI.SetupWizardContactImport
             ];
+        },
 
+        componentDidMount: function () {
             Peerio.UI.TouchId.isFeatureAvailable()
                 .then(value => {
                     value && this.steps.splice(3, 0, Peerio.UI.SetupWizardTouchID);
+                    this.forceUpdate();
                 });
         },
 
@@ -47,7 +50,7 @@
             var button = (
                 <div className={classNames(
                     'flex-row flex-shrink-0',
-                    this.state.activeStep === 0  ?
+                    this.state.activeStep >= 0  ?
                         ' flex-justify-end' : ' flex-justify-between',
                     this.state.activeStep < 0 ?
                         ' hide' : ''
