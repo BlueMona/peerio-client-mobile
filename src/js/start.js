@@ -58,10 +58,10 @@ Peerio.ACK_MSG = ':::peerioAck:::';
 
             Peerio.NativeAPI.init();
 
-            Peerio.NativeAPI.showKeyboardAccessoryBar();
-            Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
+            // Peerio.NativeAPI.showKeyboardAccessoryBar();
+            // Peerio.NativeAPI.shrinkViewOnKeyboardOpen();
             Peerio.NativeAPI.disableScrollingInShrinkView();
-            // Peerio.NativeAPI.doNotShrinkViewOnKeyboardOpen();
+            Peerio.NativeAPI.doNotShrinkViewOnKeyboardOpen();
 
             Peerio.DataCollection.init();
             Peerio.DataCollection.insertPiwikCode();

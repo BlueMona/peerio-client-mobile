@@ -23,51 +23,25 @@
 
         askNewPin: function () {
             Peerio.Action.askPin({
-                onEnterPin: this.enterNewPin,
+                onConfirmPin: this.enterNewPinConfirm,
                 onExit: this.props.skippable ? this.skip.bind(this) : null,
                 showExitTitle: this.props.skippable ? t('skip') : t('button_back'),
                 title: t('passphrase_enternewpin'),
+                confirmTitle: t('passphrase_confirmnewpin'),
+                errorTitle: t('passcode_tryagain'),
                 hideTouchID: true,
-                hideChangeUser: true
+                hideChangeUser: true,
+                confirm: true
             });
         },
 
-        askNewPinConfirm: function () {
-            Peerio.Action.askPin({
-                onEnterPin: this.enterNewPinConfirm,
-                showExitTitle: t('button_back'),
-                title: t('passphrase_confirmnewpin'),
-                hideTouchID: true,
-                hideChangeUser: true
-            });
-        },
-
-        enterNewPin: function (pin, onClose, onError) {
-            onClose();
-            this.pin = pin;
-            this.askNewPinConfirm();
-        },
-
-        enterNewPinConfirm: function (pin, onClose, onError) {
-            if (pin !== this.pin) {
-                window.setTimeout(() => onError(
-                    t('passcode_tryagain'),
-                    () => {
-                        onClose();
-                        this.askNewPin();
-                    }
-                ), 0);
-                return;
-            }
-
-            onClose();
-
+        enterNewPinConfirm: function (pin, onClose) {
             var username = this.props.data ? this.props.data.name.username : Peerio.user.username;
             var passphrase = (Peerio.user && Peerio.user.passphrase) || this.state.passphrase;
             Peerio.Auth.savePinnedPassphrase(username, pin, passphrase)
+                .then(onClose)
                 .then(this.handleNextStep);
         },
-
 
         wordCount: 5,
 

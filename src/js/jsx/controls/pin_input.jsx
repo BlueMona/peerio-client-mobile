@@ -14,7 +14,8 @@
             return {
                 pin: '',
                 touchid: false,
-                failNumber: 0
+                failNumber: 0,
+                confirm: false
             };
         },
 
@@ -30,8 +31,21 @@
             }
             this.setState({pin: this.state.pin + num}, () => {
                 if (this.state.pin.length === this.props.pinLength) {
-                    this.props.onEnterPin(this.state.pin, this.props.onClose, this.handleLoginFail);
-                    this.setState({pin: '', inProgress: true});
+                    if(this.state.confirm) {
+                        if(this.state.enteredPin === this.state.pin) {
+                            this.props.onConfirmPin(this.state.pin, this.props.onClose);
+                        } else {
+                            this.handleLoginFail(this.props.errorTitle, () => {
+                                this.setState({pin: '', confirm: false});
+                            });
+                        }
+                    }
+                    if(this.props.confirm) {
+                        this.setState({pin: '', enteredPin: this.state.pin, confirm: true});
+                    } else {
+                        this.props.onEnterPin(this.state.pin, this.props.onClose, this.handleLoginFail);
+                        this.setState({pin: '', inProgress: true});
+                    }
                 }
             });
         },
@@ -169,7 +183,7 @@
                 <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, zIndex: 100, color: 'white' }}>
                     <div className="modal pin-pad" ref="pinPad">
                         <div className="headline-md text-center margin-small padding-small text-overflow">
-                            {this.state.errorText || this.props.title || t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
+                            {this.state.errorText || (this.state.confirm ? this.props.confirmTitle : this.props.title) || t('login_welcomeBack')} <strong>{this.props.firstname}</strong>
                         </div>
                         { this.state.inProgress ?
                             this.renderProgress() :

@@ -99,7 +99,16 @@
             Peerio.user.isMe = true;
             Peerio.Auth.saveLogin(Peerio.user.username, Peerio.user.firstName);
 
-            Peerio.Helpers.checkFileSystemEncryption();
+            // Peerio.Helpers.checkFileSystemEncryption();
+
+            if(!Peerio.UI.justRegistered && Peerio.user.addresses && Peerio.user.addresses.length === 0)
+                Peerio.TinyDB.getItem('skipAddContact', Peerio.user.username)
+                    .then(val => 
+                          !val && Peerio.UI.Confirm.show({
+                              text: t('setup_contactInfoDescription')
+                          })
+                          .then(() => this.transitionTo('account_settings'))
+                          .catch(() => Peerio.TinyDB.saveItem('skipAddContact', true, Peerio.user.username)));
 
             this.transitionTo(this.nextRoute);
         },

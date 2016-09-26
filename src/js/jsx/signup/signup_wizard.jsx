@@ -16,6 +16,7 @@
                 this.data.name.lastName)
                 .then(() => {
                     Peerio.Translator.forceLocaleOnLogin = true;
+
                     //todo: terrible, transfer this through router
                     Peerio.autoLogin = {
                         username: this.data.name.username,

@@ -19,11 +19,11 @@
         },
 
         componentDidMount: function () {
-            Peerio.UI.TouchId.isFeatureAvailable()
-                .then(value => {
-                    value && this.steps.splice(3, 0, Peerio.UI.SetupWizardTouchID);
-                    this.forceUpdate();
-                });
+            // Peerio.UI.TouchId.isFeatureAvailable()
+            //     .then(value => {
+            //         value && this.steps.splice(3, 0, Peerio.UI.SetupWizardTouchID);
+            //         this.forceUpdate();
+            //     });
         },
 
         handleNextStep: function () {
