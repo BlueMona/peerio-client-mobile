@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 subject: 'Peerio error report.',
                 body: devmode.logNode.innerHTML,
                 isHtml: true
-            });
+            }, () => {}, {});
         },
         changeLogLevel: function (event) {
             L.level = +event.target.value;
