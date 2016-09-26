@@ -60,6 +60,10 @@
             this.props.handleNextStep({ name: this.state });
         },
 
+        handleTOS: function () {
+            Peerio.NativeAPI.openInBrowser('https://github.com/PeerioTechnologies/peerio-documentation/blob/master/Terms_of_Use.md')
+        },
+
         render: function () {
             return (
                 <fieldset key={'signup-step-0'} className="animate-enter no-scroll-hack">
