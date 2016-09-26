@@ -40,6 +40,11 @@
                             });
                         }
                     }
+                    if(this.props.entropyCheck && !Peerio.Util.pinEntropyCheck(this.state.pin)) {
+                        window.setTimeout(() => this.handleLoginFail(t('passcode_simple')), 0);
+                        this.setState({pin: ''});
+                        return;
+                    }
                     if(this.props.confirm) {
                         this.setState({pin: '', enteredPin: this.state.pin, confirm: true});
                     } else {
