@@ -118,23 +118,6 @@
                         <li className="caption" style={{height:'64px'}}>{t('notifications_note')}</li>
                     </ul>
                     <Peerio.UI.TouchId/>
-
-                    <ul>
-                        <li className="subhead">{t('optIns')}</li>
-                        <Peerio.UI.Tappable
-                            key='data-collection-optin'
-                            onTap={this.setDataCollection}
-                            element="li">
-                            <div className={'checkbox-input' + (this.state.dataCollectionOptIn ? ' checked': '')}>
-                                <i className="material-icons"></i>
-                            </div>
-                            <div>{t('optIns_dataCollection')}</div>
-                            <Peerio.UI.Tappable element="i" onTap={this.showDataCollectionInfo}
-                                                className="material-icons">
-                                info_outline
-                            </Peerio.UI.Tappable>
-                        </Peerio.UI.Tappable>
-                    </ul>
                     <RouteHandler/>
                 </div>
             );

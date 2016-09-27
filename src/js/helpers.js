@@ -249,7 +249,7 @@ Peerio.Helpers.init = function () {
     };
 
     api.isValidEmail = function(val) {
-        var emailRegex = new RegExp(/^([\w+-]+(?:\.[\w+-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i);
+        var emailRegex = new RegExp(/^[^ ]+@[^ ]+/i);
         return emailRegex.test(val);
     };
 
