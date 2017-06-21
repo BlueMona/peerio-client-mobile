@@ -1,4 +1,8 @@
-# peerio-client-mobile
+# Peerio (legacy) for macOS, Windows, Linux
+
+Looking for the source code for Peerio 2? Check out [the new mobile clients](https://github.com/PeerioTechnologies/peerio-mobile) and [the new SDK](https://github.com/PeerioTechnologies/peerio-icebear).
+
+For support and frequently asked questions, please see our [support portal](https://support.peerio.com). 
 
 ## Development
 
