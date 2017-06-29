@@ -9,13 +9,16 @@ echo ================= OPTIONAL VERSION BUMP ==================
 # gulp bump
 
 echo =============== BUILDING ANDROID PROJECT =================
-cordova build android --release
+cd platforms/android
+gradle assembleRelease -x lintVitalArmv7Release -x lintVitalX86Release
+cd ../..
+# cordova build android --release
 
 function signapk(){
   echo ==========================================================
   echo "SIGNING: $1 => $2"
   echo ==========================================================
-  jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore peerio.keystore $1 peerio_release_key
+  jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore peerio.keystore -storepass:file peerio.keystorepass $1 peerio_release_key
 
   echo ========== VERIFYING ==========
   jarsigner -verify -verbose -certs $1
