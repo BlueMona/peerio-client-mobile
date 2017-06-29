@@ -1,0 +1,15 @@
+cp $1/Icon-App-40x40@1x.png icon-40.png
+cp $1/Icon-App-40x40@2x.png icon-40@2x.png
+cp $1/Icon-Small-50x50@1x.png icon-50.png
+cp $1/Icon-Small-50x50@2x.png icon-50@2x.png
+cp $1/Icon-App-60x60@1x.png icon-60.png
+cp $1/Icon-App-60x60@2x.png icon-60@2x.png
+cp $1/Icon-App-60x60@3x.png icon-60@3x.png
+cp $1/Icon-App-72x72@1x.png icon-72.png
+cp $1/Icon-App-72x72@2x.png icon-72@2x.png
+cp $1/Icon-App-76x76@1x.png icon-76.png
+cp $1/Icon-App-76x76@2x.png icon-76@2x.png
+cp $1/Icon-Small-50x50@1x.png icon-small.png
+cp $1/Icon-Small-50x50@2x.png icon-small@2x.png
+cp $1/Icon-App-57x57@1x.png icon.png
+cp $1/Icon-App-57x57@2x.png icon@2x.png
