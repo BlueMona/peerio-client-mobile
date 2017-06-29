@@ -7,12 +7,7 @@ Peerio.PaymentSystem.init = function () {
     var api = Peerio.PaymentSystem = {};
 
     api.arePaymentsAvailable = function () {
-        // if the server has no runtime settings
-        if(!Peerio.user.runtime || !Peerio.user.runtime.purchases) return true;
-
-        return (Peerio.runtime.platform === 'android' && Peerio.user.runtime.purchases.google.enabled === true) 
-        || (Peerio.runtime.platform === 'ios' && Peerio.user.runtime.purchases.ios.enabled === true)
-        || (Peerio.runtime.platform === 'browser');
+        return false;
     };
 
     api.hasSubscription = function () {
@@ -150,7 +145,7 @@ Peerio.PaymentSystem.init = function () {
         return Promise.resolve(true);
     };
 
-    if(store) {
+    /*    if(store) {
         store.when('product').cancelled( function (p) { 
             p.cancelled = true;
             Peerio.Action.paymentProductCancelled(p); 
@@ -182,6 +177,7 @@ Peerio.PaymentSystem.init = function () {
             }
         });
     }
+        */
 };
 
 
