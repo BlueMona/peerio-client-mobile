@@ -220,7 +220,7 @@ gulp.task('compile-clean', function () {
 });
 
 gulp.task('localize', function () {
-    cp.execSync('tx pull -af', {stdio: 'inherit'});
+    // cp.execSync('tx pull -af', {stdio: 'inherit'});
 });
 
 gulp.task('prepare-plist', function () {
