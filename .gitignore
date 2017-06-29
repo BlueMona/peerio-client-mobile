@@ -38,3 +38,4 @@ tests/console.py
 /backup
 /*.debug.xml
 
+*.keystorepass
