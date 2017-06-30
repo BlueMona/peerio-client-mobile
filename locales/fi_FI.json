@@ -576,5 +576,5 @@
     "touch_keychain": "Enabling TouchID requires using your keychain, would you like to proceed?",
     "touch_notAvailable": "Sormenjälkitunnistus ei ole käytettävissä",
     "serverWarning_Migrate": "n/a",
-    "serverWarning_Migrate_mobile": "This version of Peerio (Legacy) will be phased out by 31-December-2017. To learn how to migrate to the new app, read our article: https://peerio.zendesk.com/hc/en-us/articles/115003186823 Unfortunately, Peerio 2 has not been translated yet. Learn how you may be able to help here: https://peerio.zendesk.com/hc/en-us/articles/115003200706"
+    "serverWarning_Migrate_mobile": "Make the move to Peerio 2! This version of Peerio (Legacy) will be phased out by 31-December-2017. To learn how to migrate to the new app, read our article: https://peerio.zendesk.com/hc/en-us/articles/115003186823 Unfortunately, Peerio 2 has not been translated yet. Learn how you may be able to help here: https://peerio.zendesk.com/hc/en-us/articles/115003200706"
 }
