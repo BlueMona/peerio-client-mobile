@@ -708,5 +708,8 @@
     "incorrectPasswordOrPIN": "Veuillez ressayer.",
     "peerioPINconfirm": "Confirmer",
     "PINDoesNotMatch": "La confirmation ne correspond pas",
-    "successPINchange": "Votre NIP a été changé"
+    "successPINchange": "Votre NIP a été changé",
+    "serverWarning_Migrate": "n/a",
+    "serverWarning_Migrate_mobile": "Faites le saut vers Peerio 2! Cette version de Peerio (Legacy) sera retirée d'ici le 31 décembre 2017. Découvrez comment migrer vers la toute nouvelle version en consultant l’article au centre d’assistance. https://peerio.zendesk.com/hc/en-us/articles/115003186823 Malheureusement, Peerio 2 n’est pas encore disponible en français. Découvrez comment nous aider à la traduire! https://peerio.zendesk.com/hc/en-us/articles/115003200706"
+	
 }

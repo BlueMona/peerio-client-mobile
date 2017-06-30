@@ -708,5 +708,8 @@
     "incorrectPasswordOrPIN": "Please try again.",
     "peerioPINconfirm": "Confirm",
     "PINDoesNotMatch": "Confirmation doesn't match",
-    "successPINchange": "Your PIN has been changed"
+    "successPINchange": "Your PIN has been changed",
+    "serverWarning_Migrate": "n/a",
+    "serverWarning_Migrate_mobile": "快更新到Peerio 2吧！我们将在 2017 年 12 月 31 日淘汰掉当前版本的Peerio（旧版）。https://peerio.zendesk.com/hc/en-us/articles/115003186823 阅读我们的帮助中心里的相关文章来学习如何将资料转移至新版本。很遗憾的是，Peerio 2 还没有被翻译。了解您能在方面帮忙的机会！https://peerio.zendesk.com/hc/en-us/articles/115003200706"
+	
 }

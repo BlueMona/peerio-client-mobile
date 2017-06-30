@@ -708,5 +708,7 @@
     "incorrectPasswordOrPIN": "Por favor, inténtelo de nuevo.",
     "peerioPINconfirm": "Confirmar",
     "PINDoesNotMatch": "La confirmación no coincide",
-    "successPINchange": "Su PIN ha sido cambiado"
+    "successPINchange": "Su PIN ha sido cambiado",
+	"serverWarning_Migrate": "n/a",
+    "serverWarning_Migrate_mobile": "Haz el cambio a Peerio 2! Ésta versión de Peerio (\"legacy\" o anterior) va a ser descontinuada para el 31-Diciembre-2017. Para aprender como migrar a la nueva app, lea nuestro artículo en el Centro de Ayuda. https://peerio.zendesk.com/hc/en-us/articles/115003186823 Desafortunadamente, Peerio 2 no ha sido traducido en este momento. Aprende como puedes ayudar! https://peerio.zendesk.com/hc/en-us/articles/115003200706"
 }
