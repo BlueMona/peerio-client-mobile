@@ -576,6 +576,6 @@
     "touch_keychain": "Enabling TouchID requires using your keychain, would you like to proceed?",
     "touch_notAvailable": "Fingerprint identification unavailable",
     "serverWarning_Migrate": "n/a",
-    "serverWarning_Migrate_mobile": "Переходите на Peerio 2! Эта версия Peerio (устаревшая) будет выведена из строя к 31 декабря 2017ю. Чтобы узнать как обновиться до новой версии прочитайте заметку в нашем центре поддержки. https://peerio.zendesk.com/hc/en-us/articles/115003186823 К сожалению, Peerio 2 еще не переведен с английского на другие языки. Узнайте как можно помочь с переводом! https://peerio.zendesk.com/hc/en-us/articles/115003200706"
+    "serverWarning_Migrate_mobile": "Переходите на Peerio 2! Эта версия Peerio (устаревшая) будет выведена из строя к 31 декабря 2017. Чтобы узнать как обновиться до новой версии прочитайте заметку в нашем центре поддержки. https://peerio.zendesk.com/hc/en-us/articles/115003186823 К сожалению, Peerio 2 еще не переведен с английского на другие языки. Узнайте как можно помочь с переводом! https://peerio.zendesk.com/hc/en-us/articles/115003200706"
 	
 }
